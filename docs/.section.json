@@ -1,0 +1,54 @@
+{
+  "section_handle": "tz-footer",
+  "section_name": "TZ Main Footer",
+  "section_archetype": "Global",
+  "description": "Main footer section with dynamic columns and payment icons.",
+
+  "zones": [
+    {
+      "id": "top_grid",
+      "label": "Top grid columns",
+      "description": "Repeatable columns (blocks) rendered in the top grid.",
+      "allowed_block_types": ["text_column", "menu_column", "newsletter", "image", "payment_icons"]
+    }
+  ],
+
+  "section_controls": {
+    "Layout": ["section_width", "content_align"],
+    "Spacing": ["padding_top", "padding_bottom"],
+    "Background": ["bg_color"],
+    "Typography": [],
+    "Colors": ["text_color", "heading_color"],
+    "Visibility": ["hide_mobile", "hide_desktop"],
+    "Behavior": [],
+    "Content": ["watermark", "show_social", "copyright_text"],
+    "Advanced": ["custom_id", "custom_class"]
+  },
+
+  "block_types": {
+    "payment_icons": {
+      "label": "Payment Icons",
+      "description": "Shows only payment methods enabled in Shopify Admin (dynamic). Icons are provided by the theme and rendered based on available payment types.",
+      "allowed_zones": ["top_grid"],
+      "block_controls": {
+        "Content": ["heading", "show_heading"],
+        "Alignment": ["align"],
+        "Styling": ["icon_size", "icon_opacity", "icon_gap"]
+      }
+    }
+  },
+
+  "presets_policy": {
+    "required": true,
+    "notes": "Must ship with a default layout of text, menu, and newsletter blocks."
+  },
+
+  "dependencies": {
+    "theme_settings": ["social_media"],
+    "snippets": ["icon-facebook", "icon-instagram"],
+    "assets": ["tziona.css"]
+  },
+
+  "constraints": [],
+  "notes": []
+}

@@ -581,3 +581,102 @@ footer {
         left: -100%;
     }
 }
+/* --- TZ SECTIONS SYSTEM (Blueprint) --- */
+
+/* 1. Wrapper System */
+.tz-section {
+    padding-top: var(--tz-pt, 40px);
+    padding-bottom: var(--tz-pb, 40px);
+    background-color: var(--tz-bg, transparent);
+    position: relative;
+    overflow: hidden;
+}
+
+.tz-section__inner {
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+}
+
+/* Width Variants */
+.tz-section__inner.page-width {
+    max-width: var(--page-width, 1200px);
+    padding: 0 40px;
+}
+
+.tz-section__inner.full-width {
+    max-width: 100%;
+    padding: 0;
+}
+
+.tz-section__content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--tz-gap, 20px);
+    width: 100%;
+}
+
+/* Alignment */
+.tz-section__content.is-left { justify-content: flex-start; text-align: left; }
+.tz-section__content.is-center { justify-content: center; text-align: center; }
+.tz-section__content.is-right { justify-content: flex-end; text-align: right; }
+
+/* 2. Typography */
+.tz-section__heading {
+    font-size: var(--tz-h-size, 32px);
+    color: var(--tz-h-color, inherit);
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.tz-section__text {
+    font-size: var(--tz-t-size, 16px);
+    color: var(--tz-t-color, inherit);
+    line-height: 1.6;
+}
+
+/* 3. Buttons */
+.tz-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 24px;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: var(--tz-btn-radius, 0);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.tz-btn--solid {
+    background-color: var(--tz-btn-bg, #000);
+    color: var(--tz-btn-text, #fff);
+    border: 1px solid var(--tz-btn-bg, #000);
+}
+
+.tz-btn--solid:hover {
+    opacity: 0.9;
+}
+
+.tz-btn--outline {
+    background-color: transparent;
+    color: var(--tz-btn-bg, #000);
+    border: 1px solid var(--tz-btn-bg, #000);
+}
+
+.tz-btn--outline:hover {
+    background-color: var(--tz-btn-bg, #000);
+    color: var(--tz-btn-text, #fff);
+}
+
+/* 4. Visibility Helpers */
+@media (max-width: 768px) {
+    .mobile-hide { display: none !important; }
+}
+
+@media (min-width: 769px) {
+    .desktop-hide { display: none !important; }
+}
