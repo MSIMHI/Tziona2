@@ -1,224 +1,97 @@
 {% style %}
+  /* =========================================================
+     TZ Main Footer — Liquid (TOKENS ONLY)
+     ========================================================= */
+
   #shopify-section-{{ section.id }}{
     --tz-pt: {{ section.settings.padding_top }}px;
     --tz-pb: {{ section.settings.padding_bottom }}px;
     --tz-bg: {{ section.settings.bg_color }};
-    --tz-gap: 40px;
-
     --tz-t-color: {{ section.settings.text_color }};
     --tz-h-color: {{ section.settings.heading_color }};
 
-    /* Section-level font controls (uses common theme CSS vars if available) */
-    --tz-heading-font: {% case section.settings.heading_font_family %}
-      {% when 'heading' %} var(--font-heading-family, inherit)
-      {% when 'body' %} var(--font-body-family, inherit)
-      {% else %} inherit
-    {% endcase %};
+    --tz-border: {{ section.settings.text_color | color_modify: 'alpha', 0.10 }};
+    --tz-nl-input-bg-default: {{ section.settings.text_color | color_modify: 'alpha', 0.08 }};
 
-    --tz-text-font: {% case section.settings.text_font_family %}
-      {% when 'heading' %} var(--font-heading-family, inherit)
-      {% when 'body' %} var(--font-body-family, inherit)
-      {% else %} inherit
-    {% endcase %};
+    --tz-heading-font:
+      {% case section.settings.heading_font_family %}
+        {% when 'heading' %} var(--font-heading-family, inherit)
+        {% when 'body' %} var(--font-body-family, inherit)
+        {% else %} inherit
+      {% endcase %};
+
+    --tz-text-font:
+      {% case section.settings.text_font_family %}
+        {% when 'heading' %} var(--font-heading-family, inherit)
+        {% when 'body' %} var(--font-body-family, inherit)
+        {% else %} inherit
+      {% endcase %};
   }
 
-  .footer-dynamic-wrapper{
-    display:flex;
-    flex-direction:column;
-    width:100%;
-  }
+  /* Per-block CSS variables (no inline styles) */
+  {% for block in section.blocks %}
+    {% assign default_input_bg = section.settings.text_color | color_modify: 'alpha', 0.08 %}
+    #shopify-section-{{ section.id }} .footer-col-dynamic[data-block-id="{{ block.id }}"]{
+      --col-align:
+        {% case block.settings.align %}
+          {% when 'center' %} center
+          {% when 'right' %} right
+          {% else %} left
+        {% endcase %};
 
-  .footer-top-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));
-    gap:var(--tz-gap);
-    margin-bottom:40px;
-  }
+      --col-h-color: {{ block.settings.heading_color | default: section.settings.heading_color }};
+      --col-t-color: {{ block.settings.text_color | default: section.settings.text_color }};
+      --col-link-color: {{ block.settings.link_color | default: block.settings.text_color | default: section.settings.text_color }};
 
-  /* Column defaults (can be overridden by block vars) */
-  .footer-col-dynamic{
-    --col-h-color: var(--tz-h-color);
-    --col-t-color: var(--tz-t-color);
-    --col-link-color: var(--tz-t-color);
-    --col-h-size: 14px;
-    --col-t-size: 14px;
-    --col-align: left;
-    --col-heading-font: var(--tz-heading-font);
-    --col-text-font: var(--tz-text-font);
+      --col-h-size: {{ block.settings.heading_size | default: 14 }}px;
+      --col-t-size: {{ block.settings.text_size | default: 14 }}px;
 
-    text-align: var(--col-align);
-  }
+      --col-heading-font:
+        {% case block.settings.font_family %}
+          {% when 'heading' %} var(--font-heading-family, inherit)
+          {% when 'body' %} var(--font-body-family, inherit)
+          {% else %} var(--tz-heading-font)
+        {% endcase %};
 
-  .footer-col-dynamic h4{
-    font-size: var(--col-h-size);
-    font-weight: 800;
-    text-transform: uppercase;
-    margin-bottom: 20px;
-    color: var(--col-h-color);
-    font-family: var(--col-heading-font);
-  }
+      --col-text-font:
+        {% case block.settings.font_family %}
+          {% when 'heading' %} var(--font-heading-family, inherit)
+          {% when 'body' %} var(--font-body-family, inherit)
+          {% else %} var(--tz-text-font)
+        {% endcase %};
 
-  .footer-col-dynamic p,
-  .footer-col-dynamic a,
-  .footer-col-dynamic li{
-    font-size: var(--col-t-size);
-    color: var(--col-t-color, #ccc);
-    line-height: 1.6;
-    text-decoration: none;
-    transition: opacity 0.2s;
-    font-family: var(--col-text-font);
-  }
+      --nl-input-bg: {{ block.settings.input_bg_color | default: default_input_bg }};
+      --nl-input-color: {{ block.settings.input_text_color | default: block.settings.text_color | default: section.settings.text_color }};
+      --nl-btn-bg: {{ block.settings.button_bg | default: block.settings.heading_color | default: section.settings.heading_color }};
+      --nl-btn-text: {{ block.settings.button_text | default: '#ffffff' }};
+      --nl-btn-radius: {{ block.settings.button_radius | default: 10 }}px;
 
-  .footer-col-dynamic a{
-    color: var(--col-link-color, var(--col-t-color, #ccc));
-  }
+      --img-width: {{ block.settings.image_width | default: 180 }}px;
+      --img-radius: {{ block.settings.image_radius | default: 0 }}px;
 
-  .footer-col-dynamic a:hover{ opacity:0.8; }
-
-  .footer-watermark{
-    text-align:center;
-    font-size:18vw;
-    font-weight:900;
-    line-height:0.8;
-    color:var(--tz-h-color);
-    opacity:0.1;
-    user-select:none;
-    margin:40px 0;
-    font-family: var(--tz-heading-font);
-  }
-
-  .footer-bottom-bar{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    flex-wrap:wrap;
-    gap:20px;
-    padding-top:20px;
-    border-top:1px solid {{ section.settings.text_color | color_modify: 'alpha', 0.1 }};
-    color: var(--tz-t-color);
-    font-family: var(--tz-text-font);
-  }
-
-  .social-icons-container{ display:flex; gap:15px; }
-  .social-icon-link svg{
-    width:20px;
-    height:20px;
-    fill: var(--tz-t-color);
-  }
-
-  /* Newsletter block styles (can be overridden by block vars) */
-  .tz-newsletter{
-    --nl-input-bg: {{ section.settings.text_color | color_modify: 'alpha', 0.08 }};
-    --nl-input-color: var(--col-t-color);
-    --nl-btn-bg: var(--col-h-color);
-    --nl-btn-text: #ffffff;
-    --nl-btn-radius: 10px;
-    --nl-gap: 12px;
-
-    display:flex;
-    flex-direction:column;
-    gap: var(--nl-gap);
-  }
-
-  .tz-newsletter__form{
-    display:flex;
-    gap: 10px;
-    flex-wrap: wrap;
-    align-items: center;
-  }
-
-  .tz-newsletter__input{
-    flex: 1 1 220px;
-    min-width: 180px;
-    padding: 12px 14px;
-    border-radius: 10px;
-    border: 1px solid rgba(255,255,255,0.12);
-    background: var(--nl-input-bg);
-    color: var(--nl-input-color);
-    outline: none;
-  }
-
-  .tz-newsletter__btn{
-    padding: 12px 16px;
-    border-radius: var(--nl-btn-radius);
-    border: 0;
-    cursor: pointer;
-    background: var(--nl-btn-bg);
-    color: var(--nl-btn-text);
-    font-weight: 700;
-    line-height: 1;
-    font-family: var(--col-heading-font);
-  }
-
-  /* Image block */
-  .tz-footer-image{
-    display:flex;
-    justify-content: flex-start;
-  }
-  .tz-footer-image.is-center{ justify-content: center; }
-  .tz-footer-image.is-right{ justify-content: flex-end; }
-
-  .tz-footer-image img{
-    max-width: 100%;
-    height: auto;
-    display:block;
-    border-radius: var(--img-radius, 0px);
-    width: var(--img-width, 180px);
-  }
-  .tz-payment-icons {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-  }
-  .tz-payment-icons.is-center { align-items: center; }
-  .tz-payment-icons.is-right { align-items: flex-start; }
-  .tz-payment-icons .payment-icons-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--icon-gap);
-  }
-  .tz-payment-icons .icon {
-    width: var(--icon-size);
-    opacity: var(--icon-opacity);
-  }
+      --icon-size: {{ block.settings.icon_size | default: 38 }}px;
+      --icon-opacity: {{ block.settings.icon_opacity | default: 100 }}%;
+      --icon-gap: {{ block.settings.icon_gap | default: 10 }}px;
+    }
+  {% endfor %}
 {% endstyle %}
 
 <section
   {% if section.settings.custom_id != blank %}
     id="{{ section.settings.custom_id | escape }}"
   {% endif %}
-  class="tz-section {{ section.settings.custom_class }} {% if section.settings.hide_mobile %}mobile-hide{% endif %} {% if section.settings.hide_desktop %}desktop-hide{% endif %}"
+  class="tz-section tz-footer {{ section.settings.custom_class }} {% if section.settings.hide_mobile %}mobile-hide{% endif %} {% if section.settings.hide_desktop %}desktop-hide{% endif %}"
 >
   <div class="tz-section__inner {{ section.settings.section_width }}">
     <div class="tz-section__content {{ section.settings.content_align }}">
       <div class="footer-dynamic-wrapper">
-        <!-- TOP GRID (Blocks) -->
+        <!-- TOP GRID -->
         <div class="footer-top-grid">
           {% for block in section.blocks %}
-            {% assign default_input_bg = section.settings.text_color | color_modify: 'alpha', 0.08 %}
             <div
               class="footer-col-dynamic"
+              data-block-id="{{ block.id }}"
               {{ block.shopify_attributes }}
-              style="
-                --col-align: {% case block.settings.align %}{% when 'center' %}center{% when 'right' %}right{% else %}left{% endcase %};
-                --col-h-color: {{ block.settings.heading_color | default: section.settings.heading_color }};
-                --col-t-color: {{ block.settings.text_color | default: section.settings.text_color }};
-                --col-link-color: {{ block.settings.link_color | default: block.settings.text_color | default: section.settings.text_color }};
-                --col-h-size: {{ block.settings.heading_size | default: 14 }}px;
-                --col-t-size: {{ block.settings.text_size | default: 14 }}px;
-                --col-heading-font: {% case block.settings.font_family %}{% when 'heading' %}var(--font-heading-family, inherit){% when 'body' %}var(--font-body-family, inherit){% else %}var(--tz-heading-font){% endcase %};
-                --col-text-font: {% case block.settings.font_family %}{% when 'heading' %}var(--font-heading-family, inherit){% when 'body' %}var(--font-body-family, inherit){% else %}var(--tz-text-font){% endcase %};
-                --nl-input-bg: {{ block.settings.input_bg_color | default: default_input_bg }};
-                --nl-input-color: {{ block.settings.input_text_color | default: block.settings.text_color | default: section.settings.text_color }};
-                --nl-btn-bg: {{ block.settings.button_bg | default: block.settings.heading_color | default: section.settings.heading_color }};
-                --nl-btn-text: {{ block.settings.button_text | default: '#ffffff' }};
-                --nl-btn-radius: {{ block.settings.button_radius | default: 10 }}px;
-                --img-width: {{ block.settings.image_width | default: 180 }}px;
-                --img-radius: {{ block.settings.image_radius | default: 0 }}px;
-                --icon-size: {{ block.settings.icon_size | default: 24 }}px;
-                --icon-opacity: {{ block.settings.icon_opacity | default: 100 }}%;
-                --icon-gap: {{ block.settings.icon_gap | default: 8 }}px;
-              "
             >
               {% unless block.type == 'payment_icons' %}
                 {% if block.settings.heading != blank %}
@@ -233,7 +106,7 @@
                 {% when 'menu_column' %}
                   <ul>
                     {% for link in linklists[block.settings.menu].links %}
-                      <li style="margin-bottom: 10px;">
+                      <li>
                         <a href="{{ link.url }}">{{ link.title }}</a>
                       </li>
                     {% endfor %}
@@ -251,7 +124,6 @@
                         class="tz-newsletter__input"
                         type="email"
                         name="contact[email]"
-                        value=""
                         autocorrect="off"
                         autocapitalize="off"
                         autocomplete="email"
