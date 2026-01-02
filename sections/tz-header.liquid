@@ -1,56 +1,55 @@
+{% comment %}
+  Load TZ Mega Menu Assets
+{% endcomment %}
+{{ 'tz-mega-menu.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'tziona.js' | asset_url }}" defer="defer"></script>
+
 {%- style -%}
-      /* =========================================================
-         TZ Header — Liquid (TOKENS ONLY)
-         ========================================================= */
-      #shopify-section-{{ section.id }} {
-        --tz-pt: {{ section.settings.padding_top | default: 12 }}px;
-        --tz-pb: {{ section.settings.padding_bottom | default: 12 }}px;
-        --tz-bg: {{ section.settings.bg_color | default: '#ffffff' }};
-        --tz-bg-opacity: {{ section.settings.bg_opacity | default: 100 | divided_by: 100.0 }};
+  /* =========================================================
+     TZ Header — Liquid (TOKENS ONLY)
+     ========================================================= */
+  #shopify-section-{{ section.id }} {
+    --tz-pt: {{ section.settings.padding_top | default: 12 }}px;
+    --tz-pb: {{ section.settings.padding_bottom | default: 12 }}px;
+    --tz-bg: {{ section.settings.bg_color | default: '#ffffff' }};
+    --tz-bg-opacity: {{ section.settings.bg_opacity | default: 100 | divided_by: 100.0 }};
 
-        --tz-text: {{ section.settings.text_color | default: '#111111' }};
-        --tz-link: {{ section.settings.link_color | default: '#111111' }};
-        --tz-link-hover: {{ section.settings.link_hover_color | default: '#555555' }};
-        --tz-accent: {{ section.settings.accent_color | default: '#ff5a1f' }};
+    --tz-text: {{ section.settings.text_color | default: '#111111' }};
+    --tz-link: {{ section.settings.link_color | default: '#111111' }};
+    --tz-link-hover: {{ section.settings.link_hover_color | default: '#555555' }};
+    --tz-accent: {{ section.settings.accent_color | default: '#ff5a1f' }};
 
-        --tz-nav-size: {{ section.settings.nav_text_size | default: 13 }}px;
-        --tz-nav-case: {% if section.settings.nav_uppercase %}uppercase{% else %}none{% endif %};
+    --tz-nav-size: {{ section.settings.nav_text_size | default: 13 }}px;
+    --tz-nav-case: {% if section.settings.nav_uppercase %}uppercase{% else %}none{% endif %};
 
-        --tz-blur: {% if section.settings.bg_blur %}blur(10px){% else %}none{% endif %};
+    --tz-blur: {% if section.settings.bg_blur %}blur(10px){% else %}none{% endif %};
 
-        --tz-heading-font: {% case section.settings.heading_font_family %}
-          {% when 'heading' %} var(--font-heading-family, inherit)
-          {% when 'body' %} var(--font-body-family, inherit)
-          {% else %} inherit
-        {% endcase %};
+    --tz-heading-font: {% case section.settings.heading_font_family %}
+      {% when 'heading' %} var(--font-heading-family, inherit)
+      {% when 'body' %} var(--font-body-family, inherit)
+      {% else %} inherit
+    {% endcase %};
 
-        --tz-text-font: {% case section.settings.text_font_family %}
-          {% when 'heading' %} var(--font-heading-family, inherit)
-          {% when 'body' %} var(--font-body-family, inherit)
-          {% else %} inherit
-        {% endcase %};
-      }
-      {% if section.settings.sticky %}
-      /* Make the Shopify section wrapper sticky (more reliable than inner element) */
-      #shopify-section-{{ section.id }}{
-        position: sticky;
-        top: 0;
-        z-index: 9999;
-      }
+    --tz-text-font: {% case section.settings.text_font_family %}
+      {% when 'heading' %} var(--font-heading-family, inherit)
+      {% when 'body' %} var(--font-body-family, inherit)
+      {% else %} inherit
+    {% endcase %};
+  }
 
-      /* Keep your internal header normal-flow */
-      #shopify-section-{{ section.id }} [data-tz-component="header"]{
-        position: relative;
-      }
-    {% endif %}
-
-    {% if section.settings.sticky %}
-    #shopify-section-{{ section.id }}{
-      /* sticky already set */
-      background: color-mix(in srgb, var(--tz-bg) calc(var(--tz-bg-opacity) * 100%), transparent);
-      backdrop-filter: var(--tz-blur);
-    }
+  {% if section.settings.sticky %}
+  #shopify-section-{{ section.id }}{
+    position: sticky;
+    top: 0;
+    z-index: 9999;
+    background: color-mix(in srgb, var(--tz-bg) calc(var(--tz-bg-opacity) * 100%), transparent);
+    backdrop-filter: var(--tz-blur);
+  }
   {% endif %}
+
+  #shopify-section-{{ section.id }} .tz-header {
+    position: relative;
+  }
 {%- endstyle -%}
 
 <section
@@ -63,19 +62,19 @@
   <div class="tz-section__inner {{ section.settings.section_width | default: 'page-width' }}">
     <div class="tz-section__content">
       <div class="header-inner">
+        <!-- MAIN NAV -->
         <nav class="nav-links uppercase">
           {% for link in linklists[section.settings.menu].links %}
-            <div class="nav-item">
-              <a href="{{ link.url }}">{{ link.title }}</a>
-
-              {%- comment -%} Check if mega menu should render (has sub-links) {%- endcomment -%}
-              {% if link.links.size > 0 %}
-                {% render 'tz-mega-menu', link: link, blocks: section.blocks %}
-              {% endif %}
-            </div>
+            <!-- We use forloop.index (1, 2, 3) because Hebrew handles often break IDs -->
+            <a
+              href="{{ link.url }}"
+              class="nav-link"
+              data-tz-index="{{ forloop.index }}"
+            >
+              {{ link.title }}
+            </a>
           {% endfor %}
 
-          <!-- Sale link -->
           {% if section.settings.show_sale %}
             <a href="{{ section.settings.sale_link }}" class="sale-text">
               {{ section.settings.sale_text }}
@@ -84,6 +83,7 @@
           {% endif %}
         </nav>
 
+        <!-- LOGO -->
         <div class="logo">
           <a href="{{ routes.root_url }}">
             {% if section.settings.logo != blank %}
@@ -94,6 +94,7 @@
           </a>
         </div>
 
+        <!-- UTILITIES -->
         <div class="nav-utilities uppercase">
           {% for link in linklists[section.settings.secondary_menu].links %}
             <a href="{{ link.url }}">{{ link.title }}</a>
@@ -122,6 +123,14 @@
         </div>
       </div>
     </div>
+  </div>
+
+  <!-- MEGA MENU LAYER -->
+  <div class="tz-mega-menu-layer">
+    {% for link in linklists[section.settings.menu].links %}
+      <!-- Pass the index number to the snippet so the ID matches the link -->
+      {% render 'tz-mega-menu', link: link, blocks: section.blocks, index: forloop.index %}
+    {% endfor %}
   </div>
 </section>
 
@@ -231,22 +240,14 @@
     { "type": "checkbox", "id": "hide_desktop", "label": "Hide on desktop", "default": false },
 
     { "type": "header", "content": "Content" },
-    {
-      "type": "image_picker",
-      "id": "logo",
-      "label": "Logo"
-    },
+    { "type": "image_picker", "id": "logo", "label": "Logo" },
     {
       "type": "link_list",
       "id": "menu",
       "label": "Main Menu",
       "default": "main-menu"
     },
-    {
-      "type": "link_list",
-      "id": "secondary_menu",
-      "label": "Utilities Menu"
-    },
+
     {
       "type": "checkbox",
       "id": "show_sale",
@@ -270,6 +271,11 @@
       "id": "sale_link",
       "label": "Sale Link"
     },
+    {
+      "type": "link_list",
+      "id": "secondary_menu",
+      "label": "Utilities Menu"
+    },
 
     { "type": "header", "content": "Advanced" },
     { "type": "text", "id": "custom_id", "label": "Custom ID" },
@@ -277,14 +283,100 @@
   ],
   "blocks": [
     {
-      "type": "mega_image",
-      "name": "Mega Menu Image",
+      "type": "mega_menu_settings",
+      "name": "Mega Menu Settings",
+      "limit": 10,
       "settings": [
         {
           "type": "text",
-          "id": "menu_item",
-          "label": "Menu Item Trigger",
-          "info": "Name of the parent menu item to display this image"
+          "id": "menu_trigger",
+          "label": "Menu Trigger Item",
+          "info": "Enter the exact name of the menu item (e.g. 'Women') to apply these settings to.",
+          "default": "Women"
+        },
+        {
+          "type": "color",
+          "id": "bg_color",
+          "label": "Background Color",
+          "default": "#ffffff"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text Color",
+          "default": "#000000"
+        },
+        {
+          "type": "range",
+          "id": "min_height",
+          "label": "Minimum Height",
+          "min": 200,
+          "max": 800,
+          "step": 10,
+          "unit": "px",
+          "default": 300
+        }
+      ]
+    },
+    {
+      "type": "menu_block",
+      "name": "Menu Column",
+      "settings": [
+        {
+          "type": "text",
+          "id": "menu_trigger",
+          "label": "Menu Trigger Item",
+          "info": "Enter the exact name of the parent menu item.",
+          "default": "Women"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Column Heading",
+          "default": "Categories"
+        },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "label": "Select Menu"
+        }
+      ]
+    },
+    {
+      "type": "rich_text_block",
+      "name": "Rich Text Column",
+      "settings": [
+        {
+          "type": "text",
+          "id": "menu_trigger",
+          "label": "Menu Trigger Item",
+          "info": "Enter the exact name of the parent menu item.",
+          "default": "Women"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Featured Info"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text Content",
+          "default": "<p>Share information about your brand or latest collection here.</p>"
+        }
+      ]
+    },
+    {
+      "type": "image_block",
+      "name": "Image Column",
+      "settings": [
+        {
+          "type": "text",
+          "id": "menu_trigger",
+          "label": "Menu Trigger Item",
+          "info": "Enter the exact name of the parent menu item.",
+          "default": "Women"
         },
         {
           "type": "image_picker",
@@ -293,15 +385,38 @@
         },
         {
           "type": "text",
-          "id": "title",
-          "label": "Caption"
+          "id": "caption",
+          "label": "Caption / Alt Text"
         },
         {
           "type": "url",
           "id": "link",
-          "label": "Link"
+          "label": "Image Link"
         }
       ]
+    },
+    {
+      "type": "product_block",
+      "name": "Product Column",
+      "settings": [
+        {
+          "type": "text",
+          "id": "menu_trigger",
+          "label": "Menu Trigger Item",
+          "info": "Enter the exact name of the parent menu item.",
+          "default": "Women"
+        },
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Select Product"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "TZ Header"
     }
   ]
 }

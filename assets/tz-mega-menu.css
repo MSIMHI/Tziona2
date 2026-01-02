@@ -1,0 +1,142 @@
+/* =========================================
+   TZ Mega Menu - Final Stable Version
+   ========================================= */
+
+/* 1. HEADER ANCHOR 
+   Force the header to allow the menu to spill out over the banner */
+.section-header, 
+.tz-header, 
+#shopify-section-header {
+  position: relative !important;
+  overflow: visible !important;
+  z-index: 1000 !important; 
+}
+
+/* 2. MENU LAYER 
+   This is the container that hangs off the bottom of the header. */
+.tz-mega-menu-layer {
+  position: absolute !important;
+  top: 100% !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 0 !important; /* Zero height so it doesn't block clicks */
+  z-index: 99999 !important;
+  display: block !important;
+}
+
+/* 3. THE MENU PANEL (The Fix)
+   We use position: absolute so all menus sit at the exact same 'Top: 0' spot.
+   This prevents Menu #1 from pushing Menu #2 down. */
+.tz-mega-menu {
+  display: block !important;
+  position: absolute !important; /* KEY FIX: Absolute, not Relative */
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  
+  background-color: var(--tz-mm-bg, #ffffff) !important;
+  color: var(--tz-mm-text, #000000);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  border-top: 1px solid #f0f0f0;
+  
+  /* Initial State: Hidden */
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  z-index: 100000 !important;
+  
+  /* Smooth Fade */
+  transition: opacity 0.2s ease, visibility 0.2s;
+}
+
+/* Active State: Visible */
+.tz-mega-menu.is-active {
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
+
+/* 4. CONTENT CONTAINER */
+.tz-mega-menu-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 30px 20px; /* Standard padding */
+  
+  /* Reset height to avoid huge white gaps */
+  min-height: auto !important;
+  
+  /* RTL Support */
+  justify-content: flex-start; 
+  align-items: flex-start;
+  text-align: start;
+}
+
+/* =========================================
+   BLOCK STYLING
+   ========================================= */
+
+.tz-mm-block {
+  flex: 1;
+  min-width: 150px;
+}
+
+/* Text Columns */
+.tz-mm-block--menu-block,
+.tz-mm-block--rich-text-block {
+  flex-grow: 1;
+  max-width: 350px;
+}
+
+/* Image & Product Columns (Prevent Huge Images) */
+.tz-mm-block--image-block,
+.tz-mm-block--product-block {
+  flex-grow: 0 !important;
+  flex-shrink: 0;
+  width: 100%;
+  max-width: 300px !important; /* Cap width at 300px */
+}
+
+/* Images */
+.tz-mm-image img,
+.tz-mm-product-img img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  border-radius: 0;
+}
+
+/* Typography */
+.tz-mm-heading {
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 15px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #eaeaea;
+  color: inherit;
+}
+
+.tz-mm-linklist { list-style: none; margin: 0; padding: 0; }
+.tz-mm-linklist li { margin-bottom: 6px; }
+.tz-mm-linklist a { text-decoration: none; color: inherit; font-size: 14px; }
+.tz-mm-linklist a:hover { text-decoration: underline; opacity: 0.7; }
+
+/* Navigation Links (Parent) */
+.nav-links {
+  position: relative;
+  z-index: 1001; 
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Mobile Safety */
+@media (max-width: 989px) {
+  .tz-mega-menu-layer { display: none !important; }
+}
