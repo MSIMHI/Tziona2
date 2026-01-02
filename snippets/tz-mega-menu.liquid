@@ -1,5 +1,7 @@
 {% comment %}
-  Snippet: tz-mega-menu.liquid (Debug Version)
+  Snippet: tz-mega-menu.liquid
+  Fixed: Used `image_tag` filter to resolve Linter "Missing width/height" errors.
+  Includes "Ghost Block" fix and "Exact Name Match" logic.
 {% endcomment %}
 
 {% assign link_title_clean = link.title | strip | downcase %}
@@ -8,11 +10,9 @@
 
 <!-- DEBUG: Link is "{{ link_title_clean }}" -->
 
+{% comment %} 1. Find Settings & Check for Content Matches {% endcomment %}
 {% for block in blocks %}
   {% assign block_trigger_clean = block.settings.menu_trigger | strip | downcase %}
-
-  <!-- DEBUG: Comparing with Block Trigger "{{ block_trigger_clean }}" -->
-
   {% if block_trigger_clean == link_title_clean %}
     {% if block.type == 'mega_menu_settings' %}
       {% assign mega_settings = block %}
@@ -40,60 +40,87 @@
         {% assign block_trigger_clean = block.settings.menu_trigger | strip | downcase %}
 
         {% if block_trigger_clean == link_title_clean and block.type != 'mega_menu_settings' %}
-          <div class="tz-mm-block tz-mm-block--{{ block.type | replace: '_', '-' }}">
-            {% case block.type %}
-              {% when 'menu_block' %}
-                {% if block.settings.heading != blank %}
-                  <h4 class="tz-mm-heading">{{ block.settings.heading }}</h4>
-                {% endif %}
-                {% if block.settings.menu != blank %}
-                  <ul class="tz-mm-linklist">
-                    {% for link in linklists[block.settings.menu].links %}
-                      <li>
-                        <a href="{{ link.url }}">{{ link.title }}</a>
-                      </li>
-                    {% endfor %}
-                  </ul>
-                {% endif %}
+          {% comment %} Check content existence to prevent empty gaps {% endcomment %}
+          {% assign show_block = false %}
 
-              {% when 'rich_text_block' %}
-                <div class="tz-mm-richtext">
+          {% case block.type %}
+            {% when 'menu_block' %}
+              {% if block.settings.menu != blank or block.settings.heading != blank %}
+                {% assign show_block = true %}
+              {% endif %}
+            {% when 'rich_text_block' %}
+              {% if block.settings.text != blank or block.settings.heading != blank %}
+                {% assign show_block = true %}
+              {% endif %}
+            {% when 'image_block' %}
+              {% if block.settings.image != blank %}
+                {% assign show_block = true %}
+              {% endif %}
+            {% when 'product_block' %}
+              {% if block.settings.product != blank %}
+                {% assign show_block = true %}
+              {% endif %}
+          {% endcase %}
+
+          {% if show_block %}
+            <div class="tz-mm-block tz-mm-block--{{ block.type | replace: '_', '-' }}">
+              {% case block.type %}
+                {% when 'menu_block' %}
                   {% if block.settings.heading != blank %}
                     <h4 class="tz-mm-heading">{{ block.settings.heading }}</h4>
                   {% endif %}
-                  <div class="rte">{{ block.settings.text }}</div>
-                </div>
-
-              {% when 'image_block' %}
-                <div class="tz-mm-image">
-                  {% if block.settings.link != blank %}<a href="{{ block.settings.link }}">{% endif %}
-                  {% if block.settings.image != blank %}
-                    <img
-                      src="{{ block.settings.image | image_url: width: 600 }}"
-                      loading="lazy"
-                      width="{{ block.settings.image.width }}"
-                      height="{{ block.settings.image.height }}"
-                    >
+                  {% if block.settings.menu != blank %}
+                    <ul class="tz-mm-linklist">
+                      {% for link in linklists[block.settings.menu].links %}
+                        <li>
+                          <a href="{{ link.url }}">{{ link.title }}</a>
+                        </li>
+                      {% endfor %}
+                    </ul>
                   {% endif %}
-                  {% if block.settings.link != blank %}</a>{% endif %}
-                </div>
 
-              {% when 'product_block' %}
-                {% assign product = all_products[block.settings.product] %}
-                <div class="tz-mm-product">
-                  {% if product != blank %}
+                {% when 'rich_text_block' %}
+                  <div class="tz-mm-richtext">
+                    {% if block.settings.heading != blank %}
+                      <h4 class="tz-mm-heading">{{ block.settings.heading }}</h4>
+                    {% endif %}
+                    <div class="rte">{{ block.settings.text }}</div>
+                  </div>
+
+                {% when 'image_block' %}
+                  <div class="tz-mm-image">
+                    {% if block.settings.link != blank %}<a href="{{ block.settings.link }}">{% endif %}
+
+                    {% comment %} FIX: Use image_tag to automatically add width/height attributes {% endcomment %}
+                    {{
+                      block.settings.image
+                      | image_url: width: 600
+                      | image_tag: loading: 'lazy', widths: '200, 400, 600', style: 'width: 100%; height: auto;'
+                    }}
+
+                    {% if block.settings.caption != blank -%}
+                      <span class="tz-mm-caption">{{ block.settings.caption }}</span>
+                    {%- endif %}
+                    {% if block.settings.link != blank %}</a>{% endif %}
+                  </div>
+
+                {% when 'product_block' %}
+                  {% assign product = all_products[block.settings.product] %}
+                  <div class="tz-mm-product">
                     <a href="{{ product.url }}" class="tz-mm-product-card">
                       <div class="tz-mm-product-img">
-                        <img src="{{ product.featured_image | image_url: width: 400 }}">
+                        {% comment %} FIX: Use image_tag here too {% endcomment %}
+                        {{ product.featured_image | image_url: width: 400 | image_tag: loading: 'lazy' }}
                       </div>
                       <div class="tz-mm-product-info">
-                        <span>{{ product.title }}</span>
+                        <span class="tz-mm-product-title">{{ product.title }}</span>
+                        <span class="tz-mm-product-price">{{ product.price | money }}</span>
                       </div>
                     </a>
-                  {% endif %}
-                </div>
-            {% endcase %}
-          </div>
+                  </div>
+              {% endcase %}
+            </div>
+          {% endif %}
         {% endif %}
       {% endfor %}
     </div>

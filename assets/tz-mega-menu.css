@@ -6,10 +6,12 @@
    Force the header to allow the menu to spill out over the banner */
 .section-header, 
 .tz-header, 
-#shopify-section-header {
-  position: relative !important;
+    #shopify-section-header {
   overflow: visible !important;
   z-index: 1000 !important; 
+  /* Fallback: If not sticky, it behaves relatively. 
+     If sticky is on, the Liquid ID style will override this. */
+  position: relative; 
 }
 
 /* 2. MENU LAYER 
