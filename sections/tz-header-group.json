@@ -1,0 +1,48 @@
+{
+    "name": "TZ Header Group",
+    "type": "header",
+    "sections": {
+        "my_announcement": {
+            "type": "tz-announcement",
+            "blocks": {
+                "m1": {
+                    "type": "announcement",
+                    "settings": {
+                        "text": "משלוח חינם לכל הארץ",
+                        "link": ""
+                    }
+                },
+                "m2": {
+                    "type": "announcement",
+                    "settings": {
+                        "text": "שירות לקוחות 24/7",
+                        "link": ""
+                    }
+                }
+            },
+            "block_order": [
+                "m1",
+                "m2"
+            ],
+            "settings": {
+                "enable_marquee": true,
+                "speed": 30,
+                "bg_color": "#000000",
+                "text_color": "#ffffff",
+                "font_size": 14
+            }
+        },
+        "my_header": {
+            "type": "tz-header",
+            "settings": {
+                "show_sale": true,
+                "sale_text": "Sale",
+                "sale_badge": "Hot"
+            }
+        }
+    },
+    "order": [
+        "my_announcement",
+        "my_header"
+    ]
+}

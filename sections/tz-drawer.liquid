@@ -1,0 +1,85 @@
+<div class="cart-overlay" id="cartOverlay"></div>
+<div class="cart-drawer" id="cartDrawer">
+    <div class="cart-promo">{{ section.settings.promo_text }}</div>
+    <div class="cart-header">
+        <div class="cart-title-row">
+            <span class="cart-title-main">עגלה</span>
+            <span class="cart-title-count">({{ cart.item_count }} פריטים)</span>
+        </div>
+        <button class="close-cart-btn" id="closeCartBtn">&times;</button>
+    </div>
+
+    <div class="shipping-bar">
+        <div class="shipping-text">משלוח חינם יחושב בקופה</div>
+        <div class="shipping-progress">
+            <!-- Example logic: fill 100% if price > threshold -->
+            <div class="shipping-progress-fill" style="width: 100%;"></div>
+        </div>
+    </div>
+
+    <div class="cart-body">
+        <div class="cart-items-list">
+            {% if cart.item_count > 0 %}
+            {% for item in cart.items %}
+            <div class="cart-item">
+                {% if item.image %}
+                {{ item.image | image_url: width: 200 | image_tag }}
+                {% else %}
+                {{ 'product-1' | placeholder_svg_tag }}
+                {% endif %}
+
+                <div class="item-details">
+                    <div class="item-title">
+                        <a href="{{ item.url }}">{{ item.product.title }}</a>
+                    </div>
+                    <div class="item-variant">{{ item.variant.title }}</div>
+                    <div class="qty-selector">
+                        <a href="/cart/change?line={{ forloop.index }}&quantity={{ item.quantity | minus: 1 }}"
+                            class="qty-btn">&minus;</a>
+                        <div class="qty-val">{{ item.quantity }}</div>
+                        <a href="/cart/change?line={{ forloop.index }}&quantity={{ item.quantity | plus: 1 }}"
+                            class="qty-btn">&plus;</a>
+                    </div>
+                </div>
+                <div class="item-price-col">
+                    <div class="item-price">{{ item.final_line_price | money }}</div>
+                    <a href="/cart/change?line={{ forloop.index }}&quantity=0" class="item-remove">הסר</a>
+                </div>
+            </div>
+            {% endfor %}
+            {% else %}
+            <div style="padding: 30px; text-align:center;">העגלה ריקה</div>
+            {% endif %}
+        </div>
+
+        <div class="order-notes">
+            <span>הוסף הערות להזמנה</span>
+            <span>&plus;</span>
+        </div>
+    </div>
+
+    <div class="cart-footer">
+        <form action="{{ routes.cart_url }}" method="post" id="cart-drawer-form">
+            <button type="submit" name="checkout" class="checkout-btn">
+                <span>לתשלום</span>
+                <span>&bull;</span>
+                <span>{{ cart.total_price | money }}</span>
+            </button>
+        </form>
+        <span class="shipping-taxes-text">משלוח ומיסים מחושבים בקופה</span>
+    </div>
+</div>
+
+{% schema %}
+{
+"name": "TZ Cart Drawer",
+"settings": [
+{
+"type": "text",
+"id": "promo_text",
+"label": "Promo Bar Text",
+"default": "לקוחות חדשים חוסכים 10% עם קוד WELCOME10"
+}
+]
+}
+{% endschema %}

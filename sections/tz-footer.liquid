@@ -1,0 +1,266 @@
+{% style %}
+/* Dynamic Grid Logic */
+.footer-top-dynamic {
+display: flex;
+flex-wrap: wrap;
+gap: 40px;
+position: relative;
+z-index: 10;
+}
+.footer-col-dynamic {
+flex: 1;
+min-width: 150px;
+}
+.footer-col-dynamic.is-wide {
+flex: 1.5;
+min-width: 250px;
+}
+
+/* Social Container Styles */
+.social-icons-container {
+display: flex;
+gap: 15px;
+align-items: center;
+flex-wrap: wrap;
+}
+
+.social-icon-link {
+display: flex;
+align-items: center;
+justify-content: center;
+transition: opacity 0.2s ease;
+color: var(--color-white, #fff);
+}
+
+.social-icon-link:hover {
+opacity: 0.7;
+}
+
+.social-icon-link svg {
+width: 20px;
+height: 20px;
+fill: currentColor; /* Inherits color from parent */
+stroke: none;
+}
+
+/* Specific fix for stroke-based icons if needed */
+.social-icon-link svg.icon-stroke {
+fill: none;
+stroke: currentColor;
+}
+{% endstyle %}
+
+<footer>
+    <!-- TOP COLUMNS AREA -->
+    <div class="footer-top footer-top-dynamic">
+        {% for block in section.blocks %}
+        <div class="footer-col footer-col-dynamic {% if block.settings.is_wide %}is-wide{% endif %}" {{
+            block.shopify_attributes }}>
+
+            {% if block.settings.heading != blank %}
+            <h4 class="uppercase">{{ block.settings.heading }}</h4>
+            {% endif %}
+
+            {% case block.type %}
+            {% when 'text_column' %}
+            {% if block.settings.text != blank %}
+            <div class="rte" style="font-size: 14px; line-height: 1.6; color: #ccc;">
+                {{ block.settings.text }}
+            </div>
+            {% endif %}
+
+            {% when 'menu_column' %}
+            {% if block.settings.menu != blank %}
+            <ul>
+                {% for link in linklists[block.settings.menu].links %}
+                <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            {% endcase %}
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- WATERMARK -->
+    <div class="footer-watermark">{{ section.settings.watermark }}</div>
+
+    <!-- BOTTOM AREA -->
+    <div class="footer-bottom">
+
+        <!-- SOCIAL ICONS CONTAINER -->
+        <div class="social-icons-container">
+            {%- if section.settings.show_social -%}
+
+            {%- if settings.social_facebook_link != blank -%}
+            <a href="{{ settings.social_facebook_link }}" class="social-icon-link" aria-label="Facebook">
+                <svg viewBox="0 0 24 24" class="icon-stroke" stroke-width="2">
+                    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                </svg>
+            </a>
+            {%- endif -%}
+
+            {%- if settings.social_instagram_link != blank -%}
+            <a href="{{ settings.social_instagram_link }}" class="social-icon-link" aria-label="Instagram">
+                <svg viewBox="0 0 24 24" class="icon-stroke" stroke-width="2">
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                </svg>
+            </a>
+            {%- endif -%}
+
+            {%- if settings.social_tiktok_link != blank -%}
+            <a href="{{ settings.social_tiktok_link }}" class="social-icon-link" aria-label="TikTok">
+                <svg viewBox="0 0 24 24" class="icon-stroke" stroke-width="2">
+                    <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path>
+                </svg>
+            </a>
+            {%- endif -%}
+
+            {%- if settings.social_twitter_link != blank -%}
+            <a href="{{ settings.social_twitter_link }}" class="social-icon-link" aria-label="Twitter">
+                <svg viewBox="0 0 24 24" class="icon-stroke" stroke-width="2">
+                    <path
+                        d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z">
+                    </path>
+                </svg>
+            </a>
+            {%- endif -%}
+
+            {%- if settings.social_pinterest_link != blank -%}
+            <a href="{{ settings.social_pinterest_link }}" class="social-icon-link" aria-label="Pinterest">
+                <svg viewBox="0 0 24 24" class="icon-stroke" stroke-width="2">
+                    <path d="M8 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path>
+                    <line x1="12" y1="2" x2="12" y2="22"></line>
+                </svg>
+            </a>
+            {%- endif -%}
+
+            {%- if settings.social_youtube_link != blank -%}
+            <a href="{{ settings.social_youtube_link }}" class="social-icon-link" aria-label="YouTube">
+                <svg viewBox="0 0 24 24" class="icon-stroke" stroke-width="2">
+                    <path
+                        d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z">
+                    </path>
+                    <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>
+                </svg>
+            </a>
+            {%- endif -%}
+
+            {%- endif -%}
+        </div>
+
+        <!-- COPYRIGHT & LINKS -->
+        <div class="copyright-text">
+            &copy; {{ 'now' | date: "%Y" }}, {{ shop.name }}. {{ section.settings.copyright_text }}<br>
+            {% if section.settings.terms_url %}
+            <a href="{{ section.settings.terms_url }}">תנאי שימוש</a> |
+            {% endif %}
+            {% if section.settings.privacy_url %}
+            <a href="{{ section.settings.privacy_url }}">מדיניות הפרטיות</a>
+            {% endif %}
+        </div>
+
+    </div>
+</footer>
+
+{% schema %}
+{
+"name": "TZ Main Footer",
+"tag": "section",
+"class": "section-footer",
+"settings": [
+{
+"type": "text",
+"id": "watermark",
+"label": "Watermark Text",
+"default": "ציונה"
+},
+{
+"type": "header",
+"content": "Social Media"
+},
+{
+"type": "checkbox",
+"id": "show_social",
+"label": "Show Social Icons",
+"default": true,
+"info": "Edit the actual links in Theme Settings > Social Media"
+},
+{
+"type": "header",
+"content": "Copyright"
+},
+{
+"type": "richtext",
+"id": "copyright_text",
+"label": "Additional Copyright Text"
+},
+{
+"type": "url",
+"id": "terms_url",
+"label": "Terms of Service Link"
+},
+{
+"type": "url",
+"id": "privacy_url",
+"label": "Privacy Policy Link"
+}
+],
+"blocks": [
+{
+"type": "text_column",
+"name": "Text Column",
+"settings": [
+{
+"type": "text",
+"id": "heading",
+"label": "Heading",
+"default": "המשימה שלנו"
+},
+{
+"type": "richtext",
+"id": "text",
+"label": "Text",
+"default": "<p>מאז 2011, יש לנו הבטחה פשוטה. לבנות את התיקים הטובים ביותר שאפשר.</p>"
+},
+{
+"type": "checkbox",
+"id": "is_wide",
+"label": "Is Wide Column?",
+"default": true
+}
+]
+},
+{
+"type": "menu_column",
+"name": "Menu Column",
+"settings": [
+{
+"type": "text",
+"id": "heading",
+"label": "Heading",
+"default": "קישורים"
+},
+{
+"type": "link_list",
+"id": "menu",
+"label": "Menu"
+},
+{
+"type": "checkbox",
+"id": "is_wide",
+"label": "Is Wide Column?",
+"default": false
+}
+]
+}
+],
+"presets": [
+{
+"name": "TZ Main Footer"
+}
+]
+}
+{% endschema %}

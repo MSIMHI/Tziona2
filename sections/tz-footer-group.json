@@ -1,0 +1,126 @@
+{
+    "name": "Footer",
+    "type": "footer",
+    "sections": {
+        "benefits": {
+            "type": "tz-benefits",
+            "blocks": {
+                "benefit_1": {
+                    "type": "benefit",
+                    "settings": {
+                        "title": "לקוחות חדשים מקבלים 15% הנחה",
+                        "text": "על ההזמנה הראשונה שלכם"
+                    }
+                },
+                "benefit_2": {
+                    "type": "benefit",
+                    "settings": {
+                        "title": "הזכות לתיקון",
+                        "text": "מעצימים אתכם לשמור על התיק בשימוש לטווח הארוך"
+                    }
+                },
+                "benefit_3": {
+                    "type": "benefit",
+                    "settings": {
+                        "title": "SHOPPAY + AFTERPAY",
+                        "text": "קנו עכשיו, שלמו אחר כך"
+                    }
+                }
+            },
+            "block_order": [
+                "benefit_1",
+                "benefit_2",
+                "benefit_3"
+            ],
+            "settings": {}
+        },
+        "guarantee": {
+            "type": "tz-guarantee",
+            "blocks": {
+                "item_1": {
+                    "type": "item",
+                    "settings": {
+                        "text": "משלוח חינם"
+                    }
+                },
+                "item_2": {
+                    "type": "item",
+                    "settings": {
+                        "text": "החזרות חינם"
+                    }
+                },
+                "item_3": {
+                    "type": "item",
+                    "settings": {
+                        "text": "אחריות לכל החיים"
+                    }
+                },
+                "item_4": {
+                    "type": "item",
+                    "settings": {
+                        "text": "חומרים ממוחזרים"
+                    }
+                }
+            },
+            "block_order": [
+                "item_1",
+                "item_2",
+                "item_3",
+                "item_4"
+            ],
+            "settings": {}
+        },
+        "main_footer": {
+            "type": "tz-footer",
+            "blocks": {
+                "mission": {
+                    "type": "text_column",
+                    "settings": {
+                        "heading": "המשימה שלנו",
+                        "text": "<p>מאז 2011, יש לנו הבטחה פשוטה.<br>לבנות את התיקים הטובים ביותר שאפשר. עד היום, זה מה שאנחנו עושים.</p>",
+                        "is_wide": true
+                    }
+                },
+                "shop_menu": {
+                    "type": "menu_column",
+                    "settings": {
+                        "heading": "חנות",
+                        "menu": "footer",
+                        "is_wide": false
+                    }
+                },
+                "info_menu": {
+                    "type": "menu_column",
+                    "settings": {
+                        "heading": "מידע",
+                        "menu": "footer",
+                        "is_wide": false
+                    }
+                },
+                "company_menu": {
+                    "type": "menu_column",
+                    "settings": {
+                        "heading": "חברה",
+                        "menu": "footer",
+                        "is_wide": false
+                    }
+                }
+            },
+            "block_order": [
+                "mission",
+                "shop_menu",
+                "info_menu",
+                "company_menu"
+            ],
+            "settings": {
+                "watermark": "ציונה",
+                "show_social": true
+            }
+        }
+    },
+    "order": [
+        "benefits",
+        "guarantee",
+        "main_footer"
+    ]
+}

@@ -1,0 +1,51 @@
+<div class="footer-benefits">
+    {% for block in section.blocks %}
+    <div class="benefit-item" {{ block.shopify_attributes }}>
+        {% if block.settings.title != blank %}
+        <div class="benefit-title uppercase">{{ block.settings.title }}</div>
+        {% endif %}
+        {% if block.settings.text != blank %}
+        <div class="benefit-desc">{{ block.settings.text }}</div>
+        {% endif %}
+    </div>
+    {% endfor %}
+</div>
+
+{% schema %}
+{
+"name": "TZ Benefits Bar",
+"tag": "section",
+"class": "section-benefits",
+"settings": [],
+"blocks": [
+{
+"type": "benefit",
+"name": "Benefit",
+"settings": [
+{
+"type": "text",
+"id": "title",
+"label": "Heading",
+"default": "לקוחות חדשים מקבלים 15% הנחה"
+},
+{
+"type": "textarea",
+"id": "text",
+"label": "Description",
+"default": "על ההזמנה הראשונה שלכם"
+}
+]
+}
+],
+"presets": [
+{
+"name": "TZ Benefits Bar",
+"blocks": [
+{ "type": "benefit" },
+{ "type": "benefit" },
+{ "type": "benefit" }
+]
+}
+]
+}
+{% endschema %}

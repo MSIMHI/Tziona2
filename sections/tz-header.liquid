@@ -1,0 +1,135 @@
+<header>
+    <div class="header-inner">
+        <nav class="nav-links uppercase">
+            {% for link in linklists[section.settings.menu].links %}
+            <div class="nav-item">
+                <a href="{{ link.url }}">{{ link.title }}</a>
+
+                {%- comment -%} Check if mega menu should render (has sub-links) {%- endcomment -%}
+                {% if link.links.size > 0 %}
+                {% render 'tz-mega-menu', link: link, blocks: section.blocks %}
+                {% endif %}
+            </div>
+            {% endfor %}
+
+            <!-- Dynamic blocks for utilities or hardcoded links per requirement -->
+            {% if section.settings.show_sale %}
+            <a href="{{ section.settings.sale_link }}" class="sale-text">
+                {{ section.settings.sale_text }}
+                <span class="sale-badge">{{ section.settings.sale_badge }}</span>
+            </a>
+            {% endif %}
+        </nav>
+
+        <div class="logo">
+            <a href="{{ routes.root_url }}">
+                {% if section.settings.logo != blank %}
+                {{ section.settings.logo | image_url: width: 300 | image_tag: height: 20 }}
+                {% else %}
+                {{ shop.name }}
+                {% endif %}
+            </a>
+        </div>
+
+        <div class="nav-utilities uppercase">
+            {% for link in linklists[section.settings.secondary_menu].links %}
+            <a href="{{ link.url }}">{{ link.title }}</a>
+            {% endfor %}
+
+            <button class="icon-btn">
+                <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none">
+                    <circle cx="11" cy="11" r="8" />
+                    <path d="M21 21l-4.35-4.35" />
+                </svg>
+            </button>
+            <a href="{{ routes.account_url }}" class="icon-btn" style="display:inline-block;color:black;">
+                <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                    <circle cx="12" cy="7" r="4" />
+                </svg>
+            </a>
+            <button class="icon-btn">
+                <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none">
+                    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+                    <path d="M16 10a4 4 0 0 1-8 0" />
+                </svg>
+            </button>
+        </div>
+    </div>
+</header>
+
+{% schema %}
+{
+"name": "TZ Header",
+"settings": [
+{
+"type": "image_picker",
+"id": "logo",
+"label": "Logo"
+},
+{
+"type": "link_list",
+"id": "menu",
+"label": "Main Menu",
+"default": "main-menu"
+},
+{
+"type": "link_list",
+"id": "secondary_menu",
+"label": "Utilities Menu"
+},
+{
+"type": "checkbox",
+"id": "show_sale",
+"label": "Show Sale Link",
+"default": true
+},
+{
+"type": "text",
+"id": "sale_text",
+"label": "Sale Text",
+"default": "במבצע עכשיו"
+},
+{
+"type": "text",
+"id": "sale_badge",
+"label": "Sale Badge",
+"default": "30% OFF"
+},
+{
+"type": "url",
+"id": "sale_link",
+"label": "Sale Link"
+}
+],
+"blocks": [
+{
+"type": "mega_image",
+"name": "Mega Menu Image",
+"settings": [
+{
+"type": "text",
+"id": "menu_item",
+"label": "Menu Item Trigger",
+"info": "Name of the parent menu item to display this image"
+},
+{
+"type": "image_picker",
+"id": "image",
+"label": "Image"
+},
+{
+"type": "text",
+"id": "title",
+"label": "Caption"
+},
+{
+"type": "url",
+"id": "link",
+"label": "Link"
+}
+]
+}
+]
+}
+{% endschema %}

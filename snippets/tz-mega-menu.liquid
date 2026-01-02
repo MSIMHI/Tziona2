@@ -1,0 +1,36 @@
+<div class="mega-menu">
+    <div class="mm-sidebar">
+        <div class="mm-category">
+            <h4>קטגוריות</h4>
+            <ul>
+                {% for childlink in link.links %}
+                <li>
+                    <a href="{{ childlink.url }}">{{ childlink.title }}</a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <div class="mm-visuals">
+        {% assign parent_title = link.title | strip | downcase %}
+
+        {% for block in blocks %}
+        {% if block.type == 'mega_image' %}
+        {% assign trigger = block.settings.menu_item | strip | downcase %}
+        {% if trigger == parent_title %}
+        <div class="mm-card">
+            <a href="{{ block.settings.link | default: '#' }}">
+                {% if block.settings.image != blank %}
+                {{ block.settings.image | image_url: width: 400 | image_tag }}
+                {% endif %}
+                {% if block.settings.title != blank %}
+                <h3>{{ block.settings.title }}</h3>
+                {% endif %}
+            </a>
+        </div>
+        {% endif %}
+        {% endif %}
+        {% endfor %}
+    </div>
+</div>
