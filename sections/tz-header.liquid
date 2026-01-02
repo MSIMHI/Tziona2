@@ -1,135 +1,308 @@
-<header>
-    <div class="header-inner">
+{%- style -%}
+      /* =========================================================
+         TZ Header — Liquid (TOKENS ONLY)
+         ========================================================= */
+      #shopify-section-{{ section.id }} {
+        --tz-pt: {{ section.settings.padding_top | default: 12 }}px;
+        --tz-pb: {{ section.settings.padding_bottom | default: 12 }}px;
+        --tz-bg: {{ section.settings.bg_color | default: '#ffffff' }};
+        --tz-bg-opacity: {{ section.settings.bg_opacity | default: 100 | divided_by: 100.0 }};
+
+        --tz-text: {{ section.settings.text_color | default: '#111111' }};
+        --tz-link: {{ section.settings.link_color | default: '#111111' }};
+        --tz-link-hover: {{ section.settings.link_hover_color | default: '#555555' }};
+        --tz-accent: {{ section.settings.accent_color | default: '#ff5a1f' }};
+
+        --tz-nav-size: {{ section.settings.nav_text_size | default: 13 }}px;
+        --tz-nav-case: {% if section.settings.nav_uppercase %}uppercase{% else %}none{% endif %};
+
+        --tz-blur: {% if section.settings.bg_blur %}blur(10px){% else %}none{% endif %};
+
+        --tz-heading-font: {% case section.settings.heading_font_family %}
+          {% when 'heading' %} var(--font-heading-family, inherit)
+          {% when 'body' %} var(--font-body-family, inherit)
+          {% else %} inherit
+        {% endcase %};
+
+        --tz-text-font: {% case section.settings.text_font_family %}
+          {% when 'heading' %} var(--font-heading-family, inherit)
+          {% when 'body' %} var(--font-body-family, inherit)
+          {% else %} inherit
+        {% endcase %};
+      }
+      {% if section.settings.sticky %}
+      /* Make the Shopify section wrapper sticky (more reliable than inner element) */
+      #shopify-section-{{ section.id }}{
+        position: sticky;
+        top: 0;
+        z-index: 9999;
+      }
+
+      /* Keep your internal header normal-flow */
+      #shopify-section-{{ section.id }} [data-tz-component="header"]{
+        position: relative;
+      }
+    {% endif %}
+
+    {% if section.settings.sticky %}
+    #shopify-section-{{ section.id }}{
+      /* sticky already set */
+      background: color-mix(in srgb, var(--tz-bg) calc(var(--tz-bg-opacity) * 100%), transparent);
+      backdrop-filter: var(--tz-blur);
+    }
+  {% endif %}
+{%- endstyle -%}
+
+<section
+  {% if section.settings.custom_id != blank %}
+    id="{{ section.settings.custom_id | escape }}"
+  {% endif %}
+  class="tz-section tz-header {% if section.settings.sticky %}is-sticky{% endif %} {{ section.settings.custom_class }} {% if section.settings.hide_mobile %}mobile-hide{% endif %} {% if section.settings.hide_desktop %}desktop-hide{% endif %}"
+  data-tz-component="header"
+>
+  <div class="tz-section__inner {{ section.settings.section_width | default: 'page-width' }}">
+    <div class="tz-section__content">
+      <div class="header-inner">
         <nav class="nav-links uppercase">
-            {% for link in linklists[section.settings.menu].links %}
+          {% for link in linklists[section.settings.menu].links %}
             <div class="nav-item">
-                <a href="{{ link.url }}">{{ link.title }}</a>
+              <a href="{{ link.url }}">{{ link.title }}</a>
 
-                {%- comment -%} Check if mega menu should render (has sub-links) {%- endcomment -%}
-                {% if link.links.size > 0 %}
+              {%- comment -%} Check if mega menu should render (has sub-links) {%- endcomment -%}
+              {% if link.links.size > 0 %}
                 {% render 'tz-mega-menu', link: link, blocks: section.blocks %}
-                {% endif %}
+              {% endif %}
             </div>
-            {% endfor %}
+          {% endfor %}
 
-            <!-- Dynamic blocks for utilities or hardcoded links per requirement -->
-            {% if section.settings.show_sale %}
+          <!-- Sale link -->
+          {% if section.settings.show_sale %}
             <a href="{{ section.settings.sale_link }}" class="sale-text">
-                {{ section.settings.sale_text }}
-                <span class="sale-badge">{{ section.settings.sale_badge }}</span>
+              {{ section.settings.sale_text }}
+              <span class="sale-badge">{{ section.settings.sale_badge }}</span>
             </a>
-            {% endif %}
+          {% endif %}
         </nav>
 
         <div class="logo">
-            <a href="{{ routes.root_url }}">
-                {% if section.settings.logo != blank %}
-                {{ section.settings.logo | image_url: width: 300 | image_tag: height: 20 }}
-                {% else %}
-                {{ shop.name }}
-                {% endif %}
-            </a>
+          <a href="{{ routes.root_url }}">
+            {% if section.settings.logo != blank %}
+              {{ section.settings.logo | image_url: width: 300 | image_tag: height: 20 }}
+            {% else %}
+              {{ shop.name }}
+            {% endif %}
+          </a>
         </div>
 
         <div class="nav-utilities uppercase">
-            {% for link in linklists[section.settings.secondary_menu].links %}
+          {% for link in linklists[section.settings.secondary_menu].links %}
             <a href="{{ link.url }}">{{ link.title }}</a>
-            {% endfor %}
+          {% endfor %}
 
-            <button class="icon-btn">
-                <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none">
-                    <circle cx="11" cy="11" r="8" />
-                    <path d="M21 21l-4.35-4.35" />
-                </svg>
-            </button>
-            <a href="{{ routes.account_url }}" class="icon-btn" style="display:inline-block;color:black;">
-                <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none">
-                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-                    <circle cx="12" cy="7" r="4" />
-                </svg>
-            </a>
-            <button class="icon-btn">
-                <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none">
-                    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
-                    <path d="M16 10a4 4 0 0 1-8 0" />
-                </svg>
-            </button>
+          <button class="icon-btn" aria-label="Search">
+            <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none">
+              <circle cx="11" cy="11" r="8" />
+              <path d="M21 21l-4.35-4.35" />
+            </svg>
+          </button>
+
+          <a href="{{ routes.account_url }}" class="icon-btn" aria-label="Account">
+            <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+              <circle cx="12" cy="7" r="4" />
+            </svg>
+          </a>
+
+          <button class="icon-btn" aria-label="Cart">
+            <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none">
+              <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+              <path d="M16 10a4 4 0 0 1-8 0" />
+            </svg>
+          </button>
         </div>
+      </div>
     </div>
-</header>
+  </div>
+</section>
 
 {% schema %}
 {
-"name": "TZ Header",
-"settings": [
-{
-"type": "image_picker",
-"id": "logo",
-"label": "Logo"
-},
-{
-"type": "link_list",
-"id": "menu",
-"label": "Main Menu",
-"default": "main-menu"
-},
-{
-"type": "link_list",
-"id": "secondary_menu",
-"label": "Utilities Menu"
-},
-{
-"type": "checkbox",
-"id": "show_sale",
-"label": "Show Sale Link",
-"default": true
-},
-{
-"type": "text",
-"id": "sale_text",
-"label": "Sale Text",
-"default": "במבצע עכשיו"
-},
-{
-"type": "text",
-"id": "sale_badge",
-"label": "Sale Badge",
-"default": "30% OFF"
-},
-{
-"type": "url",
-"id": "sale_link",
-"label": "Sale Link"
-}
-],
-"blocks": [
-{
-"type": "mega_image",
-"name": "Mega Menu Image",
-"settings": [
-{
-"type": "text",
-"id": "menu_item",
-"label": "Menu Item Trigger",
-"info": "Name of the parent menu item to display this image"
-},
-{
-"type": "image_picker",
-"id": "image",
-"label": "Image"
-},
-{
-"type": "text",
-"id": "title",
-"label": "Caption"
-},
-{
-"type": "url",
-"id": "link",
-"label": "Link"
-}
-]
-}
-]
+  "name": "TZ Header",
+  "tag": "section",
+  "class": "section-header",
+  "settings": [
+    { "type": "header", "content": "Layout" },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "Section Width",
+      "options": [
+        { "value": "page-width", "label": "Page Width" },
+        { "value": "full-width", "label": "Full Width" }
+      ],
+      "default": "page-width"
+    },
+    {
+      "type": "checkbox",
+      "id": "sticky",
+      "label": "Sticky header",
+      "default": false
+    },
+
+    { "type": "header", "content": "Spacing" },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 12
+    },
+
+    { "type": "header", "content": "Background" },
+    { "type": "color", "id": "bg_color", "label": "Background color", "default": "#ffffff" },
+    {
+      "type": "range",
+      "id": "bg_opacity",
+      "label": "Background opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    { "type": "checkbox", "id": "bg_blur", "label": "Backdrop blur (sticky)", "default": false },
+
+    { "type": "header", "content": "Typography" },
+    {
+      "type": "select",
+      "id": "heading_font_family",
+      "label": "Heading font family",
+      "options": [
+        { "value": "inherit", "label": "Inherit" },
+        { "value": "heading", "label": "Theme heading font" },
+        { "value": "body", "label": "Theme body font" }
+      ],
+      "default": "inherit"
+    },
+    {
+      "type": "select",
+      "id": "text_font_family",
+      "label": "Text font family",
+      "options": [
+        { "value": "inherit", "label": "Inherit" },
+        { "value": "body", "label": "Theme body font" },
+        { "value": "heading", "label": "Theme heading font" }
+      ],
+      "default": "inherit"
+    },
+    {
+      "type": "range",
+      "id": "nav_text_size",
+      "label": "Nav text size",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 13
+    },
+    { "type": "checkbox", "id": "nav_uppercase", "label": "Uppercase nav text", "default": true },
+
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "text_color", "label": "Text color", "default": "#111111" },
+    { "type": "color", "id": "link_color", "label": "Link color", "default": "#111111" },
+    { "type": "color", "id": "link_hover_color", "label": "Link hover color", "default": "#555555" },
+    { "type": "color", "id": "accent_color", "label": "Accent color", "default": "#ff5a1f" },
+
+    { "type": "header", "content": "Visibility" },
+    { "type": "checkbox", "id": "hide_mobile", "label": "Hide on mobile", "default": false },
+    { "type": "checkbox", "id": "hide_desktop", "label": "Hide on desktop", "default": false },
+
+    { "type": "header", "content": "Content" },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Main Menu",
+      "default": "main-menu"
+    },
+    {
+      "type": "link_list",
+      "id": "secondary_menu",
+      "label": "Utilities Menu"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_sale",
+      "label": "Show Sale Link",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "sale_text",
+      "label": "Sale Text",
+      "default": "במבצע עכשיו"
+    },
+    {
+      "type": "text",
+      "id": "sale_badge",
+      "label": "Sale Badge",
+      "default": "30% OFF"
+    },
+    {
+      "type": "url",
+      "id": "sale_link",
+      "label": "Sale Link"
+    },
+
+    { "type": "header", "content": "Advanced" },
+    { "type": "text", "id": "custom_id", "label": "Custom ID" },
+    { "type": "text", "id": "custom_class", "label": "Custom class" }
+  ],
+  "blocks": [
+    {
+      "type": "mega_image",
+      "name": "Mega Menu Image",
+      "settings": [
+        {
+          "type": "text",
+          "id": "menu_item",
+          "label": "Menu Item Trigger",
+          "info": "Name of the parent menu item to display this image"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Caption"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    }
+  ]
 }
 {% endschema %}

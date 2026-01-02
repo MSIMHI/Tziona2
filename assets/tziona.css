@@ -488,6 +488,124 @@ main {
   }
 }
 
+/* ========================================
+   TZ HEADER COMPONENT — FLEX / RTL NATIVE
+   Icons LEFT (via RTL)
+   Logo CENTER (absolute, non-intrusive)
+   Menu RIGHT
+   ======================================== */
+
+[data-tz-component="header"]{
+  background: color-mix(in srgb, var(--tz-bg) calc(var(--tz-bg-opacity) * 100%), transparent);
+  padding-top: var(--tz-pt);
+  padding-bottom: var(--tz-pb);
+}
+
+/* Sticky */
+[data-tz-component="header"].is-sticky{
+  position: sticky;
+  top: 0;
+  z-index: 60;
+  backdrop-filter: var(--tz-blur);
+}
+
+/* Header row — KEEP RTL */
+[data-tz-component="header"] .header-inner{
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+  direction: rtl; /* IMPORTANT: keep RTL */
+}
+
+/* MAIN MENU + SALE (right side in RTL) */
+[data-tz-component="header"] .nav-links{
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+/* UTILITIES + ICONS (left side in RTL — because it’s last in Liquid) */
+[data-tz-component="header"] .nav-utilities{
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+/* LOGO — visually centered, DOES NOT affect layout */
+[data-tz-component="header"] .logo{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  pointer-events: none;
+}
+
+[data-tz-component="header"] .logo a{
+  pointer-events: auto;
+  display: inline-flex;
+  align-items: center;
+  color: var(--tz-text);
+  font-family: var(--tz-heading-font);
+  text-decoration: none;
+}
+
+[data-tz-component="header"] .logo img{
+  height: 20px;
+  max-width: 180px;
+  display: block;
+}
+
+/* Links */
+[data-tz-component="header"] a{
+  color: var(--tz-link);
+  text-decoration: none;
+  font-family: var(--tz-text-font);
+  font-size: var(--tz-nav-size);
+  text-transform: var(--tz-nav-case);
+}
+
+[data-tz-component="header"] a:hover{
+  color: var(--tz-link-hover);
+}
+
+/* Icons */
+[data-tz-component="header"] .icon-btn{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: none;
+  border: 0;
+  color: var(--tz-text);
+}
+
+[data-tz-component="header"] .icon-btn svg{
+  width: 22px;
+  height: 22px;
+}
+
+/* Sale badge */
+[data-tz-component="header"] .sale-badge{
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: var(--tz-accent);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 800;
+}
+[data-tz-component="header"].is-sticky{
+  position: relative; /* or remove this whole rule’s position/top */
+  top: auto;
+}
+[data-tz-component="header"].is-sticky{
+  background: transparent;
+}
 
 /* --- DRAWER --- */
 .cart-overlay {
