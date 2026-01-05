@@ -634,7 +634,7 @@ product-info,
   align-items: center;
   font-size: var(--tz-product-text-sm);
   font-weight: 500;
-  color: rgb(var(--color-foreground));
+  color: #111111 !important; /* Light mode: dark text */
   background: none;
   border: none;
   cursor: pointer;
@@ -645,7 +645,15 @@ product-info,
 }
 
 .tz-product-wishlist:hover {
-  color: rgba(var(--color-foreground), 0.6);
+  color: rgba(17, 17, 17, 0.6) !important; /* Light mode: darker on hover */
+}
+
+.tz-product-wishlist.is-active {
+  color: #d32f2f !important; /* Red color when active/favorited */
+}
+
+.tz-product-wishlist.is-active:hover {
+  color: #b71c1c !important; /* Darker red on hover when active */
 }
 
 .tz-product-wishlist .icon {
