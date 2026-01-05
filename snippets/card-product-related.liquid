@@ -1,0 +1,63 @@
+{% comment %}
+  Custom Related Products Card - Matches product_detail_page.html design
+  RTL-First Theme
+{% endcomment %}
+
+{%- if card_product and card_product != empty -%}
+  <a href="{{ card_product.url }}" class="tz-related-product-card">
+    {%- comment -%} Image Container {%- endcomment -%}
+    <div class="tz-related-product-image">
+      {%- if card_product.featured_media -%}
+        <img
+          src="{{ card_product.featured_media | image_url: width: 400 }}"
+          srcset="{{ card_product.featured_media | image_url: width: 400 }} 400w,
+                  {{ card_product.featured_media | image_url: width: 600 }} 600w,
+                  {{ card_product.featured_media | image_url: width: 800 }} 800w"
+          sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 20vw"
+          alt="{{ card_product.featured_media.alt | escape | default: card_product.title | escape }}"
+          loading="lazy"
+        >
+      {%- else -%}
+        <div class="tz-related-product-placeholder">
+          <span class="material-icons-outlined">image</span>
+        </div>
+      {%- endif -%}
+
+      {%- comment -%} Wishlist Button {%- endcomment -%}
+      <button
+        type="button"
+        class="tz-related-product-wishlist"
+        data-product-id="{{ card_product.id }}"
+        aria-label="Add to wishlist"
+        onclick="event.preventDefault(); event.stopPropagation();"
+      >
+        <span class="material-icons-outlined">favorite_border</span>
+      </button>
+
+      {%- comment -%} Badge (if on sale or has metafield) {%- endcomment -%}
+      {%- assign variant = card_product.selected_or_first_available_variant -%}
+      {%- if variant.compare_at_price > variant.price or card_product.metafields.custom.badge -%}
+        <div class="tz-related-product-badge">
+          {%- if card_product.metafields.custom.badge -%}
+            {{ card_product.metafields.custom.badge }}
+          {%- else -%}
+            SALE
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    {%- comment -%} Product Info {%- endcomment -%}
+    <div class="tz-related-product-info">
+      <div class="tz-related-product-info-left">
+        {%- if card_product.vendor -%}
+          <p class="tz-related-product-vendor">{{ card_product.vendor }}</p>
+        {%- endif -%}
+        <p class="tz-related-product-title">{{ card_product.title }}</p>
+      </div>
+      <div class="tz-related-product-price">
+        {%- render 'price', product: card_product, use_variant: true, show_badges: false -%}
+      </div>
+    </div>
+  </a>
+{%- endif -%}

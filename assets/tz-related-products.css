@@ -1,0 +1,277 @@
+/* --- RELATED PRODUCTS SECTION (RTL-First) --- */
+.tz-related-products-section {
+  margin-top: 5rem; /* mt-20 */
+  margin-bottom: 5rem; /* mb-20 */
+  padding: 0;
+  direction: rtl;
+}
+
+.tz-related-products-section .tz-product-container {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  padding-left: var(--tz-product-padding-x) !important;
+  padding-right: var(--tz-product-padding-x) !important;
+}
+
+@media screen and (min-width: 640px) {
+  .tz-related-products-section .tz-product-container {
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .tz-related-products-section .tz-product-container {
+    padding-left: 2rem !important;
+    padding-right: 2rem !important;
+  }
+}
+
+.tz-related-products-heading {
+  font-size: 1.25rem; /* text-xl */
+  font-weight: 700; /* font-bold */
+  margin-bottom: 1.5rem; /* mb-6 */
+  color: rgb(var(--color-foreground));
+  text-align: right;
+}
+
+.tz-related-products-grid {
+  width: 100%;
+}
+
+.tz-related-products-list {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important; /* grid-cols-2 - ensure equal columns */
+  gap: 1rem !important; /* gap-4 */
+  column-gap: 1rem !important; /* Horizontal spacing between items */
+  row-gap: 1rem !important; /* Vertical spacing between items */
+  align-items: stretch !important; /* Ensure all items have same height */
+  direction: rtl;
+  margin: 0;
+  padding-left: 0.5rem !important; /* Add padding left */
+  padding-right: 0.5rem !important; /* Add padding right */
+  list-style: none;
+}
+
+@media screen and (min-width: 768px) {
+  .tz-related-products-list {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important; /* md:grid-cols-4 - ensure equal columns */
+    gap: 1rem !important; /* gap-4 */
+    column-gap: 1rem !important;
+    row-gap: 1rem !important;
+    padding-left: 0.5rem !important;
+    padding-right: 0.5rem !important;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .tz-related-products-list {
+    grid-template-columns: repeat(5, minmax(0, 1fr)) !important; /* lg:grid-cols-5 - ensure equal columns */
+    gap: 1rem !important; /* gap-4 */
+    column-gap: 1rem !important;
+    row-gap: 1rem !important;
+    padding-left: 0.5rem !important;
+    padding-right: 0.5rem !important;
+  }
+}
+
+/* --- RELATED PRODUCT CARD --- */
+.tz-related-product-card {
+  display: flex !important;
+  flex-direction: column !important;
+  text-decoration: none;
+  color: inherit;
+  transition: opacity 0.2s;
+  height: 100% !important;
+  width: 100% !important;
+  min-width: 0 !important; /* Prevent flex items from overflowing */
+}
+
+.tz-related-product-card:hover {
+  opacity: 0.9;
+}
+
+.tz-related-product-image {
+  width: 100% !important;
+  height: 0 !important;
+  padding-bottom: 133.333% !important; /* 4/3 = 133.333% maintains 3:4 aspect ratio */
+  background-color: #F9F9F9; /* bg-background-subtle */
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 0.75rem; /* mb-3 */
+  flex-shrink: 0;
+  box-sizing: border-box !important;
+}
+
+/* Ensure consistent sizing - prefer aspect-ratio when supported */
+@supports (aspect-ratio: 3/4) {
+  .tz-related-product-image {
+    aspect-ratio: 3/4 !important;
+    padding-bottom: 0 !important;
+    height: auto !important;
+  }
+}
+
+/* Force consistent image container height */
+.tz-related-product-card > .tz-related-product-image {
+  min-height: 0 !important;
+  max-height: none !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  .tz-related-product-image {
+    background-color: #1E1E1E; /* bg-background-dark-subtle */
+  }
+}
+
+.dark .tz-related-product-image {
+  background-color: #1E1E1E;
+}
+
+.tz-related-product-image img {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  transition: transform 0.5s ease;
+  display: block;
+}
+
+.tz-related-product-card:hover .tz-related-product-image img {
+  transform: scale(1.05);
+}
+
+.tz-related-product-wishlist {
+  position: absolute;
+  top: 0.5rem; /* top-2 */
+  left: 0.5rem; /* left-2 */
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  z-index: 10;
+  color: rgba(var(--color-foreground), 0.4);
+  transition: color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tz-related-product-wishlist:hover {
+  color: #ef4444; /* text-red-500 */
+}
+
+.tz-related-product-wishlist .material-icons-outlined {
+  font-size: 1.25rem;
+  line-height: 1;
+  font-family: 'Material Icons Outlined';
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Product Info */
+.tz-related-product-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  font-size: 0.75rem; /* text-xs */
+  direction: rtl;
+  gap: 3rem;
+  flex-grow: 1;
+  min-height: 3rem; /* Ensure consistent height */
+}
+
+.tz-related-product-info-left {
+  text-align: right;
+  flex: 1;
+  min-width: 0;
+}
+
+.tz-related-product-vendor {
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 0.25rem; /* mb-1 */
+  color: rgb(var(--color-foreground));
+  margin-top: 0;
+}
+
+.tz-related-product-title {
+  color: rgba(var(--color-foreground), 0.5);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 8rem; /* w-32 */
+  margin: 0;
+  text-align: right; /* Ensure title is right-aligned */
+}
+
+.tz-related-product-price {
+  font-weight: 700;
+  color: rgb(var(--color-foreground));
+  flex-shrink: 0;
+  margin-left: 0.5rem; /* In RTL, margin-left pushes to the left visually */
+  text-align: left; /* Align price to the left */
+  direction: ltr; /* Override RTL for price to ensure left alignment */
+}
+
+.tz-related-product-price .price {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: rgb(var(--color-foreground));
+  display: inline-block;
+}
+
+.tz-related-product-price .price-item {
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+/* Hide visually-hidden price labels */
+.tz-related-product-price .visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border-width: 0 !important;
+}
+
+/* Badge */
+.tz-related-product-badge {
+  position: absolute;
+  bottom: 0.5rem; /* bottom-2 */
+  right: 0.5rem; /* right-2 */
+  background-color: #000;
+  color: #fff;
+  font-size: 10px; /* text-[10px] */
+  padding: 0.25rem; /* px-1 */
+  font-weight: 700;
+  z-index: 10;
+  line-height: 1.2;
+}
+
+/* Placeholder */
+.tz-related-product-placeholder {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(var(--color-foreground), 0.05);
+}
+
+.tz-related-product-placeholder .material-icons-outlined {
+  font-size: 2rem;
+  color: rgba(var(--color-foreground), 0.3);
+}
