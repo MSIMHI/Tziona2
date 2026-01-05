@@ -17,6 +17,15 @@
 body {
     font-family: var(--font-main);
     overflow-x: hidden;
+    background-color: #FFFFFF;
+    color: #111111;
+}
+
+/* Dark Mode */
+.dark body,
+html.dark body {
+    background-color: #121212;
+    color: #EDEDED;
 }
 
 a {
@@ -47,6 +56,14 @@ header {
     height: var(--header-height);
 }
 
+/* Dark Mode Header */
+.dark header,
+html.dark header {
+    background-color: #121212;
+    border-bottom-color: #333333;
+    color: #EDEDED;
+}
+
 .header-inner {
     height: 100%;
     display: grid;
@@ -61,6 +78,23 @@ header {
     font-size: 13px;
     font-weight: 700;
     align-items: center;
+    color: inherit;
+}
+
+/* Dark Mode Navigation Links */
+.dark .nav-links,
+html.dark .nav-links {
+    color: #EDEDED;
+}
+
+.dark .nav-links a,
+html.dark .nav-links a {
+    color: #EDEDED;
+}
+
+.dark .nav-links a:hover,
+html.dark .nav-links a:hover {
+    color: rgba(237, 237, 237, 0.7);
 }
 
 .sale-badge {
@@ -87,6 +121,27 @@ header {
     font-size: 12px;
     font-weight: 700;
     align-items: center;
+    color: inherit;
+}
+
+/* Dark Mode Navigation Utilities */
+.dark .nav-utilities,
+html.dark .nav-utilities {
+    color: #EDEDED;
+}
+
+.dark .nav-utilities a,
+.dark .nav-utilities button,
+html.dark .nav-utilities a,
+html.dark .nav-utilities button {
+    color: #EDEDED;
+}
+
+.dark .nav-utilities a:hover,
+.dark .nav-utilities button:hover,
+html.dark .nav-utilities a:hover,
+html.dark .nav-utilities button:hover {
+    color: rgba(237, 237, 237, 0.7);
 }
 
 .icon-btn {
@@ -95,6 +150,101 @@ header {
     border: none;
     background: none;
     cursor: pointer;
+    color: inherit;
+}
+
+/* Dark Mode Icon Buttons */
+.dark .icon-btn,
+html.dark .icon-btn {
+    color: #EDEDED;
+}
+
+.dark .icon-btn:hover,
+html.dark .icon-btn:hover {
+    color: rgba(237, 237, 237, 0.7);
+}
+
+/* Dark Mode for Shopify Header Elements */
+.dark .header-wrapper,
+.dark .section-header,
+.dark .header,
+html.dark .header-wrapper,
+html.dark .section-header,
+html.dark .header {
+    background-color: #121212 !important;
+    color: #EDEDED !important;
+    border-bottom-color: #333333 !important;
+}
+
+.dark .header__heading,
+.dark .header__heading-link,
+.dark .header__menu-item,
+.dark .header__icon,
+html.dark .header__heading,
+html.dark .header__heading-link,
+html.dark .header__menu-item,
+html.dark .header__icon {
+    color: #EDEDED !important;
+}
+
+.dark .header__menu-item:hover,
+.dark .header__icon:hover,
+html.dark .header__menu-item:hover,
+html.dark .header__icon:hover {
+    color: rgba(237, 237, 237, 0.7) !important;
+}
+
+/* Dark Mode for TZ Header Section */
+.dark .tz-section.tz-header,
+.dark [data-tz-component="header"],
+.dark section[class*="tz-header"],
+.dark #shopify-section-tz-header,
+html.dark .tz-section.tz-header,
+html.dark [data-tz-component="header"],
+html.dark section[class*="tz-header"],
+html.dark #shopify-section-tz-header {
+    background-color: #121212 !important;
+    background: #121212 !important;
+    --tz-bg: #121212 !important;
+    color: #EDEDED !important;
+    border-bottom-color: #333333 !important;
+}
+
+/* Override inline styles from Liquid */
+.dark section[id^="shopify-section-"].tz-section.tz-header,
+html.dark section[id^="shopify-section-"].tz-section.tz-header {
+    background-color: #121212 !important;
+    background: #121212 !important;
+    --tz-bg: #121212 !important;
+}
+
+.dark .tz-section.tz-header .header-inner,
+.dark [data-tz-component="header"] .header-inner,
+html.dark .tz-section.tz-header .header-inner,
+html.dark [data-tz-component="header"] .header-inner {
+    background-color: transparent !important;
+}
+
+.dark .tz-section.tz-header .nav-links,
+.dark .tz-section.tz-header .nav-utilities,
+.dark .tz-section.tz-header .logo a,
+.dark .tz-section.tz-header .nav-link,
+.dark .tz-section.tz-header .sale-text,
+html.dark .tz-section.tz-header .nav-links,
+html.dark .tz-section.tz-header .nav-utilities,
+html.dark .tz-section.tz-header .logo a,
+html.dark .tz-section.tz-header .nav-link,
+html.dark .tz-section.tz-header .sale-text {
+    color: #EDEDED !important;
+}
+
+.dark .tz-section.tz-header .nav-links a:hover,
+.dark .tz-section.tz-header .nav-utilities a:hover,
+.dark .tz-section.tz-header .nav-link:hover,
+html.dark .tz-section.tz-header .nav-links a:hover,
+html.dark .tz-section.tz-header .nav-utilities a:hover,
+html.dark .tz-section.tz-header .nav-link:hover {
+    color: rgba(237, 237, 237, 0.7) !important;
 }
 
 
@@ -102,6 +252,14 @@ header {
 /* --- CONTENT --- */
 main {
     min-height: 60vh;
+    background-color: #FFFFFF;
+}
+
+/* Dark Mode */
+.dark main,
+html.dark main {
+    background-color: #121212;
+    color: #EDEDED;
 }
 
 /* --- FOOTER --- */
@@ -813,6 +971,13 @@ main {
     background-color: var(--tz-bg, transparent);
     position: relative;
     overflow: hidden;
+}
+
+/* Dark Mode for TZ Sections */
+.dark .tz-section.tz-header,
+html.dark .tz-section.tz-header {
+    background-color: #121212 !important;
+    --tz-bg: #121212 !important;
 }
 
 .tz-section__inner {

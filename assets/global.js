@@ -1155,17 +1155,19 @@ class ProductRecommendations extends HTMLElement {
       .then((text) => {
         const html = document.createElement('div');
         html.innerHTML = text;
-        const recommendations = html.querySelector('product-recommendations');
+        // Find the specific list container within the fetched HTML
+        const recommendationsList = html.querySelector('.tz-related-products-list');
 
-        if (recommendations?.innerHTML.trim().length) {
-          this.innerHTML = recommendations.innerHTML;
+        if (recommendationsList?.innerHTML.trim().length) {
+          // Update only the list content, not the entire custom element
+          this.innerHTML = recommendationsList.outerHTML;
         }
 
         if (!this.querySelector('slideshow-component') && this.classList.contains('complementary-products')) {
           this.remove();
         }
 
-        if (html.querySelector('.grid__item')) {
+        if (html.querySelector('.tz-related-products-list') || html.querySelector('.grid__item')) {
           this.classList.add('product-recommendations--loaded');
         }
       })

@@ -40,6 +40,31 @@
   color: var(--tz-mm-text, #000000);
   box-shadow: 0 10px 30px rgba(0,0,0,0.1);
   border-top: 1px solid #f0f0f0;
+}
+
+/* Dark Mode Mega Menu */
+.dark .tz-mega-menu,
+html.dark .tz-mega-menu {
+  background-color: #121212 !important;
+  color: #EDEDED !important;
+  border-top-color: #333333 !important;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5) !important;
+}
+
+.dark .tz-mm-heading,
+html.dark .tz-mm-heading {
+  border-bottom-color: #333333 !important;
+  color: #EDEDED !important;
+}
+
+.dark .tz-mm-linklist a,
+html.dark .tz-mm-linklist a {
+  color: #EDEDED !important;
+}
+
+.dark .tz-mm-linklist a:hover,
+html.dark .tz-mm-linklist a:hover {
+  color: rgba(237, 237, 237, 0.7) !important;
   
   /* Initial State: Hidden */
   opacity: 0;
