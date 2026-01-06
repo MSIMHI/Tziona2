@@ -55,6 +55,10 @@
       "next_slide": "Slide right",
       "previous_slide": "Slide left",
       "name": "Slider"
+    },
+    "header": {
+      "sale_text": "Sale",
+      "sale_badge": "Hot"
     }
   },
   "newsletter": {

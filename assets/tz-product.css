@@ -114,6 +114,25 @@ product-info,
   margin-bottom: 1.5rem;
   direction: rtl;
   text-align: right;
+  flex-wrap: wrap;
+}
+
+/* Mobile breadcrumb responsive */
+@media (max-width: 640px) {
+  .tz-product-breadcrumb {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+    font-size: var(--tz-product-text-xs);
+  }
+
+  .tz-product-breadcrumb a,
+  .tz-product-breadcrumb span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+  }
 }
 
 .tz-product-breadcrumb a {
