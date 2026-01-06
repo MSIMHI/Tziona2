@@ -3,6 +3,15 @@
   Built from scratch to match product_detail_page.html structure
 {% endcomment %}
 
+{%- liquid
+  assign is_hebrew = false
+  assign locale_code = request.locale.iso_code | downcase
+  assign shop_locale = shop.locale | downcase
+  if locale_code == 'he' or locale_code == 'iw' or shop_locale == 'he' or shop_locale == 'iw' or locale_code contains 'he' or shop_locale contains 'he'
+    assign is_hebrew = true
+  endif
+-%}
+
 {{ 'tz-product.css' | asset_url | stylesheet_tag }}
 
 <product-info
@@ -75,7 +84,8 @@
 
           {%- comment -%} Product Form {%- endcomment -%}
           {%- assign product_form_id = 'product-form-' | append: section.id -%}
-          {%- form 'product', product, id: product_form_id, class: 'tz-product-form' -%}
+<product-form>
+            {%- form 'product', product, id: product_form_id, class: 'tz-product-form' -%}
             <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
 
             {%- comment -%} Variant Picker {%- endcomment -%}
@@ -162,7 +172,11 @@
             {%- comment -%} Quantity Selector {%- endcomment -%}
             <div class="tz-product-quantity">
               <label class="tz-quantity-label" for="Quantity-{{ section.id }}">
-                :{{ 'products.product.quantity.label' | t | default: 'Quantity' }}
+                {% if is_hebrew %}
+                  כמות:
+                {% else %}
+                  {{ 'products.product.quantity.label' | t | default: 'Quantity' }}:
+                {% endif %}
               </label>
               <div class="tz-quantity-input">
                 <button
@@ -199,14 +213,25 @@
               {% unless product.selected_or_first_available_variant.available %}
                 disabled
               {% endunless %}
+              data-add-to-cart-text="{% if is_hebrew %}הוספה לסל{% else %}{{ 'products.product.add_to_cart' | t | default: 'Add to cart' }}{% endif %}"
+              data-sold-out-text="{% if is_hebrew %}אזל מהמלאי{% else %}{{ 'products.product.sold_out' | t | default: 'Sold out' }}{% endif %}"
             >
               {%- if product.selected_or_first_available_variant.available -%}
-                {{ 'products.product.add_to_cart' | t | default: 'הוספה לסל' }}
+                {% if is_hebrew %}
+                  הוספה לסל
+                {% else %}
+                  {{ 'products.product.add_to_cart' | t | default: 'Add to cart' }}
+                {% endif %}
               {%- else -%}
-                {{ 'products.product.sold_out' | t | default: 'אזל מהמלאי' }}
+                {% if is_hebrew %}
+                  אזל מהמלאי
+                {% else %}
+                  {{ 'products.product.sold_out' | t | default: 'Sold out' }}
+                {% endif %}
               {%- endif -%}
             </button>
           {%- endform -%}
+          </product-form>
 
           {%- comment -%} DREAM CARD Block {%- endcomment -%}
           {% if section.settings.show_dream_card %}
@@ -229,7 +254,7 @@
           {% if section.settings.show_wishlist %}
             <button type="button" class="tz-product-wishlist" data-product-id="{{ product.id }}">
               <span class="material-icons-outlined">favorite_border</span>
-              {{ section.settings.wishlist_text | default: 'MY LIST' }}
+              {{ 'products.product.wishlist.button' | t | default: 'My list' }}
             </button>
           {% endif %}
 
@@ -240,25 +265,25 @@
                 <div class="tz-product-service-icon-wrapper">
                   <span class="material-icons-outlined">card_giftcard</span>
                 </div>
-                <span>{{ section.settings.service_gift_text | default: 'מתנה' }}</span>
+                <span class="tz-product-service-icon-text">{{ section.settings.service_gift_text | default: 'מתנה' }}</span>
               </div>
               <div class="tz-product-service-icon">
                 <div class="tz-product-service-icon-wrapper">
                   <span class="material-icons-outlined">keyboard_return</span>
                 </div>
-                <span>{{ section.settings.service_return_text | default: 'החזרה' }}</span>
+                <span class="tz-product-service-icon-text">{{ section.settings.service_return_text | default: 'החזרה' }}</span>
               </div>
               <div class="tz-product-service-icon">
                 <div class="tz-product-service-icon-wrapper">
                   <span class="material-icons-outlined">sync_alt</span>
                 </div>
-                <span>{{ section.settings.service_exchange_text | default: 'החלפה' }}</span>
+                <span class="tz-product-service-icon-text">{{ section.settings.service_exchange_text | default: 'החלפה' }}</span>
               </div>
               <div class="tz-product-service-icon">
                 <div class="tz-product-service-icon-wrapper">
                   <span class="material-icons-outlined">local_shipping</span>
                 </div>
-                <span>{{ section.settings.service_shipping_text | default: 'אספקה' }}</span>
+                <span class="tz-product-service-icon-text">{{ section.settings.service_shipping_text | default: 'אספקה' }}</span>
               </div>
             </div>
           {% endif %}
@@ -442,12 +467,6 @@
       "id": "show_wishlist",
       "default": true,
       "label": "Show Wishlist Button"
-    },
-    {
-      "type": "text",
-      "id": "wishlist_text",
-      "default": "MY LIST",
-      "label": "Wishlist Button Text"
     },
     {
       "type": "header",

@@ -131,7 +131,7 @@
       },
       "nested_label": "{{ title }} for {{ parent_title }}",
       "quantity": {
-        "label": "Quantity",
+        "label": "כמות",
         "input_label": "Quantity for {{ product }}",
         "increase": "Increase quantity for {{ product }}",
         "decrease": "Decrease quantity for {{ product }}",
@@ -167,13 +167,13 @@
         "unit_price": "Unit price"
       },
       "share": "Share this product",
-      "sold_out": "Sold out",
+      "sold_out": "אזל מהמלאי",
       "unavailable": "Unavailable",
       "vendor": "Vendor",
       "value_unavailable": "{{ option_value }} - Unavailable",
       "variant_sold_out_or_unavailable": "Variant sold out or unavailable",
       "wishlist": {
-        "button": "My list"
+        "button": "הרשימה שלי"
       },
       "video_exit_message": "{{ title }} opens full screen video in same window.",
       "view_full_details": "View full details",
