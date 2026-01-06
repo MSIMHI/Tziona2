@@ -39,6 +39,316 @@ document.addEventListener('DOMContentLoaded', () => {
   if (cartOverlay) {
     cartOverlay.addEventListener('click', closeCart);
   }
+
+  // Cart Drawer Quantity Updates (AJAX)
+  function updateCartQuantity(line, quantity) {
+    return fetch('/cart/change.js', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        line: line,
+        quantity: quantity
+      })
+    });
+  }
+
+  let isRefreshing = false;
+  let refreshTimeout = null;
+
+  // Make refreshCartDrawer globally accessible
+  window.refreshCartDrawer = function refreshCartDrawer() {
+    // Prevent multiple simultaneous refreshes
+    if (isRefreshing) {
+      return Promise.resolve();
+    }
+    
+    isRefreshing = true;
+    
+    // Clear any pending refresh
+    if (refreshTimeout) {
+      clearTimeout(refreshTimeout);
+    }
+    // Fetch updated cart data
+    return fetch('/cart.js')
+      .then(res => res.json())
+      .then(cart => {
+        // Update cart count in header if exists
+        const cartCountElements = document.querySelectorAll('[data-cart-count]');
+        cartCountElements.forEach(el => {
+          el.textContent = cart.item_count;
+        });
+
+        // Update cart title count
+        const cartTitleCount = document.querySelector('.cart-title-count');
+        if (cartTitleCount) {
+          const itemText = cart.item_count === 1 ? 'פריט' : 'פריטים';
+          cartTitleCount.textContent = `(${cart.item_count} ${itemText})`;
+        }
+
+        const currentCartDrawer = document.getElementById('cartDrawer');
+        if (!currentCartDrawer) {
+          isRefreshing = false;
+          return;
+        }
+
+        // Update cart items list
+        const cartItemsList = currentCartDrawer.querySelector('.cart-items-list');
+        if (!cartItemsList) {
+          isRefreshing = false;
+          return;
+        }
+
+        // If cart is empty, show empty message
+        if (cart.item_count === 0) {
+          cartItemsList.innerHTML = '<div style="padding: 30px; text-align:center;">העגלה ריקה</div>';
+          
+          // Update footer total
+          const totalPrice = currentCartDrawer.querySelector('.checkout-btn span:last-child');
+          if (totalPrice) {
+            totalPrice.textContent = '₪0';
+          }
+          
+          setTimeout(() => {
+            initCartQuantityButtons();
+            isRefreshing = false;
+          }, 100);
+          return;
+        }
+
+        // Build cart items HTML from cart data
+        let itemsHTML = '';
+        cart.items.forEach((item, index) => {
+          const line = index + 1;
+          // Handle image URL - cart.js returns full URL or we need to construct it
+          let itemImageHTML = '';
+          if (item.image) {
+            // If image is already a full URL, use it; otherwise construct it
+            const imageUrl = item.image.startsWith('http') ? item.image : item.image;
+            itemImageHTML = `<img src="${imageUrl}" alt="${item.product_title}" style="width: 80px; height: 80px; object-fit: cover;">`;
+          } else {
+            itemImageHTML = '<div style="width: 80px; height: 80px; background: #f0f0f0;"></div>';
+          }
+          const itemPrice = formatMoney(item.final_line_price);
+          
+          itemsHTML += `
+            <div class="cart-item">
+              ${itemImageHTML}
+              <div class="item-details">
+                <div class="item-title">
+                  <a href="${item.url}">${item.product_title}</a>
+                </div>
+                <div class="item-variant">${item.variant_title || ''}</div>
+                <div class="qty-selector">
+                  <button
+                    type="button"
+                    class="qty-btn qty-btn-minus"
+                    data-line="${line}"
+                    data-quantity="${item.quantity - 1}"
+                    aria-label="Decrease quantity"
+                    ${item.quantity <= 0 ? 'disabled' : ''}
+                    >&minus;</button>
+                  <div class="qty-val">${item.quantity}</div>
+                  <button
+                    type="button"
+                    class="qty-btn qty-btn-plus"
+                    data-line="${line}"
+                    data-quantity="${item.quantity + 1}"
+                    aria-label="Increase quantity"
+                    >&plus;</button>
+                </div>
+              </div>
+              <div class="item-price-col">
+                <div class="item-price">${itemPrice}</div>
+                <button
+                  type="button"
+                  class="item-remove"
+                  data-line="${line}"
+                  aria-label="Remove item"
+                  >הסר</button>
+              </div>
+            </div>
+          `;
+        });
+
+        cartItemsList.innerHTML = itemsHTML;
+
+        // Update cart footer totals
+        const totalPrice = currentCartDrawer.querySelector('.checkout-btn span:last-child');
+        if (totalPrice) {
+          totalPrice.textContent = formatMoney(cart.total_price);
+        }
+
+        // Re-initialize quantity buttons after update (with delay to prevent loops)
+        setTimeout(() => {
+          initCartQuantityButtons();
+          isRefreshing = false;
+        }, 100);
+      })
+      .catch(err => {
+        console.error('Error fetching cart:', err);
+        isRefreshing = false;
+        // Fallback: reload page to show updated cart
+        window.location.reload();
+      });
+  }
+
+  function formatMoney(cents) {
+    // Use Shopify's money formatter if available
+    if (typeof Shopify !== 'undefined' && typeof Shopify.formatMoney === 'function') {
+      return Shopify.formatMoney(cents, window.Shopify?.money_format || '{{amount}}');
+    }
+    // Fallback: Use cart currency if available
+    if (typeof window.Shopify !== 'undefined' && window.Shopify.currency) {
+      const currency = window.Shopify.currency.active || 'ILS';
+      const locale = document.documentElement.lang || 'he-IL';
+      return new Intl.NumberFormat(locale, {
+        style: 'currency',
+        currency: currency,
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0
+      }).format(cents / 100);
+    }
+    // Final fallback
+    return new Intl.NumberFormat('he-IL', {
+      style: 'currency',
+      currency: 'ILS',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0
+    }).format(cents / 100);
+  }
+
+  function initCartQuantityButtons() {
+    // Quantity decrease buttons
+    const qtyMinusButtons = document.querySelectorAll('.qty-btn-minus');
+    qtyMinusButtons.forEach(btn => {
+      // Remove existing listeners by cloning
+      const newBtn = btn.cloneNode(true);
+      btn.parentNode.replaceChild(newBtn, btn);
+      
+      newBtn.addEventListener('click', async (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        const line = parseInt(newBtn.dataset.line);
+        const quantity = parseInt(newBtn.dataset.quantity);
+        
+        if (quantity < 0) return;
+        
+        newBtn.disabled = true;
+        try {
+          const response = await updateCartQuantity(line, quantity);
+          if (!response.ok) {
+            throw new Error('Failed to update cart');
+          }
+          await refreshCartDrawer();
+        } catch (error) {
+          console.error('Error updating cart quantity:', error);
+          alert('שגיאה בעדכון הכמות. נסה שוב.');
+        } finally {
+          newBtn.disabled = false;
+        }
+      });
+    });
+
+    // Quantity increase buttons
+    const qtyPlusButtons = document.querySelectorAll('.qty-btn-plus');
+    qtyPlusButtons.forEach(btn => {
+      // Remove existing listeners by cloning
+      const newBtn = btn.cloneNode(true);
+      btn.parentNode.replaceChild(newBtn, btn);
+      
+      newBtn.addEventListener('click', async (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        const line = parseInt(newBtn.dataset.line);
+        const quantity = parseInt(newBtn.dataset.quantity);
+        
+        newBtn.disabled = true;
+        try {
+          const response = await updateCartQuantity(line, quantity);
+          if (!response.ok) {
+            throw new Error('Failed to update cart');
+          }
+          await refreshCartDrawer();
+        } catch (error) {
+          console.error('Error updating cart quantity:', error);
+          alert('שגיאה בעדכון הכמות. נסה שוב.');
+        } finally {
+          newBtn.disabled = false;
+        }
+      });
+    });
+
+    // Remove buttons
+    const removeButtons = document.querySelectorAll('.item-remove');
+    removeButtons.forEach(btn => {
+      // Remove existing listeners by cloning
+      const newBtn = btn.cloneNode(true);
+      btn.parentNode.replaceChild(newBtn, btn);
+      
+      newBtn.addEventListener('click', async (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        const line = parseInt(newBtn.dataset.line);
+        
+        newBtn.disabled = true;
+        try {
+          const response = await updateCartQuantity(line, 0);
+          if (!response.ok) {
+            throw new Error('Failed to remove item');
+          }
+          await refreshCartDrawer();
+        } catch (error) {
+          console.error('Error removing cart item:', error);
+          alert('שגיאה בהסרת הפריט. נסה שוב.');
+        } finally {
+          newBtn.disabled = false;
+        }
+      });
+    });
+  }
+
+  // Initialize quantity buttons when drawer opens
+  if (cartDrawer) {
+    let isInitializing = false;
+    let initTimeout = null;
+    
+    // Use MutationObserver to detect when drawer content changes (but not from our own updates)
+    const observer = new MutationObserver((mutations) => {
+      // Skip if we're currently refreshing or initializing
+      if (isRefreshing || isInitializing) return;
+      
+      // Only initialize if drawer is open and changes are from user interaction
+      if (cartDrawer.classList.contains('open')) {
+        // Debounce initialization to prevent loops
+        clearTimeout(initTimeout);
+        initTimeout = setTimeout(() => {
+          if (!isRefreshing && !isInitializing) {
+            isInitializing = true;
+            initCartQuantityButtons();
+            setTimeout(() => { isInitializing = false; }, 200);
+          }
+        }, 500);
+      }
+    });
+
+    observer.observe(cartDrawer, {
+      childList: true,
+      subtree: true,
+      attributes: false // Don't watch attribute changes
+    });
+
+    // Also initialize on initial load (with delay)
+    setTimeout(() => {
+      if (!isRefreshing) {
+        initCartQuantityButtons();
+      }
+    }, 200);
+  }
 });
 
 /*-----*/
@@ -149,8 +459,18 @@ document.addEventListener('DOMContentLoaded', () => {
             body: formData
           });
           
+          // Check if response is ok
           if (!response.ok) {
-            throw new Error('Failed to add to cart');
+            const errorText = await response.text();
+            console.error('Cart add error:', errorText);
+            throw new Error('Failed to add to cart: ' + errorText);
+          }
+          
+          // Parse response to check for errors
+          const result = await response.json();
+          if (result.errors) {
+            console.error('Cart add errors:', result.errors);
+            throw new Error(result.errors || 'Failed to add to cart');
           }
           
           // Remove loader and restore button state
@@ -160,67 +480,23 @@ document.addEventListener('DOMContentLoaded', () => {
             buyButton.disabled = false;
           }
           
-          // Open cart drawer
+          // Refresh cart drawer first, then open it
+          if (typeof window.refreshCartDrawer === 'function') {
+            await window.refreshCartDrawer();
+          } else {
+            // Fallback: reload page if function not available
+            console.warn('refreshCartDrawer not available, reloading page');
+            window.location.reload();
+            return;
+          }
+          
+          // Open cart drawer after refresh
           const cartDrawer = document.getElementById('cartDrawer');
           const cartOverlay = document.getElementById('cartOverlay');
           if (cartDrawer && cartOverlay) {
             cartDrawer.classList.add('open');
             cartOverlay.classList.add('open');
             document.body.style.overflow = 'hidden';
-            
-            // Refresh cart drawer contents
-            fetch('/cart.js')
-              .then(res => res.json())
-              .then(cart => {
-                // Update cart count in header if exists
-                const cartCountElements = document.querySelectorAll('[data-cart-count]');
-                cartCountElements.forEach(el => {
-                  el.textContent = cart.item_count;
-                });
-                
-                // Update cart title count
-                const cartTitleCount = document.querySelector('.cart-title-count');
-                if (cartTitleCount) {
-                  const itemText = cart.item_count === 1 ? 'פריט' : 'פריטים';
-                  cartTitleCount.textContent = `(${cart.item_count} ${itemText})`;
-                }
-                
-                // Reload cart drawer HTML by fetching the drawer section
-                fetch(window.location.href)
-                  .then(res => res.text())
-                  .then(html => {
-                    const parser = new DOMParser();
-                    const doc = parser.parseFromString(html, 'text/html');
-                    const newCartDrawer = doc.querySelector('#cartDrawer');
-                    const currentCartDrawer = document.getElementById('cartDrawer');
-                    
-                    if (currentCartDrawer && newCartDrawer) {
-                      // Update cart items list
-                      const cartItemsList = currentCartDrawer.querySelector('.cart-items-list');
-                      const newCartItemsList = newCartDrawer.querySelector('.cart-items-list');
-                      if (cartItemsList && newCartItemsList) {
-                        cartItemsList.innerHTML = newCartItemsList.innerHTML;
-                      }
-                      
-                      // Update cart footer totals
-                      const cartFooter = currentCartDrawer.querySelector('.cart-footer');
-                      const newCartFooter = newCartDrawer.querySelector('.cart-footer');
-                      if (cartFooter && newCartFooter) {
-                        const totalPrice = newCartFooter.querySelector('.checkout-btn span:last-child');
-                        const currentTotalPrice = cartFooter.querySelector('.checkout-btn span:last-child');
-                        if (totalPrice && currentTotalPrice) {
-                          currentTotalPrice.textContent = totalPrice.textContent;
-                        }
-                      }
-                    }
-                  })
-                  .catch(err => {
-                    console.error('Error refreshing cart drawer:', err);
-                    // Fallback: reload page to show updated cart
-                    window.location.reload();
-                  });
-              })
-              .catch(err => console.error('Error fetching cart:', err));
           }
         } catch (error) {
           console.error('Error adding to cart:', error);

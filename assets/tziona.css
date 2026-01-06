@@ -852,7 +852,9 @@ html.dark main {
     width: fit-content;
 }
 
-.qty-btn {
+.qty-btn,
+.qty-btn-minus,
+.qty-btn-plus {
     width: 32px;
     height: 32px;
     background: none;
@@ -865,8 +867,17 @@ html.dark main {
     justify-content: center;
 }
 
-.qty-btn:hover {
+.qty-btn:hover:not(:disabled),
+.qty-btn-minus:hover:not(:disabled),
+.qty-btn-plus:hover:not(:disabled) {
     color: #000;
+}
+
+.qty-btn:disabled,
+.qty-btn-minus:disabled,
+.qty-btn-plus:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
 }
 
 .qty-val {
@@ -895,7 +906,8 @@ html.dark main {
     color: #000;
 }
 
-.item-remove {
+.item-remove,
+button.item-remove {
     font-size: 12px;
     text-decoration: underline;
     color: #666;
@@ -904,6 +916,18 @@ html.dark main {
     border: none;
     padding: 0;
     margin-top: auto;
+    font-family: inherit;
+}
+
+.item-remove:hover:not(:disabled),
+button.item-remove:hover:not(:disabled) {
+    color: #000;
+}
+
+.item-remove:disabled,
+button.item-remove:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
 }
 
 .order-notes {
