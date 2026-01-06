@@ -307,6 +307,15 @@
               {%- endif -%}
             {%- endfor -%}
           </div>
+
+          {%- comment -%} Product Description {%- endcomment -%}
+          {%- if section.settings.show_product_description and product.description != blank -%}
+            <div class="tz-product-description">
+              <div class="tz-product-description__content">
+                {{ product.description }}
+              </div>
+            </div>
+          {%- endif -%}
         </div>
       </div>
 
@@ -501,6 +510,16 @@
       "id": "service_gift_text",
       "default": "מתנה",
       "label": "Gift Text"
+    },
+    {
+      "type": "header",
+      "content": "Product Description"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_product_description",
+      "default": true,
+      "label": "Show Product Description"
     },
     {
       "type": "header",
