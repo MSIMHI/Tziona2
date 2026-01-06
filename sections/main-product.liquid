@@ -18,6 +18,7 @@
   id="MainProduct-{{ section.id }}"
   class="tz-product-section"
   data-section="{{ section.id }}"
+  data-hebrew="{% if is_hebrew %}true{% else %}false{% endif %}"
   data-product-id="{{ product.id }}"
   data-update-url="true"
   data-url="{{ product.url }}"
@@ -84,153 +85,196 @@
 
           {%- comment -%} Product Form {%- endcomment -%}
           {%- assign product_form_id = 'product-form-' | append: section.id -%}
-<product-form>
+          <product-form>
             {%- form 'product', product, id: product_form_id, class: 'tz-product-form' -%}
-            <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+              <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
 
-            {%- comment -%} Variant Picker {%- endcomment -%}
-            {%- unless product.has_only_default_variant -%}
-              {%- for option in product.options_with_values -%}
-                <div class="tz-variant-option">
-                  <div class="tz-variant-label">
-                    <span>
-                      {{- option.name }}: <span class="tz-variant-selected">{{ option.selected_value }}</span></span
-                    >
-                  </div>
-
-                  {%- liquid
-                    assign swatch_count = option.values | map: 'swatch' | compact | size
-                    assign picker_type = 'button'
-                    if swatch_count > 0 and option.name == 'Color' or option.name == 'צבע'
-                      assign picker_type = 'color-button'
-                    endif
-                  -%}
-
-                  {%- if picker_type == 'color-button' -%}
-                    <div class="tz-color-buttons">
-                      {%- for value in option.values -%}
-                        <button
-                          type="button"
-                          class="tz-color-button{% if value == option.selected_value %} is-active{% endif %}"
-                          data-value="{{ value | escape }}"
-                          data-option-index="{{ forloop.index0 }}"
-                          aria-label="{{ value | escape }}"
-                        >
-                          {{ value }}
-                        </button>
-                      {%- endfor -%}
+              {%- comment -%} Variant Picker {%- endcomment -%}
+              {%- unless product.has_only_default_variant -%}
+                {%- for option in product.options_with_values -%}
+                  <div class="tz-variant-option">
+                    <div class="tz-variant-label">
+                      <span>
+                        {{- option.name }}: <span class="tz-variant-selected">{{ option.selected_value }}</span></span
+                      >
                     </div>
-                  {%- else -%}
-                    {%- if option.name == 'Size' or option.name == 'מידה' -%}
-                      <div class="tz-size-grid">
+
+                    {%- liquid
+                      assign picker_type = 'button'
+                      assign option_name_down = option.name | downcase
+
+                      if option_name_down contains 'color' or option_name_down contains 'צבע' or option_name_down contains 'צֶבַע'
+                        assign picker_type = 'color-swatch'
+                      else
+                        assign is_color_option = false
+                        for value in option.values
+                          assign value_down = value | downcase
+                          if value_down contains 'red' or value_down contains 'blue' or value_down contains 'green' or value_down contains 'yellow' or value_down contains 'black' or value_down contains 'white' or value_down contains 'gray' or value_down contains 'purple' or value_down contains 'pink' or value_down contains 'orange' or value_down contains 'brown' or value_down contains 'navy' or value_down contains 'teal' or value_down contains 'maroon' or value_down contains 'אדום' or value_down contains 'כחול' or value_down contains 'ירוק' or value_down contains 'צהוב' or value_down contains 'שחור' or value_down contains 'לבן' or value_down contains 'אפור' or value_down contains 'סגול' or value_down contains 'ורוד' or value_down contains 'כתום' or value_down contains 'חום' or value_down contains 'ים' or value_down contains 'טורקיז' or value_down contains 'בורדו'
+                            assign is_color_option = true
+                          endif
+                        endfor
+                        if is_color_option
+                          assign picker_type = 'color-swatch'
+                        endif
+                      endif
+                    -%}
+
+                    {%- if picker_type == 'color-swatch' -%}
+                      <div class="tz-color-swatches">
                         {%- for value in option.values -%}
-                          {%- assign variant_available = false -%}
-                          {%- for variant in product.variants -%}
-                            {%- if variant.options[forloop.parentloop.index0] == value and variant.available -%}
-                              {%- assign variant_available = true -%}
-                              {%- break -%}
-                            {%- endif -%}
-                          {%- endfor -%}
+                          {%- liquid
+                            assign color_class = 'tz-color-gray'
+
+                            if value == 'שָׁחוֹר'
+                              assign color_class = 'tz-color-black'
+                            elsif value == 'כְּחוֹל'
+                              assign color_class = 'tz-color-blue'
+                            elsif value contains 'אדום' or value == 'red'
+                              assign color_class = 'tz-color-red'
+                            elsif value contains 'ירוק' or value == 'green'
+                              assign color_class = 'tz-color-green'
+                            elsif value contains 'צהוב' or value == 'yellow'
+                              assign color_class = 'tz-color-yellow'
+                            elsif value contains 'לבן' or value == 'white'
+                              assign color_class = 'tz-color-white'
+                            elsif value contains 'אפור' or value == 'gray'
+                              assign color_class = 'tz-color-gray'
+                            elsif value contains 'סגול' or value == 'purple'
+                              assign color_class = 'tz-color-purple'
+                            elsif value contains 'ורוד' or value == 'pink'
+                              assign color_class = 'tz-color-pink'
+                            elsif value contains 'כתום' or value == 'orange'
+                              assign color_class = 'tz-color-orange'
+                            elsif value contains 'חום' or value == 'brown'
+                              assign color_class = 'tz-color-brown'
+                            elsif value contains 'ים' or value == 'navy'
+                              assign color_class = 'tz-color-navy'
+                            elsif value contains 'טורקיז' or value == 'teal'
+                              assign color_class = 'tz-color-teal'
+                            elsif value contains 'בורדו' or value == 'maroon'
+                              assign color_class = 'tz-color-maroon'
+                            endif
+                          -%}
                           <button
                             type="button"
-                            class="tz-size-button{% if value == option.selected_value %} is-active{% endif %}{% unless variant_available %} is-disabled{% endunless %}"
+                            class="tz-color-swatch {{ color_class }}{% if value == option.selected_value %} is-active{% endif %}"
                             data-value="{{ value | escape }}"
                             data-option-index="{{ forloop.index0 }}"
-                            {% unless variant_available %}
-                              disabled
-                            {% endunless %}
-                          >
-                            {{ value }}
-                          </button>
+                            aria-label="{{ value | escape }}"
+                          ></button>
                         {%- endfor -%}
                       </div>
-                      {%- if section.settings.show_size_guide -%}
-                        <button type="button" class="tz-size-guide-link">
-                          <span class="material-icons-outlined">straighten</span>
-                          {{ section.settings.size_guide_text | default: 'טבלת מידות' }}
-                        </button>
-                      {%- endif -%}
                     {%- else -%}
-                      <div class="tz-size-grid">
-                        {%- for value in option.values -%}
-                          <button
-                            type="button"
-                            class="tz-size-button{% if value == option.selected_value %} is-active{% endif %}"
-                            data-value="{{ value | escape }}"
-                            data-option-index="{{ forloop.index0 }}"
-                          >
-                            {{ value }}
+                      {%- if option.name == 'Size' or option.name == 'מידה' -%}
+                        <div class="tz-size-grid">
+                          {%- for value in option.values -%}
+                            {%- assign variant_available = false -%}
+                            {%- for variant in product.variants -%}
+                              {%- if variant.options[forloop.parentloop.index0] == value and variant.available -%}
+                                {%- assign variant_available = true -%}
+                                {%- break -%}
+                              {%- endif -%}
+                            {%- endfor -%}
+                            <button
+                              type="button"
+                              class="tz-size-button{% if value == option.selected_value %} is-active{% endif %}{% unless variant_available %} is-disabled{% endunless %}"
+                              data-value="{{ value | escape }}"
+                              data-option-index="{{ forloop.index0 }}"
+                              {% unless variant_available %}
+                                disabled
+                              {% endunless %}
+                            >
+                              {{ value }}
+                            </button>
+                          {%- endfor -%}
+                        </div>
+                        {%- if section.settings.show_size_guide -%}
+                          <button type="button" class="tz-size-guide-link">
+                            <span class="material-icons-outlined">straighten</span>
+                            {{ section.settings.size_guide_text | default: 'טבלת מידות' }}
                           </button>
-                        {%- endfor -%}
-                      </div>
+                        {%- endif -%}
+                      {%- else -%}
+                        <div class="tz-size-grid">
+                          {%- for value in option.values -%}
+                            <button
+                              type="button"
+                              class="tz-size-button{% if value == option.selected_value %} is-active{% endif %}"
+                              data-value="{{ value | escape }}"
+                              data-option-index="{{ forloop.index0 }}"
+                            >
+                              {{ value }}
+                            </button>
+                          {%- endfor -%}
+                        </div>
+                      {%- endif -%}
                     {%- endif -%}
-                  {%- endif -%}
+                  </div>
+                {%- endfor -%}
+              {%- endunless -%}
+
+              {%- comment -%} Quantity Selector {%- endcomment -%}
+              <div class="tz-product-quantity">
+                <label class="tz-quantity-label" for="Quantity-{{ section.id }}">
+                  {% if is_hebrew %}
+                    כמות:
+                  {% else %}
+                    {{ 'products.product.quantity.label' | t | default: 'Quantity' }}:
+                  {% endif %}
+                </label>
+                <div class="tz-quantity-input">
+                  <button
+                    type="button"
+                    class="tz-quantity-button tz-quantity-plus"
+                    aria-label="{{ 'products.product.quantity.increase' | t | default: 'Increase quantity' }}"
+                  >
+                    <span class="material-icons-outlined">add</span>
+                  </button>
+                  <input
+                    type="number"
+                    id="Quantity-{{ section.id }}"
+                    name="quantity"
+                    class="tz-quantity-field"
+                    value="1"
+                    min="1"
+                    aria-label="{{ 'products.product.quantity.input_label' | t | default: 'Quantity' }}"
+                  >
+                  <button
+                    type="button"
+                    class="tz-quantity-button tz-quantity-minus"
+                    aria-label="{{ 'products.product.quantity.decrease' | t | default: 'Decrease quantity' }}"
+                  >
+                    <span class="material-icons-outlined">remove</span>
+                  </button>
                 </div>
-              {%- endfor -%}
-            {%- endunless -%}
-
-            {%- comment -%} Quantity Selector {%- endcomment -%}
-            <div class="tz-product-quantity">
-              <label class="tz-quantity-label" for="Quantity-{{ section.id }}">
-                {% if is_hebrew %}
-                  כמות:
-                {% else %}
-                  {{ 'products.product.quantity.label' | t | default: 'Quantity' }}:
-                {% endif %}
-              </label>
-              <div class="tz-quantity-input">
-                <button
-                  type="button"
-                  class="tz-quantity-button tz-quantity-plus"
-                  aria-label="{{ 'products.product.quantity.increase' | t | default: 'Increase quantity' }}"
-                >
-                  <span class="material-icons-outlined">add</span>
-                </button>
-                <input
-                  type="number"
-                  id="Quantity-{{ section.id }}"
-                  name="quantity"
-                  class="tz-quantity-field"
-                  value="1"
-                  min="1"
-                  aria-label="{{ 'products.product.quantity.input_label' | t | default: 'Quantity' }}"
-                >
-                <button
-                  type="button"
-                  class="tz-quantity-button tz-quantity-minus"
-                  aria-label="{{ 'products.product.quantity.decrease' | t | default: 'Decrease quantity' }}"
-                >
-                  <span class="material-icons-outlined">remove</span>
-                </button>
               </div>
-            </div>
 
-            {%- comment -%} Buy Button {%- endcomment -%}
-            <button
-              type="submit"
-              name="add"
-              class="tz-product-buy-button"
-              {% unless product.selected_or_first_available_variant.available %}
-                disabled
-              {% endunless %}
-              data-add-to-cart-text="{% if is_hebrew %}הוספה לסל{% else %}{{ 'products.product.add_to_cart' | t | default: 'Add to cart' }}{% endif %}"
-              data-sold-out-text="{% if is_hebrew %}אזל מהמלאי{% else %}{{ 'products.product.sold_out' | t | default: 'Sold out' }}{% endif %}"
-            >
-              {%- if product.selected_or_first_available_variant.available -%}
-                {% if is_hebrew %}
-                  הוספה לסל
-                {% else %}
-                  {{ 'products.product.add_to_cart' | t | default: 'Add to cart' }}
-                {% endif %}
-              {%- else -%}
-                {% if is_hebrew %}
-                  אזל מהמלאי
-                {% else %}
-                  {{ 'products.product.sold_out' | t | default: 'Sold out' }}
-                {% endif %}
-              {%- endif -%}
-            </button>
-          {%- endform -%}
+              {%- comment -%} Buy Button {%- endcomment -%}
+              <button
+                type="submit"
+                name="add"
+                class="tz-product-buy-button"
+                {% unless product.selected_or_first_available_variant.available %}
+                  disabled
+                {% endunless %}
+                data-add-to-cart-text="{% if is_hebrew %}הוספה לסל{% else %}{{ 'products.product.add_to_cart' | t | default: 'Add to cart' }}{% endif %}"
+                data-sold-out-text="{% if is_hebrew %}אזל מהמלאי{% else %}{{ 'products.product.sold_out' | t | default: 'Sold out' }}{% endif %}"
+              >
+                {%- if product.selected_or_first_available_variant.available -%}
+                  {% if is_hebrew %}
+                    הוספה לסל
+                  {% else %}
+                    {{ 'products.product.add_to_cart' | t | default: 'Add to cart' }}
+                  {% endif %}
+                {%- else -%}
+                  {% if is_hebrew %}
+                    אזל מהמלאי
+                  {% else %}
+                    {{ 'products.product.sold_out' | t | default: 'Sold out' }}
+                  {% endif %}
+                {%- endif -%}
+              </button>
+            {%- endform -%}
           </product-form>
 
           {%- comment -%} DREAM CARD Block {%- endcomment -%}
@@ -265,25 +309,33 @@
                 <div class="tz-product-service-icon-wrapper">
                   <span class="material-icons-outlined">card_giftcard</span>
                 </div>
-                <span class="tz-product-service-icon-text">{{ section.settings.service_gift_text | default: 'מתנה' }}</span>
+                <span class="tz-product-service-icon-text">
+                  {{- section.settings.service_gift_text | default: 'מתנה' -}}
+                </span>
               </div>
               <div class="tz-product-service-icon">
                 <div class="tz-product-service-icon-wrapper">
                   <span class="material-icons-outlined">keyboard_return</span>
                 </div>
-                <span class="tz-product-service-icon-text">{{ section.settings.service_return_text | default: 'החזרה' }}</span>
+                <span class="tz-product-service-icon-text">
+                  {{- section.settings.service_return_text | default: 'החזרה' -}}
+                </span>
               </div>
               <div class="tz-product-service-icon">
                 <div class="tz-product-service-icon-wrapper">
                   <span class="material-icons-outlined">sync_alt</span>
                 </div>
-                <span class="tz-product-service-icon-text">{{ section.settings.service_exchange_text | default: 'החלפה' }}</span>
+                <span class="tz-product-service-icon-text">
+                  {{- section.settings.service_exchange_text | default: 'החלפה' -}}
+                </span>
               </div>
               <div class="tz-product-service-icon">
                 <div class="tz-product-service-icon-wrapper">
                   <span class="material-icons-outlined">local_shipping</span>
                 </div>
-                <span class="tz-product-service-icon-text">{{ section.settings.service_shipping_text | default: 'אספקה' }}</span>
+                <span class="tz-product-service-icon-text">
+                  {{- section.settings.service_shipping_text | default: 'אספקה' -}}
+                </span>
               </div>
             </div>
           {% endif %}

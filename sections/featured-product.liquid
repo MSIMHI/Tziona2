@@ -14,9 +14,7 @@
     data-zoom-on-hover
   {% endif %}
 >
-  {{ 'section-main-product.css' | asset_url | stylesheet_tag }}
-  {{ 'section-featured-product.css' | asset_url | stylesheet_tag }}
-  {{ 'component-accordion.css' | asset_url | stylesheet_tag }}
+  {{ 'tz-featured-product.css' | asset_url | stylesheet_tag }}
   {{ 'component-price.css' | asset_url | stylesheet_tag }}
   {{ 'component-deferred-media.css' | asset_url | stylesheet_tag }}
   {{ 'component-rating.css' | asset_url | stylesheet_tag }}
@@ -28,19 +26,20 @@
   {% endunless %}
 
   {%- style -%}
-    .section-{{ section.id }}-padding {
+    .tz-featured-product-container {
       padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
       padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
     }
 
     @media screen and (min-width: 750px) {
-      .section-{{ section.id }}-padding {
+      .tz-featured-product-container {
         padding-top: {{ section.settings.padding_top }}px;
         padding-bottom: {{ section.settings.padding_bottom }}px;
       }
     }
   {%- endstyle -%}
 
+  <script src="{{ 'tz-featured-product.js' | asset_url }}" defer="defer"></script>
   <script src="{{ 'product-info.js' | asset_url }}" defer="defer"></script>
   <script src="{{ 'show-more.js' | asset_url }}" defer="defer"></script>
   <script src="{{ 'price-per-item.js' | asset_url }}" defer="defer"></script>
@@ -68,16 +67,16 @@
 
   {% assign variant_images = product.images | where: 'attached_to_variant?', true | map: 'src' %}
 
-  <section class="color-{{ section.settings.color_scheme }} {% if section.settings.secondary_background %}background-secondary{% else %}gradient{% endif %}">
-    <div class="page-width section-{{ section.id }}-padding{% if section.settings.secondary_background %} isolate{% endif %}">
-      <div class="featured-product product product--{{ section.settings.media_size }} grid grid--1-col gradient color-{{ section.settings.color_scheme }} product--{{ section.settings.media_position }}{% if section.settings.secondary_background == false %} isolate{% endif %} {% if product.media.size > 0 or section.settings.product == blank %}grid--2-col-tablet{% else %}product--no-media{% endif %}">
-        <div class="grid__item product__media-wrapper">
+  <section class="tz-featured-product-section color-{{ section.settings.color_scheme }}">
+    <div class="tz-featured-product-container">
+      <div class="tz-product-grid">
+        <div class="tz-product-media-wrapper">
           {%- unless placeholder -%}
             {% render 'product-media-gallery', product: product, variant_images: variant_images, limit: 1 %}
           {%- else -%}
-            <div class="product__media-item">
+            <div class="tz-product-media-item">
               <div
-                class="product-media-container global-media-settings gradient{% if section.settings.constrain_to_viewport %} constrain-height{% endif %}"
+                class="tz-product-media-container{% if section.settings.constrain_to_viewport %} constrain-height{% endif %}"
                 style="--ratio: 1.0; --preview-ratio: 1.0;"
               >
                 {{ 'product-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
@@ -85,10 +84,10 @@
             </div>
           {%- endunless -%}
         </div>
-        <div class="product__info-wrapper grid__item{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+        <div class="tz-product-info-wrapper{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
           <section
             id="ProductInfo-{{ section.id }}"
-            class="product__info-container"
+            class="tz-product-info-container"
             data-section="{{ section.id }}"
             data-url="{{ product.url }}"
           >
@@ -100,13 +99,13 @@
                   {% render block %}
                 {%- when 'text' -%}
                   <p
-                    class="product__text inline-richtext{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %}"
+                    class="tz-product-text inline-richtext{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %}"
                     {{ block.shopify_attributes }}
                   >
                     {{- block.settings.text -}}
                   </p>
                 {%- when 'title' -%}
-                  <h2 class="product__title {{ block.settings.heading_size }}" {{ block.shopify_attributes }}>
+                  <h2 class="tz-product-title {{ block.settings.heading_size }}" {{ block.shopify_attributes }}>
                     {%- unless placeholder -%}
                       {{ product.title | escape }}
                     {%- else -%}
@@ -114,13 +113,13 @@
                     {%- endunless -%}
                   </h2>
                 {%- when 'price' -%}
-                  <div id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
+                  <div id="price-{{ section.id }}" class="tz-price-container" role="status" {{ block.shopify_attributes }}>
                     {%- render 'price',
                       product: product,
                       placeholder: placeholder,
                       use_variant: true,
                       show_badges: true,
-                      price_class: 'price--large'
+                      price_class: 'tz-price-large'
                     -%}
                   </div>
                   {%- if product.quantity_price_breaks_configured? -%}
@@ -152,7 +151,7 @@
                   {%- endunless -%}
                 {%- when 'sku' -%}
                   <p
-                    class="product__sku{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %}{% if product.selected_or_first_available_variant.sku.size == 0 %} visibility-hidden{% endif %}"
+                    class="tz-product-sku{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %}{% if product.selected_or_first_available_variant.sku.size == 0 %} visibility-hidden{% endif %}"
                     id="Sku-{{ section.id }}"
                     role="status"
                     {{ block.shopify_attributes }}
@@ -163,7 +162,7 @@
                 {%- when 'quantity_selector' -%}
                   <div
                     id="Quantity-Form-{{ section.id }}"
-                    class="product-form__input product-form__quantity{% if settings.inputs_shadow_vertical_offset != 0 and settings.inputs_shadow_vertical_offset < 0 %} product-form__quantity-top{% endif %}"
+                    class="tz-quantity-selector product-form__input product-form__quantity{% if settings.inputs_shadow_vertical_offset != 0 and settings.inputs_shadow_vertical_offset < 0 %} product-form__quantity-top{% endif %}"
                     {{ block.shopify_attributes }}
                   >
                     {% comment %} TODO: enable theme-check once `item_count_for_variant` is accepted as valid filter {% endcomment %}
@@ -391,26 +390,34 @@
                 {%- when 'share' -%}
                   {% liquid
                     assign share_url = product.selected_variant.url | default: product.url | prepend: request.origin
-                    render 'share-button', block: block, share_link: share_url
                   %}
+                  <div class="tz-share-button">
+                    {% render 'share-button', block: block, share_link: share_url %}
+                  </div>
                 {%- when 'variant_picker' -%}
-                  {% render 'product-variant-picker',
-                    product: product,
-                    block: block,
-                    product_form_id: product_form_id
-                  %}
+                  <div class="tz-variant-picker">
+                    {% render 'product-variant-picker',
+                      product: product,
+                      block: block,
+                      product_form_id: product_form_id
+                    %}
+                  </div>
                 {%- when 'buy_buttons' -%}
-                  {%- render 'buy-buttons',
-                    block: block,
-                    product: product,
-                    product_form_id: product_form_id,
-                    section_id: section.id
-                  -%}
+                  <div class="tz-buy-buttons">
+                    {%- render 'buy-buttons',
+                      block: block,
+                      product: product,
+                      product_form_id: product_form_id,
+                      section_id: section.id
+                    -%}
+                  </div>
                 {%- when 'custom_liquid' -%}
-                  {{ block.settings.custom_liquid }}
+                  <div class="tz-custom-liquid">
+                    {{ block.settings.custom_liquid }}
+                  </div>
                 {%- when 'rating' -%}
                   {%- if product.metafields.reviews.rating.value != blank -%}
-                    <div class="rating-wrapper">
+                    <div class="tz-rating-wrapper">
                       {% liquid
                         assign rating_decimal = 0
                         assign decimal = product.metafields.reviews.rating.value.rating | modulo: 1
@@ -421,7 +428,7 @@
                         endif
                       %}
                       <div
-                        class="rating"
+                        class="tz-rating"
                         role="img"
                         aria-label="{{ 'accessibility.star_reviews_info' | t: rating_value: product.metafields.reviews.rating.value, rating_max: product.metafields.reviews.rating.value.scale_max }}"
                       >
@@ -431,13 +438,13 @@
                           style="--rating: {{ product.metafields.reviews.rating.value.rating | floor }}; --rating-max: {{ product.metafields.reviews.rating.value.scale_max }}; --rating-decimal: {{ rating_decimal }};"
                         ></span>
                       </div>
-                      <p class="rating-text caption">
+                      <p class="tz-rating-text caption">
                         <span aria-hidden="true">
                           {{- product.metafields.reviews.rating.value }} /
                           {{ product.metafields.reviews.rating.value.scale_max -}}
                         </span>
                       </p>
-                      <p class="rating-count caption">
+                      <p class="tz-rating-count caption">
                         <span aria-hidden="true">({{ product.metafields.reviews.rating_count }})</span>
                         <span class="visually-hidden">
                           {{- product.metafields.reviews.rating_count }}
@@ -447,7 +454,9 @@
                     </div>
                   {%- endif -%}
                 {%- when 'icon-with-text' -%}
-                  {% render 'icon-with-text', block: block %}
+                  <div class="tz-icon-with-text{% if block.settings.layout == 'vertical' %} tz-icon-with-text--vertical{% endif %}">
+                    {% render 'icon-with-text', block: block %}
+                  </div>
               {%- endcase -%}
             {%- endfor -%}
             <a
@@ -456,7 +465,7 @@
               {% else %}
                 href="{{ product.url }}"
               {% endif %}
-              class="link product__view-details animate-arrow"
+              class="tz-product-view-details animate-arrow"
             >
               {{ 'products.product.view_full_details' | t }}
               {{- 'icon-arrow.svg' | inline_asset_content -}}

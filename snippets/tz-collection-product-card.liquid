@@ -1,0 +1,170 @@
+{%- comment -%}
+  TZ Collection Product Card - RTL-First Theme
+  Built from scratch to match product_detail_page.html design
+{%- endcomment -%}
+
+{%- liquid
+  assign product_link = product.url
+  assign product_title = product.title | escape
+  assign product_vendor = product.vendor | escape
+
+  # Get the featured image
+  assign featured_image = product.featured_image
+  if featured_image == blank
+    assign featured_image = product.images[0]
+  endif
+
+  # Get price information
+  assign price = product.price
+  assign compare_at_price = product.compare_at_price
+  assign on_sale = false
+  if compare_at_price > price
+    assign on_sale = true
+  endif
+
+  # Get variant information for quick add
+  assign default_variant = product.selected_or_first_available_variant
+  if default_variant == blank
+    assign default_variant = product.variants[0]
+  endif
+-%}
+
+<a href="{{ product_link }}" class="tz-collection-product-card" aria-label="{{ product_title }}">
+  {%- comment -%} Product Image {%- endcomment -%}
+  <div class="tz-collection-product-image">
+    {%- if featured_image -%}
+      <img
+        src="{{ featured_image | image_url: width: 400 }}"
+        alt="{{ featured_image.alt | default: product_title }}"
+        loading="lazy"
+        width="{{ featured_image.width }}"
+        height="{{ featured_image.height }}"
+      >
+    {%- else -%}
+      <img
+        src="{{ 'product-apparel-1' | placeholder_svg_tag }}"
+        alt="{{ product_title }}"
+        loading="lazy"
+      >
+    {%- endif -%}
+
+    {%- comment -%} Sale Badge {%- endcomment -%}
+    {%- if on_sale and show_sale_badge -%}
+      <div class="tz-collection-sale-badge">
+        {{ 'products.product.on_sale' | t | default: 'מבצע' }}
+      </div>
+    {%- endif -%}
+
+    {%- comment -%} Wishlist Button {%- endcomment -%}
+    {%- if show_wishlist -%}
+      <button
+        class="tz-collection-wishlist-btn"
+        aria-label="{{ 'products.product.wishlist.add' | t | default: 'הוסף לרשימה' }}"
+        data-product-id="{{ product.id }}"
+      >
+        <span class="material-icons-outlined">favorite_border</span>
+      </button>
+    {%- endif -%}
+  </div>
+
+  {%- comment -%} Product Info {%- endcomment -%}
+  <div class="tz-collection-product-info">
+    {%- comment -%} Vendor {%- endcomment -%}
+    {%- if show_vendor and product_vendor != blank -%}
+      <div class="tz-collection-product-vendor">
+        {{ product_vendor }}
+      </div>
+    {%- endif -%}
+
+    {%- comment -%} Title {%- endcomment -%}
+    <div class="tz-collection-product-title">
+      {{ product_title }}
+    </div>
+
+    {%- comment -%} Price {%- endcomment -%}
+    <div class="tz-collection-product-price">
+      {%- if on_sale -%}
+        <span class="tz-collection-price-sale">{{ compare_at_price | money }}</span>
+        <span class="tz-collection-price-current">{{ price | money }}</span>
+      {%- else -%}
+        {{ price | money }}
+      {%- endif -%}
+    </div>
+
+    {%- comment -%} Quick Add Button {%- endcomment -%}
+    {%- if quick_add != 'none' and default_variant.available -%}
+      <button
+        class="tz-collection-quick-add-btn"
+        data-product-id="{{ product.id }}"
+        data-variant-id="{{ default_variant.id }}"
+        aria-label="{{ 'products.product.add_to_cart' | t | default: 'הוסף לסל' }}"
+      >
+        <span class="tz-collection-quick-add-text">
+          {%- if quick_add == 'bulk' -%}
+            {{ 'products.product.quantity.label' | t | default: 'כמות' }}
+          {%- else -%}
+            {{ 'products.product.add_to_cart' | t | default: 'הוסף לסל' }}
+          {%- endif -%}
+        </span>
+        {%- if quick_add == 'bulk' -%}
+          <span class="tz-collection-quick-add-icon">
+            <span class="material-icons-outlined">add</span>
+          </span>
+        {%- endif -%}
+      </button>
+    {%- endif -%}
+  </div>
+</a>
+
+<style>
+  /* Quick add button styles */
+  .tz-collection-quick-add-btn {
+    width: 100%;
+    margin-top: 0.75rem;
+    padding: 0.5rem;
+    background-color: var(--tz-collection-primary);
+    color: #000;
+    border: none;
+    border-radius: 0;
+    font-size: var(--tz-collection-text-xs);
+    font-weight: 700;
+    font-family: var(--tz-collection-font-family);
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .tz-collection-quick-add-btn:hover {
+    background-color: var(--tz-collection-primary-hover);
+  }
+
+  .tz-collection-quick-add-btn:disabled {
+    background-color: rgba(var(--color-foreground), 0.2);
+    color: rgba(var(--color-foreground), 0.5);
+    cursor: not-allowed;
+  }
+
+  /* Sale price styling */
+  .tz-collection-price-sale {
+    text-decoration: line-through;
+    color: rgba(var(--color-foreground), 0.5);
+    margin-right: 0.5rem;
+    font-size: 0.9em;
+  }
+
+  .tz-collection-price-current {
+    color: var(--tz-collection-primary);
+    font-weight: 700;
+  }
+
+  /* RTL adjustments for price */
+  [dir="rtl"] .tz-collection-price-sale {
+    margin-right: 0;
+    margin-left: 0.5rem;
+  }
+</style>

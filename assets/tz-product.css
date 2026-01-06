@@ -573,6 +573,7 @@ product-info,
 }
 
 /* Color Buttons (Text-based, Left-aligned in RTL) */
+/* Color buttons (text-based for non-color variants) */
 .tz-color-buttons {
   display: flex;
   flex-direction: row;
@@ -608,6 +609,87 @@ product-info,
   color: #000 !important;
   border-color: #000 !important;
   border-width: 2px !important;
+}
+
+/* Color swatches (circular for color variants) */
+.tz-color-swatches {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+}
+
+/* RTL adjustments for variant options */
+[dir="rtl"] .tz-variant-option,
+.tz-product-section[dir="rtl"] .tz-variant-option {
+  text-align: right;
+  direction: rtl;
+}
+
+[dir="rtl"] .tz-variant-label,
+.tz-product-section[dir="rtl"] .tz-variant-label {
+  text-align: right;
+}
+
+/* RTL adjustments for color swatches - position on the right in RTL */
+[dir="rtl"] .tz-color-swatches,
+.tz-product-section[dir="rtl"] .tz-color-swatches {
+  justify-content: flex-start !important;
+}
+
+.tz-color-swatch {
+  width: 2rem !important;
+  height: 2rem !important;
+  border-radius: 50% !important;
+  border: 2px solid transparent !important;
+  cursor: pointer !important;
+  transition: all 0.2s !important;
+  flex-shrink: 0 !important;
+  position: relative !important;
+  display: inline-block !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  background-clip: padding-box !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important;
+  outline: none !important;
+}
+
+.tz-color-swatch:hover:not(.is-active) {
+  border-color: rgba(0, 0, 0, 0.3) !important;
+  transform: scale(1.1) !important;
+}
+
+.tz-color-swatch.is-active {
+  border-color: #000 !important;
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1) !important;
+  transform: scale(1.05) !important;
+}
+
+/* Color backgrounds */
+.tz-color-red { background-color: #ef4444 !important; }
+.tz-color-blue { background-color: #3b82f6 !important; }
+.tz-color-green { background-color: #10b981 !important; }
+.tz-color-yellow { background-color: #f59e0b !important; }
+.tz-color-black { background-color: #000000 !important; }
+.tz-color-white { background-color: #ffffff !important; border-color: #e5e5e5 !important; }
+.tz-color-gray { background-color: #6b7280 !important; }
+.tz-color-purple { background-color: #8b5cf6 !important; }
+.tz-color-pink { background-color: #ec4899 !important; }
+.tz-color-orange { background-color: #f97316 !important; }
+.tz-color-brown { background-color: #92400e !important; }
+.tz-color-navy { background-color: #1e3a8a !important; }
+.tz-color-teal { background-color: #14b8a6 !important; }
+.tz-color-maroon { background-color: #7f1d1d !important; }
+
+/* Size Grid */
+.tz-size-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+  margin-top: 0.75rem;
 }
 
 /* Size Grid */
@@ -755,6 +837,13 @@ product-info,
   text-align: right;
 }
 
+/* RTL adjustments for Hebrew quantity label */
+.tz-product-section[data-hebrew="true"] .tz-quantity-label,
+[dir="rtl"] .tz-quantity-label {
+  text-align: left;
+  direction: rtl;
+}
+
 .tz-quantity-input {
   display: flex !important;
   flex-direction: row !important;
@@ -763,8 +852,9 @@ product-info,
   border: 2px solid #000 !important;
   width: fit-content !important;
   direction: ltr !important;
-  /* Override for input field */
+  /* Override for input field - keep LTR for numbers */
 }
+
 
 .tz-quantity-button {
   width: 2.5rem;
@@ -1352,6 +1442,28 @@ product-info,
   color: #EDEDED !important;
 }
 
+.dark .tz-color-swatch {
+  border-color: #EDEDED !important;
+}
+
+.dark .tz-color-swatch:hover:not(.is-active) {
+  border-color: rgba(237, 237, 237, 0.5) !important;
+}
+
+.dark .tz-color-swatch.is-active {
+  border-color: #EDEDED !important;
+  box-shadow: 0 0 0 3px rgba(237, 237, 237, 0.1) !important;
+}
+
+.dark .tz-color-white {
+  border-color: #404040 !important;
+}
+
+.dark .tz-color-white.is-active {
+  border-color: #EDEDED !important;
+}
+
+/* Dark mode styles for size buttons */
 .dark .tz-size-button {
   border-color: #EDEDED !important;
   color: #EDEDED !important;

@@ -1,0 +1,56 @@
+{%- comment -%}
+  TZ Collection Card - Matches featured collection card design
+  RTL-First Theme - Custom collection card component
+{%- endcomment -%}
+
+{%- liquid
+  assign collection_link = collection.url
+  assign collection_title = collection.title | escape
+
+  # Get the featured image
+  assign featured_image = collection.featured_image
+  if featured_image == blank and collection.products.size > 0
+    # Use first product image as fallback
+    assign first_product = collection.products | first
+    assign featured_image = first_product.featured_image
+  endif
+
+  # Get collection metadata
+  assign product_count = collection.all_products_count
+-%}
+
+<a href="{{ collection_link }}" class="tz-collection-card" aria-label="{{ collection_title }}">
+  {%- comment -%} Collection Image {%- endcomment -%}
+  <div class="tz-collection-image">
+    {%- if featured_image -%}
+      <img
+        src="{{ featured_image | image_url: width: 400 }}"
+        alt="{{ featured_image.alt | default: collection_title }}"
+        loading="lazy"
+        width="{{ featured_image.width }}"
+        height="{{ featured_image.height }}"
+      >
+    {%- else -%}
+      <img
+        src="{{ 'collection-1' | placeholder_svg_tag }}"
+        alt="{{ collection_title }}"
+        loading="lazy"
+      >
+    {%- endif -%}
+  </div>
+
+  {%- comment -%} Collection Info {%- endcomment -%}
+  <div class="tz-collection-info">
+    {%- comment -%} Collection Title {%- endcomment -%}
+    <h3 class="tz-collection-title">
+      {{ collection_title }}
+    </h3>
+
+    {%- comment -%} Collection Meta {%- endcomment -%}
+    {%- if product_count > 0 -%}
+      <div class="tz-collection-meta">
+        {{ product_count }} {{ 'collections.general.products_count' | t: count: product_count }}
+      </div>
+    {%- endif -%}
+  </div>
+</a>

@@ -1,0 +1,264 @@
+/* =========================================================
+   TZ MAIN LIST COLLECTIONS - Collections Grid Display
+   RTL-First Theme - Matches collection design system
+   ========================================================= */
+
+/* --- CSS VARIABLES (RTL-First) --- */
+:root {
+  /* Colors - Same as collection */
+  --tz-collection-primary: #F8E71C;
+  --tz-collection-primary-hover: #E6D61A;
+  --tz-collection-bg-subtle: #F9F9F9;
+  --tz-collection-bg-dark: #121212;
+  --tz-collection-bg-dark-subtle: #1E1E1E;
+  --tz-collection-text-light: #111111;
+  --tz-collection-text-dark: #EDEDED;
+  --tz-collection-border-light: #E5E5E5;
+  --tz-collection-border-dark: #333333;
+
+  /* Spacing (RTL-aware) */
+  --tz-collection-container-max: 1280px;
+  --tz-collection-gap: 2rem;
+  --tz-collection-padding-x: 1rem;
+  --tz-collection-padding-y: 3rem;
+
+  /* Typography - Same as collection */
+  --tz-collection-font-family: 'Heebo', sans-serif;
+  --tz-collection-title-size: 2rem;
+  --tz-collection-subtitle-size: 1.125rem;
+  --tz-collection-text-size: 0.875rem;
+  --tz-collection-text-sm: 0.875rem;
+  --tz-collection-text-xs: 0.75rem;
+
+  /* Grid */
+  --tz-collection-grid-cols-mobile: 2;
+  --tz-collection-grid-cols-tablet: 3;
+  --tz-collection-grid-cols-desktop: 3;
+  --tz-collection-card-gap: 1.5rem;
+}
+
+/* Dark Mode Variables */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --tz-collection-bg-subtle: var(--tz-collection-bg-dark-subtle);
+  }
+}
+
+.dark {
+  --tz-collection-bg-subtle: var(--tz-collection-bg-dark-subtle);
+}
+
+/* --- MAIN CONTAINER --- */
+.tz-collections-section {
+  width: 100%;
+  direction: rtl;
+  background: rgb(var(--color-background));
+}
+
+.tz-collections-container {
+  max-width: var(--tz-collection-container-max);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--tz-collection-padding-x);
+  padding-right: var(--tz-collection-padding-x);
+  padding-top: var(--tz-collection-padding-y);
+  padding-bottom: var(--tz-collection-padding-y);
+}
+
+/* --- SECTION TITLE --- */
+.tz-collections-title {
+  font-size: var(--tz-collection-title-size);
+  font-weight: 700;
+  font-family: var(--tz-collection-font-family);
+  color: rgb(var(--color-foreground));
+  margin-bottom: 2rem;
+  text-align: right;
+  direction: rtl;
+  line-height: 1.2;
+}
+
+/* --- COLLECTIONS GRID --- */
+.tz-collections-grid {
+  display: grid;
+  grid-template-columns: repeat(var(--tz-collection-grid-cols-mobile), 1fr);
+  gap: var(--tz-collection-card-gap);
+  direction: rtl;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+@media (min-width: 640px) {
+  .tz-collections-grid {
+    grid-template-columns: repeat(var(--tz-collection-grid-cols-tablet), 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .tz-collections-grid {
+    grid-template-columns: repeat(var(--tz-collection-grid-cols-desktop), 1fr);
+  }
+}
+
+/* --- COLLECTION CARD --- */
+.tz-collection-card {
+  position: relative;
+  background: rgb(var(--color-background));
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  direction: rtl;
+  text-decoration: none;
+  display: block;
+  color: inherit;
+}
+
+.tz-collection-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* Collection Image */
+.tz-collection-image {
+  position: relative;
+  aspect-ratio: 4/5;
+  background-color: var(--tz-collection-bg-subtle);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tz-collection-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.tz-collection-card:hover .tz-collection-image img {
+  transform: scale(1.05);
+}
+
+/* Dark mode adjustments */
+@media (prefers-color-scheme: dark) {
+  .tz-collection-image {
+    background-color: var(--tz-collection-bg-dark-subtle);
+  }
+}
+
+.dark .tz-collection-image {
+  background-color: var(--tz-collection-bg-dark-subtle);
+}
+
+/* Collection Info */
+.tz-collection-info {
+  padding: 1rem;
+  direction: rtl;
+  text-align: right;
+}
+
+/* Collection Title */
+.tz-collection-title {
+  font-size: var(--tz-collection-text-size);
+  font-weight: 600;
+  font-family: var(--tz-collection-font-family);
+  color: rgb(var(--color-foreground));
+  line-height: 1.4;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Collection Meta */
+.tz-collection-meta {
+  font-size: var(--tz-collection-text-xs);
+  font-family: var(--tz-collection-font-family);
+  color: rgba(var(--color-foreground), 0.6);
+  margin-top: 0.5rem;
+  direction: rtl;
+}
+
+/* --- PAGINATION --- */
+.tz-collections-pagination {
+  margin-top: 3rem;
+  display: flex;
+  justify-content: center;
+}
+
+/* --- ANIMATIONS --- */
+.tz-collection-card.scroll-trigger.animate--slide-in {
+  animation: slideInFromRight 0.6s ease-out;
+}
+
+@keyframes slideInFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* --- RESPONSIVE DESIGN --- */
+
+/* Mobile */
+@media (max-width: 639px) {
+  .tz-collections-container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+
+  .tz-collections-title {
+    font-size: 1.75rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .tz-collections-grid {
+    gap: 1rem;
+  }
+
+  .tz-collection-info {
+    padding: 0.75rem;
+  }
+}
+
+/* Tablet */
+@media (min-width: 640px) and (max-width: 1023px) {
+  .tz-collections-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+  .tz-collections-container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+/* --- FOCUS AND ACCESSIBILITY --- */
+.tz-collection-card:focus {
+  outline: 2px solid var(--tz-collection-primary);
+  outline-offset: 2px;
+}
+
+.tz-collection-title:focus,
+.tz-collection-meta:focus {
+  outline: none;
+}
+
+/* --- PRINT STYLES --- */
+@media print {
+  .tz-collection-image img {
+    mix-blend-mode: normal;
+  }
+}

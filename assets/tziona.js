@@ -807,8 +807,8 @@ document.addEventListener('DOMContentLoaded', () => {
       productInfo.dispatchEvent(event);
     }
     
-    // Color button selection
-    const colorButtons = productInfo.querySelectorAll('.tz-color-button');
+    // Color swatch/button selection
+    const colorButtons = productInfo.querySelectorAll('.tz-color-swatch, .tz-color-button');
     colorButtons.forEach(button => {
       button.addEventListener('click', (e) => {
         e.preventDefault();
