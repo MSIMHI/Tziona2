@@ -260,23 +260,73 @@
 
                   {%- comment -%} Color Variants {%- endcomment -%}
                   {%- if product.variants.size > 1 -%}
-                    <div class="tz-collection-product-variants">
-                      {%- for variant in product.variants limit: 4 -%}
-                        {%- assign variant_bg = '#6b7280' -%}
-                        {%- if variant.option1 contains 'שחור' or variant.option1 contains 'black' -%}
-                          {%- assign variant_bg = '#000000' -%}
-                        {%- elsif variant.option1 contains 'לבן' or variant.option1 contains 'white' -%}
-                          {%- assign variant_bg = '#e5e7eb' -%}
-                        {%- elsif variant.option1 contains 'אפור' or variant.option1 contains 'gray' -%}
-                          {%- assign variant_bg = '#6b7280' -%}
-                        {%- elsif variant.option1 contains 'כתום' or variant.option1 contains 'orange' -%}
-                          {%- assign variant_bg = '#f97316' -%}
-                        {%- elsif variant.option1 contains 'ירוק' or variant.option1 contains 'green' -%}
-                          {%- assign variant_bg = '#14532d' -%}
-                        {%- endif -%}
-                        <div class="tz-collection-variant-swatch" style="background-color: {{ variant_bg }}"></div>
-                      {%- endfor -%}
-                    </div>
+                    {%- liquid
+                      assign color_option = null
+                      assign color_option_index = null
+                      
+                      for option in product.options_with_values
+                        assign option_name_down = option.name | downcase
+                        if option_name_down contains 'color' or option_name_down contains 'צבע' or option_name_down contains 'צֶבַע'
+                          assign color_option = option
+                          assign color_option_index = forloop.index0
+                          break
+                        else
+                          assign is_color_option = false
+                          for value in option.values
+                            assign value_down = value | downcase
+                            if value_down contains 'red' or value_down contains 'blue' or value_down contains 'green' or value_down contains 'yellow' or value_down contains 'black' or value_down contains 'white' or value_down contains 'gray' or value_down contains 'purple' or value_down contains 'pink' or value_down contains 'orange' or value_down contains 'brown' or value_down contains 'navy' or value_down contains 'teal' or value_down contains 'maroon' or value_down contains 'אדום' or value_down contains 'כחול' or value_down contains 'ירוק' or value_down contains 'צהוב' or value_down contains 'שחור' or value_down contains 'לבן' or value_down contains 'אפור' or value_down contains 'סגול' or value_down contains 'ורוד' or value_down contains 'כתום' or value_down contains 'חום' or value_down contains 'ים' or value_down contains 'טורקיז' or value_down contains 'בורדו'
+                              assign is_color_option = true
+                            endif
+                          endfor
+                          if is_color_option
+                            assign color_option = option
+                            assign color_option_index = forloop.index0
+                            break
+                          endif
+                        endif
+                      endfor
+                    -%}
+                    
+                    {%- if color_option -%}
+                      <div class="tz-collection-product-variants">
+                        {%- for value in color_option.values limit: 4 -%}
+                          {%- liquid
+                            assign variant_bg = '#6b7280'
+                            
+                            if value == 'שָׁחוֹר'
+                              assign variant_bg = '#000000'
+                            elsif value == 'כְּחוֹל'
+                              assign variant_bg = '#3b82f6'
+                            elsif value contains 'אדום' or value == 'red'
+                              assign variant_bg = '#ef4444'
+                            elsif value contains 'ירוק' or value == 'green'
+                              assign variant_bg = '#10b981'
+                            elsif value contains 'צהוב' or value == 'yellow'
+                              assign variant_bg = '#f59e0b'
+                            elsif value contains 'לבן' or value == 'white'
+                              assign variant_bg = '#ffffff'
+                            elsif value contains 'אפור' or value == 'gray'
+                              assign variant_bg = '#6b7280'
+                            elsif value contains 'סגול' or value == 'purple'
+                              assign variant_bg = '#8b5cf6'
+                            elsif value contains 'ורוד' or value == 'pink'
+                              assign variant_bg = '#ec4899'
+                            elsif value contains 'כתום' or value == 'orange'
+                              assign variant_bg = '#f97316'
+                            elsif value contains 'חום' or value == 'brown'
+                              assign variant_bg = '#92400e'
+                            elsif value contains 'ים' or value == 'navy'
+                              assign variant_bg = '#1e3a8a'
+                            elsif value contains 'טורקיז' or value == 'teal'
+                              assign variant_bg = '#14b8a6'
+                            elsif value contains 'בורדו' or value == 'maroon'
+                              assign variant_bg = '#7f1d1d'
+                            endif
+                          -%}
+                          <div class="tz-collection-variant-swatch" style="background-color: {{ variant_bg }}"></div>
+                        {%- endfor -%}
+                      </div>
+                    {%- endif -%}
                   {%- endif -%}
                 </a>
               {%- endfor -%}
