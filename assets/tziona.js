@@ -118,6 +118,123 @@ document.addEventListener('DOMContentLoaded', () => {
     const productId = productInfo.dataset.productId;
     const form = productInfo.querySelector('.tz-product-form');
     const variantInput = form ? form.querySelector('input[name="id"]') : null;
+    
+    // Handle form submission - open cart drawer instead of redirecting
+    if (form) {
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        const buyButton = form.querySelector('.tz-product-buy-button');
+        if (buyButton && buyButton.disabled) return;
+        
+        // Store original button state
+        const originalText = buyButton ? buyButton.textContent : '';
+        const originalHTML = buyButton ? buyButton.innerHTML : '';
+        
+        // Show loader and disable button during submission
+        if (buyButton) {
+          buyButton.disabled = true;
+          buyButton.classList.add('is-loading');
+          buyButton.innerHTML = '<span class="tz-loader"></span><span class="tz-button-text">' + (buyButton.dataset.addToCartText ? buyButton.dataset.addToCartText.replace('הוספה', 'מוסיף') : 'מוסיף לסל...') + '</span>';
+        }
+        
+        // Get form data
+        const formData = new FormData(form);
+        
+        try {
+          // Submit to cart
+          const response = await fetch('/cart/add.js', {
+            method: 'POST',
+            body: formData
+          });
+          
+          if (!response.ok) {
+            throw new Error('Failed to add to cart');
+          }
+          
+          // Remove loader and restore button state
+          if (buyButton) {
+            buyButton.classList.remove('is-loading');
+            buyButton.innerHTML = originalHTML;
+            buyButton.disabled = false;
+          }
+          
+          // Open cart drawer
+          const cartDrawer = document.getElementById('cartDrawer');
+          const cartOverlay = document.getElementById('cartOverlay');
+          if (cartDrawer && cartOverlay) {
+            cartDrawer.classList.add('open');
+            cartOverlay.classList.add('open');
+            document.body.style.overflow = 'hidden';
+            
+            // Refresh cart drawer contents
+            fetch('/cart.js')
+              .then(res => res.json())
+              .then(cart => {
+                // Update cart count in header if exists
+                const cartCountElements = document.querySelectorAll('[data-cart-count]');
+                cartCountElements.forEach(el => {
+                  el.textContent = cart.item_count;
+                });
+                
+                // Update cart title count
+                const cartTitleCount = document.querySelector('.cart-title-count');
+                if (cartTitleCount) {
+                  const itemText = cart.item_count === 1 ? 'פריט' : 'פריטים';
+                  cartTitleCount.textContent = `(${cart.item_count} ${itemText})`;
+                }
+                
+                // Reload cart drawer HTML by fetching the drawer section
+                fetch(window.location.href)
+                  .then(res => res.text())
+                  .then(html => {
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(html, 'text/html');
+                    const newCartDrawer = doc.querySelector('#cartDrawer');
+                    const currentCartDrawer = document.getElementById('cartDrawer');
+                    
+                    if (currentCartDrawer && newCartDrawer) {
+                      // Update cart items list
+                      const cartItemsList = currentCartDrawer.querySelector('.cart-items-list');
+                      const newCartItemsList = newCartDrawer.querySelector('.cart-items-list');
+                      if (cartItemsList && newCartItemsList) {
+                        cartItemsList.innerHTML = newCartItemsList.innerHTML;
+                      }
+                      
+                      // Update cart footer totals
+                      const cartFooter = currentCartDrawer.querySelector('.cart-footer');
+                      const newCartFooter = newCartDrawer.querySelector('.cart-footer');
+                      if (cartFooter && newCartFooter) {
+                        const totalPrice = newCartFooter.querySelector('.checkout-btn span:last-child');
+                        const currentTotalPrice = cartFooter.querySelector('.checkout-btn span:last-child');
+                        if (totalPrice && currentTotalPrice) {
+                          currentTotalPrice.textContent = totalPrice.textContent;
+                        }
+                      }
+                    }
+                  })
+                  .catch(err => {
+                    console.error('Error refreshing cart drawer:', err);
+                    // Fallback: reload page to show updated cart
+                    window.location.reload();
+                  });
+              })
+              .catch(err => console.error('Error fetching cart:', err));
+          }
+        } catch (error) {
+          console.error('Error adding to cart:', error);
+          alert('שגיאה בהוספה לעגלה. נסה שוב.');
+          
+          // Re-enable button and restore original state on error
+          if (buyButton) {
+            buyButton.disabled = false;
+            buyButton.classList.remove('is-loading');
+            buyButton.innerHTML = originalHTML;
+          }
+        }
+      });
+    }
     const updateUrl = productInfo.dataset.updateUrl === 'true';
     const productUrl = productInfo.dataset.url;
     

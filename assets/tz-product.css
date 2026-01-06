@@ -502,15 +502,46 @@ product-info,
   cursor: pointer;
   border-radius: 0;
   font-family: inherit;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
 }
 
-.tz-product-buy-button:hover:not(:disabled) {
+.tz-product-buy-button:hover:not(:disabled):not(.is-loading) {
   background-color: var(--tz-product-primary-hover);
 }
 
-.tz-product-buy-button:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
+.tz-product-buy-button:disabled,
+.tz-product-buy-button.is-loading {
+  opacity: 0.7;
+  cursor: wait;
+}
+
+.tz-product-buy-button .tz-button-text {
+  display: inline-block;
+}
+
+/* Loader Spinner */
+.tz-loader {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  border-top-color: #000;
+  border-radius: 50%;
+  animation: tz-spin 0.6s linear infinite;
+}
+
+@keyframes tz-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.tz-product-buy-button.is-loading .tz-loader {
+  display: inline-block;
 }
 
 /* --- QUANTITY SELECTOR --- */
