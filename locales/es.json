@@ -134,6 +134,9 @@
       "sold_out": "Agotado",
       "unavailable": "No disponible",
       "vendor": "Proveedor",
+      "wishlist": {
+        "button": "Mi lista"
+      },
       "video_exit_message": "{{ title }} abre el video en pantalla completa en la misma ventana.",
       "xr_button": "Ver en tu espacio",
       "xr_button_label": "Ver en tu espacio, carga el artículo en la ventana de realidad aumentada",

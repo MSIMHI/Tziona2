@@ -273,7 +273,22 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       
       function formatMoney(cents) {
-        // Basic formatting - Shopify theme should have a money formatter
+        // Use Shopify's money formatter if available
+        if (typeof Shopify !== 'undefined' && typeof Shopify.formatMoney === 'function') {
+          return Shopify.formatMoney(cents, window.Shopify?.money_format || '{{amount}}');
+        }
+        // Fallback: Use cart currency if available
+        if (typeof window.Shopify !== 'undefined' && window.Shopify.currency) {
+          const currency = window.Shopify.currency.active || 'ILS';
+          const locale = document.documentElement.lang || 'he-IL';
+          return new Intl.NumberFormat(locale, {
+            style: 'currency',
+            currency: currency,
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0
+          }).format(cents / 100);
+        }
+        // Final fallback
         return new Intl.NumberFormat('he-IL', {
           style: 'currency',
           currency: 'ILS',

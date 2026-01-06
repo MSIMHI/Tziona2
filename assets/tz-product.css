@@ -632,6 +632,7 @@ product-info,
   flex-direction: row-reverse;
   /* RTL */
   align-items: center;
+  justify-content: flex-end; /* Align to right in RTL */
   font-size: var(--tz-product-text-sm);
   font-weight: 500;
   color: #111111 !important; /* Light mode: dark text */
@@ -640,8 +641,13 @@ product-info,
   cursor: pointer;
   padding: 0;
   margin-top: 1rem;
+  margin-right: 0; /* RTL: no right margin */
+  margin-left: auto; /* RTL: push to right */
   transition: color 0.2s;
   gap: 0.5rem;
+  direction: rtl;
+  text-align: right; /* RTL: align text to right */
+  width: 100%; /* Full width to allow right alignment */
 }
 
 .tz-product-wishlist:hover {
@@ -681,6 +687,12 @@ product-info,
   align-items: center;
   gap: 0.25rem;
   cursor: pointer;
+}
+
+/* Service icon text - specific class to avoid breaking other elements */
+.tz-product-service-icon-text {
+  color: rgba(17, 17, 17, 0.6) !important; /* Light mode: explicit dark gray for text */
+  font-size: var(--tz-product-text-10px);
 }
 
 .tz-product-service-icon-wrapper {
@@ -741,8 +753,15 @@ product-info,
 }
 
 .dark .tz-product-service-icons {
+  color: rgba(237, 237, 237, 0.7);
   border-top-color: #333333;
 }
+
+/* Dark mode service icon text */
+.dark .tz-product-service-icon-text {
+  color: rgba(237, 237, 237, 0.7) !important; /* Dark mode: light gray for text */
+}
+
 
 .tz-accordion-summary {
   display: flex;
@@ -1054,8 +1073,28 @@ product-info,
 
 .dark .tz-product-service-icons {
   color: rgba(237, 237, 237, 0.7);
-  border-bottom-color: #333333;
+  border-top-color: #333333;
 }
+
+/* Dark mode service icon text */
+.dark .tz-product-service-icon-text {
+  color: rgba(237, 237, 237, 0.7) !important; /* Dark mode: light gray for text */
+}
+
+/* Dark mode service icon text */
+
+  color: rgba(237, 237, 237, 0.7);
+
+/* Dark mode service icon text */
+
+  border-top-color: #333333;
+
+/* Dark mode service icon text */
+
+}
+
+/* Dark mode service icon text */
+
 
 .dark .tz-product-service-icon-wrapper {
   background-color: rgba(30, 30, 30, 0.8);
