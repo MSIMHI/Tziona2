@@ -1,8 +1,8 @@
-{{ 'component-price.css' | asset_url | stylesheet_tag }}
+{{ 'tz-main-collection-product-grid.css' | asset_url | stylesheet_tag }}
 {{ 'tz-related-products.css' | asset_url | stylesheet_tag }}
 
 <div class="tz-related-products-section">
-  <div class="tz-product-container">
+  <div class="tz-collection-container">
     <h3 class="tz-related-products-heading">
       {{ section.settings.heading | default: 'עשוי לעניין אתכם' }}
     </h3>
@@ -13,7 +13,7 @@
       data-product-id="{{ product.id }}"
     >
       {% if recommendations.performed and recommendations.products_count > 0 %}
-        <div class="tz-related-products-list">
+        <div class="tz-collection-product-grid">
           {% for recommendation in recommendations.products %}
             {% render 'card-product-related', card_product: recommendation %}
           {% endfor %}

@@ -118,8 +118,10 @@
       "inventory_in_stock_show_count": "{{ quantity }} in stock",
       "inventory_low_stock": "Low stock",
       "inventory_low_stock_show_count": "Low stock: {{ quantity }} left",
-      "inventory_out_of_stock": "Out of stock",
-      "inventory_out_of_stock_continue_selling": "In stock",
+      "inventory_out_of_stock": "אזל מהמלאי",
+      "inventory_out_of_stock_continue_selling": "במלאי",
+      "color": "צבע",
+      "type": "סוג מוצר",
       "sku": "SKU",
       "on_sale": "מבצע",
       "quantity": {
@@ -199,34 +201,50 @@
     },
     "facets": {
       "filter_and_operator_subtitle": "Match all",
-      "apply": "Apply",
-      "clear": "Clear",
-      "clear_all": "Remove all",
-      "from": "From",
-      "filter_and_sort": "Filter and sort",
-      "filter_by_label": "Filter:",
-      "filter_button": "Filter",
+      "apply": "החל",
+      "clear": "נקה",
+      "clear_all": "הסר הכל",
+      "from": "מ",
+      "filter_and_sort": "סנן ומיין",
+      "filter_by_label": "סנן:",
+      "filter_button": "זמינות",
       "filters_selected": {
-        "one": "{{ count }} selected",
-        "other": "{{ count }} selected"
+        "one": "{{ count }} נבחר",
+        "other": "{{ count }} נבחרו"
       },
-      "filter_selected_accessibility": "{{ type }} ({{ count }} filters selected)",
-      "show_more": "Show more",
-      "show_less": "Show less",
-      "max_price": "The highest price is {{ price }}",
+      "filter_selected_accessibility": "{{ type }} ({{ count }} מסננים נבחרו)",
+      "show_more": "הצג עוד",
+      "show_less": "הצג פחות",
+      "max_price": "המחיר הגבוה ביותר הוא {{ price }}",
       "product_count": {
-        "one": "{{ product_count }} of {{ count }} product",
-        "other": "{{ product_count }} of {{ count }} products"
+        "one": "{{ product_count }} מתוך {{ count }} מוצר",
+        "other": "{{ product_count }} מתוך {{ count }} מוצרים"
       },
       "product_count_simple": {
-        "one": "{{ count }} product",
-        "other": "{{ count }} products"
+        "one": "{{ count }} מוצר",
+        "other": "{{ count }} מוצרים"
       },
-      "reset": "Reset",
-      "sort_button": "Sort",
-      "sort_by_label": "Sort by:",
-      "to": "To",
-      "clear_filter": "Remove filter"
+      "reset": "איפוס",
+      "sort_button": "מיין",
+      "sort_by_label": "מיין לפי:",
+      "to": "עד",
+      "clear_filter": "הסר מסנן",
+      "sort_options": {
+        "manual": "מומלץ",
+        "best-selling": "הכי נמכר",
+        "title-ascending": "אלפביתי, א-ת",
+        "title-descending": "אלפביתי, ת-א",
+        "price-ascending": "מחיר, נמוך לגבוה",
+        "price-descending": "מחיר, גבוה לנמוך",
+        "created-ascending": "תאריך, ישן לחדש",
+        "created-descending": "תאריך, חדש לישן"
+      }
+    }
+  },
+  "collections": {
+    "general": {
+      "view_all": "הכל",
+      "all_of_collection": "הכל"
     }
   },
   "templates": {
@@ -260,7 +278,8 @@
       "pages": "Pages"
     },
     "cart": {
-      "cart": "Cart"
+      "cart": "Cart",
+      "price": "מחיר"
     },
     "contact": {
       "form": {

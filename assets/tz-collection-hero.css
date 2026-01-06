@@ -1,0 +1,209 @@
+/* =========================================================
+   TZ COLLECTION HERO - RTL-First Theme
+   Collection banner/hero section styling
+   Matches design system from tz-main-collection-product-grid
+   ========================================================= */
+
+/* --- CSS VARIABLES (RTL-First) --- */
+:root {
+  /* Colors - matching collection grid design */
+  --tz-collection-hero-primary: #F8E71C;
+  --tz-collection-hero-bg-light: #FFFFFF;
+  --tz-collection-hero-bg-dark: #121212;
+  --tz-collection-hero-text-light: #111111;
+  --tz-collection-hero-text-dark: #EDEDED;
+  --tz-collection-hero-border-light: #E5E5E5;
+  --tz-collection-hero-border-dark: #333333;
+
+  /* Spacing (RTL-aware) */
+  --tz-collection-hero-container-max: 1600px;
+  --tz-collection-hero-padding-x: 1rem;
+  --tz-collection-hero-padding-y: 2rem;
+  --tz-collection-hero-gap: 2rem;
+
+  /* Typography - matching collection grid */
+  --tz-collection-hero-font-family: 'Heebo', sans-serif;
+  --tz-collection-hero-title-size: 2rem;
+  --tz-collection-hero-description-size: 1.125rem;
+  --tz-collection-hero-title-mobile: 1.5rem;
+}
+
+/* Dark Mode Variables */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --tz-collection-hero-bg-light: var(--tz-collection-hero-bg-dark);
+  }
+}
+
+.dark {
+  --tz-collection-hero-bg-light: var(--tz-collection-hero-bg-dark);
+}
+
+/* --- MAIN CONTAINER (RTL-First) --- */
+.tz-collection-hero {
+  width: 100%;
+  direction: rtl;
+  text-align: right;
+  background-color: rgb(var(--color-background));
+  padding: var(--tz-collection-hero-padding-y) var(--tz-collection-hero-padding-x);
+}
+
+.tz-collection-hero__inner {
+  max-width: var(--tz-collection-hero-container-max);
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--tz-collection-hero-gap);
+  direction: rtl;
+}
+
+/* --- TEXT WRAPPER (RTL-First) --- */
+.tz-collection-hero__text-wrapper {
+  flex: 1;
+  direction: rtl;
+  text-align: right;
+}
+
+/* --- TITLE (RTL-First) --- */
+.tz-collection-hero__title {
+  font-family: var(--tz-collection-hero-font-family);
+  font-size: var(--tz-collection-hero-title-mobile);
+  font-weight: 700;
+  color: rgb(var(--color-foreground));
+  margin: 0 0 1rem 0;
+  direction: rtl;
+  text-align: right;
+  line-height: 1.2;
+}
+
+@media screen and (min-width: 750px) {
+  .tz-collection-hero__title {
+    font-size: var(--tz-collection-hero-title-size);
+    margin-bottom: 1.5rem;
+  }
+}
+
+.tz-collection-hero__title .visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* --- DESCRIPTION (RTL-First) --- */
+.tz-collection-hero__description {
+  font-family: var(--tz-collection-hero-font-family);
+  font-size: var(--tz-collection-hero-description-size);
+  font-weight: 400;
+  color: rgba(var(--color-foreground), 0.8);
+  line-height: 1.6;
+  margin: 0;
+  direction: rtl;
+  text-align: right;
+  max-width: 66.67%;
+}
+
+@media screen and (max-width: 749px) {
+  .tz-collection-hero__description {
+    max-width: 100%;
+    font-size: 1rem;
+  }
+}
+
+/* --- IMAGE CONTAINER (RTL-First) --- */
+.tz-collection-hero--with-image .tz-collection-hero__inner {
+  flex-direction: column;
+}
+
+@media screen and (min-width: 750px) {
+  .tz-collection-hero--with-image .tz-collection-hero__inner {
+    flex-direction: row-reverse;
+    align-items: center;
+    gap: 3rem;
+  }
+}
+
+.tz-collection-hero__image-container {
+  width: 100%;
+  position: relative;
+  border-radius: 0.125rem;
+  overflow: hidden;
+  background-color: var(--tz-collection-hero-bg-light);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.tz-collection-hero__image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+@media screen and (max-width: 749px) {
+  .tz-collection-hero__image-container {
+    height: 20rem;
+    margin-top: 2rem;
+  }
+}
+
+@media screen and (min-width: 750px) {
+  .tz-collection-hero--with-image .tz-collection-hero__text-wrapper {
+    flex: 0 0 50%;
+    padding-left: 2rem;
+    padding-right: 0;
+  }
+
+  .tz-collection-hero__image-container {
+    flex: 0 0 50%;
+    min-height: 20rem;
+    margin-right: 0;
+    margin-left: 0;
+  }
+}
+
+/* --- COLOR SCHEME SUPPORT --- */
+.tz-collection-hero.color-scheme-1 {
+  background-color: rgb(var(--color-background));
+}
+
+.tz-collection-hero.color-scheme-2 {
+  background-color: rgb(var(--color-background));
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .tz-collection-hero {
+    background-color: rgb(18, 18, 18);
+  }
+}
+
+.dark .tz-collection-hero {
+  background-color: rgb(18, 18, 18);
+}
+
+.dark .tz-collection-hero__image-container {
+  background-color: rgb(31, 41, 55);
+}
+
+/* --- ANIMATIONS --- */
+.tz-collection-hero.scroll-trigger {
+  opacity: 0;
+  animation: fadeIn 0.6s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

@@ -1,3 +1,4 @@
+{{ 'tz-main-collection-product-grid.css' | asset_url | stylesheet_tag }}
 {{ 'tz-featured-collection.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'tz-featured-collection.js' | asset_url }}" defer="defer"></script>
 
@@ -32,13 +33,14 @@
         <div class="tz-collection-slider-container">
           <div class="tz-collection-slider" data-slider>
             {%- for product in section.settings.collection.products limit: products_limit -%}
+              {% assign lazy_load = false %}
+              {%- if forloop.index > 2 -%}
+                {%- assign lazy_load = true -%}
+              {%- endif -%}
               <div class="tz-collection-slide">
                 {% render 'tz-collection-product-card',
                   product: product,
-                  show_vendor: section.settings.show_vendor,
-                  show_sale_badge: section.settings.show_sale_badge,
-                  show_wishlist: section.settings.show_wishlist,
-                  quick_add: section.settings.quick_add
+                  lazy_load: lazy_load
                 %}
               </div>
             {%- endfor -%}
@@ -59,14 +61,15 @@
           </nav>
         </div>
       {%- else -%}
-        <div class="tz-collection-grid">
+        <div class="tz-collection-product-grid">
           {%- for product in section.settings.collection.products limit: products_limit -%}
+            {% assign lazy_load = false %}
+            {%- if forloop.index > 2 -%}
+              {%- assign lazy_load = true -%}
+            {%- endif -%}
             {% render 'tz-collection-product-card',
               product: product,
-              show_vendor: section.settings.show_vendor,
-              show_sale_badge: section.settings.show_sale_badge,
-              show_wishlist: section.settings.show_wishlist,
-              quick_add: section.settings.quick_add
+              lazy_load: lazy_load
             %}
           {%- endfor -%}
         </div>

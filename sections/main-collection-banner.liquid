@@ -1,29 +1,22 @@
 {% comment %}theme-check-disable ImgLazyLoading{% endcomment %}
-{{ 'component-collection-hero.css' | asset_url | stylesheet_tag }}
+{{ 'tz-collection-hero.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'tz-collection-hero.js' | asset_url }}" defer="defer"></script>
 
-{%- style -%}
-  @media screen and (max-width: 749px) {
-    .collection-hero--with-image .collection-hero__inner {
-      padding-bottom: calc({{ settings.media_shadow_vertical_offset | at_least: 0 }}px + 2rem);
-    }
-  }
-{%- endstyle -%}
-
-<div class="collection-hero{% if section.settings.show_collection_image and collection.image %} collection-hero--with-image{% endif %} color-{{ section.settings.color_scheme }} gradient">
-  <div class="collection-hero__inner page-width {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
-    <div class="collection-hero__text-wrapper">
-      <h1 class="collection-hero__title">
+<div class="tz-collection-hero{% if section.settings.show_collection_image and collection.image %} tz-collection-hero--with-image{% endif %} color-{{ section.settings.color_scheme }}{% if settings.animations_reveal_on_scroll %} scroll-trigger{% endif %}" data-section-type="tz-collection-hero" data-section-id="{{ section.id }}">
+  <div class="tz-collection-hero__inner">
+    <div class="tz-collection-hero__text-wrapper">
+      <h1 class="tz-collection-hero__title">
         <span class="visually-hidden">{{ 'sections.collection_template.title' | t }}: </span>
         {{- collection.title | escape -}}
       </h1>
 
       {%- if section.settings.show_collection_description -%}
-        <div class="collection-hero__description rte">{{ collection.description }}</div>
+        <div class="tz-collection-hero__description rte">{{ collection.description }}</div>
       {%- endif -%}
     </div>
 
     {%- if section.settings.show_collection_image and collection.image -%}
-      <div class="collection-hero__image-container media gradient">
+      <div class="tz-collection-hero__image-container">
         <img
           srcset="
             {%- if collection.image.width >= 165 -%}{{ collection.image | image_url: width: 165 }} 165w,{%- endif -%}
@@ -35,10 +28,11 @@
             {{ collection.image | image_url }} {{ collection.image.width }}w
           "
           src="{{ collection.image | image_url: width: 750 }}"
-          sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: 2 }}px, (min-width: 750px) calc(50vw - 130px), calc(50vw - 55px)"
+          sizes="(min-width: 1600px) 800px, (min-width: 750px) 50vw, 100vw"
           alt="{{ collection.image.alt | escape }}"
           width="{{ collection.image.width }}"
           height="{{ collection.image.height }}"
+          loading="lazy"
         >
       </div>
     {%- endif -%}

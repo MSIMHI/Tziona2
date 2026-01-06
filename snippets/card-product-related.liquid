@@ -1,63 +1,57 @@
-{% comment %}
-  Custom Related Products Card - Matches product_detail_page.html design
+{%- comment -%}
+  TZ Related Product Card - Matches main-collection-product-grid card structure
   RTL-First Theme
-{% endcomment %}
+{%- endcomment -%}
 
 {%- if card_product and card_product != empty -%}
-  <a href="{{ card_product.url }}" class="tz-related-product-card">
-    {%- comment -%} Image Container {%- endcomment -%}
-    <div class="tz-related-product-image">
-      {%- if card_product.featured_media -%}
+  <a href="{{ card_product.url }}" class="tz-collection-product-item">
+    <div class="tz-collection-product-image-container">
+      {%- if card_product.available == false -%}
+        <span class="tz-collection-product-badge tz-collection-product-badge--out-of-stock">{{ 'products.product.inventory_out_of_stock' | t }}</span>
+      {%- elsif card_product.compare_at_price > card_product.price -%}
+        <span class="tz-collection-product-badge tz-collection-product-badge--sale">{{ 'products.product.on_sale' | t }}</span>
+      {%- endif -%}
+
+      {%- if card_product.featured_image -%}
         <img
-          src="{{ card_product.featured_media | image_url: width: 400 }}"
-          srcset="{{ card_product.featured_media | image_url: width: 400 }} 400w,
-                  {{ card_product.featured_media | image_url: width: 600 }} 600w,
-                  {{ card_product.featured_media | image_url: width: 800 }} 800w"
-          sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 20vw"
-          alt="{{ card_product.featured_media.alt | escape | default: card_product.title | escape }}"
+          alt="{{ card_product.featured_image.alt | escape }}"
+          class="tz-collection-product-image"
+          src="{{ card_product.featured_image | image_url: width: 600 }}"
           loading="lazy"
         >
+      {%- endif -%}
+    </div>
+
+    <h3 class="tz-collection-product-title">{{ card_product.title | escape }}</h3>
+
+    <div class="tz-collection-product-price{% if card_product.compare_at_price > card_product.price %} tz-collection-product-price--with-sale{% endif %}">
+      {%- if card_product.compare_at_price > card_product.price -%}
+        <span class="tz-collection-product-price-current">{{ card_product.price | money }}</span>
+        <span class="tz-collection-product-price-original">{{ card_product.compare_at_price | money }}</span>
       {%- else -%}
-        <div class="tz-related-product-placeholder">
-          <span class="material-icons-outlined">image</span>
-        </div>
+        {{ card_product.price | money }}
       {%- endif -%}
+    </div>
 
-      {%- comment -%} Wishlist Button {%- endcomment -%}
-      <button
-        type="button"
-        class="tz-related-product-wishlist"
-        data-product-id="{{ card_product.id }}"
-        aria-label="Add to wishlist"
-        onclick="event.preventDefault(); event.stopPropagation();"
-      >
-        <span class="material-icons-outlined">favorite_border</span>
-      </button>
-
-      {%- comment -%} Badge (if on sale or has metafield) {%- endcomment -%}
-      {%- assign variant = card_product.selected_or_first_available_variant -%}
-      {%- if variant.compare_at_price > variant.price or card_product.metafields.custom.badge -%}
-        <div class="tz-related-product-badge">
-          {%- if card_product.metafields.custom.badge -%}
-            {{ card_product.metafields.custom.badge }}
-          {%- else -%}
-            SALE
+    {%- comment -%} Color Variants {%- endcomment -%}
+    {%- if card_product.variants.size > 1 -%}
+      <div class="tz-collection-product-variants">
+        {%- for variant in card_product.variants limit: 4 -%}
+          {%- assign variant_bg = '#6b7280' -%}
+          {%- if variant.option1 contains 'שחור' or variant.option1 contains 'black' -%}
+            {%- assign variant_bg = '#000000' -%}
+          {%- elsif variant.option1 contains 'לבן' or variant.option1 contains 'white' -%}
+            {%- assign variant_bg = '#e5e7eb' -%}
+          {%- elsif variant.option1 contains 'אפור' or variant.option1 contains 'gray' -%}
+            {%- assign variant_bg = '#6b7280' -%}
+          {%- elsif variant.option1 contains 'כתום' or variant.option1 contains 'orange' -%}
+            {%- assign variant_bg = '#f97316' -%}
+          {%- elsif variant.option1 contains 'ירוק' or variant.option1 contains 'green' -%}
+            {%- assign variant_bg = '#14532d' -%}
           {%- endif -%}
-        </div>
-      {%- endif -%}
-    </div>
-
-    {%- comment -%} Product Info {%- endcomment -%}
-    <div class="tz-related-product-info">
-      <div class="tz-related-product-info-left">
-        {%- if card_product.vendor -%}
-          <p class="tz-related-product-vendor">{{ card_product.vendor }}</p>
-        {%- endif -%}
-        <p class="tz-related-product-title">{{ card_product.title }}</p>
+          <div class="tz-collection-variant-swatch" style="background-color: {{ variant_bg }}"></div>
+        {%- endfor -%}
       </div>
-      <div class="tz-related-product-price">
-        {%- render 'price', product: card_product, use_variant: true, show_badges: false -%}
-      </div>
-    </div>
+    {%- endif -%}
   </a>
 {%- endif -%}

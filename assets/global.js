@@ -1156,7 +1156,7 @@ class ProductRecommendations extends HTMLElement {
         const html = document.createElement('div');
         html.innerHTML = text;
         // Find the specific list container within the fetched HTML
-        const recommendationsList = html.querySelector('.tz-related-products-list');
+        const recommendationsList = html.querySelector('.tz-collection-product-grid') || html.querySelector('.tz-related-products-list');
 
         if (recommendationsList?.innerHTML.trim().length) {
           // Update only the list content, not the entire custom element
@@ -1167,7 +1167,7 @@ class ProductRecommendations extends HTMLElement {
           this.remove();
         }
 
-        if (html.querySelector('.tz-related-products-list') || html.querySelector('.grid__item')) {
+        if (html.querySelector('.tz-collection-product-grid') || html.querySelector('.tz-related-products-list') || html.querySelector('.grid__item')) {
           this.classList.add('product-recommendations--loaded');
         }
       })

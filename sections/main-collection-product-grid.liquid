@@ -1,26 +1,6 @@
-{{ 'template-collection.css' | asset_url | stylesheet_tag }}
-{{ 'component-card.css' | asset_url | stylesheet_tag }}
-{{ 'component-price.css' | asset_url | stylesheet_tag }}
+{{ 'tz-main-collection-product-grid.css' | asset_url | stylesheet_tag }}
 
-{% if section.settings.image_shape == 'blob' %}
-  {{ 'mask-blobs.css' | asset_url | stylesheet_tag }}
-{%- endif -%}
-
-{%- unless section.settings.quick_add == 'none' -%}
-  {{ 'quick-add.css' | asset_url | stylesheet_tag }}
-{%- endunless -%}
-
-{%- if section.settings.quick_add == 'standard' -%}
-  <script src="{{ 'quick-add.js' | asset_url }}" defer="defer"></script>
-  <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
-{%- endif -%}
-
-{%- if section.settings.quick_add == 'bulk' -%}
-  <script src="{{ 'quick-add-bulk.js' | asset_url }}" defer="defer"></script>
-  <script src="{{ 'quantity-popover.js' | asset_url }}" defer="defer"></script>
-  <script src="{{ 'price-per-item.js' | asset_url }}" defer="defer"></script>
-  <script src="{{ 'quick-order-list.js' | asset_url }}" defer="defer"></script>
-{%- endif -%}
+<script src="{{ 'tz-main-collection-product-grid.js' | asset_url }}" defer="defer"></script>
 
 {%- style -%}
   .section-{{ section.id }}-padding {
@@ -36,163 +16,284 @@
   }
 {%- endstyle -%}
 
-<div class="section-{{ section.id }}-padding gradient color-{{ section.settings.color_scheme }}">
+<div class="section-{{ section.id }}-padding tz-collection-section" data-section-type="tz-collection-grid" data-section-id="{{ section.id }}">
   {%- paginate collection.products by section.settings.products_per_page -%}
-    {% comment %} Sort is the first tabbable element when filter type is vertical {% endcomment %}
-    {%- if section.settings.enable_sorting and section.settings.filter_type == 'vertical' -%}
-      <facet-filters-form class="facets facets-vertical-sort page-width small-hide">
-        <form class="facets-vertical-form" id="FacetSortForm">
-          <div class="facet-filters sorting caption">
-            <div class="facet-filters__field">
-              <h2 class="facet-filters__label caption-large text-body">
-                <label for="SortBy">{{ 'products.facets.sort_by_label' | t }}</label>
-              </h2>
-              <div class="select">
-                {%- assign sort_by = collection.sort_by | default: collection.default_sort_by -%}
-                <select
-                  name="sort_by"
-                  class="facet-filters__sort select__select caption-large"
-                  id="SortBy"
-                  aria-describedby="a11y-refresh-page-message"
-                >
-                  {%- for option in collection.sort_options -%}
-                    <option
-                      value="{{ option.value | escape }}"
-                      {% if option.value == sort_by %}
-                        selected="selected"
-                      {% endif %}
-                    >
-                      {{ option.name | escape }}
-                    </option>
-                  {%- endfor -%}
-                </select>
-                <span class="svg-wrapper">
-                  {{- 'icon-caret.svg' | inline_asset_content -}}
-                </span>
+    <div class="tz-collection-container">
+      {% comment %} Category Filter Buttons Row {% endcomment %}
+      {%- if section.settings.show_category_filters -%}
+        <div class="tz-collection-filter-row">
+          {%- comment -%} All Products Button {%- endcomment -%}
+          <a href="{{ routes.collections_url }}/all" class="tz-collection-filter-button{% if collection.handle == 'all' %} is-active{% endif %}">
+            {%- if section.settings.filter_all_text != blank -%}
+              {{ section.settings.filter_all_text }}
+            {%- else -%}
+              {{ 'collections.general.view_all' | t }}
+            {%- endif -%}
+          </a>
+          
+          {%- comment -%} Show main collections as category filters {%- endcomment -%}
+          {%- for collection_item in collections -%}
+            {%- if collection_item.products_count > 0 and collection_item.handle != collection.handle -%}
+              <a href="{{ collection_item.url }}" class="tz-collection-filter-button{% if collection_item.handle == collection.handle %} is-active{% endif %}">
+                {{ collection_item.title }}
+              </a>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+
+      <div class="tz-collection-layout">
+        {% comment %} Sidebar Filters {% endcomment %}
+        <aside class="tz-collection-sidebar">
+          {% comment %} Availability Filter {% endcomment %}
+          <div class="tz-collection-sidebar-section">
+            <h3 class="tz-collection-filter-header">
+              <span class="tz-collection-filter-title">
+                {%- if section.settings.filter_availability_label != blank -%}
+                  {{ section.settings.filter_availability_label }}
+                {%- else -%}
+                  {{ 'products.facets.filter_button' | t }}
+                {%- endif -%}
+              </span>
+              <span class="tz-collection-filter-icon material-icons-outlined">remove</span>
+            </h3>
+            <div class="tz-collection-checkbox-group">
+              <label class="tz-collection-checkbox-label">
+                <input class="tz-collection-checkbox" type="checkbox" name="availability" value="in_stock">
+                <span>{{ 'products.product.inventory_out_of_stock_continue_selling' | t }}</span>
+              </label>
+              <label class="tz-collection-checkbox-label">
+                <input class="tz-collection-checkbox" type="checkbox" name="availability" value="out_of_stock">
+                <span>{{ 'products.product.inventory_out_of_stock' | t }}</span>
+              </label>
+            </div>
+          </div>
+
+          {% comment %} Price Filter {% endcomment %}
+          <div class="tz-collection-sidebar-section">
+            <h3 class="tz-collection-filter-header">
+              <span class="tz-collection-filter-title">
+                {%- if section.settings.filter_price_label != blank -%}
+                  {{ section.settings.filter_price_label }}
+                {%- else -%}
+                  {{ 'templates.cart.price' | t | default: 'Price' }}
+                {%- endif -%}
+              </span>
+              <span class="tz-collection-filter-icon material-icons-outlined">remove</span>
+            </h3>
+            <div class="tz-collection-price-range">
+              <input class="tz-collection-price-input" data-type="min" type="range" min="0" max="1000" value="0" step="10">
+              <div class="tz-collection-price-inputs">
+                <div class="relative">
+                  <input class="tz-collection-price-input" data-type="max" type="number" value="570" placeholder="570">
+                  <span class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">{{ cart.currency.symbol }}</span>
+                </div>
+                <span class="tz-collection-price-separator">{{ 'products.facets.to' | t }}</span>
+                <div class="relative">
+                  <input class="tz-collection-price-input" data-type="min" type="number" value="0" placeholder="0">
+                  <span class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">{{ cart.currency.symbol }}</span>
+                </div>
               </div>
             </div>
           </div>
 
-          <div class="product-count-vertical light" role="status">
-            <h2 class="product-count__text text-body">
-              <span id="ProductCountDesktop">
-                {%- if collection.results_count -%}
-                  {{
-                    'templates.search.results_with_count'
-                    | t: terms: collection.terms, count: collection.results_count
-                  }}
-                {%- elsif collection.products_count == collection.all_products_count -%}
-                  {{ 'products.facets.product_count_simple' | t: count: collection.products_count }}
+          {% comment %} Color Filter {% endcomment %}
+          <div class="tz-collection-sidebar-section">
+            <h3 class="tz-collection-filter-header">
+              <span class="tz-collection-filter-title">
+                {%- if section.settings.filter_color_label != blank -%}
+                  {{ section.settings.filter_color_label }}
                 {%- else -%}
-                  {{
-                    'products.facets.product_count'
-                    | t: product_count: collection.products_count, count: collection.all_products_count
-                  }}
+                  {{ 'products.product.color' | t | default: 'Color' }}
                 {%- endif -%}
               </span>
-            </h2>
-            {%- render 'loading-spinner' -%}
-          </div>
-        </form>
-      </facet-filters-form>
-    {%- endif -%}
-
-    <div class="{% if section.settings.filter_type == 'vertical' %} facets-vertical page-width{% endif %}">
-      {{ 'component-facets.css' | asset_url | stylesheet_tag }}
-      <script src="{{ 'facets.js' | asset_url }}" defer="defer"></script>
-      {%- if section.settings.enable_filtering or section.settings.enable_sorting -%}
-        <aside
-          aria-labelledby="verticalTitle"
-          class="facets-wrapper{% unless section.settings.enable_filtering %} facets-wrapper--no-filters{% endunless %}{% if section.settings.filter_type != 'vertical' %} page-width{% endif %}"
-          id="main-collection-filters"
-          data-id="{{ section.id }}"
-        >
-          {% render 'facets',
-            results: collection,
-            enable_filtering: section.settings.enable_filtering,
-            enable_sorting: section.settings.enable_sorting,
-            filter_type: section.settings.filter_type,
-            paginate: paginate
-          %}
-        </aside>
-      {%- endif -%}
-
-      <div
-        class="product-grid-container{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
-        id="ProductGridContainer"
-        {% if settings.animations_reveal_on_scroll %}
-          data-cascade
-        {% endif %}
-      >
-        {%- if collection.products.size == 0 -%}
-          <div class="collection collection--empty page-width" id="product-grid" data-id="{{ section.id }}">
-            <div class="loading-overlay gradient"></div>
-            <div class="title-wrapper center">
-              <h2 class="title title--primary">
-                {{ 'sections.collection_template.empty' | t -}}
-                <br>
-                {{
-                  'sections.collection_template.use_fewer_filters_html'
-                  | t: link: collection.url, class: 'underlined-link link'
-                }}
-              </h2>
+              <span class="tz-collection-filter-icon material-icons-outlined">remove</span>
+            </h3>
+            <div class="tz-collection-color-grid">
+              <button class="tz-collection-color-swatch tz-collection-color-black" data-color="black" aria-label="Black"></button>
+              <button class="tz-collection-color-swatch tz-collection-color-orange" data-color="orange" aria-label="Orange"></button>
+              <button class="tz-collection-color-swatch tz-collection-color-gray" data-color="gray" aria-label="Gray"></button>
+              <button class="tz-collection-color-swatch tz-collection-color-white" data-color="white" aria-label="Light Gray"></button>
+              <button class="tz-collection-color-swatch tz-collection-color-navy" data-color="navy" aria-label="Navy"></button>
+              <button class="tz-collection-color-swatch tz-collection-color-olive" data-color="olive" aria-label="Olive"></button>
             </div>
           </div>
-        {%- else -%}
-          <div
-            class="collection{% if section.settings.filter_type != 'vertical' %} page-width{% endif %}"
-          >
-            <div class="loading-overlay gradient"></div>
-            <ul
-              id="product-grid"
-              data-id="{{ section.id }}"
-              class="
-                grid product-grid grid--{{ section.settings.columns_mobile }}-col-tablet-down
-                grid--{{ section.settings.columns_desktop }}-col-desktop
-                {% if section.settings.quick_add == 'bulk' %} collection-quick-add-bulk{% endif %}
-              "
-            >
-              {% assign skip_card_product_styles = false %}
+
+          {% comment %} Product Type Filter {% endcomment %}
+          <div class="tz-collection-sidebar-section">
+            <h3 class="tz-collection-filter-header">
+              <span class="tz-collection-filter-title">
+                {%- if section.settings.filter_product_type_label != blank -%}
+                  {{ section.settings.filter_product_type_label }}
+                {%- else -%}
+                  {{ 'products.product.type' | t | default: 'Product Type' }}
+                {%- endif -%}
+              </span>
+              <span class="tz-collection-filter-icon material-icons-outlined">remove</span>
+            </h3>
+            <div class="tz-collection-checkbox-group">
+              {%- if collection.all_types.size > 0 -%}
+                {%- for product_type in collection.all_types -%}
+                  {%- if product_type != blank and product_type != '' -%}
+                    <label class="tz-collection-checkbox-label">
+                      <input class="tz-collection-checkbox" type="checkbox" name="product_type" value="{{ product_type | escape }}">
+                      <span>{{ product_type }}</span>
+                    </label>
+                  {%- endif -%}
+                {%- endfor -%}
+              {%- else -%}
+                {%- comment -%} Fallback if no product types available {%- endcomment -%}
+                <label class="tz-collection-checkbox-label">
+                  <input class="tz-collection-checkbox" type="checkbox" name="product_type" value="accessories">
+                  <span>
+                    {%- if section.settings.filter_product_type_accessories != blank -%}
+                      {{ section.settings.filter_product_type_accessories }}
+                    {%- else -%}
+                      Accessories
+                    {%- endif -%}
+                  </span>
+                </label>
+                <label class="tz-collection-checkbox-label">
+                  <input class="tz-collection-checkbox" type="checkbox" name="product_type" value="backpacks">
+                  <span>
+                    {%- if section.settings.filter_product_type_backpacks != blank -%}
+                      {{ section.settings.filter_product_type_backpacks }}
+                    {%- else -%}
+                      Backpacks
+                    {%- endif -%}
+                  </span>
+                </label>
+              {%- endif -%}
+            </div>
+          </div>
+        </aside>
+
+        {% comment %} Main Content {% endcomment %}
+        <main class="tz-collection-main">
+          {% comment %} Sort Controls {% endcomment %}
+            <div class="tz-collection-sort-row">
+            <div class="tz-collection-product-count">
+              {%- if collection.results_count -%}
+                {{ 'products.facets.product_count_simple' | t: count: collection.results_count }}
+              {%- else -%}
+                {{ 'products.facets.product_count_simple' | t: count: collection.products_count }}
+              {%- endif -%}
+            </div>
+            <form class="tz-collection-sort-form" action="{{ collection.url }}" method="get" onsubmit="return false;">
+              {%- if collection.current_tags -%}
+                {%- for tag in collection.current_tags -%}
+                  <input type="hidden" name="constraint" value="{{ tag | escape }}">
+                {%- endfor -%}
+              {%- endif -%}
+              <div class="tz-collection-sort-group">
+                <label for="SortBy" class="tz-collection-sort-label">{{ 'products.facets.sort_by_label' | t }}</label>
+                <div class="tz-collection-sort-select-wrapper">
+                  {%- assign sort_by = collection.sort_by | default: collection.default_sort_by -%}
+                  <select
+                    name="sort_by"
+                    class="tz-collection-sort-select"
+                    id="SortBy"
+                    aria-describedby="a11y-refresh-page-message"
+                  >
+                    {%- for option in collection.sort_options -%}
+                      <option
+                        value="{{ option.value | escape }}"
+                        {% if option.value == sort_by %}selected="selected"{% endif %}
+                      >
+                        {{ option.name | escape }}
+                      </option>
+                    {%- endfor -%}
+                  </select>
+                  <span class="tz-collection-sort-icon material-icons-outlined">expand_more</span>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          {% comment %} Product Grid {% endcomment %}
+          {%- if collection.products.size == 0 -%}
+            <div class="tz-collection-empty">
+              <h2>{{ 'sections.collection_template.empty' | t }}</h2>
+              <p>
+                {{
+                  'sections.collection_template.use_fewer_filters_html'
+                  | t: link: collection.url, class: 'tz-collection-link'
+                }}
+              </p>
+            </div>
+          {%- else -%}
+            <div class="tz-collection-product-grid">
               {%- for product in collection.products -%}
                 {% assign lazy_load = false %}
                 {%- if forloop.index > 2 -%}
                   {%- assign lazy_load = true -%}
                 {%- endif -%}
-                <li
-                  class="grid__item{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
-                  {% if settings.animations_reveal_on_scroll %}
-                    data-cascade
-                    style="--animation-order: {{ forloop.index }};"
-                  {% endif %}
-                >
-                  {% render 'card-product',
-                    card_product: product,
-                    media_aspect_ratio: section.settings.image_ratio,
-                    image_shape: section.settings.image_shape,
-                    show_secondary_image: section.settings.show_secondary_image,
-                    show_vendor: section.settings.show_vendor,
-                    show_rating: section.settings.show_rating,
-                    lazy_load: lazy_load,
-                    skip_styles: skip_card_product_styles,
-                    quick_add: section.settings.quick_add,
-                    section_id: section.id
-                  %}
-                </li>
-                {%- assign skip_card_product_styles = true -%}
+
+                <a href="{{ product.url }}" class="tz-collection-product-item">
+                  <div class="tz-collection-product-image-container">
+                    {%- if product.available == false -%}
+                      <span class="tz-collection-product-badge tz-collection-product-badge--out-of-stock">{{ 'products.product.inventory_out_of_stock' | t }}</span>
+                    {%- elsif product.compare_at_price > product.price -%}
+                      <span class="tz-collection-product-badge tz-collection-product-badge--sale">{{ 'products.product.on_sale' | t }}</span>
+                    {%- endif -%}
+
+                    {%- if product.featured_image -%}
+                      <img
+                        alt="{{ product.featured_image.alt | escape }}"
+                        class="tz-collection-product-image"
+                        src="{{ product.featured_image | image_url: width: 600 }}"
+                        loading="{% if lazy_load %}lazy{% else %}eager{% endif %}"
+                      >
+                    {%- endif -%}
+                  </div>
+
+                  <h3 class="tz-collection-product-title">{{ product.title | escape }}</h3>
+
+                  <div class="tz-collection-product-price{% if product.compare_at_price > product.price %} tz-collection-product-price--with-sale{% endif %}">
+                    {%- if product.compare_at_price > product.price -%}
+                      <span class="tz-collection-product-price-current">{{ product.price | money }}</span>
+                      <span class="tz-collection-product-price-original">{{ product.compare_at_price | money }}</span>
+                    {%- else -%}
+                      {{ product.price | money }}
+                    {%- endif -%}
+                  </div>
+
+                  {%- comment -%} Color Variants {%- endcomment -%}
+                  {%- if product.variants.size > 1 -%}
+                    <div class="tz-collection-product-variants">
+                      {%- for variant in product.variants limit: 4 -%}
+                        {%- assign variant_bg = '#6b7280' -%}
+                        {%- if variant.option1 contains 'שחור' or variant.option1 contains 'black' -%}
+                          {%- assign variant_bg = '#000000' -%}
+                        {%- elsif variant.option1 contains 'לבן' or variant.option1 contains 'white' -%}
+                          {%- assign variant_bg = '#e5e7eb' -%}
+                        {%- elsif variant.option1 contains 'אפור' or variant.option1 contains 'gray' -%}
+                          {%- assign variant_bg = '#6b7280' -%}
+                        {%- elsif variant.option1 contains 'כתום' or variant.option1 contains 'orange' -%}
+                          {%- assign variant_bg = '#f97316' -%}
+                        {%- elsif variant.option1 contains 'ירוק' or variant.option1 contains 'green' -%}
+                          {%- assign variant_bg = '#14532d' -%}
+                        {%- endif -%}
+                        <div class="tz-collection-variant-swatch" style="background-color: {{ variant_bg }}"></div>
+                      {%- endfor -%}
+                    </div>
+                  {%- endif -%}
+                </a>
               {%- endfor -%}
-            </ul>
+            </div>
 
             {%- if paginate.pages > 1 -%}
-              {% render 'pagination', paginate: paginate, anchor: '' %}
+              <div class="tz-collection-load-more">
+                <button class="tz-collection-load-more-button">
+                  {{ 'products.facets.show_more' | t }}
+                </button>
+              </div>
             {%- endif -%}
-          </div>
-        {%- endif -%}
+          {%- endif -%}
+        </main>
       </div>
     </div>
   {%- endpaginate -%}
-  {% if section.settings.image_shape == 'arch' %}
-    {{ 'mask-arch.svg' | inline_asset_content }}
-  {%- endif -%}
 </div>
 
 {% schema %}
@@ -208,6 +309,63 @@
       "step": 4,
       "default": 16,
       "label": "t:sections.main-collection-product-grid.settings.products_per_page.label"
+    },
+    {
+      "type": "header",
+      "content": "Category Filters"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_category_filters",
+      "default": true,
+      "label": "Show Category Filter Buttons",
+      "info": "Display collection categories as filter buttons above products"
+    },
+    {
+      "type": "text",
+      "id": "filter_all_text",
+      "label": "All Products Button Text",
+      "info": "Text for 'All' filter button (leave empty to use translation)"
+    },
+    {
+      "type": "header",
+      "content": "Filter Labels"
+    },
+    {
+      "type": "text",
+      "id": "filter_availability_label",
+      "label": "Availability Filter Label",
+      "info": "Leave empty to use translation"
+    },
+    {
+      "type": "text",
+      "id": "filter_price_label",
+      "label": "Price Filter Label",
+      "info": "Leave empty to use translation"
+    },
+    {
+      "type": "text",
+      "id": "filter_color_label",
+      "label": "Color Filter Label",
+      "info": "Leave empty to use translation"
+    },
+    {
+      "type": "text",
+      "id": "filter_product_type_label",
+      "label": "Product Type Filter Label",
+      "info": "Leave empty to use translation"
+    },
+    {
+      "type": "text",
+      "id": "filter_product_type_accessories",
+      "label": "Accessories Option Text",
+      "info": "Leave empty to use translation"
+    },
+    {
+      "type": "text",
+      "id": "filter_product_type_backpacks",
+      "label": "Backpacks Option Text",
+      "info": "Leave empty to use translation"
     },
     {
       "type": "range",
