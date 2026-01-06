@@ -389,6 +389,59 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
+// Zoom Dialog Functionality
+function openZoomDialog(imageSrc, imageAlt) {
+  // Create zoom dialog if it doesn't exist
+  let zoomDialog = document.getElementById('tz-zoom-dialog');
+  if (!zoomDialog) {
+    zoomDialog = document.createElement('div');
+    zoomDialog.id = 'tz-zoom-dialog';
+    zoomDialog.className = 'tz-zoom-dialog-overlay';
+    zoomDialog.innerHTML = `
+      <div class="tz-zoom-dialog">
+        <button class="tz-zoom-dialog-close" aria-label="Close zoom">
+          <span class="material-icons-outlined">close</span>
+        </button>
+        <div class="tz-zoom-dialog-content">
+          <img src="" alt="" class="tz-zoom-dialog-image">
+        </div>
+      </div>
+    `;
+    document.body.appendChild(zoomDialog);
+
+    // Close dialog when clicking overlay or close button
+    zoomDialog.addEventListener('click', (e) => {
+      if (e.target === zoomDialog || e.target.closest('.tz-zoom-dialog-close')) {
+        closeZoomDialog();
+      }
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && zoomDialog.style.display === 'flex') {
+        closeZoomDialog();
+      }
+    });
+  }
+
+  // Update image source and alt
+  const dialogImage = zoomDialog.querySelector('.tz-zoom-dialog-image');
+  dialogImage.src = imageSrc;
+  dialogImage.alt = imageAlt;
+
+  // Show dialog
+  zoomDialog.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+
+function closeZoomDialog() {
+  const zoomDialog = document.getElementById('tz-zoom-dialog');
+  if (zoomDialog) {
+    zoomDialog.style.display = 'none';
+    document.body.style.overflow = '';
+  }
+}
+
 /*-----*/
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -922,16 +975,15 @@ document.addEventListener('DOMContentLoaded', () => {
   const shareButton = document.querySelector('.tz-product-share-button');
   
   if (zoomButton && mainImage) {
-    zoomButton.addEventListener('click', () => {
-      // Open lightbox or zoom functionality
-      console.log('Zoom:', mainImage.src);
-      // TODO: Implement lightbox functionality
-      window.open(mainImage.src, '_blank');
+    zoomButton.addEventListener('click', (e) => {
+      e.preventDefault();
+      openZoomDialog(mainImage.src, mainImage.alt || productTitle);
     });
   }
 
   if (shareButton) {
-    shareButton.addEventListener('click', () => {
+    shareButton.addEventListener('click', (e) => {
+      e.preventDefault();
       if (navigator.share) {
         navigator.share({
           title: document.title,

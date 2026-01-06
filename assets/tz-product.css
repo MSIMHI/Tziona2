@@ -224,6 +224,104 @@ product-info,
   }
 }
 
+/* --- ZOOM DIALOG --- */
+.tz-zoom-dialog-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.9);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  backdrop-filter: blur(5px);
+}
+
+.tz-zoom-dialog {
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
+  background: transparent;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tz-zoom-dialog-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10001;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+}
+
+.tz-zoom-dialog-close:hover {
+  background: rgba(0, 0, 0, 0.9);
+  transform: scale(1.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.tz-zoom-dialog-close .material-icons-outlined {
+  font-size: 28px;
+  font-weight: 300;
+}
+
+.tz-zoom-dialog-content {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.tz-zoom-dialog-image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* Mobile zoom dialog */
+@media (max-width: 768px) {
+  .tz-zoom-dialog-overlay {
+    padding: 1rem;
+  }
+
+  .tz-zoom-dialog {
+    max-width: 100%;
+    max-height: 100%;
+  }
+
+  .tz-zoom-dialog-close {
+    top: 15px;
+    right: 15px;
+    width: 44px;
+    height: 44px;
+  }
+
+  .tz-zoom-dialog-close .material-icons-outlined {
+    font-size: 24px;
+  }
+}
+
 /* --- PRODUCT GRID (RTL-First Layout) --- */
 .tz-product-grid {
   display: grid;
@@ -1095,7 +1193,7 @@ product-info,
 .tz-product-share-button .material-icons-outlined {
   width: 1.25rem;
   height: 1.25rem;
-  color: rgb(var(--color-foreground));
+  color: #ffffff !important;
   font-size: 1.25rem;
 }
 
