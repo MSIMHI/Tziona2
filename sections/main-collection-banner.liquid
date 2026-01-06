@@ -6,8 +6,22 @@
   <div class="tz-collection-hero__inner">
     <div class="tz-collection-hero__text-wrapper">
       <h1 class="tz-collection-hero__title">
-        <span class="visually-hidden">{{ 'sections.collection_template.title' | t }}: </span>
-        {{- collection.title | escape -}}
+        {%- liquid
+          assign collection_title = collection.title | escape
+          assign collection_title_down = collection_title | downcase
+          
+          # Translate common collection names to Hebrew (case-insensitive)
+          if collection_title_down == 'products' or collection_title_down == 'all products'
+            assign collection_title = 'מוצרים'
+          elsif collection_title_down == 'collection'
+            assign collection_title = 'קטגוריה'
+          elsif collection_title_down == 'collections'
+            assign collection_title = 'קטגוריות'
+          elsif collection.handle == 'all'
+            assign collection_title = 'מוצרים'
+          endif
+        -%}
+        {{- collection_title -}}
       </h1>
 
       {%- if section.settings.show_collection_description -%}

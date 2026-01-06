@@ -363,9 +363,9 @@
       "view_all": "View all"
     },
     "collection_template": {
-      "empty": "No products found",
-      "title": "Collection",
-      "use_fewer_filters_html": "Use fewer filters or <a class=\"{{ class }}\" href=\"{{ link }}\">remove all</a>"
+      "empty": "לא נמצאו מוצרים",
+      "title": "קטגוריה",
+      "use_fewer_filters_html": "השתמש בפחות מסננים או <a class=\"{{ class }}\" href=\"{{ link }}\">הסר הכל</a>"
     },
     "video": {
       "load_video": "Load video: {{ description }}"
