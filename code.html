@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="he"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>דף אוסף מוצרים</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#111827", // Dark gray/black for primary actions
+                        "background-light": "#FFFFFF",
+                        "background-dark": "#121212",
+                        "card-light": "#F3F4F6",
+                        "card-dark": "#1E1E1E",
+                        "text-light": "#1F2937",
+                        "text-dark": "#E5E7EB",
+                        "accent": "#F97316", // Orange accent seen in color swatches
+                    },
+                    fontFamily: {
+                        display: ["Heebo", "sans-serif"],
+                        body: ["Heebo", "sans-serif"],
+                    },
+                    borderRadius: {
+                        DEFAULT: "0px", // Sharp corners as seen in the image
+                        'sm': '2px',
+                    },
+                },
+            },
+        };
+    </script>
+<style>::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background-color: #CBD5E1;
+            border-radius: 4px;
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background-color: #4B5563;
+        }input[type=range] {
+            -webkit-appearance: none;
+            width: 100%;
+            background: transparent;
+        }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 16px;
+            width: 16px;
+            border-radius: 50%;
+            background: #111827;
+            cursor: pointer;
+            margin-top: -6px;
+        }
+        .dark input[type=range]::-webkit-slider-thumb {
+            background: #E5E7EB;
+        }
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 4px;
+            cursor: pointer;
+            background: #E5E7EB;
+            border-radius: 2px;
+        }
+        .dark input[type=range]::-webkit-slider-runnable-track {
+            background: #374151;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark font-body transition-colors duration-200">
+<div class="max-w-[1600px] mx-auto px-4 py-8">
+<div class="flex flex-wrap gap-4 mb-12 border-b border-gray-200 dark:border-gray-800 pb-8 justify-center sm:justify-start overflow-x-auto">
+<button class="px-8 py-3 border border-gray-300 dark:border-gray-700 text-sm font-medium hover:border-primary dark:hover:border-white transition-colors whitespace-nowrap uppercase tracking-wider bg-white dark:bg-card-dark">תרמילים</button>
+<button class="px-8 py-3 border border-gray-300 dark:border-gray-700 text-sm font-medium hover:border-primary dark:hover:border-white transition-colors whitespace-nowrap uppercase tracking-wider bg-white dark:bg-card-dark">יומיומי</button>
+<button class="px-8 py-3 border border-gray-300 dark:border-gray-700 text-sm font-medium hover:border-primary dark:hover:border-white transition-colors whitespace-nowrap uppercase tracking-wider bg-white dark:bg-card-dark">טכנולוגיה</button>
+<button class="px-8 py-3 border border-gray-300 dark:border-gray-700 text-sm font-medium hover:border-primary dark:hover:border-white transition-colors whitespace-nowrap uppercase tracking-wider bg-white dark:bg-card-dark">נסיעות</button>
+<button class="px-8 py-3 border border-gray-300 dark:border-gray-700 text-sm font-medium hover:border-primary dark:hover:border-white transition-colors whitespace-nowrap uppercase tracking-wider bg-white dark:bg-card-dark">קטן</button>
+<button class="px-8 py-3 border border-gray-300 dark:border-gray-700 text-sm font-medium hover:border-primary dark:hover:border-white transition-colors whitespace-nowrap uppercase tracking-wider bg-white dark:bg-card-dark">עבודה</button>
+</div>
+<div class="flex flex-col lg:flex-row gap-8">
+<aside class="w-full lg:w-64 flex-shrink-0 space-y-8">
+<div class="border-b border-gray-200 dark:border-gray-800 pb-6">
+<h3 class="font-bold text-sm uppercase tracking-wider mb-4 flex justify-between items-center cursor-pointer group">
+                        זמינות
+                        <span class="material-symbols-outlined text-gray-400 group-hover:text-primary dark:group-hover:text-white transition-colors">remove</span>
+</h3>
+<div class="space-y-2">
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="form-checkbox h-4 w-4 text-primary border-gray-300 rounded-sm focus:ring-primary dark:bg-gray-800 dark:border-gray-600" type="checkbox"/>
+<span class="text-sm group-hover:text-gray-600 dark:group-hover:text-gray-300">במלאי</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="form-checkbox h-4 w-4 text-primary border-gray-300 rounded-sm focus:ring-primary dark:bg-gray-800 dark:border-gray-600" type="checkbox"/>
+<span class="text-sm group-hover:text-gray-600 dark:group-hover:text-gray-300">אזל מהמלאי</span>
+</label>
+</div>
+</div>
+<div class="border-b border-gray-200 dark:border-gray-800 pb-6">
+<h3 class="font-bold text-sm uppercase tracking-wider mb-4 flex justify-between items-center cursor-pointer group">
+                        מחיר
+                        <span class="material-symbols-outlined text-gray-400 group-hover:text-primary dark:group-hover:text-white transition-colors">remove</span>
+</h3>
+<div class="mb-4">
+<input class="w-full" max="600" min="0" type="range" value="0"/>
+</div>
+<div class="flex gap-4 items-center">
+<div class="flex-1">
+<label class="sr-only">מחיר מינימום</label>
+<div class="relative">
+<span class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">₪</span>
+<input class="w-full pl-2 pr-6 py-2 border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-sm text-center rounded-sm focus:border-primary focus:ring-0" type="number" value="0"/>
+</div>
+</div>
+<span class="text-gray-400">-</span>
+<div class="flex-1">
+<label class="sr-only">מחיר מקסימום</label>
+<div class="relative">
+<span class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">₪</span>
+<input class="w-full pl-2 pr-6 py-2 border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-sm text-center rounded-sm focus:border-primary focus:ring-0" type="number" value="570"/>
+</div>
+</div>
+</div>
+</div>
+<div class="border-b border-gray-200 dark:border-gray-800 pb-6">
+<h3 class="font-bold text-sm uppercase tracking-wider mb-4 flex justify-between items-center cursor-pointer group">
+                        צבע
+                        <span class="material-symbols-outlined text-gray-400 group-hover:text-primary dark:group-hover:text-white transition-colors">remove</span>
+</h3>
+<div class="flex flex-wrap gap-3">
+<button aria-label="Black" class="w-8 h-8 rounded-full bg-black border border-gray-200 shadow-sm hover:scale-110 transition-transform focus:ring-2 ring-offset-2 ring-primary dark:ring-offset-background-dark"></button>
+<button aria-label="Orange" class="w-8 h-8 rounded-full bg-orange-500 border border-gray-200 shadow-sm hover:scale-110 transition-transform focus:ring-2 ring-offset-2 ring-primary dark:ring-offset-background-dark"></button>
+<button aria-label="Gray" class="w-8 h-8 rounded-full bg-gray-500 border border-gray-200 shadow-sm hover:scale-110 transition-transform focus:ring-2 ring-offset-2 ring-primary dark:ring-offset-background-dark"></button>
+<button aria-label="Light Gray" class="w-8 h-8 rounded-full bg-gray-200 border border-gray-300 shadow-sm hover:scale-110 transition-transform focus:ring-2 ring-offset-2 ring-primary dark:ring-offset-background-dark"></button>
+<button aria-label="Navy" class="w-8 h-8 rounded-full bg-blue-900 border border-gray-200 shadow-sm hover:scale-110 transition-transform focus:ring-2 ring-offset-2 ring-primary dark:ring-offset-background-dark"></button>
+<button aria-label="Olive" class="w-8 h-8 rounded-full bg-green-900 border border-gray-200 shadow-sm hover:scale-110 transition-transform focus:ring-2 ring-offset-2 ring-primary dark:ring-offset-background-dark"></button>
+</div>
+</div>
+<div class="pb-6">
+<h3 class="font-bold text-sm uppercase tracking-wider mb-4 flex justify-between items-center cursor-pointer group">
+                        סוג מוצר
+                        <span class="material-symbols-outlined text-gray-400 group-hover:text-primary dark:group-hover:text-white transition-colors">remove</span>
+</h3>
+<div class="space-y-2">
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="form-checkbox h-4 w-4 text-primary border-gray-300 rounded-sm focus:ring-primary dark:bg-gray-800 dark:border-gray-600" type="checkbox"/>
+<span class="text-sm group-hover:text-gray-600 dark:group-hover:text-gray-300">אביזרים</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="form-checkbox h-4 w-4 text-primary border-gray-300 rounded-sm focus:ring-primary dark:bg-gray-800 dark:border-gray-600" type="checkbox"/>
+<span class="text-sm group-hover:text-gray-600 dark:group-hover:text-gray-300">תיקי גב</span>
+</label>
+</div>
+</div>
+</aside>
+<main class="flex-1">
+<div class="flex justify-between items-center mb-6 text-sm">
+<div class="flex items-center gap-2 group cursor-pointer">
+<span class="text-gray-500 dark:text-gray-400">מיין לפי</span>
+<span class="font-medium group-hover:text-gray-600 dark:group-hover:text-gray-300">מומלץ</span>
+<span class="material-symbols-outlined text-lg">expand_more</span>
+</div>
+<div class="text-gray-500 dark:text-gray-400">
+                        24 מוצרים
+                    </div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-12">
+<div class="relative group h-[450px] overflow-hidden bg-gray-100 dark:bg-gray-800">
+<img alt="Man wearing backpack outdoors" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAMEDI_IiO2Lr5Xda4uDniyvoKS4_DrXirRl6fUZg_enk3vj79IoXazfZwR4E_mOOznhi2yhJ0kUxEF3JijB5k043tZSTZlI5l_zPw3-E5WX4jpr1E5Ngk5q_tGkMkZXqqU2CyhdgnbzEX8dyOAwfo6N3TuGrWCQZsewmYUVqAYnj9k3PEetK4LFxYjuwuvCIS9M874fdl3gRprZozxDF_KeCRovfbgbAffiHTN0R_ai_drRqzjvC7Lc5UhZ_wH-E_6ekWxf_KeHSUw"/>
+<div class="absolute inset-0 bg-black/30 flex flex-col justify-center items-center text-center p-6">
+<h2 class="text-white text-3xl font-bold mb-4 uppercase tracking-wider drop-shadow-md">חדשים נחתו</h2>
+<button class="bg-white text-primary px-8 py-3 text-xs font-bold uppercase tracking-widest hover:bg-gray-100 transition-colors">קנה עכשיו</button>
+</div>
+</div>
+<div class="group flex flex-col">
+<div class="relative bg-card-light dark:bg-card-dark aspect-[4/5] mb-4 overflow-hidden">
+<span class="absolute top-4 right-4 bg-white dark:bg-black/50 text-[10px] font-bold px-2 py-1 uppercase tracking-widest z-10">אזל מהמלאי</span>
+<img alt="Black everyday backpack" class="w-full h-full object-cover mix-blend-multiply dark:mix-blend-normal group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJdNc_BTjf-CyOxbs9zWOct8RT5QXnP5dGFVJVCsqiijjY4u8mK9W_-c8NRYujWGEsuWfnNxVbU8Fxp5KUfnt16GGHFEmQNg5Lo3Sy3Ew1lmL1INhvV96lVYKgLyHAG1jWJId-jCSW5Op_5xWoY9KvtuzxGw8VS-vH-CzOzOPhex3LjRkbWA9jkN8OtAS9TkaZGZZrPV48lEgXrTGYQeSGpGyJtca5EVh0uVlvaBt_7RMhIEluN76qD_OGhAN5Wp86Xu43ybO4BgF3"/>
+</div>
+<h3 class="font-medium text-lg mb-1 group-hover:text-gray-600 dark:group-hover:text-gray-300 transition-colors cursor-pointer">תיק גב יומיומי</h3>
+<div class="text-sm text-gray-600 dark:text-gray-400 mb-2">₪209.00</div>
+<div class="flex gap-1">
+<div class="w-4 h-2 bg-black border border-gray-300"></div>
+</div>
+</div>
+<div class="group flex flex-col">
+<div class="relative bg-card-light dark:bg-card-dark aspect-[4/5] mb-4 overflow-hidden">
+<img alt="Dark grey backpack v2" class="w-full h-full object-cover mix-blend-multiply dark:mix-blend-normal group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQB8EKEpOR0iBWf_ygFV69zDHTPLsP1FVD9hGLC5XJiKd7d2-F1IVazIcQA9GBxIPVGGuF61NStvvhYySKRr9NI71B6V3k7gG22s4untBmqvFm_bVUjx-3Ly_nqEfLH_z7Hr_NRrDN6xc6ctYxXiysFIz6Gg-fP8LYa8Du-DB0X4z2vhy9x3DViK7DVde4DNv7NRqnYzjTarMMwfT8h33fuKodqH6MU-bqUynCudct1s4CfQiM5q8EmCjgGQgdb24d8R_hJGJc6usQ"/>
+</div>
+<h3 class="font-medium text-lg mb-1 group-hover:text-gray-600 dark:group-hover:text-gray-300 transition-colors cursor-pointer">תיק גב יומיומי גרסה 2</h3>
+<div class="text-sm text-gray-600 dark:text-gray-400 mb-2">₪255.00</div>
+<div class="flex gap-1">
+<div class="w-4 h-2 bg-orange-500 border border-gray-300"></div>
+</div>
+</div>
+<div class="group flex flex-col">
+<div class="relative bg-card-light dark:bg-card-dark aspect-[4/5] mb-4 overflow-hidden">
+<img alt="Hybrid backpack black" class="w-full h-full object-cover mix-blend-multiply dark:mix-blend-normal group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDYQ5K6YZiXS5SI3FX2jVA4_4Ibm-kA4Ey78s8_6wGNU1w5Zi72du8d7CHn4jCxFgqrzI7s_F_0EPLqTdG0DyPBKmebpBQkI26AOSQpXNRVa6PlE-gOzdr-2Bzd_JwNOGaAPb2CXaSKAFvk3XJM9SxD-8yjX4yIKQ3hsU-ewNYt5klYl-tNivTTIRdIDVapZ3swnwNEMaRnQx1gGPwRaBJDDs1Wn5YW4SzrvUugnUGtD6ZWyBXQJcAz8K7MHq66NLKP52UFnzufwlR5"/>
+</div>
+<h3 class="font-medium text-lg mb-1 group-hover:text-gray-600 dark:group-hover:text-gray-300 transition-colors cursor-pointer">תיק גב היברידי</h3>
+<div class="text-sm text-gray-600 dark:text-gray-400 mb-2">₪268.00</div>
+<div class="flex gap-1">
+<div class="w-4 h-2 bg-black border border-gray-300"></div>
+<div class="w-4 h-2 bg-gray-500 border border-gray-300"></div>
+<div class="w-4 h-2 bg-green-900 border border-gray-300"></div>
+</div>
+</div>
+<div class="group flex flex-col">
+<div class="relative bg-card-light dark:bg-card-dark aspect-[4/5] mb-4 overflow-hidden">
+<img alt="Hybrid backpack v2" class="w-full h-full object-cover mix-blend-multiply dark:mix-blend-normal group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCOSBseIwsfYJemlIEN5Iae64mKfSkFxdLOMyr4achpbmxS9wXytz3uEg5f3A6DDUC6hoOStqLlYWd__C0exmNY5FFw1w2NjBxInF1sb-66Og2QY5pb-12BCaB-C7hKlb_FglMLb5jQKh9fMALkMRmBpbU9xakyo-XUrSOQ7KT7Hoss9LB-NGP7SbmX8liBuy2L21dX2dqFzWzMochiLlx3N1obh2TSwnX3-arESV6gNyKiHm7u2xAiUk4mUI-BaPyOHY0WZPUskGi0"/>
+</div>
+<h3 class="font-medium text-lg mb-1 group-hover:text-gray-600 dark:group-hover:text-gray-300 transition-colors cursor-pointer">תיק גב היברידי גרסה 2</h3>
+<div class="text-sm text-gray-600 dark:text-gray-400 mb-2">₪314.00</div>
+<div class="flex gap-1">
+<div class="w-4 h-2 bg-orange-500 border border-gray-300"></div>
+</div>
+</div>
+<div class="group flex flex-col">
+<div class="relative bg-card-light dark:bg-card-dark aspect-[4/5] mb-4 overflow-hidden">
+<img alt="Metro backpack green" class="w-full h-full object-cover mix-blend-multiply dark:mix-blend-normal group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJN_BgyzLMp9IoCed6Kf0BfinpO6xCjSF2bNCf3TMtTH6SiqKB9vc4_5InS6GHhwWdgSup-Kn77XslzJj7e2hWrJ4vDcCvbdSWTglibnbnXyYsCj_QlBqHVXau8NykuXwCTNqCrFjHDnrlmhI-I83sPuIWX78256_O_mgWiOBnE8tNT70nepzFhPImNgBxlYihQMxWNyIT7npPXTxvy-bncSCijK0uTpmrAZhP9M9zEtgBd22Sry3OnELanBuO3ftR9gyfqYIpPTvA"/>
+</div>
+<h3 class="font-medium text-lg mb-1 group-hover:text-gray-600 dark:group-hover:text-gray-300 transition-colors cursor-pointer">תיק מטרו</h3>
+<div class="text-sm text-gray-600 dark:text-gray-400 mb-2">₪360.00</div>
+<div class="flex gap-1">
+<div class="w-4 h-2 bg-gray-400 border border-gray-300"></div>
+<div class="w-4 h-2 bg-green-900 border border-gray-300"></div>
+<div class="w-4 h-2 bg-black border border-gray-300"></div>
+</div>
+</div>
+<div class="group flex flex-col">
+<div class="relative bg-card-light dark:bg-card-dark aspect-[4/5] mb-4 overflow-hidden">
+<img alt="Metro Backpack Pro grey" class="w-full h-full object-cover mix-blend-multiply dark:mix-blend-normal group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBsMy3uhMx5WJZL4ekvl4L50V9RZKfZ4oUbXmccHUbOUInNRrVKtpk95OC6VlV5O5AErk2KDvULIJr33QLB76eCT4SvWQ2moh6SBELYR7TtIy6jryXvqICfy8mPbi7EkIBlKeVMbpyJ8BsrIczJPZdXYJz_Ipaqu71iVMeJuBD_ZixEXoJ93WQOfV-cLLTt1SgBSnkFSbYNS5NBfTpa-xR5JtDHXrX4TxkfQ6EyHJZ6Syq-I48GhbufHQbE70WdJhhtHm15Zvr5oc0V"/>
+</div>
+<h3 class="font-medium text-lg mb-1 group-hover:text-gray-600 dark:group-hover:text-gray-300 transition-colors cursor-pointer">תיק מטרו פרו</h3>
+<div class="text-sm text-gray-600 dark:text-gray-400 mb-2">₪360.00</div>
+<div class="flex gap-1">
+<div class="w-4 h-2 bg-gray-500 border border-gray-300"></div>
+<div class="w-4 h-2 bg-black border border-gray-300"></div>
+<div class="w-4 h-2 bg-green-900 border border-gray-300"></div>
+</div>
+</div>
+<div class="group flex flex-col">
+<div class="relative bg-card-light dark:bg-card-dark aspect-[4/5] mb-4 overflow-hidden">
+<span class="absolute top-4 right-4 bg-white dark:bg-black/50 text-[10px] font-bold px-2 py-1 uppercase tracking-widest z-10">אזל מהמלאי</span>
+<img alt="Metro Backpack Pro v2 black" class="w-full h-full object-cover mix-blend-multiply dark:mix-blend-normal group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC2b2aSrByStQHYiPWDkMXYV-ikRvxUD1Jh2-LY1KxFYMU0EZ8jk4AyIGooy8qNiLFtFGk-kwd4-TF43FVURdMrooT1akJ549jyGozwH1TBpC0EPQGqKW975H8g5TCOZV4rrPOQg8EhoFIGyUwJusm39Pl7GdD3ZH6zoLJ3_FOrUwkSzAFwVlQMoHuy20nXOJCNCaBY6EEYfkOoZJCB7Oi9ampG5Wfw8Hl8h7FW8QnKBtvYkGHzelsVCEye9A6wzDHuNXY6N7Kp-BCN"/>
+</div>
+<h3 class="font-medium text-lg mb-1 group-hover:text-gray-600 dark:group-hover:text-gray-300 transition-colors cursor-pointer">תיק מטרו פרו גרסה 2</h3>
+<div class="text-sm text-gray-600 dark:text-gray-400 mb-2">₪268.00</div>
+<div class="flex gap-1">
+<div class="w-4 h-2 bg-black border border-gray-300"></div>
+</div>
+</div>
+<div class="group flex flex-col">
+<div class="relative bg-card-light dark:bg-card-dark aspect-[4/5] mb-4 overflow-hidden">
+<img alt="Metro Backpack v2 black" class="w-full h-full object-cover mix-blend-multiply dark:mix-blend-normal group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCW8k4MWE0SqKGakJ1uG63Nmf7FWTQXFrbsYPzVV-2Y8zOwzGzYGdt6fGwI71Fw5L8VYoxkDaca9Xtb8ZTQY1I4CS8DCByuizPiUhL9nZWQyydZBDjDNhBExUPCWb94b0VDidItFvCbwiAz74HbofPuQSkGcrZNVks5KJGTipcNJeC5NdoeF7H4O1th66OkvuZ8Zvywyf75rFD3sZgunyytNVHUqqS4kptH7co4P8hjG4W5Pa5nxGQFE1qAigqr886XFBZEnhxqefWo"/>
+</div>
+<h3 class="font-medium text-lg mb-1 group-hover:text-gray-600 dark:group-hover:text-gray-300 transition-colors cursor-pointer">תיק מטרו גרסה 2</h3>
+<div class="text-sm text-gray-600 dark:text-gray-400 mb-2">₪430.00</div>
+<div class="flex gap-1">
+<div class="w-4 h-2 bg-black border border-gray-300"></div>
+</div>
+</div>
+<div class="relative group col-span-1 lg:col-span-2 overflow-hidden bg-gray-100 dark:bg-gray-800">
+<img alt="Man with organized backpack" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbQ85NuF7L15bBc1WgRasoSBw4VpFZllXq0WPLPbae1pa4wjPZUIQzEXaTwN-ZFfqDycfSY-8fPELcw_aPekdEkCRnraUUitMPXeEyvcKybRgFGMybIHSyIN3q1ohDNyr8eu9E4mJuBFgrKwAnOVXI-G9e_K2CxSKMdnF5VnT5uDD6ZAxhpJym0yc32YxmNur5UFLW6Ikg1aAdBbEqxA05JpBwvGi5m1drtdU0pNJxTvLgvakDrZAgm6-f69f1cPZ_lMKO1WHyDB0Q"/>
+<div class="absolute inset-0 bg-black/20 flex flex-col justify-center items-center text-center p-6">
+<h2 class="text-white text-3xl md:text-4xl font-bold mb-4 uppercase tracking-wider drop-shadow-md max-w-lg">הישאר מאורגן בדרכים</h2>
+<button class="bg-white text-primary px-8 py-3 text-xs font-bold uppercase tracking-widest hover:bg-gray-100 transition-colors">קנה קולקציית יומם</button>
+</div>
+</div>
+<div class="group flex flex-col">
+<div class="relative bg-card-light dark:bg-card-dark aspect-[4/5] mb-4 overflow-hidden">
+<span class="absolute top-4 right-4 bg-red-600 text-white text-[10px] font-bold px-2 py-1 uppercase tracking-widest z-10">מבצע</span>
+<img alt="Navigator Backpack black" class="w-full h-full object-cover mix-blend-multiply dark:mix-blend-normal group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJSrTvpg8RY9462_lWgKXFWndec73uC4LvGkPX64WFCoHLCwI_lmybbLPShPr3-S6N6p0Snch5eBH6oFYgFivJ5k3mKHj1YyzdF7P1sRF7MITIHe03o5bGAZakUi1KxQ3tZHWVf-24YRs1ESQWixtEkXgKeoVA-9lnM90oGhuZD1LpPwaxtAs7QB_M_dTcZfu4oUOayoG_CcsA9dxBsb_SD3suDNrU5eE5-AP8gFPwyu783xNCqFGbhaNArGGm4kcFWBWkhY4GMt8O"/>
+</div>
+<h3 class="font-medium text-lg mb-1 group-hover:text-gray-600 dark:group-hover:text-gray-300 transition-colors cursor-pointer">תיק נווט</h3>
+<div class="text-sm text-gray-600 dark:text-gray-400 mb-2 flex items-center gap-2">
+<span class="text-red-600">₪268.00</span>
+<span class="line-through text-gray-400">₪400.00</span>
+</div>
+<div class="flex gap-1">
+<div class="w-4 h-2 bg-black border border-gray-300"></div>
+<div class="w-4 h-2 bg-gray-400 border border-gray-300"></div>
+</div>
+</div>
+<div class="group flex flex-col">
+<div class="relative bg-card-light dark:bg-card-dark aspect-[4/5] mb-4 overflow-hidden">
+<img alt="Navigator Backpack v2 black" class="w-full h-full object-cover mix-blend-multiply dark:mix-blend-normal group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDSrLQBRMul3wQX-QhnoOhIP8ag0bd6njKunjLZ8cDSha7KmYIA69v9MYcbEu4j-LuIWgA5R4VF82u7t23whXRLusBw705-ZJKFr_SbJZemcFYzt93h2C_tI3KMI-ZLhqSXNmxUbo73DdE7cg1_IfDCb9aBWtpYltTPxNiSx34QRVnF12uC_3gYm6_DqjpDCg_YnUKyv4vtYt51VdoawDqqLDES2aDsH36gOnYKY8EXNNkmBbBRhnTQCeN-jYdv-P5LitNHQ9j_zIy_"/>
+</div>
+<h3 class="font-medium text-lg mb-1 group-hover:text-gray-600 dark:group-hover:text-gray-300 transition-colors cursor-pointer">תיק נווט גרסה 2</h3>
+<div class="text-sm text-gray-600 dark:text-gray-400 mb-2">₪314.00</div>
+<div class="flex gap-1">
+<div class="w-4 h-2 bg-orange-500 border border-gray-300"></div>
+</div>
+</div>
+<div class="group flex flex-col">
+<div class="relative bg-card-light dark:bg-card-dark aspect-[4/5] mb-4 overflow-hidden">
+<img alt="Performance Backpack grey" class="w-full h-full object-cover mix-blend-multiply dark:mix-blend-normal group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZA5df2btAw_f82qmFM_aBN7NkAci2oNxRxnKnYx7mJT0TofakGx47kpTs4xwsZ0q3HL2RhtH0gsBiTgFpsACwFFcjA4PH2zoWt-uhxi37_MPl5C14rDZulGT-Zsp_aiezkMpIrRAzQyFOAtHrQFC8sF_EuOi_TG08TJ-Tdyo081l6XpGx00pL0MMOkHlB7262uBRpJUuxUXkDDnevPPIJu14p3-H8R_Yn3pld7phge9vG9t9H3SGdMWUgh6Tj_QVz40H_H-ek6oXO"/>
+</div>
+<h3 class="font-medium text-lg mb-1 group-hover:text-gray-600 dark:group-hover:text-gray-300 transition-colors cursor-pointer">תיק ביצועים</h3>
+<div class="text-sm text-gray-600 dark:text-gray-400 mb-2">₪223.00</div>
+<div class="flex gap-1">
+<div class="w-4 h-2 bg-gray-400 border border-gray-300"></div>
+<div class="w-4 h-2 bg-black border border-gray-300"></div>
+<div class="w-4 h-2 bg-green-900 border border-gray-300"></div>
+</div>
+</div>
+</div>
+<div class="mt-16 text-center">
+<button class="px-8 py-3 border border-black dark:border-white text-sm font-bold hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors uppercase tracking-widest">טען עוד</button>
+</div>
+</main>
+</div>
+</div>
+
+</body></html>

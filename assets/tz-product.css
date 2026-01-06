@@ -1394,20 +1394,6 @@ product-info,
 }
 
 /* Dark mode service icon text */
-
-  color: rgba(237, 237, 237, 0.7);
-
-/* Dark mode service icon text */
-
-  border-top-color: #333333;
-
-/* Dark mode service icon text */
-
-}
-
-/* Dark mode service icon text */
-
-
 .dark .tz-product-service-icon-wrapper {
   background-color: rgba(30, 30, 30, 0.8);
 }
