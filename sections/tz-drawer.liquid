@@ -34,22 +34,37 @@
               </div>
               <div class="item-variant">{{ item.variant.title }}</div>
               <div class="qty-selector">
-                <a
-                  href="/cart/change?line={{ forloop.index }}&quantity={{ item.quantity | minus: 1 }}"
-                  class="qty-btn"
-                  >&minus;</a
+                <button
+                  type="button"
+                  class="qty-btn qty-btn-minus"
+                  data-line="{{ forloop.index }}"
+                  data-quantity="{{ item.quantity | minus: 1 }}"
+                  aria-label="Decrease quantity"
                 >
+                  &minus;
+                </button>
                 <div class="qty-val">{{ item.quantity }}</div>
-                <a
-                  href="/cart/change?line={{ forloop.index }}&quantity={{ item.quantity | plus: 1 }}"
-                  class="qty-btn"
-                  >&plus;</a
+                <button
+                  type="button"
+                  class="qty-btn qty-btn-plus"
+                  data-line="{{ forloop.index }}"
+                  data-quantity="{{ item.quantity | plus: 1 }}"
+                  aria-label="Increase quantity"
                 >
+                  &plus;
+                </button>
               </div>
             </div>
             <div class="item-price-col">
               <div class="item-price">{{ item.final_line_price | money }}</div>
-              <a href="/cart/change?line={{ forloop.index }}&quantity=0" class="item-remove">הסר</a>
+              <button
+                type="button"
+                class="item-remove"
+                data-line="{{ forloop.index }}"
+                aria-label="Remove item"
+              >
+                הסר
+              </button>
             </div>
           </div>
         {% endfor %}
