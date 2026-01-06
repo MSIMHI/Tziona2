@@ -62,6 +62,15 @@
   <div class="tz-section__inner {{ section.settings.section_width | default: 'page-width' }}">
     <div class="tz-section__content">
       <div class="header-inner">
+        <!-- MOBILE MENU BUTTON -->
+        <button class="mobile-menu-toggle" aria-label="Menu" aria-expanded="false">
+          <span class="hamburger-icon">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+        </button>
+
         <!-- MAIN NAV -->
         <nav class="nav-links uppercase">
           {% for link in linklists[section.settings.menu].links %}
@@ -77,8 +86,8 @@
 
           {% if section.settings.show_sale %}
             <a href="{{ section.settings.sale_link }}" class="sale-text">
-              {{ section.settings.sale_text }}
-              <span class="sale-badge">{{ section.settings.sale_badge }}</span>
+              {{ 'general.header.sale_text' | t | default: section.settings.sale_text }}
+              <span class="sale-badge">{{ 'general.header.sale_badge' | t | default: section.settings.sale_badge }}</span>
             </a>
           {% endif %}
         </nav>
@@ -131,6 +140,32 @@
       <!-- Pass the index number to the snippet so the ID matches the link -->
       {% render 'tz-mega-menu', link: link, blocks: section.blocks, index: forloop.index %}
     {% endfor %}
+  </div>
+
+  <!-- MOBILE MENU OVERLAY -->
+  <div class="mobile-menu-overlay"></div>
+  
+  <!-- MOBILE MENU DRAWER -->
+  <div class="mobile-menu-drawer" id="mobile-menu-drawer">
+    <div class="mobile-menu-content">
+      <div class="mobile-menu-header">
+        <span class="mobile-menu-title">{{ 'sections.header.menu' | t | default: 'Menu' }}</span>
+        <button class="mobile-menu-close" aria-label="Close menu">
+          <span class="material-icons-outlined">close</span>
+        </button>
+      </div>
+      <nav class="mobile-menu-nav">
+        {% for link in linklists[section.settings.menu].links %}
+          <a href="{{ link.url }}" class="mobile-menu-link">{{ link.title }}</a>
+        {% endfor %}
+        {% if section.settings.show_sale %}
+          <a href="{{ section.settings.sale_link }}" class="mobile-menu-link mobile-menu-sale">
+            {{ 'general.header.sale_text' | t | default: section.settings.sale_text }}
+            <span class="sale-badge">{{ 'general.header.sale_badge' | t | default: section.settings.sale_badge }}</span>
+          </a>
+        {% endif %}
+      </nav>
+    </div>
   </div>
 </section>
 
