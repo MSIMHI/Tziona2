@@ -1,0 +1,183 @@
+/* TZ Collage Section Styles */
+.tz-collage-section {
+    padding-top: var(--tz-pt, 36px);
+    padding-bottom: var(--tz-pb, 36px);
+}
+
+.tz-collage-container {
+    max-width: var(--page-width, 1200px);
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+.tz-collage-title {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.tz-collage-grid {
+    display: grid;
+    gap: 1rem;
+}
+
+/* Desktop layout: Left Large (1/3 1/3 2/3) */
+@media screen and (min-width: 750px) {
+    .tz-collage-grid {
+        grid-template-columns: repeat(3, 1fr);
+        grid-auto-rows: minmax(300px, auto);
+    }
+
+    .tz-collage-grid--left .tz-collage-item:nth-child(1) {
+        grid-column: span 2;
+        grid-row: span 2;
+    }
+
+    .tz-collage-grid--right .tz-collage-item:nth-child(3) {
+        grid-column: span 2;
+        grid-row: span 2;
+    }
+}
+
+/* Mobile Layout: Column */
+@media screen and (max-width: 749px) {
+    .tz-collage-grid--column {
+        grid-template-columns: 1fr;
+    }
+    
+    .tz-collage-grid--collage {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .tz-collage-grid--collage .tz-collage-item:first-child {
+        grid-column: span 2;
+    }
+}
+
+.tz-collage-item {
+    position: relative;
+    overflow: hidden;
+    background-color: #f3f3f3;
+}
+
+.tz-collage-card {
+    height: 100%;
+    width: 100%;
+    display: block;
+    position: relative;
+}
+
+.tz-collage-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.tz-collage-item:hover img {
+    transform: scale(1.05);
+}
+
+.tz-collage-video-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255, 255, 255, 0.8);
+    border: none;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 2;
+    transition: background 0.3s;
+}
+
+.tz-collage-video-btn:hover {
+    background: #fff;
+}
+
+.tz-collage-video-btn .material-icons-outlined {
+    font-size: 32px;
+    color: #000;
+}
+
+/* Video Modal */
+.tz-video-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 11000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.tz-video-modal.is-active {
+    display: flex;
+}
+
+.tz-video-modal-content {
+    width: 90%;
+    max-width: 1000px;
+    aspect-ratio: 16/9;
+    position: relative;
+}
+
+.tz-video-modal-content iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.tz-video-modal-close {
+    position: absolute;
+    top: -40px;
+    right: 0;
+    background: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.tz-collage-card-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 1.5rem;
+    background: linear-gradient(transparent, rgba(0,0,0,0.8));
+    color: #fff;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.tz-collage-card-info h3 {
+    margin: 0;
+    color: #fff;
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.tz-collage-card-info p {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.full-unstyled-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    height: 100%;
+}
