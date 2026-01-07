@@ -1,41 +1,45 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // Mobile Menu Toggle
-  const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
-  const mobileMenuDrawer = document.getElementById('mobile-menu-drawer');
-  const mobileMenuOverlay = document.querySelector('.mobile-menu-overlay');
-  const mobileMenuClose = document.querySelector('.mobile-menu-close');
-  
-  if (mobileMenuToggle && mobileMenuDrawer) {
-    mobileMenuToggle.addEventListener('click', () => {
-      const isOpen = mobileMenuToggle.getAttribute('aria-expanded') === 'true';
-      mobileMenuToggle.setAttribute('aria-expanded', !isOpen);
-      mobileMenuDrawer.classList.toggle('is-open');
-      if (mobileMenuOverlay) {
-        mobileMenuOverlay.classList.toggle('is-visible');
-      }
-      document.body.style.overflow = isOpen ? '' : 'hidden';
-    });
+  // Mobile Menu Toggle logic
+  const initMobileMenu = () => {
+    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+    const mobileMenuDrawer = document.getElementById('mobile-menu-drawer');
+    const mobileMenuOverlay = document.querySelector('.mobile-menu-overlay');
+    const mobileMenuClose = document.querySelector('.mobile-menu-close');
     
-    if (mobileMenuClose) {
-      mobileMenuClose.addEventListener('click', () => {
-        mobileMenuToggle.setAttribute('aria-expanded', 'false');
-        mobileMenuDrawer.classList.remove('is-open');
+    if (mobileMenuToggle && mobileMenuDrawer) {
+      const toggleMenu = (forceClose = false) => {
+        const isOpen = forceClose ? true : mobileMenuToggle.getAttribute('aria-expanded') === 'true';
+        const newState = !isOpen;
+        
+        mobileMenuToggle.setAttribute('aria-expanded', newState ? 'true' : 'false');
+        mobileMenuDrawer.classList.toggle('is-open', newState);
         if (mobileMenuOverlay) {
-          mobileMenuOverlay.classList.remove('is-visible');
+          mobileMenuOverlay.classList.toggle('is-visible', newState);
         }
-        document.body.style.overflow = '';
+        document.body.style.overflow = newState ? 'hidden' : '';
+      };
+
+      mobileMenuToggle.addEventListener('click', (e) => {
+        e.preventDefault();
+        toggleMenu();
       });
+      
+      if (mobileMenuClose) {
+        mobileMenuClose.addEventListener('click', (e) => {
+          e.preventDefault();
+          toggleMenu(true);
+        });
+      }
+      
+      if (mobileMenuOverlay) {
+        mobileMenuOverlay.addEventListener('click', () => {
+          toggleMenu(true);
+        });
+      }
     }
-    
-    if (mobileMenuOverlay) {
-      mobileMenuOverlay.addEventListener('click', () => {
-        mobileMenuToggle.setAttribute('aria-expanded', 'false');
-        mobileMenuDrawer.classList.remove('is-open');
-        mobileMenuOverlay.classList.remove('is-visible');
-        document.body.style.overflow = '';
-      });
-    }
-  }
+  };
+
+  initMobileMenu();
 
   // Select cart button (looking for the specific SVG pattern or a data-attribute if added)
   const cartBtns = document.querySelectorAll('.icon-btn');

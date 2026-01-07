@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
     {{ content_for_header }}
     {{ 'tziona.css' | asset_url | stylesheet_tag }}
-    {{ 'tziona.js' | asset_url | script_tag }}
+    <script src="{{ 'tziona.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'global.js' | asset_url }}" defer="defer"></script>
 </head>
 <body class="template-{{ template.name }}">
