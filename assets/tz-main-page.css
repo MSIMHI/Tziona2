@@ -1,0 +1,36 @@
+.tz-page-section {
+  padding-top: var(--tz-pt, 36px);
+  padding-bottom: var(--tz-pb, 36px);
+}
+
+.tz-page-container {
+  max-width: 800px; /* Equivalent to page-width--narrow */
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.tz-page-title {
+  font-size: 2.5rem;
+  font-weight: 300;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.tz-page-content {
+  line-height: 1.6;
+  color: #1a1a1a;
+}
+
+.tz-page-content img {
+  max-width: 100%;
+  height: auto;
+}
+
+.tz-page-content a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+[dir="rtl"] .tz-page-title {
+  text-align: center;
+}

@@ -283,13 +283,13 @@
     },
     "contact": {
       "form": {
-        "title": "Contact form",
-        "name": "Name",
-        "email": "Email",
-        "phone": "Phone number",
-        "comment": "Comment",
-        "send": "Send",
-        "post_success": "Thanks for contacting us. We'll get back to you as soon as possible.",
+        "title": "צור קשר",
+        "name": "שם",
+        "email": "אימייל",
+        "phone": "מספר טלפון",
+        "comment": "הודעה",
+        "send": "שלח",
+        "post_success": "תודה שיצרת איתנו קשר. נחזור אליך בהקדם האפשרי.",
         "error_heading": "אנא תקנו את הפרטים הבאים:"
       }
     },

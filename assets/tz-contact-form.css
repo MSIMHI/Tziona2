@@ -1,0 +1,138 @@
+.tz-contact-section {
+  padding: var(--tz-pt, 36px) 1.5rem var(--tz-pb, 36px);
+}
+
+.tz-contact-container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.tz-contact-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.tz-contact-title {
+  font-weight: 300;
+  margin: 0 0 0.5rem 0;
+}
+
+.tz-contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.tz-contact-fields-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media screen and (min-width: 750px) {
+  .tz-contact-fields-row {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.tz-form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.tz-form-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #000;
+}
+
+.tz-form-input,
+.tz-form-textarea {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid #d1d5db;
+  color: #111827;
+  background-color: #fff;
+  font-size: 0.875rem;
+  transition: border-color 0.2s;
+}
+
+.tz-form-input:focus,
+.tz-form-textarea:focus {
+  outline: none;
+  border-color: #000;
+}
+
+.tz-form-textarea {
+  min-height: 150px;
+  resize: vertical;
+}
+
+.tz-submit-btn {
+  width: 100%;
+  background-color: #facc15;
+  color: #000;
+  font-weight: 500;
+  padding: 0.875rem;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 1rem;
+}
+
+.tz-submit-btn:hover {
+  background-color: #eab308;
+}
+
+/* Status Messages */
+.tz-form-success {
+  background-color: #ecfdf5;
+  border: 1px solid #10b981;
+  color: #065f46;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  font-size: 0.875rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.tz-form-error {
+  background-color: #fef2f2;
+  border: 1px solid #ef4444;
+  color: #991b1b;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  font-size: 0.875rem;
+}
+
+.tz-form-error-title {
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.tz-form-error ul {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+.tz-form-error li {
+  margin-bottom: 0.25rem;
+}
+
+.tz-form-error a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+/* RTL Support */
+[dir="rtl"] .tz-form-error ul {
+  padding-left: 0;
+  padding-right: 1.25rem;
+}
