@@ -1171,7 +1171,7 @@ html.dark .tz-section.tz-header {
         max-width: 400px;
         height: 100vh;
         background: var(--tz-bg, #fff);
-        z-index: 9999;
+        z-index: 10001;
         transition: left 0.3s ease;
         overflow-y: auto;
         box-shadow: 5px 0 25px rgba(0,0,0,0.1);
@@ -1211,7 +1211,7 @@ html.dark .tz-section.tz-header {
         opacity: 0;
         visibility: hidden;
         transition: opacity 0.3s ease, visibility 0.3s ease;
-        z-index: 9998;
+        z-index: 10000;
     }
     
     .mobile-menu-overlay.is-visible {

@@ -36,11 +36,14 @@
     {% endcase %};
   }
 
+  #shopify-section-{{ section.id }} {
+    position: {% if section.settings.sticky %}sticky{% else %}relative{% endif %};
+    top: 0;
+    z-index: {% if section.settings.sticky %}9999{% else %}auto{% endif %};
+  }
+
   {% if section.settings.sticky %}
   #shopify-section-{{ section.id }}{
-    position: sticky;
-    top: 0;
-    z-index: 9999;
     background: color-mix(in srgb, var(--tz-bg) calc(var(--tz-bg-opacity) * 100%), transparent);
     backdrop-filter: var(--tz-blur);
   }
@@ -139,32 +142,6 @@
       <!-- Pass the index number to the snippet so the ID matches the link -->
       {% render 'tz-mega-menu', link: link, blocks: section.blocks, index: forloop.index %}
     {% endfor %}
-  </div>
-
-  <!-- MOBILE MENU OVERLAY -->
-  <div class="mobile-menu-overlay"></div>
-  
-  <!-- MOBILE MENU DRAWER -->
-  <div class="mobile-menu-drawer" id="mobile-menu-drawer">
-    <div class="mobile-menu-content">
-      <div class="mobile-menu-header">
-        <span class="mobile-menu-title">{{ 'sections.header.menu' | t | default: 'Menu' }}</span>
-        <button class="mobile-menu-close" aria-label="Close menu">
-          <span class="material-icons-outlined">close</span>
-        </button>
-      </div>
-      <nav class="mobile-menu-nav">
-        {% for link in linklists[section.settings.menu].links %}
-          <a href="{{ link.url }}" class="mobile-menu-link">{{ link.title }}</a>
-        {% endfor %}
-        {% if section.settings.show_sale %}
-          <a href="{{ section.settings.sale_link }}" class="mobile-menu-link mobile-menu-sale">
-            {{ 'general.header.sale_text' | t | default: section.settings.sale_text }}
-            <span class="sale-badge">{{ 'general.header.sale_badge' | t | default: section.settings.sale_badge }}</span>
-          </a>
-        {% endif %}
-      </nav>
-    </div>
   </div>
 </section>
 

@@ -91,15 +91,78 @@
   </div>
 </div>
 
+<!-- MOBILE MENU OVERLAY -->
+<div class="mobile-menu-overlay"></div>
+
+<!-- MOBILE MENU DRAWER -->
+<div class="mobile-menu-drawer" id="mobile-menu-drawer">
+  <div class="mobile-menu-content">
+    <div class="mobile-menu-header">
+      <span class="mobile-menu-title">{{ 'sections.header.menu' | t | default: 'Menu' }}</span>
+      <button class="mobile-menu-close" aria-label="Close menu">
+        <span class="material-icons-outlined">close</span>
+      </button>
+    </div>
+    <nav class="mobile-menu-nav">
+      {% for link in linklists[section.settings.mobile_menu].links %}
+        <a href="{{ link.url }}" class="mobile-menu-link">{{ link.title }}</a>
+      {% endfor %}
+      {% if section.settings.show_sale %}
+        <a href="{{ section.settings.sale_link }}" class="mobile-menu-link mobile-menu-sale">
+          {{ 'general.header.sale_text' | t | default: section.settings.sale_text }}
+          <span class="sale-badge">{{ 'general.header.sale_badge' | t | default: section.settings.sale_badge }}</span>
+        </a>
+      {% endif %}
+    </nav>
+  </div>
+</div>
+
 {% schema %}
 {
-  "name": "TZ Cart Drawer",
+  "name": "TZ Cart & Menu Drawer",
   "settings": [
+    {
+      "type": "header",
+      "content": "Cart Settings"
+    },
     {
       "type": "text",
       "id": "promo_text",
       "label": "Promo Bar Text",
       "default": "לקוחות חדשים חוסכים 10% עם קוד WELCOME10"
+    },
+    {
+      "type": "header",
+      "content": "Mobile Menu Settings"
+    },
+    {
+      "type": "link_list",
+      "id": "mobile_menu",
+      "label": "Mobile Menu",
+      "default": "main-menu"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_sale",
+      "label": "Show Sale Link",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "sale_text",
+      "label": "Sale Text",
+      "default": "במבצע עכשיו"
+    },
+    {
+      "type": "text",
+      "id": "sale_badge",
+      "label": "Sale Badge",
+      "default": "30% OFF"
+    },
+    {
+      "type": "url",
+      "id": "sale_link",
+      "label": "Sale Link"
     }
   ]
 }
