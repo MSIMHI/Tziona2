@@ -1,0 +1,176 @@
+.tz-account-section {
+  padding-top: var(--tz-pt, 3rem);
+  padding-bottom: var(--tz-pb, 3rem);
+  background-color: #fff;
+}
+
+.tz-account-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.tz-account-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2.5rem;
+  border-bottom: 1px solid #e5e7eb;
+  padding-bottom: 1.5rem;
+}
+
+.tz-account-title {
+  font-size: 2rem;
+  font-weight: 300;
+  margin: 0;
+}
+
+.tz-logout-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #4b5563;
+  text-decoration: none;
+  font-size: 0.875rem;
+  transition: color 0.2s;
+}
+
+.tz-logout-link:hover {
+  color: #000;
+}
+
+.tz-logout-link svg {
+  width: 20px;
+  height: 20px;
+}
+
+.tz-account-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+}
+
+@media screen and (min-width: 769px) {
+  .tz-account-grid {
+    grid-template-columns: 2fr 1fr;
+  }
+}
+
+.tz-account-heading {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Orders Table */
+.tz-orders-table-wrapper {
+  overflow-x: auto;
+}
+
+.tz-orders-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: right;
+}
+
+[dir="ltr"] .tz-orders-table {
+  text-align: left;
+}
+
+.tz-orders-table th {
+  padding: 1rem;
+  border-bottom: 2px solid #f3f4f6;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #6b7280;
+  text-transform: uppercase;
+}
+
+.tz-orders-table td {
+  padding: 1rem;
+  border-bottom: 1px solid #f3f4f6;
+  font-size: 0.875rem;
+}
+
+.tz-order-link {
+  color: #000;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.tz-order-link:hover {
+  color: #4b5563;
+}
+
+/* Pagination */
+.tz-pagination {
+  margin-top: 2rem;
+}
+
+.tz-pagination-list {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+  gap: 0.5rem;
+}
+
+.tz-pagination-item {
+  display: flex;
+}
+
+.tz-pagination-link,
+.tz-pagination-current {
+  padding: 0.5rem 1rem;
+  border: 1px solid #e5e7eb;
+  text-decoration: none;
+  color: #000;
+  font-size: 0.875rem;
+}
+
+.tz-pagination-current {
+  background-color: #000;
+  color: #fff;
+  border-color: #000;
+}
+
+.tz-pagination-link:hover:not(.tz-pagination-current) {
+  background-color: #f3f4f6;
+}
+
+/* Account Details */
+.tz-account-details-card {
+  background-color: #f9fafb;
+  padding: 1.5rem;
+  border: 1px solid #e5e7eb;
+}
+
+.tz-account-address {
+  font-style: normal;
+  line-height: 1.6;
+  font-size: 0.875rem;
+  margin-bottom: 1.5rem;
+  color: #4b5563;
+}
+
+.tz-view-addresses-link {
+  display: inline-block;
+  color: #000;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.tz-view-addresses-link:hover {
+  color: #4b5563;
+}
+
+/* Empty State */
+.tz-empty-state {
+  text-align: center;
+  padding: 3rem 0;
+  color: #6b7280;
+}

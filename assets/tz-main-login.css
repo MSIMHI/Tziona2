@@ -1,0 +1,166 @@
+.tz-login-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 200px);
+  padding: 3rem 1.5rem;
+}
+
+.tz-login-container {
+  width: 100%;
+  max-width: 448px; /* max-w-md */
+}
+
+.tz-login-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.tz-login-title {
+  font-size: 1.875rem; /* text-3xl */
+  font-weight: 300; /* font-light */
+  margin-bottom: 0.5rem;
+}
+
+.tz-login-subtitle {
+  color: #4b5563; /* text-gray-600 */
+  font-size: 0.875rem; /* text-sm */
+}
+
+.tz-login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem; /* space-y-6 */
+}
+
+.tz-form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.tz-form-label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #000;
+}
+
+.tz-form-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid #d1d5db; /* border-gray-300 */
+  color: #111827; /* text-gray-900 */
+  background-color: #fff;
+  transition: border-color 0.2s;
+}
+
+.tz-form-input::placeholder {
+  color: #6b7280; /* placeholder-gray-500 */
+}
+
+.tz-form-input:focus {
+  outline: none;
+  border-color: #000;
+}
+
+.tz-form-options {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.875rem;
+}
+
+.tz-checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.tz-form-link {
+  color: #000;
+  text-decoration: none;
+}
+
+.tz-form-link:hover {
+  text-decoration: underline;
+}
+
+.tz-submit-btn {
+  width: 100%;
+  background-color: #facc15; /* bg-yellow-400 */
+  color: #000;
+  font-weight: 500;
+  padding: 0.75rem;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin-top: 2rem;
+}
+
+.tz-submit-btn:hover {
+  background-color: #eab308; /* bg-yellow-500 */
+}
+
+.tz-login-divider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.tz-divider-line {
+  flex: 1;
+  height: 1px;
+  background-color: #e5e7eb; /* bg-gray-200 */
+}
+
+.tz-divider-text {
+  color: #4b5563;
+  font-size: 0.875rem;
+}
+
+.tz-register-prompt {
+  text-align: center;
+  font-size: 0.875rem;
+  color: #4b5563;
+}
+
+.tz-register-link {
+  color: #000;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.tz-register-link:hover {
+  text-decoration: underline;
+}
+
+/* Recover Password Section */
+#recover:target ~ #login-form-container,
+#recover:target ~ .tz-login-header {
+  display: none;
+}
+
+#recover-form-container {
+  display: none;
+}
+
+#recover:target ~ #recover-form-container {
+  display: block;
+}
+
+/* Error messages */
+.tz-form-error {
+  color: #dc2626;
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+}
+
+.tz-form-success {
+  color: #059669;
+  font-size: 0.875rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}

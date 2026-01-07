@@ -1,0 +1,250 @@
+.tz-addresses-section {
+  padding: var(--tz-pt, 36px) 1.5rem var(--tz-pb, 36px);
+}
+
+.tz-addresses-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.tz-addresses-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.tz-addresses-title {
+  font-size: 1.875rem;
+  font-weight: 300;
+  margin: 0;
+}
+
+.tz-return-link {
+  color: #4b5563;
+  font-size: 0.875rem;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.tz-return-link:hover {
+  text-decoration: underline;
+}
+
+.tz-add-address-btn {
+  background-color: #facc15;
+  color: #000;
+  font-weight: 500;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin-bottom: 2rem;
+  display: block;
+}
+
+.tz-add-address-btn:hover {
+  background-color: #eab308;
+}
+
+/* Address List */
+.tz-address-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.tz-address-card {
+  border: 1px solid #e5e7eb;
+  padding: 1.5rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.tz-address-default-badge {
+  display: inline-block;
+  background-color: #000;
+  color: #fff;
+  font-size: 0.75rem;
+  padding: 0.25rem 0.5rem;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  width: fit-content;
+}
+
+.tz-address-details {
+  font-style: normal;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: #4b5563;
+  margin-bottom: 1.5rem;
+  flex-grow: 1;
+}
+
+.tz-address-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: auto;
+}
+
+.tz-address-btn {
+  background: none;
+  border: 1px solid #d1d5db;
+  padding: 0.5rem 1rem;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.tz-address-btn:hover {
+  border-color: #000;
+  background-color: #f9fafb;
+}
+
+.tz-address-btn--delete {
+  color: #dc2626;
+  border-color: #fecaca;
+}
+
+.tz-address-btn--delete:hover {
+  background-color: #fef2f2;
+  border-color: #dc2626;
+}
+
+/* Forms (Add & Edit) */
+.tz-address-form-container {
+  display: none;
+  border: 1px solid #e5e7eb;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  background-color: #fff;
+}
+
+.tz-address-form-container.is-open {
+  display: block;
+}
+
+.tz-address-form-title {
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+}
+
+.tz-address-form {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+@media screen and (min-width: 640px) {
+  .tz-address-form {
+    grid-template-columns: 1fr 1fr;
+  }
+  .tz-form-full {
+    grid-column: span 2;
+  }
+}
+
+.tz-form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.tz-form-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #000;
+}
+
+.tz-form-input, .tz-form-select {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid #d1d5db;
+  color: #111827;
+  background-color: #fff;
+  font-size: 0.875rem;
+}
+
+.tz-form-input:focus, .tz-form-select:focus {
+  outline: none;
+  border-color: #000;
+}
+
+.tz-form-checkbox-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  margin: 1rem 0;
+}
+
+.tz-form-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.tz-submit-btn {
+  background-color: #000;
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.tz-cancel-btn {
+  background-color: transparent;
+  color: #4b5563;
+  padding: 0.75rem 1.5rem;
+  border: 1px solid #d1d5db;
+  cursor: pointer;
+}
+
+.tz-cancel-btn:hover {
+  border-color: #000;
+  color: #000;
+}
+
+/* Pagination */
+.tz-pagination {
+  margin-top: 3rem;
+  display: flex;
+  justify-content: center;
+}
+
+.tz-pagination-list {
+  display: flex;
+  list-style: none;
+  gap: 0.5rem;
+  padding: 0;
+}
+
+.tz-pagination-link, .tz-pagination-current {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid #e5e7eb;
+  text-decoration: none;
+  color: #000;
+  font-size: 0.875rem;
+}
+
+.tz-pagination-current {
+  background-color: #000;
+  color: #fff;
+  border-color: #000;
+}
+
+.tz-pagination-link:hover {
+  border-color: #000;
+}

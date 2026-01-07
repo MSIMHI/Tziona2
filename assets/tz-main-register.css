@@ -1,0 +1,178 @@
+.tz-register-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 200px);
+  padding: 3rem 1.5rem;
+}
+
+.tz-register-container {
+  width: 100%;
+  max-width: 448px; /* max-w-md */
+}
+
+.tz-register-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.tz-register-title {
+  font-size: 1.875rem; /* text-3xl */
+  font-weight: 300; /* font-light */
+  margin-bottom: 0.5rem;
+}
+
+.tz-register-subtitle {
+  color: #4b5563; /* text-gray-600 */
+  font-size: 0.875rem; /* text-sm */
+}
+
+.tz-register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem; /* space-y-5 */
+}
+
+.tz-form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.tz-form-label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #000;
+}
+
+.tz-form-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid #d1d5db; /* border-gray-300 */
+  color: #111827; /* text-gray-900 */
+  background-color: #fff;
+  transition: border-color 0.2s;
+}
+
+.tz-form-input::placeholder {
+  color: #6b7280; /* placeholder-gray-500 */
+}
+
+.tz-form-input:focus {
+  outline: none;
+  border-color: #000;
+}
+
+.tz-form-hint {
+  font-size: 0.75rem; /* text-xs */
+  color: #6b7280; /* text-gray-500 */
+  margin-top: 0.25rem;
+}
+
+.tz-form-checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 0.5rem 0;
+}
+
+.tz-checkbox-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.tz-checkbox {
+  width: 1rem;
+  height: 1rem;
+  margin-top: 0.25rem;
+}
+
+.tz-checkbox-text {
+  font-size: 0.875rem;
+  color: #374151; /* text-gray-700 */
+}
+
+.tz-checkbox-text a {
+  color: #000;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.tz-checkbox-text a:hover {
+  text-decoration: underline;
+}
+
+.tz-submit-btn {
+  width: 100%;
+  background-color: #facc15; /* bg-yellow-400 */
+  color: #000;
+  font-weight: 500;
+  padding: 0.75rem;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin-top: 1.5rem;
+}
+
+.tz-submit-btn:hover {
+  background-color: #eab308; /* bg-yellow-500 */
+}
+
+.tz-register-divider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.tz-divider-line {
+  flex: 1;
+  height: 1px;
+  background-color: #e5e7eb; /* bg-gray-200 */
+}
+
+.tz-divider-text {
+  color: #4b5563;
+  font-size: 0.875rem;
+}
+
+.tz-login-prompt {
+  text-align: center;
+  font-size: 0.875rem;
+  color: #4b5563;
+}
+
+.tz-login-link {
+  color: #000;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.tz-login-link:hover {
+  text-decoration: underline;
+}
+
+/* Error messages */
+.tz-form-error {
+  color: #dc2626;
+  font-size: 0.875rem;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  background-color: #fef2f2;
+  border: 1px solid #fee2e2;
+}
+
+.tz-form-error ul {
+  margin: 0.5rem 0 0 1.25rem;
+  padding: 0;
+}
+
+.tz-form-error-title {
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
