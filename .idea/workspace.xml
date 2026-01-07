@@ -4,18 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="261e89e2-f91d-4885-a699-11b8f855e509" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/register.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/layout/theme.liquid" beforeDir="false" afterPath="$PROJECT_DIR$/layout/theme.liquid" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locales/en.default.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/locales/en.default.schema.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/locales/he.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sections/main-account.liquid" beforeDir="false" afterPath="$PROJECT_DIR$/sections/main-account.liquid" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sections/main-addresses.liquid" beforeDir="false" afterPath="$PROJECT_DIR$/sections/main-addresses.liquid" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sections/main-login.liquid" beforeDir="false" afterPath="$PROJECT_DIR$/sections/main-login.liquid" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sections/main-register.liquid" beforeDir="false" afterPath="$PROJECT_DIR$/sections/main-register.liquid" afterDir="false" />
-    </list>
+    <list default="true" id="261e89e2-f91d-4885-a699-11b8f855e509" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -79,7 +68,7 @@
       <option name="presentableId" value="Default" />
       <updated>1767638897530</updated>
       <workItem from="1767638902769" duration="3693000" />
-      <workItem from="1767777475363" duration="17207000" />
+      <workItem from="1767777475363" duration="17508000" />
     </task>
     <servers />
   </component>
