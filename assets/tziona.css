@@ -1028,7 +1028,6 @@ html.dark .tz-section.tz-header {
 /* Width Variants */
 .tz-section__inner.page-width {
     max-width: var(--page-width, 1200px);
-    padding: 0 40px;
 }
 
 .tz-section__inner.full-width {
@@ -1168,7 +1167,7 @@ html.dark .tz-section.tz-header {
         top: 0;
         left: -100%;
         width: 100%;
-        max-width: 400px;
+        max-width: 410px;
         height: 100vh;
         background: var(--tz-bg, #fff);
         z-index: 10001;
@@ -1193,9 +1192,6 @@ html.dark .tz-section.tz-header {
         right: 0;
     }
 
-    [dir="rtl"] .mobile-menu-header {
-        flex-direction: row-reverse;
-    }
 
     [dir="rtl"] .mobile-menu-nav {
         align-items: flex-end;
@@ -1235,12 +1231,18 @@ html.dark .tz-section.tz-header {
         margin-bottom: 1.5rem;
     }
     
-    .mobile-menu-title {
-        font-size: 1.25rem;
-        font-weight: 700;
-        color: var(--tz-text);
+    
+    .mobile-menu-logo {
+        display: flex;
+        align-items: center;
     }
     
+    .mobile-menu-logo img {
+        height: 20px;
+        width: auto;
+        display: block;
+    }
+
     .mobile-menu-close {
         background: none;
         border: none;
@@ -1263,15 +1265,14 @@ html.dark .tz-section.tz-header {
     }
     
     .mobile-menu-link {
-        padding: 1rem;
+        padding: 1rem 1.5rem;
         font-size: 1rem;
         font-weight: 500;
         color: var(--tz-text);
         text-decoration: none;
         border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
+        display: block;
+        width: 100%;
         text-align: left;
     }
 
@@ -1316,6 +1317,13 @@ html.dark .tz-section.tz-header {
     [data-tz-component="header"] .logo img {
         height: 18px;
         max-width: 120px;
+    }
+    
+    /* Hide header logo on mobile (small screens only) since it's now in the drawer */
+    @media (max-width: 411px) {
+        [data-tz-component="header"] .logo {
+            display: none !important;
+        }
     }
     
     /* Adjust utilities spacing on mobile */

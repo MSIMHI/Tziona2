@@ -309,7 +309,7 @@
 
     "header": {
       "announcement": "Announcement",
-      "menu": "Menu",
+      "menu": "תפריט",
       "cart_count": {
         "one": "{{ count }} item",
         "other": "{{ count }} items"

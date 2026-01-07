@@ -98,8 +98,16 @@
 <div class="mobile-menu-drawer" id="mobile-menu-drawer">
   <div class="mobile-menu-content">
     <div class="mobile-menu-header">
-      <span class="mobile-menu-title">{{ 'sections.header.menu' | t | default: 'Menu' }}</span>
-      <button class="mobile-menu-close" aria-label="Close menu">
+      <div class="mobile-menu-logo">
+        <a href="{{ routes.root_url }}">
+          {% if settings.logo != blank %}
+            {{ settings.logo | image_url: width: 300 | image_tag: height: 20 }}
+          {% else %}
+            {{ shop.name }}
+          {% endif %}
+        </a>
+      </div>
+      <button class="mobile-menu-close" aria-label="{{ 'accessibility.close' | t }}">
         <span class="material-icons-outlined">close</span>
       </button>
     </div>
