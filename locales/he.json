@@ -277,14 +277,14 @@
     },
     "contact": {
       "form": {
-        "title": "Contact form",
-        "name": "Name",
-        "email": "Email",
-        "phone": "Phone number",
-        "comment": "Comment",
+        "title": "טופס יצירת קשר",
+        "name": "שם",
+        "email": "אימייל",
+        "phone": "מספר טלפון",
+        "comment": "הערה",
         "send": "שלח",
-        "post_success": "תודה שיצרת איתנו קשר. נחזור אליך בהקדם האפשרי.",
-        "error_heading": "אנא תקן את השגיאות הבאות:"
+        "post_success": "תודה שפנית אלינו. נחזור אליך בהקדם האפשרי.",
+        "error_heading": "אנא תקן את הדברים הבאים:"
       }
     },
     "404": {
