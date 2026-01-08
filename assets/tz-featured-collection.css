@@ -141,14 +141,6 @@
 /* --- PRODUCT CARD STYLES --- */
 /* Product card styles are now imported from tz-main-collection-product-grid.css */
 /* Only section-specific styles below */
-  height: 36px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  z-index: 2;
-}
 
 .tz-collection-wishlist-btn:hover {
   background: rgba(255, 255, 255, 1);
@@ -442,5 +434,4 @@
   .tz-related-products-section .tz-collection-grid {
     grid-template-columns: repeat(4, 1fr);
   }
-}
 }

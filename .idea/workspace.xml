@@ -5,9 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="261e89e2-f91d-4885-a699-11b8f855e509" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/tz-contact-form.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/tz-contact-form.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/tz-section-rich-text.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/tz-section-rich-text.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/tz-featured-collection.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/tz-featured-collection.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
