@@ -82,10 +82,10 @@
               <span class="tz-collection-filter-icon material-icons-outlined">remove</span>
             </h3>
             <div class="tz-collection-price-range">
-              <input class="tz-collection-price-input" data-type="min" type="range" min="0" max="1000" value="0" step="10">
+              <input class="tz-collection-price-input" data-type="min" type="range" min="0" max="1000" value="{{ collection.products | map: 'price' | max | times: 1.0 }}" value="0" step="10">
               <div class="tz-collection-price-inputs">
                 <div class="relative">
-                  <input class="tz-collection-price-input" data-type="max" type="number" value="570" placeholder="570">
+                  <input class="tz-collection-price-input" data-type="max" type="number" value="10000" placeholder="10000">
                   <span class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">{{ cart.currency.symbol }}</span>
                 </div>
                 <span class="tz-collection-price-separator">{{ 'products.facets.to' | t }}</span>

@@ -117,9 +117,17 @@ class TzCollectionGrid {
   // Price range inputs
   bindPriceInputs() {
     this.priceInputs.forEach(input => {
-      input.addEventListener('input', debounce(() => {
-        this.updatePriceFilters();
-      }, 300));
+      if (input.type === 'range') {
+        // Range inputs should update number inputs immediately
+        input.addEventListener('input', () => {
+          this.syncRangeToNumberInput(input);
+        });
+      } else {
+        // Number inputs use debounced filtering
+        input.addEventListener('input', debounce(() => {
+          this.updatePriceFilters();
+        }, 300));
+      }
 
       input.addEventListener('blur', () => {
         this.validatePriceInputs();
@@ -306,8 +314,9 @@ class TzCollectionGrid {
     // Price range - using filter parameters
     const minPrice = this.getPriceValue('min');
     const maxPrice = this.getPriceValue('max');
-    if (minPrice) params.set('filter.v.price.gte', minPrice);
-    if (maxPrice) params.set('filter.v.price.lte', maxPrice);
+    // Only apply price filters if values are greater than 0
+    if (minPrice > 0) params.set('filter.v.price.gte', minPrice);
+    if (maxPrice > 0) params.set('filter.v.price.lte', maxPrice);
 
     // Add constraints as filter parameter
     if (constraints.length > 0) {
@@ -329,6 +338,18 @@ class TzCollectionGrid {
   updatePriceFilters() {
     this.validatePriceInputs();
     this.updateFilters();
+  }
+
+  // Sync range input to corresponding number input
+  syncRangeToNumberInput(rangeInput) {
+    const type = rangeInput.dataset.type; // 'min' or 'max'
+    const numberInput = this.section.querySelector(`.tz-collection-price-input[data-type="${type}"][type="number"]`);
+
+    if (numberInput) {
+      // Update the number input with the dollar value (not cents)
+      numberInput.value = rangeInput.value;
+      this.updatePriceFilters();
+    }
   }
 
   // Validate price input ranges
@@ -380,8 +401,13 @@ class TzCollectionGrid {
 
   // Get price input values
   getPriceValue(type) {
-    const input = this.section.querySelector(`.tz-collection-price-input[data-type="${type}"]`);
-    return input && input.value ? input.value : null;
+    // Specifically get the number input, not the range input
+    const input = this.section.querySelector(`.tz-collection-price-input[data-type="${type}"][type="number"]`);
+    if (input && input.value) {
+      // Keep in dollars for Shopify price filtering
+      return parseFloat(input.value);
+    }
+    return null;
   }
 
   // Toggle sort dropdown

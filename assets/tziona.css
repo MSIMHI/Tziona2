@@ -2603,3 +2603,27 @@ html.dark .cart-footer .cart-subtotal,
 html.dark .cart-footer .cart-total {
   color: #ffffff !important;
 }
+
+/* Additional cart elements - maintain white text in light mode */
+.light .tz-cart-coupon-text,
+.light .tz-cart-ctas,
+.light .tz-cart-trust-icon,
+.light .tz-cart-trust-icon.material-icons-outlined,
+.light .material-icons-outlined.tz-cart-trust-icon,
+html.light .tz-cart-coupon-text,
+html.light .tz-cart-ctas,
+html.light .tz-cart-trust-icon,
+html.light .tz-cart-trust-icon.material-icons-outlined {
+  color: #ffffff !important;
+}
+/* Cart checkout button text - ensure visibility on white background in dark mode */
+.dark .tz-cart-checkout-button,
+html.dark .tz-cart-checkout-button {
+  color: #000000 !important;
+}
+
+/* Collection product sale badge - maintain white text in light mode */
+.light .tz-collection-product-badge--sale,
+html.light .tz-collection-product-badge--sale {
+  color: #ffffff !important;
+}
