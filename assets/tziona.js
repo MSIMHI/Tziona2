@@ -1011,3 +1011,634 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
+
+/**
+ * TZ Main Search Component
+ * Custom search functionality with RTL/LTR support
+ */
+class TZMainSearch extends HTMLElement {
+  constructor() {
+    super();
+
+    // Elements
+    this.form = this.querySelector('form');
+    this.input = this.querySelector('input[type="search"]');
+    this.resetButton = this.querySelector('.tz-search-reset');
+    this.submitButton = this.querySelector('.tz-search-submit');
+    this.predictiveSearch = this.querySelector('.tz-predictive-search');
+
+    // State
+    this.isRTL = document.documentElement.getAttribute('dir') === 'rtl';
+    this.searchPerformed = false;
+
+    // Bind methods
+    this.handleInput = this.handleInput.bind(this);
+    this.handleFocus = this.handleFocus.bind(this);
+    this.handleReset = this.handleReset.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleKeydown = this.handleKeydown.bind(this);
+    this.syncInputs = this.syncInputs.bind(this);
+
+    this.init();
+  }
+
+  init() {
+    if (!this.input) return;
+
+    this.setupEventListeners();
+    this.updateRTLAttributes();
+    this.updateResetButtonVisibility();
+  }
+
+  setupEventListeners() {
+    // Input events
+    this.input.addEventListener('input', this.handleInput);
+    this.input.addEventListener('focus', this.handleFocus);
+    this.input.addEventListener('keydown', this.handleKeydown);
+
+    // Form events
+    if (this.form) {
+      this.form.addEventListener('submit', this.handleSubmit);
+      this.form.addEventListener('reset', this.handleReset);
+    }
+
+    // Button events
+    if (this.resetButton) {
+      this.resetButton.addEventListener('click', this.handleReset);
+    }
+
+    // Predictive search events
+    if (this.predictiveSearch) {
+      this.setupPredictiveSearch();
+    }
+
+    // Sync with other search inputs
+    this.setupInputSync();
+  }
+
+  handleInput(event) {
+    const value = event.target.value;
+    this.updateResetButtonVisibility();
+    this.syncInputs(value, event.target);
+
+    // Trigger predictive search if enabled
+    if (this.predictiveSearch && value.length > 2) {
+      this.showPredictiveSearch();
+    } else {
+      this.hidePredictiveSearch();
+    }
+  }
+
+  handleFocus(event) {
+    // Scroll into view on mobile
+    if (window.innerWidth < 750) {
+      setTimeout(() => {
+        this.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 300);
+    }
+
+    // Show predictive search if input has value
+    if (this.input.value.length > 0) {
+      this.showPredictiveSearch();
+    }
+  }
+
+  handleReset(event) {
+    event.preventDefault();
+    this.input.value = '';
+    this.input.focus();
+    this.updateResetButtonVisibility();
+    this.hidePredictiveSearch();
+    this.syncInputs('', this.input);
+  }
+
+  handleSubmit(event) {
+    const query = this.input.value.trim();
+
+    if (!query) {
+      event.preventDefault();
+      this.input.focus();
+      return;
+    }
+
+    this.searchPerformed = true;
+    this.updateUI();
+  }
+
+  handleKeydown(event) {
+    // Escape key
+    if (event.key === 'Escape') {
+      this.hidePredictiveSearch();
+      this.input.blur();
+    }
+
+    // Enter key
+    if (event.key === 'Enter' && this.predictiveSearch && this.predictiveSearch.classList.contains('is-open')) {
+      event.preventDefault();
+      this.selectFirstResult();
+    }
+
+    // Arrow keys for predictive search navigation
+    if (this.predictiveSearch && this.predictiveSearch.classList.contains('is-open')) {
+      this.handlePredictiveNavigation(event);
+    }
+  }
+
+  updateResetButtonVisibility() {
+    if (!this.resetButton) return;
+
+    const hasValue = this.input.value.length > 0;
+    this.resetButton.classList.toggle('is-visible', hasValue);
+  }
+
+  updateRTLAttributes() {
+    if (this.isRTL) {
+      this.input.setAttribute('dir', 'rtl');
+    }
+  }
+
+  setupInputSync() {
+    // Find all search inputs on the page
+    const allSearchInputs = document.querySelectorAll('input[type="search"]');
+
+    if (allSearchInputs.length > 1) {
+      allSearchInputs.forEach(input => {
+        if (input !== this.input) {
+          input.addEventListener('input', (event) => {
+            this.syncInputs(event.target.value, event.target);
+          });
+        }
+      });
+    }
+  }
+
+  syncInputs(value, sourceInput) {
+    const allSearchInputs = document.querySelectorAll('input[type="search"]');
+
+    allSearchInputs.forEach(input => {
+      if (input !== sourceInput) {
+        input.value = value;
+        // Trigger input event to update reset buttons
+        input.dispatchEvent(new Event('input', { bubbles: true }));
+      }
+    });
+  }
+
+  setupPredictiveSearch() {
+    // Close predictive search when clicking outside
+    document.addEventListener('click', (event) => {
+      if (!this.contains(event.target)) {
+        this.hidePredictiveSearch();
+      }
+    });
+
+    // Handle window resize
+    window.addEventListener('resize', () => {
+      if (this.predictiveSearch.classList.contains('is-open')) {
+        this.updatePredictivePosition();
+      }
+    });
+  }
+
+  showPredictiveSearch() {
+    if (!this.predictiveSearch) return;
+
+    this.predictiveSearch.classList.add('is-open');
+    this.updatePredictivePosition();
+  }
+
+  hidePredictiveSearch() {
+    if (!this.predictiveSearch) return;
+
+    this.predictiveSearch.classList.remove('is-open');
+  }
+
+  updatePredictivePosition() {
+    if (!this.predictiveSearch) return;
+
+    // Ensure predictive search doesn't go off-screen
+    const rect = this.predictiveSearch.getBoundingClientRect();
+    const viewportHeight = window.innerHeight;
+
+    if (rect.bottom > viewportHeight) {
+      this.predictiveSearch.style.maxHeight = `${viewportHeight - rect.top - 10}px`;
+    }
+  }
+
+  selectFirstResult() {
+    const firstResult = this.predictiveSearch.querySelector('a, button');
+    if (firstResult) {
+      firstResult.click();
+    }
+  }
+
+  handlePredictiveNavigation(event) {
+    const results = this.predictiveSearch.querySelectorAll('a, button');
+    const currentFocus = document.activeElement;
+
+    let currentIndex = -1;
+    results.forEach((result, index) => {
+      if (result === currentFocus) {
+        currentIndex = index;
+      }
+    });
+
+    if (event.key === 'ArrowDown') {
+      event.preventDefault();
+      const nextIndex = currentIndex < results.length - 1 ? currentIndex + 1 : 0;
+      results[nextIndex].focus();
+    } else if (event.key === 'ArrowUp') {
+      event.preventDefault();
+      const prevIndex = currentIndex > 0 ? currentIndex - 1 : results.length - 1;
+      results[prevIndex].focus();
+    }
+  }
+
+  updateUI() {
+    // Update classes based on search state
+    const container = this.closest('.tz-main-search');
+    if (container) {
+      container.classList.toggle('tz-main-search--empty', !this.searchPerformed);
+    }
+  }
+
+  // Utility methods
+  debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+      const later = () => {
+        clearTimeout(timeout);
+        func(...args);
+      };
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+    };
+  }
+
+  // Accessibility
+  updateAriaAttributes() {
+    if (this.predictiveSearch) {
+      const isOpen = this.predictiveSearch.classList.contains('is-open');
+      this.input.setAttribute('aria-expanded', isOpen);
+      this.input.setAttribute('aria-controls', isOpen ? 'tz-predictive-search-results' : null);
+    }
+  }
+}
+
+// Register the custom element
+if (!customElements.get('tz-main-search')) {
+  customElements.define('tz-main-search', TZMainSearch);
+}
+
+// Export for potential use
+window.TZMainSearch = TZMainSearch;
+
+/**
+ * TZ Header Search Dialog
+ * Beautiful search modal with live search functionality
+ */
+
+class TZHeaderSearch {
+  constructor() {
+    this.searchButton = document.querySelector('.icon-btn[aria-label="Search"]');
+    this.overlay = null;
+    this.dialog = null;
+    this.searchInput = null;
+    this.resultsContainer = null;
+    this.closeButton = null;
+    this.currentQuery = '';
+    this.searchTimeout = null;
+    this.isRTL = document.documentElement.getAttribute('dir') === 'rtl';
+
+    this.init();
+  }
+
+  init() {
+    if (!this.searchButton) return;
+
+    // Detect language from HTML lang attribute
+    const htmlLang = document.documentElement.getAttribute('lang');
+
+    // Set translations based on language
+    if (htmlLang === 'he') {
+      this.translations = {
+        searching: 'מחפש...',
+        noResults: 'לא נמצאו תוצאות',
+        viewAll: 'צפה בכל התוצאות עבור',
+        placeholder: 'חיפוש מוצרים...',
+        emptyHint: 'התחל להקליד לחיפוש...'
+      };
+    } else {
+      this.translations = {
+        searching: 'Searching...',
+        noResults: 'No results found',
+        viewAll: 'View all results for',
+        placeholder: 'Search products...',
+        emptyHint: 'Start typing to search...'
+      };
+    }
+
+    this.createDialog();
+    this.bindEvents();
+  }
+
+  createDialog() {
+    // Create overlay
+    this.overlay = document.createElement('div');
+    this.overlay.className = 'tz-search-dialog-overlay';
+    this.overlay.innerHTML = `
+      <div class="tz-search-dialog" role="dialog" aria-modal="true" aria-label="Search">
+        <div class="tz-search-dialog-header">
+          <form class="tz-search-form" role="search">
+            <div class="tz-search-field">
+              <input
+                class="tz-search-input"
+                type="search"
+                placeholder="` + this.translations.placeholder + `"
+                autocomplete="off"
+                spellcheck="false"
+              >
+              <label class="tz-search-label">Search products</label>
+              <button type="button" class="tz-search-reset hidden" aria-label="Clear search">
+                <svg class="tz-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="18" y1="6" x2="6" y2="18"></line>
+                  <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+              </button>
+              <button type="submit" class="tz-search-submit" aria-label="Search">
+                <svg class="tz-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <path d="m21 21-4.35-4.35"></path>
+                </svg>
+              </button>
+            </div>
+          </form>
+          <button class="tz-search-dialog-close" aria-label="Close search">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+        <div class="tz-search-dialog-results"></div>
+      </div>
+    `;
+
+    document.body.appendChild(this.overlay);
+
+    // Get references to elements
+    this.dialog = this.overlay.querySelector('.tz-search-dialog');
+    this.searchInput = this.overlay.querySelector('.tz-search-input');
+    this.resetButton = this.overlay.querySelector('.tz-search-reset');
+    this.submitButton = this.overlay.querySelector('.tz-search-submit');
+    this.closeButton = this.overlay.querySelector('.tz-search-dialog-close');
+    this.resultsContainer = this.overlay.querySelector('.tz-search-dialog-results');
+    this.form = this.overlay.querySelector('.tz-search-form');
+
+    // Set RTL attributes if needed
+    if (this.isRTL) {
+      this.searchInput.setAttribute('dir', 'rtl');
+      this.dialog.style.direction = 'rtl';
+      this.resultsContainer.style.direction = 'rtl';
+    }
+  }
+
+  bindEvents() {
+    // Open dialog
+    this.searchButton.addEventListener('click', (e) => {
+      e.preventDefault();
+      this.openDialog();
+    });
+
+    // Close dialog
+    this.overlay.addEventListener('click', (e) => {
+      if (e.target === this.overlay) {
+        this.closeDialog();
+      }
+    });
+
+    this.closeButton.addEventListener('click', () => {
+      this.closeDialog();
+    });
+
+    // Keyboard events
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && this.overlay.classList.contains('is-open')) {
+        this.closeDialog();
+      }
+
+      // Focus management
+      if (e.key === '/' && !this.overlay.classList.contains('is-open') &&
+          !['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement.tagName)) {
+        e.preventDefault();
+        this.openDialog();
+      }
+    });
+
+    // Search input
+    this.searchInput.addEventListener('input', this.debounce((e) => {
+      this.handleSearch(e.target.value);
+    }, 300));
+
+    this.searchInput.addEventListener('focus', () => {
+      this.updateResetButton();
+    });
+
+    // Reset button
+    this.resetButton.addEventListener('click', () => {
+      this.searchInput.value = '';
+      this.searchInput.focus();
+      this.clearResults();
+      this.updateResetButton();
+    });
+
+    // Form submission
+    this.form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const query = this.searchInput.value.trim();
+      if (query) {
+        this.performSearch(query);
+      }
+    });
+  }
+
+  openDialog() {
+    this.overlay.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+
+    // Focus management
+    setTimeout(() => {
+      this.searchInput.focus();
+    }, 100);
+  }
+
+  closeDialog() {
+    this.overlay.classList.remove('is-open');
+    document.body.style.overflow = '';
+
+    // Clear search
+    this.searchInput.value = '';
+    this.clearResults();
+    this.updateResetButton();
+  }
+
+  handleSearch(query) {
+    this.currentQuery = query.trim();
+    this.updateResetButton();
+
+    if (this.currentQuery.length === 0) {
+      this.clearResults();
+      return;
+    }
+
+    if (this.currentQuery.length < 2) {
+      this.showEmptyState();
+      return;
+    }
+
+    this.showLoadingState();
+    this.performSearch(this.currentQuery);
+  }
+
+  async performSearch(query) {
+    try {
+      // Use Shopify's search suggest API for predictive search
+      const response = await fetch(`/search/suggest.json?q=${encodeURIComponent(query)}&resources[type]=product&resources[limit]=6&resources[options][unavailable_products]=hide`);
+      const data = await response.json();
+
+      if (data.resources && data.resources.results && data.resources.results.products && data.resources.results.products.length > 0) {
+        this.displayResults(data.resources.results.products, query);
+      } else {
+        // Fallback to regular search if suggest doesn't return results
+        await this.performFallbackSearch(query);
+      }
+    } catch (error) {
+      console.error('Search error:', error);
+      await this.performFallbackSearch(query);
+    }
+  }
+
+  async performFallbackSearch(query) {
+    try {
+      // Fallback to regular search results
+      const response = await fetch(`/search?view=json&q=${encodeURIComponent(query)}&type=product`);
+      const data = await response.json();
+
+      if (data.results && data.results.length > 0) {
+        // Transform regular search results to match suggest format
+        const products = data.results.slice(0, 6).map(item => ({
+          title: item.title,
+          url: item.url,
+          featured_image: item.featured_image,
+          price: item.price,
+          compare_at_price: item.compare_at_price
+        }));
+        this.displayResults(products, query);
+      } else {
+        this.showNoResults();
+      }
+    } catch (error) {
+      console.error('Fallback search error:', error);
+      this.showNoResults();
+    }
+  }
+
+  displayResults(products, query) {
+    if (!products || products.length === 0) {
+      this.showNoResults();
+      return;
+    }
+
+    const resultsHtml = products.map(product => this.createProductHtml(product)).join('');
+
+    const viewAllHtml = `
+      <a href="/search?q=${encodeURIComponent(query)}" class="tz-search-view-all">
+        ${this.translations.viewAll} "${query}"
+      </a>
+    `;
+
+    this.resultsContainer.innerHTML = resultsHtml + viewAllHtml;
+  }
+
+  createProductHtml(product) {
+    const imageUrl = product.featured_image ? product.featured_image.url : '';
+    const title = product.title;
+    const url = product.url;
+    const price = product.price;
+    const compareAtPrice = product.compare_at_price;
+    const isOnSale = compareAtPrice && compareAtPrice > price;
+
+    return `
+      <a href="${url}" class="tz-search-result-item">
+        ${imageUrl ? `<img src="${imageUrl}" alt="${title}" class="tz-search-result-image" loading="lazy">` : ''}
+        <div class="tz-search-result-info">
+          <h3 class="tz-search-result-title">${title}</h3>
+          <div class="tz-search-result-price ${isOnSale ? 'tz-search-result-price--sale' : ''}">
+            ${isOnSale ?
+              `<span class="tz-search-result-price-current">${this.formatMoney(price)}</span>
+               <span class="tz-search-result-price-original">${this.formatMoney(compareAtPrice)}</span>` :
+              this.formatMoney(price)
+            }
+          </div>
+        </div>
+      </a>
+    `;
+  }
+
+  formatMoney(amount) {
+    // Handle both formatted strings and numeric amounts
+    if (typeof amount === 'string') {
+      return amount; // Already formatted
+    }
+    // For numeric amounts (cents), convert to dollars and format
+    return `$${parseFloat(amount / 100).toFixed(2)}`;
+  }
+
+  showLoadingState() {
+    this.resultsContainer.innerHTML = `
+      <div class="tz-search-result-loading">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12a9 9 0 1 1-6.219-8.56"/>
+        </svg>
+        ${this.translations.searching}
+      </div>
+    `;
+  }
+
+  showEmptyState() {
+    this.resultsContainer.innerHTML = '';
+  }
+
+  showNoResults() {
+    this.resultsContainer.innerHTML = `
+      <div class="tz-search-result-empty">
+        <h3 class="tz-search-result-empty-title">${this.translations.noResults}</h3>
+        <p class="tz-search-result-empty-text">Try searching with different keywords</p>
+      </div>
+    `;
+  }
+
+  clearResults() {
+    this.resultsContainer.innerHTML = '';
+  }
+
+  updateResetButton() {
+    const hasValue = this.searchInput.value.length > 0;
+    this.resetButton.classList.toggle('hidden', !hasValue);
+  }
+
+  debounce(func, wait) {
+    return (...args) => {
+      clearTimeout(this.searchTimeout);
+      this.searchTimeout = setTimeout(() => func.apply(this, args), wait);
+    };
+  }
+}
+
+// Initialize header search when DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+  new TZHeaderSearch();
+});
+
+// Export for potential use
+window.TZHeaderSearch = TZHeaderSearch;
