@@ -1,3 +1,13 @@
+html[dir="rtl"] .tz-form-input[type="tel"] {
+  text-align: right;
+  direction: ltr; /* numbers stay natural */
+}
+
+html[dir="rtl"] .tz-form-input[type="tel"]::placeholder {
+  direction: rtl;
+  text-align: right;
+}
+
 .tz-contact-section {
   padding: var(--tz-pt, 36px) 1.5rem var(--tz-pb, 36px);
 }
