@@ -226,6 +226,21 @@ document.addEventListener('DOMContentLoaded', () => {
           totalPrice.textContent = formatMoney(cart.total_price);
         }
 
+        // Update cart footer with view cart button
+        const cartFooter = currentCartDrawer.querySelector('.cart-footer');
+        if (cartFooter && cart.item_count > 0) {
+          // Create or update view cart button
+          let viewCartBtn = cartFooter.querySelector('.tz-cart-drawer-view-cart');
+          if (!viewCartBtn) {
+            viewCartBtn = document.createElement('a');
+            viewCartBtn.className = 'tz-cart-drawer-view-cart';
+            viewCartBtn.href = routes.cart_url;
+            cartFooter.insertBefore(viewCartBtn, cartFooter.querySelector('.checkout-btn'));
+          }
+          // Update button text without count
+          viewCartBtn.textContent = 'צפה בעגלה';
+        }
+
         // Re-initialize quantity buttons after update (with delay to prevent loops)
         setTimeout(() => {
           initCartQuantityButtons();
@@ -588,7 +603,10 @@ document.addEventListener('DOMContentLoaded', () => {
             window.location.reload();
             return;
           }
-          
+
+          // Small delay to ensure DOM is updated
+          await new Promise(resolve => setTimeout(resolve, 100));
+
           // Open cart drawer after refresh
           const cartDrawer = document.getElementById('cartDrawer');
           const cartOverlay = document.getElementById('cartOverlay');

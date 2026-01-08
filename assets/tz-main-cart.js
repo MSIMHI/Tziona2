@@ -109,10 +109,10 @@
         }
         input.value = newValue;
       } else if (button.name === 'minus' || button.classList.contains('tz-cart-quantity-button-minus')) {
-        // Decrement
+        // Decrement - allow going to 0 to remove item, regardless of min rule
         let newValue = previousValue - step;
-        if (newValue < min) {
-          newValue = min;
+        if (newValue < 0) {
+          newValue = 0;
         }
         input.value = newValue;
       }
@@ -175,7 +175,7 @@
       const max = parseInt(event.target.max || 999999);
       const step = parseInt(event.target.step || 1);
 
-      if (inputValue < min) {
+      if (inputValue < min && inputValue !== 0) {
         message = window.tzCartStrings?.min_error?.replace('[min]', min) || `Minimum quantity is ${min}`;
       } else if (inputValue > max) {
         message = window.tzCartStrings?.max_error?.replace('[max]', max) || `Maximum quantity is ${max}`;
@@ -290,6 +290,28 @@
           const cartFooter = document.getElementById('main-cart-footer');
           if (cartFooter) {
             cartFooter.classList.toggle('tz-cart-is-empty', parsedState.item_count === 0);
+          }
+
+          // Update cart count in header and title
+          const cartCountElements = document.querySelectorAll('[data-cart-count]');
+          cartCountElements.forEach(el => {
+            el.textContent = parsedState.item_count;
+          });
+
+          // Update cart title count on cart page
+          const cartTitleCount = document.querySelector('.tz-cart-item-count');
+          if (cartTitleCount) {
+            const itemText = parsedState.item_count === 1 ?
+              (window.cartStrings?.product || 'Product') :
+              (window.cartStrings?.products || 'Products');
+            cartTitleCount.textContent = `(${parsedState.item_count} ${itemText})`;
+          }
+
+          // Update cart drawer title count if open
+          const drawerTitleCount = document.querySelector('.cart-title-count');
+          if (drawerTitleCount) {
+            const itemText = parsedState.item_count === 1 ? 'פריט' : 'פריטים';
+            drawerTitleCount.textContent = `(${parsedState.item_count} ${itemText})`;
           }
 
           this.getSectionsToRender().forEach((section) => {

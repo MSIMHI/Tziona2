@@ -99,7 +99,7 @@
   <div class="cart-footer">
     {% if cart.item_count > 0 %}
       <a href="{{ routes.cart_url }}" class="tz-cart-drawer-view-cart">
-        {{ 'general.cart.view' | t: count: cart.item_count }}
+        {{ 'general.cart.view_empty_cart' | t }}
       </a>
     {% endif %}
     <form action="{{ routes.cart_url }}" method="post" id="cart-drawer-form">

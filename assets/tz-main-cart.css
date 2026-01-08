@@ -182,6 +182,10 @@ cart-items.tz-cart-items,
   margin: 0;
 }
 
+.tz-cart-login-title {
+  padding-top: 22px;
+}
+
 .tz-cart-item-count {
   font-size: var(--tz-cart-subtitle-size);
   font-weight: 400;
