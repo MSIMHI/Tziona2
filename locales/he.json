@@ -1,14 +1,14 @@
 {
   "general": {
     "password_page": {
-      "login_form_heading": "הזן סיסמה לכניסה לחנות:",
-      "login_password_button": "היכנס עם סיסמה",
-      "login_form_password_label": "סיסמה",
-      "login_form_password_placeholder": "הסיסמה שלך",
-      "login_form_error": "סיסמה שגויה!",
-      "login_form_submit": "כניסה",
-      "admin_link_html": "האם אתה בעל החנות? <a href=\"/admin\" class=\"link underlined-link\">היכנס כאן</a>",
-      "powered_by_shopify_html": "חנות זו מופעלת על ידי {{ shopify }}"
+      "login_form_heading": "Enter store using password:",
+      "login_password_button": "Enter using password",
+      "login_form_password_label": "Password",
+      "login_form_password_placeholder": "Your password",
+      "login_form_error": "Wrong password!",
+      "login_form_submit": "Enter",
+      "admin_link_html": "Are you the store owner? <a href=\"/admin\" class=\"link underlined-link\">Log in here</a>",
+      "powered_by_shopify_html": "This shop will be powered by {{ shopify }}"
     },
     "social": {
       "alt_text": {
@@ -28,7 +28,7 @@
         "tiktok": "TikTok"
       }
     },
-    "continue_shopping": "Continue shopping",
+    "continue_shopping": "המשך בקניות",
     "pagination": {
       "label": "Pagination",
       "page": "Page {{ number }}",
@@ -40,8 +40,8 @@
       "reset": "Clear search term"
     },
     "cart": {
-      "view": "View cart ({{ count }})",
-      "view_empty_cart": "View cart",
+      "view": "צפה בעגלה ({{ count }})",
+      "view_empty_cart": "צפה בעגלה",
       "item_added": "Item added to your cart"
     },
     "share": {
@@ -62,46 +62,46 @@
     }
   },
   "newsletter": {
-    "label": "אימייל",
-    "success": "תודה שנרשמת",
-    "button_label": "הרשמה"
+    "label": "Email",
+    "success": "Thanks for subscribing",
+    "button_label": "Subscribe"
   },
   "accessibility": {
-    "skip_to_text": "דלג לתוכן",
-    "skip_to_product_info": "דלג למידע על המוצר",
-    "close": "סגור",
-    "unit_price_separator": "לכל",
-    "vendor": "יצרן:",
-    "error": "שגיאה",
-    "refresh_page": "בחירת בחירה גורמת לרענון דף מלא.",
+    "skip_to_text": "Skip to content",
+    "skip_to_product_info": "Skip to product information",
+    "close": "Close",
+    "unit_price_separator": "per",
+    "vendor": "Vendor:",
+    "error": "Error",
+    "refresh_page": "Choosing a selection results in a full page refresh.",
     "link_messages": {
-      "new_window": "נפתח בחלון חדש.",
-      "external": "פותח אתר חיצוני."
+      "new_window": "Opens in a new window.",
+      "external": "Opens external website."
     },
-    "loading": "טוען...",
-    "total_reviews": "סה\"כ ביקורות",
-    "star_reviews_info": "{{ rating_value }} מתוך {{ rating_max }} כוכבים",
-    "collapsible_content_title": "תוכן מתקפל",
-    "complementary_products": "מוצרים משלימים"
+    "loading": "Loading...",
+    "total_reviews": "total reviews",
+    "star_reviews_info": "{{ rating_value }} out of {{ rating_max }} stars",
+    "collapsible_content_title": "Collapsible content",
+    "complementary_products": "Complementary products"
   },
   "blogs": {
     "article": {
-      "blog": "בלוג",
-      "read_more_title": "קרא עוד: {{ title }}",
+      "blog": "Blog",
+      "read_more_title": "Read more: {{ title }}",
       "comments": {
-        "one": "תגובה {{ count }}",
-        "other": "{{ count }} תגובות"
+        "one": "{{ count }} comment",
+        "other": "{{ count }} comments"
       },
-      "moderated": "שים לב, תגובות צריכות לקבל אישור לפני שהן מתפרסמות.",
-      "comment_form_title": "השאר תגובה",
-      "name": "שם",
-      "email": "אימייל",
-      "message": "תגובה",
-      "post": "שלח תגובה",
-      "back_to_blog": "חזרה לבלוג",
-      "share": "שתף מאמר זה",
-      "success": "התגובה שלך פורסמה בהצלחה! תודה!",
-      "success_moderated": "התגובה שלך פורסמה בהצלחה. נפרסם אותה בעוד זמן קצר, מכיוון שהבלוג שלנו מנוהל."
+      "moderated": "Please note, comments need to be approved before they are published.",
+      "comment_form_title": "Leave a comment",
+      "name": "Name",
+      "email": "Email",
+      "message": "Comment",
+      "post": "Post comment",
+      "back_to_blog": "Back to blog",
+      "share": "Share this article",
+      "success": "Your comment was posted successfully! Thank you!",
+      "success_moderated": "Your comment was posted successfully. We will publish it in a little while, as our blog is moderated."
     }
   },
   "onboarding": {
@@ -283,14 +283,14 @@
     },
     "contact": {
       "form": {
-        "title": "צור קשר",
-        "name": "שם",
-        "email": "אימייל",
-        "phone": "מספר טלפון",
-        "comment": "הודעה",
-        "send": "שלח",
-        "post_success": "תודה שיצרת איתנו קשר. נחזור אליך בהקדם האפשרי.",
-        "error_heading": "אנא תקנו את הפרטים הבאים:"
+        "title": "Contact form",
+        "name": "Name",
+        "email": "Email",
+        "phone": "Phone number",
+        "comment": "Comment",
+        "send": "Send",
+        "post_success": "Thanks for contacting us. We'll get back to you as soon as possible.",
+        "error_heading": "Please adjust the following:"
       }
     },
     "404": {
@@ -309,33 +309,47 @@
 
     "header": {
       "announcement": "Announcement",
-      "menu": "תפריט",
+      "menu": "Menu",
       "cart_count": {
         "one": "{{ count }} item",
         "other": "{{ count }} items"
       }
     },
     "cart": {
-      "title": "עגלת הקניות שלך",
+      "title": "סל הקניות",
       "caption": "פריטים בעגלה",
+      "remove": "הסר",
       "remove_title": "הסר {{ title }}",
       "estimated_total": "סה\"כ משוער",
       "new_estimated_total": "סה\"כ משוער חדש",
       "note": "הוראות מיוחדות להזמנה",
-      "checkout": "לתשלום",
+      "checkout": "מעבר לתשלום",
       "empty": "העגלה שלך ריקה",
       "cart_error": "אירעה שגיאה בעדכון העגלה. אנא נסה שוב.",
-      "cart_quantity_error_html": "ניתן להוסיף רק {{ quantity }} מפריט זה לעגלה.",
-      "duties_and_taxes_included_shipping_at_checkout_with_policy_html": "כולל מכס ומיסים. הנחות ו<a href=\"{{ link }}\">משלוח</a> מחושבים בקופה.",
-      "duties_and_taxes_included_shipping_at_checkout_without_policy": "כולל מכס ומיסים. הנחות ומשלוח מחושבים בקופה.",
-      "taxes_included_shipping_at_checkout_with_policy_html": "כולל מיסים. הנחות ו<a href=\"{{ link }}\">משלוח</a> מחושבים בקופה.",
-      "taxes_included_shipping_at_checkout_without_policy": "כולל מיסים. הנחות ומשלוח מחושבים בקופה.",
-      "duties_included_taxes_at_checkout_shipping_at_checkout_with_policy_html": "כולל מכס. מיסים, הנחות ו<a href=\"{{ link }}\">משלוח</a> מחושבים בקופה.",
-      "duties_included_taxes_at_checkout_shipping_at_checkout_without_policy": "כולל מכס. מיסים, הנחות ומשלוח מחושבים בקופה.",
-      "taxes_at_checkout_shipping_at_checkout_with_policy_html": "מיסים, הנחות ו<a href=\"{{ link }}\">משלוח</a> מחושבים בקופה.",
-      "taxes_at_checkout_shipping_at_checkout_without_policy": "מיסים, הנחות ומשלוח מחושבים בקופה.",
+      "cart_quantity_error_html": "ניתן להוסיף רק {{ quantity }} מהפריט הזה לעגלה.",
+      "duties_and_taxes_included_shipping_at_checkout_with_policy_html": "מסים ומכס כלולים. הנחות ו<a href=\"{{ link }}\">משלוח</a> יחושבו בקופה.",
+      "duties_and_taxes_included_shipping_at_checkout_without_policy": "מסים ומכס כלולים. הנחות ומשלוח יחושבו בקופה.",
+      "taxes_included_shipping_at_checkout_with_policy_html": "מסים כלולים. הנחות ו<a href=\"{{ link }}\">משלוח</a> יחושבו בקופה.",
+      "taxes_included_shipping_at_checkout_without_policy": "מסים כלולים. הנחות ומשלוח יחושבו בקופה.",
+      "duties_included_taxes_at_checkout_shipping_at_checkout_with_policy_html": "מכס כלול. מסים, הנחות ו<a href=\"{{ link }}\">משלוח</a> יחושבו בקופה.",
+      "duties_included_taxes_at_checkout_shipping_at_checkout_without_policy": "מכס כלול. מסים, הנחות ומשלוח יחושבו בקופה.",
+      "taxes_at_checkout_shipping_at_checkout_with_policy_html": "מסים, הנחות ו<a href=\"{{ link }}\">משלוח</a> יחושבו בקופה.",
+      "taxes_at_checkout_shipping_at_checkout_without_policy": "מסים, הנחות ומשלוח יחושבו בקופה.",
+      "tz": {
+        "shipping_free_applied": "משלוח חינם יוחל בקופה",
+        "taxes_shipping_calculated": "מיסים ומשלוח יחושבו בשלב הבא",
+        "trust_secure_payment": "תשלום מאובטח",
+        "trust_free_returns": "החזרות חינם",
+        "trust_lifetime_warranty": "אחריות לכל החיים",
+        "subtotal": "סה\"כ ביניים",
+        "coupon_new_customer": "לקוחות חדשים חוסכים 10% עם קוד קופון",
+        "coupon_code": "WELCOME10",
+        "buy_with": "קנה את זה עם...",
+        "quick_add": "הוספה מהירה",
+        "add_order_note": "הוסף הערות להזמנה"
+      },
       "headings": {
-        "product": "מוצר",
+        "product": "פריט",
         "price": "מחיר",
         "total": "סה\"כ",
         "quantity": "כמות",
@@ -344,7 +358,7 @@
       "update": "עדכן",
       "login": {
         "title": "יש לך חשבון?",
-        "paragraph_html": "<a href=\"{{ link }}\" class=\"link underlined-link\">התחבר</a> כדי לשלם מהר יותר."
+        "paragraph_html": "<a href=\"{{ link }}\" class=\"link underlined-link\">התחבר</a> כדי לעבור לקופה מהר יותר."
       }
     },
     "footer": {
@@ -409,178 +423,182 @@
     }
   },
   "localization": {
-    "country_label": "מדינה/אזור",
-    "language_label": "שפה",
-    "update_language": "עדכן שפה",
-    "update_country": "עדכן מדינה/אזור",
-    "search": "חיפוש",
-    "popular_countries_regions": "מדינות/אזורים פופולריים",
-    "country_results_count": "נמצאו {{ count }} מדינות/אזורים"
+    "country_label": "Country/region",
+    "language_label": "Language",
+    "update_language": "Update language",
+    "update_country": "Update country/region",
+    "search": "Search",
+    "popular_countries_regions": "Popular countries/regions",
+    "country_results_count": "{{ count }} countries/regions found"
   },
   "customer": {
     "errors": {
-      "incorrect_email_password": "דוא\"ל או סיסמה שגויים.",
-      "not_found": "לא נמצא חשבון עם כתובת דוא\"ל זו."
+      "incorrect_email_password": "אימייל או סיסמה שגויים.",
+      "not_found": "לא נמצא חשבון עם האימייל הזה."
     },
     "account": {
-      "title": "חשבון",
-      "details": "פרטי חשבון",
-      "view_addresses": "צפה בכתובות",
-      "return": "חזרה לפרטי החשבון"
+      "title": "Account",
+      "details": "Account details",
+      "view_addresses": "View addresses",
+      "return": "Return to Account details"
     },
-    "account_fallback": "חשבון",
+    "account_fallback": "Account",
     "activate_account": {
-      "title": "הפעל חשבון",
-      "subtext": "צור את הסיסמה שלך כדי להפעיל את החשבון שלך.",
-      "password": "סיסמה",
-      "password_confirm": "אישור סיסמה",
-      "submit": "הפעל חשבון",
-      "cancel": "דחה הזמנה"
+      "title": "Activate account",
+      "subtext": "Create your password to activate your account.",
+      "password": "Password",
+      "password_confirm": "Confirm password",
+      "submit": "Activate account",
+      "cancel": "Decline invitation"
     },
     "addresses": {
-      "title": "כתובות",
-      "default": "ברירת מחדל",
-      "add_new": "הוסף כתובת חדשה",
-      "edit_address": "ערוך כתובת",
-      "first_name": "שם פרטי",
-      "last_name": "שם משפחה",
-      "company": "חברה",
-      "address1": "כתובת 1",
-      "address2": "כתובת 2",
-      "city": "עיר",
-      "country": "מדינה/אזור",
-      "province": "מחוז",
-      "zip": "מיקוד",
-      "phone": "טלפון",
-      "set_default": "הגדר ככתובת ברירת מחדל",
-      "add": "הוסף כתובת",
-      "update": "עדכן כתובת",
-      "cancel": "ביטול",
-      "edit": "ערוך",
-      "delete": "מחק",
-      "delete_confirm": "האם אתה בטוח שברצונך למחוק כתובת זו?"
+      "title": "Addresses",
+      "default": "Default",
+      "add_new": "Add a new address",
+      "edit_address": "Edit address",
+      "first_name": "First name",
+      "last_name": "Last name",
+      "company": "Company",
+      "address1": "Address 1",
+      "address2": "Address 2",
+      "city": "City",
+      "country": "Country/region",
+      "province": "Province",
+      "zip": "Postal/ZIP code",
+      "phone": "Phone",
+      "set_default": "Set as default address",
+      "add": "Add address",
+      "update": "Update address",
+      "cancel": "Cancel",
+      "edit": "Edit",
+      "delete": "Delete",
+      "delete_confirm": "Are you sure you wish to delete this address?"
     },
-    "log_in": "כניסה",
-    "log_out": "יציאה",
+    "log_in": "Log in",
+    "log_out": "Log out",
     "login_page": {
-      "cancel": "ביטול",
-      "create_account": "צור חשבון",
-      "email": "דוא\"ל",
-      "email_label": "דוא\"ל",
-      "email_placeholder": "הזן את כתובת הדוא\"ל שלך",
-      "forgot_password": "שכחת סיסמה?",
-      "guest_continue": "המשך",
-      "guest_title": "המשך כאורח",
-      "password": "סיסמה",
+      "cancel": "Cancel",
+      "create_account": "Create account",
+      "email": "Email",
+      "email_label": "אימייל",
+      "email_placeholder": "הכנס את כתובת האימייל שלך",
+      "forgot_password": "Forgot your password?",
+      "guest_continue": "Continue",
+      "guest_title": "Continue as a guest",
+      "password": "Password",
       "password_label": "סיסמה",
-      "password_placeholder": "הזן את הסיסמה שלך",
-      "title": "כניסה לחשבון",
-      "sign_in": "כניסה",
-      "submit": "כניסה",
-      "alternate_provider_separator": "או",
-      "subtext": "הזן את הפרטים שלך להמשך",
+      "password_placeholder": "הכנס את הסיסמה שלך",
+      "title": "Login",
+      "sign_in": "Sign in",
+      "submit": "Submit",
+      "alternate_provider_separator": "or",
+      "subtext": "הכנס את הפרטים שלך כדי להמשיך",
       "remember_me": "זכור אותי",
       "no_account": "עדיין אין לך חשבון?"
     },
     "order": {
-      "title": "הזמנה {{ name }}",
-      "date_html": "בוצעה ב- {{ date }}",
-      "cancelled_html": "הזמנה בוטלה ב- {{ date }}",
-      "cancelled_reason": "סיבה: {{ reason }}",
-      "billing_address": "כתובת לחיוב",
-      "payment_status": "סטטוס תשלום",
-      "shipping_address": "כתובת למשלוח",
-      "fulfillment_status": "סטטוס אספקה",
-      "discount": "הנחה",
-      "shipping": "משלוח",
-      "tax": "מס",
-      "product": "מוצר",
-      "sku": "מק\"ט",
-      "price": "מחיר",
-      "quantity": "כמות",
-      "total": "סה\"כ",
-      "total_refunded": "הוחזר",
-      "fulfilled_at_html": "סופק ב- {{ date }}",
-      "track_shipment": "עקוב אחר המשלוח",
-      "tracking_url": "קישור למעקב",
-      "tracking_company": "חברת שליחויות",
-      "tracking_number": "מספר מעקב",
-      "subtotal": "סיכום ביניים",
-      "total_duties": "מכס"
+      "title": "Order {{ name }}",
+      "date_html": "Placed on {{ date }}",
+      "cancelled_html": "Order Cancelled on {{ date }}",
+      "cancelled_reason": "Reason: {{ reason }}",
+      "billing_address": "Billing Address",
+      "payment_status": "Payment Status",
+      "shipping_address": "Shipping Address",
+      "fulfillment_status": "Fulfillment Status",
+      "discount": "Discount",
+      "shipping": "Shipping",
+      "tax": "Tax",
+      "product": "Product",
+      "sku": "SKU",
+      "price": "Price",
+      "quantity": "Quantity",
+      "total": "Total",
+      "total_refunded": "Refunded",
+      "fulfilled_at_html": "Fulfilled {{ date }}",
+      "track_shipment": "Track shipment",
+      "tracking_url": "Tracking link",
+      "tracking_company": "Carrier",
+      "tracking_number": "Tracking number",
+      "subtotal": "Subtotal",
+      "total_duties": "Duties"
     },
     "orders": {
-      "title": "היסטוריית הזמנות",
-      "order_number": "הזמנה",
-      "order_number_link": "מספר הזמנה {{ number }}",
-      "date": "תאריך",
-      "payment_status": "סטטוס תשלום",
-      "fulfillment_status": "סטטוס אספקה",
-      "total": "סה\"כ",
-      "none": "עדיין לא ביצעת הזמנות."
+      "title": "Order history",
+      "order_number": "Order",
+      "order_number_link": "Order number {{ number }}",
+      "date": "Date",
+      "payment_status": "Payment status",
+      "fulfillment_status": "Fulfillment status",
+      "total": "Total",
+      "none": "You haven't placed any orders yet."
     },
     "recover_password": {
-      "title": "איפוס סיסמה",
-      "subtext": "שלח אלינו דוא\"ל לאיפוס הסיסמה שלך",
-      "success": "שלחנו לך דוא\"ל עם קישור לעדכון הסיסמה שלך."
+      "title": "Reset your password",
+      "subtext": "We will send you an email to reset your password",
+      "success": "We've sent you an email with a link to update your password."
     },
     "register": {
-      "title": "צור חשבון",
+      "title": "Create account",
       "subtext": "הצטרף לקהילה שלנו היום",
+      "first_name": "First name",
       "first_name_label": "שם פרטי",
-      "first_name_placeholder": "הזן את שמך הפרטי",
+      "first_name_placeholder": "הכנס את השם הפרטי שלך",
+      "last_name": "Last name",
       "last_name_label": "שם משפחה",
-      "last_name_placeholder": "הזן את שם המשפחה שלך",
-      "email_label": "דוא\"ל",
-      "email_placeholder": "הזן את כתובת הדוא\"ל שלך",
+      "last_name_placeholder": "הכנס את שם המשפחה שלך",
+      "email": "Email",
+      "email_label": "אימייל",
+      "email_placeholder": "הכנס את כתובת האימייל שלך",
+      "password": "Password",
       "password_label": "סיסמה",
       "password_placeholder": "בחר סיסמה חזקה",
-      "password_hint": "לפחות 8 תווים, הכוללים אותיות ומספרים",
+      "password_hint": "לפחות 8 תווים, כולל אותיות ומספרים",
       "confirm_password_label": "אישור סיסמה",
       "confirm_password_placeholder": "אשר את הסיסמה שלך",
-      "terms_html": "אני מסכים ל<a href=\"#\">תנאי השימוש</a> ול<a href=\"#\">מדיניות הפרטיות</a>",
+      "terms_html": "אני מסכים ל<a href=\"#\">תנאי השירות</a> ול<a href=\"#\">מדיניות הפרטיות</a>",
       "newsletter_label": "שלח לי עדכונים והצעות מיוחדות",
-      "submit": "צור חשבון",
+      "submit": "Create",
       "already_have_account": "כבר יש לך חשבון?",
       "login_here": "התחבר כאן"
     },
     "reset_password": {
-      "title": "איפוס סיסמת חשבון",
-      "subtext": "הזן סיסמה חדשה",
-      "password": "סיסמה",
-      "password_confirm": "אישור סיסמה",
-      "submit": "איפוס סיסמה"
+      "title": "Reset account password",
+      "subtext": "Enter a new password",
+      "password": "Password",
+      "password_confirm": "Confirm password",
+      "submit": "Reset password"
     }
   },
   "gift_cards": {
     "issued": {
-      "how_to_use_gift_card": "השתמש בקוד כרטיס המתנה באינטרנט או בקוד QR בחנות",
-      "title": "הנה יתרת כרטיס המתנה שלך בסך {{ value }} עבור {{ shop }}!",
-      "subtext": "כרטיס המתנה שלך",
-      "gift_card_code": "קוד כרטיס מתנה",
-      "shop_link": "בקר בחנות המקוונת",
-      "add_to_apple_wallet": "הוסף ל-Apple Wallet",
-      "qr_image_alt": "קוד QR — סרוק למימוש כרטיס מתנה",
-      "copy_code": "העתק קוד כרטיס מתנה",
-      "expiration_date": "פג תוקף ב- {{ expires_on }}",
-      "copy_code_success": "הקוד הועתק בהצלחה",
-      "expired": "פג תוקף"
+      "how_to_use_gift_card": "Use the gift card code online or QR code in-store",
+      "title": "Here's your {{ value }} gift card balance for {{ shop }}!",
+      "subtext": "Your gift card",
+      "gift_card_code": "Gift card code",
+      "shop_link": "Visit online store",
+      "add_to_apple_wallet": "Add to Apple Wallet",
+      "qr_image_alt": "QR code — scan to redeem gift card",
+      "copy_code": "Copy gift card code",
+      "expiration_date": "Expires {{ expires_on }}",
+      "copy_code_success": "Code copied successfully",
+      "expired": "Expired"
     }
   },
   "recipient": {
     "form": {
-      "checkbox": "אני רוצה לשלוח את זה כמתנה",
-      "expanded": "טופס מקבל כרטיס מתנה מורחב",
-      "collapsed": "טופס מקבל כרטיס מתנה מקופל",
-      "email_label": "אימייל המקבל",
-      "email_label_optional_for_no_js_behavior": "אימייל המקבל (אופציונלי)",
-      "email": "אימייל",
-      "name_label": "שם המקבל (אופציונלי)",
-      "name": "שם",
-      "message_label": "הודעה (אופציונלי)",
-      "message": "הודעה",
-      "max_characters": "מקסימום {{ max_chars }} תווים",
+      "checkbox": "I want to send this as a gift",
+      "expanded": "Gift card recipient form expanded",
+      "collapsed": "Gift card recipient form collapsed",
+      "email_label": "Recipient email",
+      "email_label_optional_for_no_js_behavior": "Recipient email (optional)",
+      "email": "Email",
+      "name_label": "Recipient name (optional)",
+      "name": "Name",
+      "message_label": "Message (optional)",
+      "message": "Message",
+      "max_characters": "{{ max_chars }} characters max",
       "send_on": "YYYY-MM-DD",
-      "send_on_label": "שלח ב (אופציונלי)"
+      "send_on_label": "Send on (optional)"
     }
   }
 }

@@ -1,3 +1,5 @@
+{{ 'tz-main-cart.css' | asset_url | stylesheet_tag }}
+
 <div class="cart-overlay" id="cartOverlay"></div>
 <div class="cart-drawer" id="cartDrawer">
   <div class="cart-promo">{{ section.settings.promo_text }}</div>
@@ -73,13 +75,28 @@
       {% endif %}
     </div>
 
-    <div class="order-notes">
-      <span>הוסף הערות להזמנה</span>
-      <span>&plus;</span>
+    <div class="tz-cart-note">
+      <button type="button" class="tz-cart-note-button" aria-expanded="false">
+        <span>{{ 'sections.cart.tz.add_order_note' | t }}</span>
+        <span class="material-icons-outlined">add</span>
+      </button>
+      <cart-note class="tz-cart-note-element" style="display: none;">
+        <textarea
+          class="tz-cart-note-textarea"
+          name="note"
+          placeholder="{{ 'sections.cart.tz.add_order_note' | t }}"
+          rows="4"
+        >{{ cart.note }}</textarea>
+      </cart-note>
     </div>
   </div>
 
   <div class="cart-footer">
+    {% if cart.item_count > 0 %}
+      <a href="{{ routes.cart_url }}" class="tz-cart-drawer-view-cart">
+        {{ 'general.cart.view' | t: count: cart.item_count }}
+      </a>
+    {% endif %}
     <form action="{{ routes.cart_url }}" method="post" id="cart-drawer-form">
       <button type="submit" name="checkout" class="checkout-btn">
         <span>לתשלום</span>
@@ -175,3 +192,5 @@
   ]
 }
 {% endschema %}
+
+<script src="{{ 'tz-main-cart.js' | asset_url }}" defer="defer"></script>
