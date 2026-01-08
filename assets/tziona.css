@@ -1410,6 +1410,7 @@ html.dark .tz-section.tz-header {
 .tz-search-form {
   position: relative;
   width: 100%;
+  margin-top: 24px;
 }
 
 .tz-search-field {
@@ -1609,7 +1610,7 @@ html.dark .tz-section.tz-header {
 /* Close Button */
 .tz-search-dialog-close {
   position: absolute;
-  top: 1.5rem;
+  top: 0;
   right: 1.5rem;
   background: none;
   border: none;
@@ -1647,7 +1648,7 @@ html.dark .tz-section.tz-header {
 }
 
 .tz-search-dialog-results:empty::before {
-  content: "Start typing to search...";
+  content: attr(data-empty-hint);
   display: block;
   text-align: center;
   color: #666666;
@@ -1772,6 +1773,10 @@ html.dark .tz-section.tz-header {
   color: #ededed;
 }
 
+.tz-search-result-empty-text::before {
+  content: attr(data-try-different-keywords);
+}
+
 .tz-search-result-empty-text {
   font-size: 1.4rem;
   margin: 0;
@@ -1843,7 +1848,7 @@ html.dark .tz-section.tz-header {
 /* RTL Support for Search Dialog */
 [dir="rtl"] .tz-search-dialog-close {
   right: auto;
-  left: 1.5rem;
+  left: 0;
 }
 
 [dir="rtl"] .tz-search-result-item {

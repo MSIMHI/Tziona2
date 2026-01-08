@@ -1326,7 +1326,8 @@ class TZHeaderSearch {
         noResults: 'לא נמצאו תוצאות',
         viewAll: 'צפה בכל התוצאות עבור',
         placeholder: 'חיפוש מוצרים...',
-        emptyHint: 'התחל להקליד לחיפוש...'
+        emptyHint: 'התחל להקליד לחיפוש...',
+        tryDifferentKeywords: 'נסה לחפש עם מילות מפתח שונות'
       };
     } else {
       this.translations = {
@@ -1334,7 +1335,8 @@ class TZHeaderSearch {
         noResults: 'No results found',
         viewAll: 'View all results for',
         placeholder: 'Search products...',
-        emptyHint: 'Start typing to search...'
+        emptyHint: 'Start typing to search...',
+        tryDifferentKeywords: 'Try searching with different keywords'
       };
     }
 
@@ -1394,6 +1396,15 @@ class TZHeaderSearch {
     this.closeButton = this.overlay.querySelector('.tz-search-dialog-close');
     this.resultsContainer = this.overlay.querySelector('.tz-search-dialog-results');
     this.form = this.overlay.querySelector('.tz-search-form');
+
+    // Set translated empty state text
+    this.resultsContainer.setAttribute('data-empty-hint', this.translations.emptyHint);
+
+    // Set translated "try different keywords" text
+    const emptyTextElement = this.resultsContainer.querySelector('.tz-search-result-empty-text');
+    if (emptyTextElement) {
+      emptyTextElement.setAttribute('data-try-different-keywords', this.translations.tryDifferentKeywords);
+    }
 
     // Set RTL attributes if needed
     if (this.isRTL) {
@@ -1613,7 +1624,7 @@ class TZHeaderSearch {
     this.resultsContainer.innerHTML = `
       <div class="tz-search-result-empty">
         <h3 class="tz-search-result-empty-title">${this.translations.noResults}</h3>
-        <p class="tz-search-result-empty-text">Try searching with different keywords</p>
+        <p class="tz-search-result-empty-text" data-try-different-keywords></p>
       </div>
     `;
   }
