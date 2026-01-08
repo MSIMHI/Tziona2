@@ -124,12 +124,6 @@
       "type": "סוג מוצר",
       "sku": "SKU",
       "on_sale": "מבצע",
-      "quantity": {
-        "label": "כמות",
-        "increase": "הגדל כמות",
-        "decrease": "הקטן כמות",
-        "input_label": "כמות"
-      },
       "product_variants": "Product variants",
       "media": {
         "gallery_viewer": "Gallery Viewer",
