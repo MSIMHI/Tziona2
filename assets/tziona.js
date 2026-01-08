@@ -329,7 +329,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initialize theme on page load
     const initializeTheme = () => {
-      const savedMode = localStorage.getItem('darkMode') || 'dark'; // Default to dark
+      const savedMode = localStorage.getItem('darkMode') || 'light'; // Default to light
       let currentTheme = savedMode;
 
       if (savedMode === 'auto') {
