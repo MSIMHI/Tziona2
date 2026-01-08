@@ -40,8 +40,8 @@
       "reset": "Clear search term"
     },
     "cart": {
-      "view": "View cart ({{ count }})",
-      "view_empty_cart": "View cart",
+      "view": "צפה בעגלה ({{ count }})",
+      "view_empty_cart": "צפה בעגלה",
       "item_added": "Item added to your cart"
     },
     "share": {

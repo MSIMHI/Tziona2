@@ -461,20 +461,75 @@
 
   // Initialize cart note toggle
   function initCartNoteToggle() {
-    const noteButton = document.querySelector('.tz-cart-note-button');
-    const noteTextarea = document.querySelector('.tz-cart-note-textarea');
+    // Find all note buttons (could be in main cart or drawer)
+    const noteButtons = document.querySelectorAll('.tz-cart-note-button');
     
-    if (noteButton && noteTextarea) {
+    noteButtons.forEach(noteButton => {
+      // Find the cart-note container (could be cart-note element itself or a div with tz-cart-note class)
+      const noteContainer = noteButton.closest('.tz-cart-note') || noteButton.closest('cart-note');
+      
+      if (!noteContainer) return;
+      
+      // Check if noteContainer is a cart-note element itself (cart footer structure)
+      const isCartNoteElement = noteContainer.tagName === 'CART-NOTE';
+      
+      // Find nested cart-note element (drawer structure) or use the textarea directly (cart footer structure)
+      const nestedNoteElement = isCartNoteElement ? null : noteContainer.querySelector('cart-note');
+      const noteTextarea = noteContainer.querySelector('.tz-cart-note-textarea');
+      const iconElement = noteButton.querySelector('.material-icons-outlined');
+      
+      if (!noteTextarea) return;
+      
+      // Determine which element to toggle:
+      // - If there's a nested cart-note element (drawer), toggle that
+      // - Otherwise, toggle the textarea directly (cart footer)
+      const elementToToggle = nestedNoteElement || noteTextarea;
+      
+      // Helper function to check if element is visible
+      const isElementVisible = (el) => {
+        if (!el) return false;
+        const style = window.getComputedStyle(el);
+        return style.display !== 'none' && style.visibility !== 'hidden';
+      };
+      
+      // Check initial state
+      const isInitiallyVisible = isElementVisible(elementToToggle);
+      
+      // Set initial icon state
+      if (iconElement) {
+        iconElement.textContent = isInitiallyVisible ? 'remove' : 'add';
+        noteButton.setAttribute('aria-expanded', isInitiallyVisible ? 'true' : 'false');
+      }
+      
       noteButton.addEventListener('click', function(e) {
         e.preventDefault();
-        const isVisible = noteTextarea.style.display !== 'none' && noteTextarea.style.display !== '';
-        noteTextarea.style.display = isVisible ? 'none' : 'block';
-        noteButton.setAttribute('aria-expanded', isVisible ? 'false' : 'true');
-        if (!isVisible) {
-          noteTextarea.focus();
+        
+        // Determine current visibility state using computed styles
+        const isCurrentlyVisible = isElementVisible(elementToToggle);
+        
+        // Toggle visibility
+        if (nestedNoteElement) {
+          // Drawer structure: toggle the nested cart-note element
+          nestedNoteElement.style.display = isCurrentlyVisible ? 'none' : 'block';
+        } else {
+          // Cart footer structure: toggle the textarea directly
+          noteTextarea.style.display = isCurrentlyVisible ? 'none' : 'block';
+        }
+        
+        const newState = !isCurrentlyVisible;
+        noteButton.setAttribute('aria-expanded', newState ? 'true' : 'false');
+        
+        // Toggle icon between add (+) and remove (-)
+        if (iconElement) {
+          iconElement.textContent = newState ? 'remove' : 'add';
+        }
+        
+        if (newState) {
+          // Focus textarea when opening
+          setTimeout(() => noteTextarea.focus(), 100);
         }
       });
-    }
+    });
   }
 
   // Initialize cart two-column layout wrapper
