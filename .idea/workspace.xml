@@ -5,8 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="261e89e2-f91d-4885-a699-11b8f855e509" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/assets/tz-section-image-banner.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sections/main-cart-footer.liquid" beforeDir="false" afterPath="$PROJECT_DIR$/sections/main-cart-footer.liquid" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/tziona.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/tziona.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/tziona.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/tziona.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layout/theme.liquid" beforeDir="false" afterPath="$PROJECT_DIR$/layout/theme.liquid" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/en.default.json" beforeDir="false" afterPath="$PROJECT_DIR$/locales/en.default.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/he.json" beforeDir="false" afterPath="$PROJECT_DIR$/locales/he.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sections/image-banner.liquid" beforeDir="false" afterPath="$PROJECT_DIR$/sections/image-banner.liquid" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sections/tz-drawer.liquid" beforeDir="false" afterPath="$PROJECT_DIR$/sections/tz-drawer.liquid" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -1,0 +1,4 @@
+refactor the image-banner.liquid to
+be more professionnal remove the default css, js and classes use our own template classes starting with tz, create tz-section-image-banner.css and create our own design based on our design
+READ main-product.liquid to get inspiration
+I already started creating the tz-section-image-banner.css with some base styles

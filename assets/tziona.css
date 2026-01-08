@@ -983,6 +983,10 @@ button.item-remove:disabled {
     opacity: 0.9;
 }
 
+.visually-hidden {
+    padding-bottom: 18px;
+}
+
 .shipping-taxes-text {
     display: block;
     text-align: center;

@@ -144,7 +144,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // If cart is empty, show empty message
         if (cart.item_count === 0) {
-          cartItemsList.innerHTML = '<div style="padding: 30px; text-align:center;">העגלה ריקה</div>';
+          // Clear the list and show empty message with translation if possible, 
+          // but for now keeping it simple as JS doesn't have easy access to Liquid translations without help.
+          // However, the issue mentioned cart-drawer, which usually refers to the Liquid file.
+          // If this JS is used, we might need to handle it.
+          cartItemsList.innerHTML = '<div style="padding: 30px; text-align:center;">' + (window.cartStrings ? window.cartStrings.empty : 'העגלה ריקה') + '</div>';
           
           // Update footer total
           const totalPrice = currentCartDrawer.querySelector('.checkout-btn span:last-child');

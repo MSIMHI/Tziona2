@@ -331,7 +331,14 @@
       "taxes_at_checkout_shipping_at_checkout_without_policy": "Taxes, discounts and shipping calculated at checkout.",
       "tz": {
         "shipping_free_applied": "Free shipping will be applied at checkout",
+        "shipping_free_calculated_at_checkout": "Free shipping calculated at checkout",
         "taxes_shipping_calculated": "Taxes and shipping will be calculated at the next step",
+        "taxes_and_shipping_at_checkout": "Shipping and taxes calculated at checkout",
+        "checkout_amount": "Checkout",
+        "items_count": {
+          "one": "({{ count }} item)",
+          "other": "({{ count }} items)"
+        },
         "trust_secure_payment": "Secure Payment",
         "trust_free_returns": "Free Returns",
         "trust_lifetime_warranty": "Lifetime Warranty",

@@ -4,15 +4,20 @@
 <div class="cart-drawer" id="cartDrawer">
   <div class="cart-promo">{{ section.settings.promo_text }}</div>
   <div class="cart-header">
+    <script>
+      window.cartStrings = {
+        empty: `{{ 'sections.cart.empty' | t }}`
+      };
+    </script>
     <div class="cart-title-row">
-      <span class="cart-title-main">עגלה</span>
-      <span class="cart-title-count">({{ cart.item_count }} פריטים)</span>
+      <span class="cart-title-main">{{ 'templates.cart.cart' | t }}</span>
+      <span class="cart-title-count">{{ 'sections.cart.tz.items_count' | t: count: cart.item_count }}</span>
     </div>
     <button class="close-cart-btn" id="closeCartBtn">&times;</button>
   </div>
 
   <div class="shipping-bar">
-    <div class="shipping-text">משלוח חינם יחושב בקופה</div>
+    <div class="shipping-text">{{ 'sections.cart.tz.shipping_free_calculated_at_checkout' | t }}</div>
     <div class="shipping-progress">
       <!-- Example logic: fill 100% if price > threshold -->
       <div class="shipping-progress-fill" style="width: 100%;"></div>
@@ -65,13 +70,13 @@
                 data-line="{{ forloop.index }}"
                 aria-label="Remove item"
               >
-                הסר
+                {{ 'sections.cart.remove' | t }}
               </button>
             </div>
           </div>
         {% endfor %}
       {% else %}
-        <div style="padding: 30px; text-align:center;">העגלה ריקה</div>
+        <div style="padding: 30px; text-align:center;">{{ 'sections.cart.empty' | t }}</div>
       {% endif %}
     </div>
 
@@ -99,12 +104,12 @@
     {% endif %}
     <form action="{{ routes.cart_url }}" method="post" id="cart-drawer-form">
       <button type="submit" name="checkout" class="checkout-btn">
-        <span>לתשלום</span>
+        <span>{{ 'sections.cart.tz.checkout_amount' | t }}</span>
         <span>&bull;</span>
         <span>{{ cart.total_price | money }}</span>
       </button>
     </form>
-    <span class="shipping-taxes-text">משלוח ומיסים מחושבים בקופה</span>
+    <span class="shipping-taxes-text">{{ 'sections.cart.tz.taxes_and_shipping_at_checkout' | t }}</span>
   </div>
 </div>
 
