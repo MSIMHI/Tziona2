@@ -1,16 +1,13 @@
-{{ 'component-cart.css' | asset_url | stylesheet_tag }}
-{{ 'component-totals.css' | asset_url | stylesheet_tag }}
-{{ 'component-price.css' | asset_url | stylesheet_tag }}
-{{ 'component-discounts.css' | asset_url | stylesheet_tag }}
+{{ 'tz-main-cart.css' | asset_url | stylesheet_tag }}
 
 {%- style -%}
-  .section-{{ section.id }}-padding {
+  .tz-cart-footer-section-{{ section.id }}-padding {
     padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
     padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
   }
 
   @media screen and (min-width: 750px) {
-    .section-{{ section.id }}-padding {
+    .tz-cart-footer-section-{{ section.id }}-padding {
       padding-top: {{ section.settings.padding_top }}px;
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
@@ -18,97 +15,168 @@
 {%- endstyle -%}
 
 <div
-  class="gradient color-{{ section.settings.color_scheme }}{% if cart == empty %} is-empty{% endif %}"
+  class="tz-cart-footer-section{% if cart == empty %} tz-cart-is-empty{% endif %} tz-cart-footer-section-{{ section.id }}-padding"
   id="main-cart-footer"
   data-id="{{ section.id }}"
 >
-  <div class="page-width">
-    <div class="cart__footer isolate section-{{ section.id }}-padding">
-      {%- if settings.show_cart_note -%}
-        <cart-note class="cart__note field">
-          <label for="Cart-note">{{ 'sections.cart.note' | t }}</label>
-          <textarea
-            class="text-area field__input"
-            name="note"
-            form="cart"
-            id="Cart-note"
-            placeholder="{{ 'sections.cart.note' | t }}"
-          >{{ cart.note }}</textarea>
-        </cart-note>
-      {%- endif -%}
-
-      <div class="cart__blocks">
+  <div class="tz-cart-container">
+    <div class="tz-cart-footer-wrapper">
+      <div class="tz-cart-blocks">
         {% for block in section.blocks %}
           {%- case block.type -%}
             {%- when '@app' -%}
               {% render block %}
             {%- when 'subtotal' -%}
-              <div class="js-contents" {{ block.shopify_attributes }}>
-                <div>
-                  {%- if cart.cart_level_discount_applications.size > 0 -%}
-                    <ul class="discounts list-unstyled" role="list" aria-label="{{ 'customer.order.discount' | t }}">
-                      {%- for discount in cart.cart_level_discount_applications -%}
-                        <li class="discounts__discount discounts__discount--position">
-                          {{- 'icon-discount.svg' | inline_asset_content -}}
-                          {{ discount.title | escape }}
-                          (-{{ discount.total_allocated_amount | money }})
-                        </li>
-                      {%- endfor -%}
-                    </ul>
-                  {%- endif -%}
+              <div class="tz-cart-js-contents" {{ block.shopify_attributes }}>
+                {%- comment -%} Shipping Progress (Top) {%- endcomment -%}
+                <div class="tz-cart-shipping-progress">
+                  <div class="tz-cart-shipping-info">
+                    <span class="tz-cart-shipping-icon material-icons-outlined">local_shipping</span>
+                    <span>{{ 'sections.cart.tz.shipping_free_applied' | t }}</span>
+                  </div>
+                  <div class="tz-cart-progress-bar">
+                    <div class="tz-cart-progress-fill"></div>
+                  </div>
                 </div>
 
-                <div class="totals">
-                  <h2 class="totals__total">{{ 'sections.cart.estimated_total' | t }}</h2>
-                  <p class="totals__total-value">{{ cart.total_price | money_with_currency }}</p>
+                {%- comment -%} Subtotal Section {%- endcomment -%}
+                <div class="tz-cart-totals">
+                  <h2 class="tz-cart-totals-label">{{ 'sections.cart.tz.subtotal' | t }}</h2>
+                  <p class="tz-cart-totals-value">{{ cart.total_price | money_with_currency }}</p>
                 </div>
 
-                <small class="tax-note caption-large rte">
-                  {%- if cart.duties_included and cart.taxes_included -%}
-                    {%- if shop.shipping_policy.body == blank -%}
-                      {{ 'sections.cart.duties_and_taxes_included_shipping_at_checkout_without_policy' | t }}
-                    {%- else -%}
-                      {{
-                        'sections.cart.duties_and_taxes_included_shipping_at_checkout_with_policy_html'
-                        | t: link: shop.shipping_policy.url
-                      }}
-                    {%- endif -%}
-                  {%- elsif cart.duties_included == false and cart.taxes_included -%}
-                    {%- if shop.shipping_policy.body == blank -%}
-                      {{ 'sections.cart.taxes_included_shipping_at_checkout_without_policy' | t }}
-                    {%- else -%}
-                      {{
-                        'sections.cart.taxes_included_shipping_at_checkout_with_policy_html'
-                        | t: link: shop.shipping_policy.url
-                      }}
-                    {%- endif -%}
-                  {%- elsif cart.duties_included and cart.taxes_included == false -%}
-                    {%- if shop.shipping_policy.body == blank -%}
-                      {{ 'sections.cart.duties_included_taxes_at_checkout_shipping_at_checkout_without_policy' | t }}
-                    {%- else -%}
-                      {{
-                        'sections.cart.duties_included_taxes_at_checkout_shipping_at_checkout_with_policy_html'
-                        | t: link: shop.shipping_policy.url
-                      }}
-                    {%- endif -%}
-                  {%- elsif cart.duties_included == false and cart.taxes_included == false -%}
-                    {%- if shop.shipping_policy.body == blank -%}
-                      {{ 'sections.cart.taxes_at_checkout_shipping_at_checkout_without_policy' | t }}
-                    {%- else -%}
-                      {{
-                        'sections.cart.taxes_at_checkout_shipping_at_checkout_with_policy_html'
-                        | t: link: shop.shipping_policy.url
-                      }}
-                    {%- endif -%}
-                  {%- endif -%}
-                </small>
+                {%- comment -%} Discounts {%- endcomment -%}
+                {%- if cart.cart_level_discount_applications.size > 0 -%}
+                  <ul class="tz-cart-discounts" role="list" aria-label="{{ 'customer.order.discount' | t }}">
+                    {%- for discount in cart.cart_level_discount_applications -%}
+                      <li class="tz-cart-discount-item">
+                        {{- 'icon-discount.svg' | inline_asset_content -}}
+                        {{ discount.title | escape }}
+                        (-{{ discount.total_allocated_amount | money }})
+                      </li>
+                    {%- endfor -%}
+                  </ul>
+                {%- endif -%}
               </div>
             {%- else -%}
-              <div class="cart__ctas" {{ block.shopify_attributes }}>
+              {%- comment -%} Complementary Products / Buy This With {%- endcomment -%}
+              {%- if cart != empty -%}
+                {%- comment -%} Get complementary product - try collections.all first, then fallback to featured collection {%- endcomment -%}
+                {%- assign complementary_product = null -%}
+                {%- assign first_cart_item = cart.items.first -%}
+                
+                {%- comment -%} Try to get a product from collections.all that's not in cart {%- endcomment -%}
+                {%- if collections.all.products.size > 0 -%}
+                  {%- for product in collections.all.products limit: 50 -%}
+                    {%- assign product_in_cart = false -%}
+                    {%- for item in cart.items -%}
+                      {%- if item.product_id == product.id -%}
+                        {%- assign product_in_cart = true -%}
+                        {%- break -%}
+                      {%- endif -%}
+                    {%- endfor -%}
+                    {%- unless product_in_cart -%}
+                      {%- if product.available -%}
+                        {%- assign complementary_product = product -%}
+                        {%- break -%}
+                      {%- endif -%}
+                    {%- endunless -%}
+                  {%- endfor -%}
+                {%- elsif collections['all'] and collections['all'].products.size > 0 -%}
+                  {%- comment -%} Fallback: try collections['all'] {%- endcomment -%}
+                  {%- for product in collections['all'].products limit: 50 -%}
+                    {%- assign product_in_cart = false -%}
+                    {%- for item in cart.items -%}
+                      {%- if item.product_id == product.id -%}
+                        {%- assign product_in_cart = true -%}
+                        {%- break -%}
+                      {%- endif -%}
+                    {%- endfor -%}
+                    {%- unless product_in_cart -%}
+                      {%- if product.available -%}
+                        {%- assign complementary_product = product -%}
+                        {%- break -%}
+                      {%- endif -%}
+                    {%- endunless -%}
+                  {%- endfor -%}
+                {%- endif -%}
+                
+                {%- if complementary_product -%}
+                  <div class="tz-cart-complementary-products">
+                    <div class="tz-cart-complementary-item">
+                      {%- if complementary_product.featured_image -%}
+                        <img 
+                          src="{{ complementary_product.featured_image | image_url: width: 64 }}"
+                          alt="{{ complementary_product.title | escape }}"
+                          class="tz-cart-complementary-image"
+                          width="64"
+                          height="64"
+                          loading="lazy"
+                        >
+                      {%- else -%}
+                        <div class="tz-cart-complementary-image-placeholder"></div>
+                      {%- endif -%}
+                      <div class="tz-cart-complementary-content">
+                        <p class="tz-cart-complementary-label">{{ 'sections.cart.tz.buy_with' | t }}</p>
+                        <h4 class="tz-cart-complementary-title">{{ complementary_product.title | escape }}</h4>
+                        <div class="tz-cart-complementary-footer">
+                          <span class="tz-cart-complementary-price">{{ complementary_product.selected_or_first_available_variant.price | money }}</span>
+                          <button 
+                            type="button" 
+                            class="tz-cart-complementary-add"
+                            data-product-id="{{ complementary_product.id }}"
+                            data-variant-id="{{ complementary_product.selected_or_first_available_variant.id }}"
+                          >
+                            {{ 'sections.cart.tz.quick_add' | t }}
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                {%- endif -%}
+              {%- endif -%}
+
+              {%- comment -%} Order Notes {%- endcomment -%}
+              <cart-note class="tz-cart-note">
+                {%- if cart.note == blank -%}
+                  <button type="button" class="tz-cart-note-button" aria-expanded="false">
+                    <span>{{ 'sections.cart.tz.add_order_note' | t }}</span>
+                    <span class="material-icons-outlined">add</span>
+                  </button>
+                  <textarea
+                    class="tz-cart-note-textarea"
+                    name="note"
+                    form="cart"
+                    id="Cart-note"
+                    placeholder="{{ 'sections.cart.tz.add_order_note' | t }}"
+                    style="display: none;"
+                  >{{ cart.note }}</textarea>
+                {%- else -%}
+                  <label for="Cart-note" class="tz-cart-note-label">{{ 'sections.cart.tz.add_order_note' | t }}</label>
+                  <textarea
+                    class="tz-cart-note-textarea"
+                    name="note"
+                    form="cart"
+                    id="Cart-note"
+                    placeholder="{{ 'sections.cart.tz.add_order_note' | t }}"
+                  >{{ cart.note }}</textarea>
+                {%- endif -%}
+              </cart-note>
+
+              {%- comment -%} Coupon Code Section {%- endcomment -%}
+              <div class="tz-cart-coupon-section">
+                <p class="tz-cart-coupon-text">
+                  {{ 'sections.cart.tz.coupon_new_customer' | t }}<br/>
+                  <span class="tz-cart-coupon-code">{{ 'sections.cart.tz.coupon_code' | t }}</span>
+                </p>
+              </div>
+
+              {%- comment -%} Checkout Button {%- endcomment -%}
+              <div class="tz-cart-ctas" {{ block.shopify_attributes }}>
                 <button
                   type="submit"
                   id="checkout"
-                  class="cart__checkout-button button"
+                  class="tz-cart-checkout-button"
                   name="checkout"
                   {% if cart == empty %}
                     disabled
@@ -119,8 +187,37 @@
                 </button>
               </div>
 
+              {%- comment -%} Tax Note {%- endcomment -%}
+              <p class="tz-cart-tax-note-secondary">
+                {{ 'sections.cart.tz.taxes_shipping_calculated' | t }}
+              </p>
+
+              {%- comment -%} Trust Badges {%- endcomment -%}
+              <div class="tz-cart-trust-badges">
+                <div class="tz-cart-trust-grid">
+                  <div class="tz-cart-trust-item">
+                    <div class="tz-cart-trust-icon-wrapper">
+                      <span class="tz-cart-trust-icon material-icons-outlined">lock</span>
+                    </div>
+                    <span class="tz-cart-trust-text">{{ 'sections.cart.tz.trust_secure_payment' | t }}</span>
+                  </div>
+                  <div class="tz-cart-trust-item">
+                    <div class="tz-cart-trust-icon-wrapper">
+                      <span class="tz-cart-trust-icon material-icons-outlined">published_with_changes</span>
+                    </div>
+                    <span class="tz-cart-trust-text">{{ 'sections.cart.tz.trust_free_returns' | t }}</span>
+                  </div>
+                  <div class="tz-cart-trust-item">
+                    <div class="tz-cart-trust-icon-wrapper">
+                      <span class="tz-cart-trust-icon material-icons-outlined">verified</span>
+                    </div>
+                    <span class="tz-cart-trust-text">{{ 'sections.cart.tz.trust_lifetime_warranty' | t }}</span>
+                  </div>
+                </div>
+              </div>
+
               {%- if additional_checkout_buttons -%}
-                <div class="cart__dynamic-checkout-buttons additional-checkout-buttons">
+                <div class="tz-cart-dynamic-checkout-buttons">
                   {{ content_for_additional_checkout_buttons }}
                 </div>
               {%- endif -%}
@@ -132,6 +229,8 @@
     </div>
   </div>
 </div>
+
+<script src="{{ 'tz-main-cart.js' | asset_url }}" defer="defer"></script>
 
 {% schema %}
 {

@@ -299,6 +299,7 @@
     "cart": {
       "title": "Your cart",
       "caption": "Cart items",
+      "remove": "Remove",
       "remove_title": "Remove {{ title }}",
       "estimated_total": "Estimated total",
       "new_estimated_total": "New estimated total",
@@ -315,6 +316,19 @@
       "duties_included_taxes_at_checkout_shipping_at_checkout_without_policy": "Duties included. Taxes, discounts and shipping calculated at checkout.",
       "taxes_at_checkout_shipping_at_checkout_with_policy_html": "Taxes, discounts and <a href=\"{{ link }}\">shipping</a> calculated at checkout.",
       "taxes_at_checkout_shipping_at_checkout_without_policy": "Taxes, discounts and shipping calculated at checkout.",
+      "tz": {
+        "shipping_free_applied": "Free shipping will be applied at checkout",
+        "taxes_shipping_calculated": "Taxes and shipping will be calculated at the next step",
+        "trust_secure_payment": "Secure Payment",
+        "trust_free_returns": "Free Returns",
+        "trust_lifetime_warranty": "Lifetime Warranty",
+        "subtotal": "Subtotal",
+        "coupon_new_customer": "New customers save 10% with coupon code",
+        "coupon_code": "WELCOME10",
+        "buy_with": "Buy this with...",
+        "quick_add": "Quick Add",
+        "add_order_note": "Add order notes"
+      },
       "headings": {
         "product": "Product",
         "price": "Price",
