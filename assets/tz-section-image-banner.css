@@ -529,6 +529,60 @@
   pointer-events: none;
 }
 
+/* Dark Mode Banner Button Support */
+.dark .tz-btn--solid,
+html.dark .tz-btn--solid {
+  background: #ededed !important;
+  color: #121212 !important;
+  border-color: #ededed !important;
+}
+
+.dark .tz-btn--solid:hover,
+html.dark .tz-btn--solid:hover {
+  background: #d4d4d4 !important;
+  border-color: #d4d4d4 !important;
+}
+
+.dark .tz-btn--outline,
+html.dark .tz-btn--outline {
+  background: transparent !important;
+  color: #ededed !important;
+  border-color: #ededed !important;
+}
+
+.dark .tz-btn--outline:hover,
+html.dark .tz-btn--outline:hover {
+  background: #ededed !important;
+  color: #121212 !important;
+}
+
+/* Light Mode Banner Button Support */
+.light .tz-btn--solid,
+html.light .tz-btn--solid {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border-color: #000000 !important;
+}
+
+.light .tz-btn--solid:hover,
+html.light .tz-btn--solid:hover {
+  background: #333333 !important;
+  border-color: #333333 !important;
+}
+
+.light .tz-btn--outline,
+html.light .tz-btn--outline {
+  background: transparent !important;
+  color: #000000 !important;
+  border-color: #000000 !important;
+}
+
+.light .tz-btn--outline:hover,
+html.light .tz-btn--outline:hover {
+  background: #000000 !important;
+  color: #ffffff !important;
+}
+
 /* Responsive Adjustments */
 @media screen and (max-width: 749px) {
   .tz-image-banner__content {

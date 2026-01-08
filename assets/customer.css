@@ -707,6 +707,130 @@ li[data-address] {
   display: block;
 }
 
+/* Dark Mode Support */
+.dark .customer *,
+.dark .customer h1,
+.dark .customer h2,
+.dark .customer h3,
+.dark .customer p,
+.dark .customer span,
+.dark .customer label,
+.dark .customer div,
+html.dark .customer *,
+html.dark .customer h1,
+html.dark .customer h2,
+html.dark .customer h3,
+html.dark .customer p,
+html.dark .customer span,
+html.dark .customer label,
+html.dark .customer div {
+  color: #EDEDED !important;
+}
+
+.dark .customer a,
+html.dark .customer a {
+  color: #CCCCCC !important;
+}
+
+.dark .customer a:hover,
+html.dark .customer a:hover {
+  color: #EDEDED !important;
+}
+
+.dark .customer input,
+.dark .customer textarea,
+.dark .customer select,
+html.dark .customer input,
+html.dark .customer textarea,
+html.dark .customer select {
+  background-color: #1e1e1e !important;
+  border-color: #333333 !important;
+  color: #EDEDED !important;
+}
+
+.dark .customer input:focus,
+.dark .customer textarea:focus,
+.dark .customer select:focus,
+html.dark .customer input:focus,
+html.dark .customer textarea:focus,
+html.dark .customer select:focus {
+  border-color: #555555 !important;
+}
+
+.dark .customer button,
+html.dark .customer button {
+  background-color: #EDEDED !important;
+  color: #121212 !important;
+  border-color: #EDEDED !important;
+}
+
+.dark .customer button:hover,
+html.dark .customer button:hover {
+  background-color: #CCCCCC !important;
+}
+
+/* Light Mode Support */
+.light .customer *,
+.light .customer h1,
+.light .customer h2,
+.light .customer h3,
+.light .customer p,
+.light .customer span,
+.light .customer label,
+.light .customer div,
+html.light .customer *,
+html.light .customer h1,
+html.light .customer h2,
+html.light .customer h3,
+html.light .customer p,
+html.light .customer span,
+html.light .customer label,
+html.light .customer div {
+  color: #111111 !important;
+}
+
+.light .customer a,
+html.light .customer a {
+  color: #333333 !important;
+}
+
+.light .customer a:hover,
+html.light .customer a:hover {
+  color: #000000 !important;
+}
+
+.light .customer input,
+.light .customer textarea,
+.light .customer select,
+html.light .customer input,
+html.light .customer textarea,
+html.light .customer select {
+  background-color: #ffffff !important;
+  border-color: #cccccc !important;
+  color: #111111 !important;
+}
+
+.light .customer input:focus,
+.light .customer textarea:focus,
+.light .customer select:focus,
+html.light .customer input:focus,
+html.light .customer textarea:focus,
+html.light .customer select:focus {
+  border-color: #999999 !important;
+}
+
+.light .customer button,
+html.light .customer button {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border-color: #000000 !important;
+}
+
+.light .customer button:hover,
+html.light .customer button:hover {
+  background-color: #333333 !important;
+}
+
 .addresses h2 {
   text-align: left;
 }

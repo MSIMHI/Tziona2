@@ -9,7 +9,7 @@ html[dir="rtl"] .tz-form-input[type="tel"]::placeholder {
 }
 
 .tz-contact-section {
-  padding: var(--tz-pt, 36px) 1.5rem var(--tz-pb, 36px);
+  padding: var(--tz-pt, 36px) 1.5rem calc(var(--tz-pb, 36px) + 30px);
 }
 
 .tz-contact-container {

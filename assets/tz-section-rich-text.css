@@ -12,6 +12,17 @@
   --tz-rich-text-color: #000;
 }
 
+/* Dark Mode Variables */
+.dark {
+  --tz-rich-text-background: rgba(30, 30, 30, 0.95);
+  --tz-rich-text-color: #ededed;
+}
+
+.light {
+  --tz-rich-text-background: rgba(255, 255, 255, 0.95);
+  --tz-rich-text-color: #000;
+}
+
 [dir="rtl"] {
   --tz-rich-text-direction: rtl;
 }
@@ -394,6 +405,52 @@
 .tz-rich-text--color-scheme-3 {
   --tz-rich-text-background: rgba(245, 245, 245, 0.95);
   --tz-rich-text-color: #000;
+}
+
+/* Dark Mode Button Styles */
+.dark .tz-btn--solid {
+  background: #ededed;
+  color: #121212;
+  border-color: #ededed;
+}
+
+.dark .tz-btn--solid:hover {
+  background: #d4d4d4;
+  border-color: #d4d4d4;
+}
+
+.dark .tz-btn--outline {
+  background: transparent;
+  color: #ededed;
+  border-color: #ededed;
+}
+
+.dark .tz-btn--outline:hover {
+  background: #ededed;
+  color: #121212;
+}
+
+/* Light Mode Button Styles */
+.light .tz-btn--solid {
+  background: #000;
+  color: #fff;
+  border-color: #000;
+}
+
+.light .tz-btn--solid:hover {
+  background: #333;
+  border-color: #333;
+}
+
+.light .tz-btn--outline {
+  background: transparent;
+  color: #000;
+  border-color: #000;
+}
+
+.light .tz-btn--outline:hover {
+  background: #000;
+  color: #fff;
 }
 
 /* Responsive Adjustments */

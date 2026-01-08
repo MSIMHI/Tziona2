@@ -18,6 +18,30 @@ color: inherit;
 }
 .tz-announcement a:hover { opacity: 0.8; }
 
+/* Dark Mode Support */
+.dark .tz-announcement,
+html.dark .tz-announcement {
+  border-bottom-color: #333333 !important;
+  color: #ffffff !important;
+}
+
+.dark .tz-announcement *,
+html.dark .tz-announcement * {
+  color: #ffffff !important;
+}
+
+/* Light Mode Support - White text on dark background */
+.light .tz-announcement,
+html.light .tz-announcement {
+  border-bottom-color: rgba(0,0,0,0.05) !important;
+  color: #ffffff !important;
+}
+
+.light .tz-announcement *,
+html.light .tz-announcement * {
+  color: #ffffff !important;
+}
+
 /* --- STATIC MODE --- */
 .tz-announcement-inner {
 padding: 10px 40px;

@@ -21,11 +21,280 @@ body {
     color: #111111;
 }
 
-/* Dark Mode */
+/* Theme Modes */
 .dark body,
 html.dark body {
-    background-color: #121212;
-    color: #EDEDED;
+    background-color: #121212 !important;
+    color: #EDEDED !important;
+}
+
+.light body,
+html.light body {
+    background-color: #ffffff !important;
+    color: #111111 !important;
+}
+
+/* Dark mode for all text elements */
+.dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6,
+.dark p, .dark span, .dark div, .dark li, .dark td, .dark th,
+html.dark h1, html.dark h2, html.dark h3, html.dark h4, html.dark h5, html.dark h6,
+html.dark p, html.dark span, html.dark div, html.dark li, html.dark td, html.dark th {
+    color: #EDEDED !important;
+}
+
+.dark a,
+html.dark a {
+    color: #CCCCCC !important;
+}
+
+.dark a:hover,
+html.dark a:hover {
+ 
+/* Ensure white text elements maintain white color in dark mode */
+.dark .cart-promo,
+html.dark .cart-promo,
+.dark .sale-badge,
+html.dark .sale-badge,
+.dark .tz-cart-toast--success,
+html.dark .tz-cart-toast--success,
+.dark .tz-cart-toast--error,
+html.dark .tz-cart-toast--error,
+.dark .tz-cart-toast--info,
+html.dark .tz-cart-toast--info,
+.dark .tz-submit-btn,
+html.dark .tz-submit-btn,
+.dark .tz-address-default-badge,
+html.dark .tz-address-default-badge {
+    color: #ffffff !important;
+}
+    color: #EDEDED !important;
+}
+
+/* Light mode for all text elements */
+.light h1, .light h2, .light h3, .light h4, .light h5, .light h6,
+.light p, .light span, .light div, .light li, .light td, .light th,
+html.light h1, html.light h2, html.light h3, html.light h4, html.light h5, html.light h6,
+html.light p, html.light span, html.light div, html.light li, html.light td, html.light th {
+    color: #111111 !important;
+}
+
+.light a,
+html.light a {
+    color: #333333 !important;
+}
+
+.light a:hover,
+html.light a:hover {
+ 
+/* Override light mode text color for elements that should remain white */
+.light .cart-promo,
+html.light .cart-promo,
+.light .sale-badge,
+html.light .sale-badge,
+.light .tz-cart-toast--success,
+html.light .tz-cart-toast--success,
+.light .tz-cart-toast--error,
+html.light .tz-cart-toast--error,
+.light .tz-cart-toast--info,
+html.light .tz-cart-toast--info,
+.light .tz-submit-btn,
+html.light .tz-submit-btn,
+.light .tz-address-default-badge,
+html.light .tz-address-default-badge {
+    color: #ffffff !important;
+}
+    color: #000000 !important;
+}
+
+/* Dark Mode Dropdown */
+.footer-dark-mode-dropdown {
+    position: relative;
+    display: inline-block;
+    margin-left: 1rem;
+    z-index: 1100; /* Higher than footer z-index */
+    overflow: visible; /* Override footer overflow hidden */
+}
+
+.dark-mode-dropdown-trigger {
+    background: none;
+    border: 1px solid var(--color-black, #111);
+    color: var(--color-black, #111);
+    padding: 0.5rem 0.75rem;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    transition: all 0.2s ease;
+}
+
+.dark body .dark-mode-dropdown-trigger,
+html.dark .dark-mode-dropdown-trigger {
+    border-color: var(--color-white, #ededed);
+    color: var(--color-white, #ededed);
+}
+
+/* Footer-specific dropdown trigger styles (footer is always dark) */
+.tz-footer .dark-mode-dropdown-trigger {
+    border-color: var(--color-white, #ededed) !important;
+    color: var(--color-white, #ededed) !important;
+}
+
+/* Light mode styles (don't apply to footer) */
+.light body .dark-mode-dropdown-trigger,
+html.light .dark-mode-dropdown-trigger {
+    border-color: var(--color-black, #111);
+    color: var(--color-black, #111);
+}
+
+.tz-footer .dark-mode-dropdown-trigger:hover {
+    background: rgba(255, 255, 255, 0.05) !important;
+}
+
+.dark-mode-dropdown-trigger:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.dark body .dark-mode-dropdown-trigger:hover,
+html.dark .dark-mode-dropdown-trigger:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.light body .dark-mode-dropdown-trigger:hover,
+html.light .dark-mode-dropdown-trigger:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.dark-mode-dropdown-icon {
+    width: 16px;
+    height: 16px;
+}
+
+.dropdown-arrow {
+    font-size: 0.75rem;
+    transition: transform 0.2s ease;
+    transform: rotate(0deg);
+}
+
+.dark-mode-dropdown-menu {
+    position: absolute;
+    bottom: calc(100% + 0.5rem);
+    right: 0;
+    background: var(--color-white, #ffffff);
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    min-width: 140px;
+    z-index: 1100;
+    margin-bottom: 0;
+}
+
+.dark body .dark-mode-dropdown-menu,
+html.dark .dark-mode-dropdown-menu {
+    background: #1e1e1e;
+    border-color: #333333;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.light body .dark-mode-dropdown-menu,
+html.light .dark-mode-dropdown-menu {
+    background: var(--color-white, #ffffff);
+    border-color: #e5e7eb;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Footer-specific dropdown menu styles (maintain dark theme) */
+.tz-footer .dark-mode-dropdown-menu {
+    background: #1e1e1e !important;
+    border-color: #333333 !important;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3) !important;
+    z-index: 1101 !important;
+    position: absolute !important;
+}
+
+.tz-footer .dark-mode-option {
+    color: #ededed !important;
+}
+
+.tz-footer .dark-mode-option:hover {
+    background: #2a2a2a !important;
+}
+
+.tz-footer .dark-mode-option.active {
+    background: #333333 !important;
+}
+
+.dark-mode-option {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background: none;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    font-size: 0.875rem;
+    color: var(--color-black, #111);
+    transition: background 0.2s ease;
+}
+
+.dark body .dark-mode-option,
+html.dark .dark-mode-option {
+    color: var(--color-white, #ededed);
+}
+
+.light body .dark-mode-option,
+html.light .dark-mode-option {
+    color: var(--color-black, #111);
+}
+
+.dark-mode-option:hover {
+    background: #f9f9f9;
+}
+
+.dark body .dark-mode-option:hover,
+html.dark .dark-mode-option:hover {
+    background: #2a2a2a;
+}
+
+.light body .dark-mode-option:hover,
+html.light .dark-mode-option:hover {
+    background: #f9f9f9;
+}
+
+.dark-mode-option.active {
+    background: #f0f0f0;
+    font-weight: 600;
+}
+
+.dark body .dark-mode-option.active,
+html.dark .dark-mode-option.active {
+    background: #333333;
+}
+
+.light body .dark-mode-option.active,
+html.light .dark-mode-option.active {
+    background: #f0f0f0;
+}
+
+.dark-mode-option:first-child {
+    border-radius: 6px 6px 0 0;
+}
+
+.dark-mode-option:last-child {
+    border-radius: 0 0 6px 6px;
+}
+
+.dark-mode-option:only-child {
+    border-radius: 6px;
+}
+
+.theme-icon {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
 }
 
 a {
@@ -290,6 +559,12 @@ html.dark main {
     font-size: 14px;
     font-weight: 800;
     letter-spacing: 0.5px;
+ 
+/* Ensure cart promo text stays white in light mode */
+.light .cart-promo,
+html.light .cart-promo {
+    color: var(--color-white) !important;
+}
 }
 
 .benefit-desc {
@@ -297,6 +572,40 @@ html.dark main {
     color: #333;
     line-height: 1.4;
     max-width: 300px;
+}
+
+/* Dark Mode for Benefits */
+.dark .footer-benefits,
+html.dark .footer-benefits {
+    background-color: #1e1e1e;
+    border-top-color: #333333;
+}
+
+.dark .benefit-item,
+html.dark .benefit-item {
+    border-left-color: #333333;
+}
+
+.dark .benefit-desc,
+html.dark .benefit-desc {
+    color: #cccccc;
+}
+
+/* Light Mode for Benefits */
+.light .footer-benefits,
+html.light .footer-benefits {
+    background-color: var(--color-white);
+    border-top-color: #eee;
+}
+
+.light .benefit-item,
+html.light .benefit-item {
+    border-left-color: #ddd;
+}
+
+.light .benefit-desc,
+html.light .benefit-desc {
+    color: #333;
 }
 
 .footer-guarantee {
@@ -313,6 +622,20 @@ html.dark main {
     font-weight: 800;
     letter-spacing: 1px;
     flex: 1;
+}
+
+/* Dark Mode for Guarantee */
+.dark .footer-guarantee,
+html.dark .footer-guarantee {
+    background-color: #121212;
+    color: #ededed;
+}
+
+/* Light Mode for Guarantee */
+.light .footer-guarantee,
+html.light .footer-guarantee {
+    background-color: var(--color-off-white);
+    color: #111111;
 }
 
 /* =========================================================
@@ -402,6 +725,12 @@ html.dark main {
   font-weight: 800;
   margin-bottom: 25px;     /* preset similar to your old footer */
   letter-spacing: 0.5px;   /* preset */
+ 
+/* Ensure cart promo text stays white in light mode */
+.light .cart-promo,
+html.light .cart-promo {
+    color: var(--color-white) !important;
+}
   color: var(--col-h-color);
   font-family: var(--col-heading-font);
   text-transform: uppercase;
@@ -562,6 +891,49 @@ html.dark main {
   font-size: 11px;
   color: var(--tz-t-color);
   line-height: 1.5;
+}
+
+/* Light Mode Footer Support - White text on dark footer background */
+.light .tz-footer .copyright-text,
+html.light .tz-footer .copyright-text {
+  color: #ededed !important;
+}
+
+.light .tz-footer .social-icon-link svg,
+html.light .tz-footer .social-icon-link svg {
+  fill: #ededed !important;
+}
+
+/* Footer links and all text elements should be white in light mode */
+.light .tz-footer *,
+html.light .tz-footer * {
+  color: #ededed !important;
+}
+
+.light .tz-footer a,
+html.light .tz-footer a {
+  color: #cccccc !important;
+}
+
+.light .tz-footer a:hover,
+html.light .tz-footer a:hover {
+  color: #ededed !important;
+}
+
+/* Dark Mode Footer Support - Ensure proper contrast */
+.dark .tz-footer *,
+html.dark .tz-footer * {
+  color: #ededed !important;
+}
+
+.dark .tz-footer a,
+html.dark .tz-footer a {
+  color: #cccccc !important;
+}
+
+.dark .tz-footer a:hover,
+html.dark .tz-footer a:hover {
+  color: #ededed !important;
 }
 
 /* Mobile tweaks */
@@ -751,6 +1123,12 @@ html.dark main {
     font-size: 13px;
     font-weight: 500;
     letter-spacing: 0.5px;
+ 
+/* Ensure cart promo text stays white in light mode */
+.light .cart-promo,
+html.light .cart-promo {
+    color: var(--color-white) !important;
+}
 }
 
 .cart-header {
@@ -1449,6 +1827,28 @@ html.dark .tz-section.tz-header {
   color: rgba(0, 0, 0, 0.5);
 }
 
+/* Dark Mode Search Input */
+.dark .tz-search-input,
+html.dark .tz-search-input {
+  color: #ededed !important;
+}
+
+.dark .tz-search-input::placeholder,
+html.dark .tz-search-input::placeholder {
+  color: rgba(255, 255, 255, 0.5) !important;
+}
+
+/* Light Mode Search Input */
+.light .tz-search-input,
+html.light .tz-search-input {
+  color: #111111 !important;
+}
+
+.light .tz-search-input::placeholder,
+html.light .tz-search-input::placeholder {
+  color: rgba(0, 0, 0, 0.5) !important;
+}
+
 [dir="rtl"] .tz-search-input {
   text-align: right;
   direction: rtl;
@@ -1516,6 +1916,28 @@ html.dark .tz-section.tz-header {
   background: rgba(0, 0, 0, 0.05);
 }
 
+/* Dark Mode Search Submit Button */
+.dark .tz-search-submit,
+html.dark .tz-search-submit {
+  background: #2a2a2a !important;
+}
+
+.dark .tz-search-submit:hover,
+html.dark .tz-search-submit:hover {
+  background: #333333 !important;
+}
+
+/* Light Mode Search Submit Button */
+.light .tz-search-submit,
+html.light .tz-search-submit {
+  background: var(--tz-search-bg-color) !important;
+}
+
+.light .tz-search-submit:hover,
+html.light .tz-search-submit:hover {
+  background: rgba(0, 0, 0, 0.05) !important;
+}
+
 .tz-search-submit .tz-search-icon {
   width: 2rem;
   height: 2rem;
@@ -1524,6 +1946,30 @@ html.dark .tz-section.tz-header {
   stroke-width: 0.2rem;
   stroke-linecap: round;
   stroke-linejoin: round;
+}
+
+/* Dark Mode Search Icon */
+.dark .tz-search-submit .tz-search-icon,
+html.dark .tz-search-submit .tz-search-icon {
+  stroke: #ededed !important;
+}
+
+/* Light Mode Search Icon */
+.light .tz-search-submit .tz-search-icon,
+html.light .tz-search-submit .tz-search-icon {
+  stroke: var(--tz-search-text-color) !important;
+}
+
+/* Dark Mode Search Reset Icon */
+.dark .tz-search-reset .tz-search-icon,
+html.dark .tz-search-reset .tz-search-icon {
+  stroke: #ededed !important;
+}
+
+/* Light Mode Search Reset Icon */
+.light .tz-search-reset .tz-search-icon,
+html.light .tz-search-reset .tz-search-icon {
+  stroke: var(--tz-search-text-color) !important;
 }
 
 /* RTL Adjustments */
@@ -1625,6 +2071,16 @@ html.dark .tz-section.tz-header {
   transition: all 0.2s ease;
 }
 
+.dark .tz-search-dialog-close,
+html.dark .tz-search-dialog-close {
+  color: #999999;
+}
+
+.light .tz-search-dialog-close,
+html.light .tz-search-dialog-close {
+  color: #666666;
+}
+
 .tz-search-dialog-close:hover {
   background: #f5f5f5;
   color: #111111;
@@ -1633,6 +2089,28 @@ html.dark .tz-section.tz-header {
 .dark .tz-search-dialog-close:hover {
   background: #333333;
   color: #ededed;
+}
+
+/* Search Dialog Input Dark Mode */
+.dark .tz-search-dialog .tz-search-input,
+html.dark .tz-search-dialog .tz-search-input {
+  color: #ededed !important;
+}
+
+.dark .tz-search-dialog .tz-search-input::placeholder,
+html.dark .tz-search-dialog .tz-search-input::placeholder {
+  color: rgba(255, 255, 255, 0.5) !important;
+}
+
+/* Search Dialog Input Light Mode */
+.light .tz-search-dialog .tz-search-input,
+html.light .tz-search-dialog .tz-search-input {
+  color: #111111 !important;
+}
+
+.light .tz-search-dialog .tz-search-input::placeholder,
+html.light .tz-search-dialog .tz-search-input::placeholder {
+  color: rgba(0, 0, 0, 0.5) !important;
 }
 
 .tz-search-dialog-close svg {
@@ -1658,6 +2136,10 @@ html.dark .tz-section.tz-header {
 
 .dark .tz-search-dialog-results:empty::before {
   color: #999999;
+}
+
+.light .tz-search-dialog-results:empty::before {
+  color: #666666;
 }
 
 /* Search Result Item */
@@ -1723,6 +2205,16 @@ html.dark .tz-section.tz-header {
   font-size: 1.3rem;
   color: #666666;
   font-weight: 500;
+}
+
+.dark .tz-search-result-price,
+html.dark .tz-search-result-price {
+  color: #cccccc;
+}
+
+.light .tz-search-result-price,
+html.light .tz-search-result-price {
+  color: #666666;
 }
 
 .dark .tz-search-result-price {
@@ -1903,4 +2395,211 @@ html.dark .tz-section.tz-header {
   .tz-search-dialog {
     display: none;
   }
+}
+
+/* FINAL OVERRIDE: Ensure white text elements remain white in all themes */
+/* This rule loads last and has maximum specificity and importance */
+.light .cart-promo,
+.light .sale-badge, 
+.light .tz-cart-toast--success,
+.light .tz-cart-toast--error,
+.light .tz-cart-toast--info,
+.light .tz-submit-btn,
+.light .tz-address-default-badge,
+html.light .cart-promo,
+html.light .sale-badge,
+html.light .tz-cart-toast--success,
+html.light .tz-cart-toast--error,
+html.light .tz-cart-toast--info,
+html.light .tz-submit-btn,
+html.light .tz-address-default-badge,
+.dark .cart-promo,
+.dark .sale-badge,
+.dark .tz-cart-toast--success,
+.dark .tz-cart-toast--error,
+.dark .tz-cart-toast--info,
+.dark .tz-submit-btn,
+.dark .tz-address-default-badge,
+html.dark .cart-promo,
+html.dark .sale-badge,
+html.dark .tz-cart-toast--success,
+html.dark .tz-cart-toast--error,
+html.dark .tz-cart-toast--info,
+html.dark .tz-submit-btn,
+html.dark .tz-address-default-badge {
+  color: #ffffff !important;
+}
+
+/* Additional checkout button override */
+.light .checkout-btn,
+html.light .checkout-btn,
+.dark .checkout-btn,
+html.dark .checkout-btn {
+  color: #ffffff !important;
+}
+
+/* Additional white text elements */
+.light .tz-pagination-current,
+html.light .tz-pagination-current,
+.dark .tz-pagination-current,
+html.dark .tz-pagination-current,
+.light .tz-zoom-dialog-close,
+html.light .tz-zoom-dialog-close,
+.dark .tz-zoom-dialog-close,
+html.dark .tz-zoom-dialog-close {
+  color: #ffffff !important;
+}
+
+/* Checkout button span elements - maintain white text */
+.light .checkout-btn span,
+html.light .checkout-btn span,
+.dark .checkout-btn span,
+html.dark .checkout-btn span {
+  color: #ffffff !important;
+}
+
+/* Hamburger icon spans - ensure visibility in dark mode */
+.dark .hamburger-icon span,
+html.dark .hamburger-icon span {
+  background-color: #ffffff !important;
+}
+
+/* Mobile menu drawer - dark mode overrides */
+.dark .mobile-menu-drawer,
+html.dark .mobile-menu-drawer {
+  background: #1a1a1a !important;
+}
+
+.dark .mobile-menu-close,
+html.dark .mobile-menu-close,
+.dark .mobile-menu-link,
+html.dark .mobile-menu-link {
+  color: #ffffff !important;
+}
+
+.dark .mobile-menu-link:hover,
+html.dark .mobile-menu-link:hover {
+  color: var(--tz-accent, #ff5a1f) !important;
+}
+
+.dark .mobile-menu-header,
+html.dark .mobile-menu-header {
+  border-bottom-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.dark .mobile-menu-link,
+html.dark .mobile-menu-link {
+  border-bottom-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Cart drawer - dark mode overrides */
+.dark .cart-drawer,
+html.dark .cart-drawer {
+  background: #1a1a1a !important;
+}
+
+.dark .cart-drawer .cart-title-main,
+.dark .cart-drawer .cart-title-count,
+.dark .cart-drawer .cart-item__details,
+.dark .cart-drawer .cart-item__price,
+.dark .cart-drawer .price,
+.dark .cart-drawer .cart__login-title,
+html.dark .cart-drawer .cart-title-main,
+html.dark .cart-drawer .cart-title-count,
+html.dark .cart-drawer .cart-item__details,
+html.dark .cart-drawer .cart-item__price,
+html.dark .cart-drawer .price,
+html.dark .cart-drawer .cart__login-title {
+  color: #ffffff !important;
+}
+
+.dark .cart-drawer .cart-header,
+html.dark .cart-drawer .cart-header {
+  border-bottom-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.dark .cart-drawer .cart-item,
+html.dark .cart-drawer .cart-item {
+  border-bottom-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Cart drawer - dark mode overrides */
+.dark .cart-drawer,
+html.dark .cart-drawer {
+  background: #1a1a1a !important;
+}
+
+.dark .cart-drawer .cart-title-main,
+.dark .cart-drawer .cart-title-count,
+.dark .cart-drawer .cart-item__details,
+.dark .cart-drawer .cart-item__price,
+.dark .cart-drawer .price,
+.dark .cart-drawer .cart__login-title,
+html.dark .cart-drawer .cart-title-main,
+html.dark .cart-drawer .cart-title-count,
+html.dark .cart-drawer .cart-item__details,
+html.dark .cart-drawer .cart-item__price,
+html.dark .cart-drawer .price,
+html.dark .cart-drawer .cart__login-title {
+  color: #ffffff !important;
+}
+
+.dark .cart-drawer .cart-header,
+html.dark .cart-drawer .cart-header {
+  border-bottom-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.dark .cart-drawer .cart-item,
+html.dark .cart-drawer .cart-item {
+  border-bottom-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Cart item images - ensure normal display in dark mode */
+.dark .cart-item img,
+html.dark .cart-item img {
+  mix-blend-mode: normal !important;
+  filter: brightness(1.1) !important;
+}
+
+/* Cart item images - ensure normal display in dark mode */
+.dark .cart-item img,
+html.dark .cart-item img {
+  mix-blend-mode: normal !important;
+  filter: brightness(1.1) !important;
+}
+
+/* Cart footer - dark mode overrides */
+.dark .cart-footer,
+html.dark .cart-footer {
+  background: #1a1a1a !important;
+  border-top-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.dark .cart-footer .cart__login-title,
+.dark .cart-footer .price,
+.dark .cart-footer .cart-subtotal,
+.dark .cart-footer .cart-total,
+html.dark .cart-footer .cart__login-title,
+html.dark .cart-footer .price,
+html.dark .cart-footer .cart-subtotal,
+html.dark .cart-footer .cart-total {
+  color: #ffffff !important;
+}
+
+/* Cart footer - dark mode overrides */
+.dark .cart-footer,
+html.dark .cart-footer {
+  background: #1a1a1a !important;
+  border-top-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.dark .cart-footer .cart__login-title,
+.dark .cart-footer .price,
+.dark .cart-footer .cart-subtotal,
+.dark .cart-footer .cart-total,
+html.dark .cart-footer .cart__login-title,
+html.dark .cart-footer .price,
+html.dark .cart-footer .cart-subtotal,
+html.dark .cart-footer .cart-total {
+  color: #ffffff !important;
 }

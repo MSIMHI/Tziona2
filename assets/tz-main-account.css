@@ -64,6 +64,70 @@
   letter-spacing: 0.05em;
 }
 
+/* Dark Mode Support for Account Details Section */
+.dark .tz-account-details,
+html.dark .tz-account-details {
+  background-color: transparent !important;
+}
+
+.dark .tz-account-heading,
+html.dark .tz-account-heading {
+  color: #EDEDED !important;
+}
+
+.dark .tz-account-details-card,
+html.dark .tz-account-details-card {
+  background-color: #1e1e1e !important;
+  border-color: #333333 !important;
+}
+
+.dark .tz-account-address,
+html.dark .tz-account-address {
+  color: #EDEDED !important;
+}
+
+.dark .tz-view-addresses-link,
+html.dark .tz-view-addresses-link {
+  color: #CCCCCC !important;
+}
+
+.dark .tz-view-addresses-link:hover,
+html.dark .tz-view-addresses-link:hover {
+  color: #EDEDED !important;
+}
+
+/* Light Mode Support for Account Details Section */
+.light .tz-account-details,
+html.light .tz-account-details {
+  background-color: transparent !important;
+}
+
+.light .tz-account-heading,
+html.light .tz-account-heading {
+  color: #111111 !important;
+}
+
+.light .tz-account-details-card,
+html.light .tz-account-details-card {
+  background-color: #f9fafb !important;
+  border-color: #e5e7eb !important;
+}
+
+.light .tz-account-address,
+html.light .tz-account-address {
+  color: #4b5563 !important;
+}
+
+.light .tz-view-addresses-link,
+html.light .tz-view-addresses-link {
+  color: #4b5563 !important;
+}
+
+.light .tz-view-addresses-link:hover,
+html.light .tz-view-addresses-link:hover {
+  color: #000000 !important;
+}
+
 /* Orders Table */
 .tz-orders-table-wrapper {
   overflow-x: auto;
@@ -173,4 +237,116 @@
   text-align: center;
   padding: 3rem 0;
   color: #6b7280;
+}
+
+/* Dark Mode Support */
+.dark .tz-account-section,
+html.dark .tz-account-section {
+  background-color: #121212 !important;
+}
+
+.dark .tz-account-header,
+html.dark .tz-account-header {
+  border-bottom-color: #333333 !important;
+}
+
+.dark .tz-account-title,
+.dark .tz-account-subtitle,
+.dark .tz-account-meta,
+.dark .tz-account-info,
+.dark .tz-order-item,
+.dark .tz-order-status,
+.dark .tz-order-total,
+.dark .tz-empty-state,
+html.dark .tz-account-title,
+html.dark .tz-account-subtitle,
+html.dark .tz-account-meta,
+html.dark .tz-account-info,
+html.dark .tz-order-item,
+html.dark .tz-order-status,
+html.dark .tz-order-total,
+html.dark .tz-empty-state {
+  color: #EDEDED !important;
+}
+
+.dark .tz-logout-link,
+html.dark .tz-logout-link {
+  color: #CCCCCC !important;
+}
+
+.dark .tz-logout-link:hover,
+html.dark .tz-logout-link:hover {
+  color: #EDEDED !important;
+}
+
+.dark .tz-account-card,
+html.dark .tz-account-card {
+  background-color: #1e1e1e !important;
+  border-color: #333333 !important;
+}
+
+.dark .tz-order-link,
+html.dark .tz-order-link {
+  color: #CCCCCC !important;
+}
+
+.dark .tz-order-link:hover,
+html.dark .tz-order-link:hover {
+  color: #EDEDED !important;
+}
+
+/* Light Mode Support */
+.light .tz-account-section,
+html.light .tz-account-section {
+  background-color: #ffffff !important;
+}
+
+.light .tz-account-header,
+html.light .tz-account-header {
+  border-bottom-color: #e5e7eb !important;
+}
+
+.light .tz-account-title,
+.light .tz-account-subtitle,
+.light .tz-account-meta,
+.light .tz-account-info,
+.light .tz-order-item,
+.light .tz-order-status,
+.light .tz-order-total,
+.light .tz-empty-state,
+html.light .tz-account-title,
+html.light .tz-account-subtitle,
+html.light .tz-account-meta,
+html.light .tz-account-info,
+html.light .tz-order-item,
+html.light .tz-order-status,
+html.light .tz-order-total,
+html.light .tz-empty-state {
+  color: #111111 !important;
+}
+
+.light .tz-logout-link,
+html.light .tz-logout-link {
+  color: #4b5563 !important;
+}
+
+.light .tz-logout-link:hover,
+html.light .tz-logout-link:hover {
+  color: #000000 !important;
+}
+
+.light .tz-account-card,
+html.light .tz-account-card {
+  background-color: #ffffff !important;
+  border-color: #e5e7eb !important;
+}
+
+.light .tz-order-link,
+html.light .tz-order-link {
+  color: #4b5563 !important;
+}
+
+.light .tz-order-link:hover,
+html.light .tz-order-link:hover {
+  color: #000000 !important;
 }

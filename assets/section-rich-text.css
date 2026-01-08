@@ -84,3 +84,35 @@
 .rich-text__blocks.right .rich-text__buttons {
   justify-content: flex-end;
 }
+
+/* Dark Mode Support */
+.dark .rich-text__blocks *,
+html.dark .rich-text__blocks * {
+  color: #ededed;
+}
+
+.dark .rich-text__blocks a,
+html.dark .rich-text__blocks a {
+  color: #cccccc;
+}
+
+.dark .rich-text__blocks a:hover,
+html.dark .rich-text__blocks a:hover {
+  color: #ededed;
+}
+
+/* Light Mode Support */
+.light .rich-text__blocks *,
+html.light .rich-text__blocks * {
+  color: #111111;
+}
+
+.light .rich-text__blocks a,
+html.light .rich-text__blocks a {
+  color: #333333;
+}
+
+.light .rich-text__blocks a:hover,
+html.light .rich-text__blocks a:hover {
+  color: #000000;
+}

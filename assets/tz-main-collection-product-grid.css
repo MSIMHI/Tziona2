@@ -146,6 +146,31 @@
   border-color: rgb(255 255 255);
 }
 
+/* Light mode filter buttons */
+.light .tz-collection-filter-button,
+html.light .tz-collection-filter-button {
+  background-color: #ffffff;
+  color: #111111;
+  border-color: #e5e7eb;
+}
+
+.light .tz-collection-filter-button:hover,
+html.light .tz-collection-filter-button:hover {
+  border-color: #000000;
+}
+
+.light .tz-collection-filter-button.is-active,
+html.light .tz-collection-filter-button.is-active {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border-color: #000000 !important;
+}
+
+.light .tz-collection-filter-button.is-active *,
+html.light .tz-collection-filter-button.is-active * {
+  color: #ffffff !important;
+}
+
 /* --- MAIN LAYOUT GRID --- */
 .tz-collection-layout {
   display: flex;

@@ -20,6 +20,110 @@
   }
 }
 
+/* Dark Mode Support */
+.dark .contact *,
+.dark .contact h1,
+.dark .contact h2,
+.dark .contact h3,
+.dark .contact p,
+.dark .contact span,
+.dark .contact label,
+.dark .contact div,
+html.dark .contact *,
+html.dark .contact h1,
+html.dark .contact h2,
+html.dark .contact h3,
+html.dark .contact p,
+html.dark .contact span,
+html.dark .contact label,
+html.dark .contact div {
+  color: #EDEDED !important;
+}
+
+.dark .contact input,
+.dark .contact textarea,
+.dark .contact select,
+html.dark .contact input,
+html.dark .contact textarea,
+html.dark .contact select {
+  background-color: #1e1e1e !important;
+  border-color: #333333 !important;
+  color: #EDEDED !important;
+}
+
+.dark .contact input:focus,
+.dark .contact textarea:focus,
+.dark .contact select:focus,
+html.dark .contact input:focus,
+html.dark .contact textarea:focus,
+html.dark .contact select:focus {
+  border-color: #555555 !important;
+}
+
+.dark .contact button,
+html.dark .contact button {
+  background-color: #EDEDED !important;
+  color: #121212 !important;
+  border-color: #EDEDED !important;
+}
+
+.dark .contact button:hover,
+html.dark .contact button:hover {
+  background-color: #CCCCCC !important;
+}
+
+/* Light Mode Support */
+.light .contact *,
+.light .contact h1,
+.light .contact h2,
+.light .contact h3,
+.light .contact p,
+.light .contact span,
+.light .contact label,
+.light .contact div,
+html.light .contact *,
+html.light .contact h1,
+html.light .contact h2,
+html.light .contact h3,
+html.light .contact p,
+html.light .contact span,
+html.light .contact label,
+html.light .contact div {
+  color: #111111 !important;
+}
+
+.light .contact input,
+.light .contact textarea,
+.light .contact select,
+html.light .contact input,
+html.light .contact textarea,
+html.light .contact select {
+  background-color: #ffffff !important;
+  border-color: #cccccc !important;
+  color: #111111 !important;
+}
+
+.light .contact input:focus,
+.light .contact textarea:focus,
+.light .contact select:focus,
+html.light .contact input:focus,
+html.light .contact textarea:focus,
+html.light .contact select:focus {
+  border-color: #999999 !important;
+}
+
+.light .contact button,
+html.light .contact button {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border-color: #000000 !important;
+}
+
+.light .contact button:hover,
+html.light .contact button:hover {
+  background-color: #333333 !important;
+}
+
 .contact__button {
   margin-top: 3rem;
 }

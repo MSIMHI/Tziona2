@@ -164,3 +164,157 @@
   margin-bottom: 1rem;
   text-align: center;
 }
+
+/* Dark Mode Support */
+.dark .tz-login-section,
+.dark .tz-login-container,
+.dark .tz-login-header,
+.dark .tz-login-title,
+.dark .tz-login-subtitle,
+.dark .tz-form-field,
+.dark .tz-form-label,
+.dark .tz-form-input,
+.dark .tz-form-textarea,
+.dark .tz-form-select,
+.dark .tz-form-checkbox,
+.dark .tz-form-radio,
+.dark .tz-form-message,
+html.dark .tz-login-section,
+html.dark .tz-login-container,
+html.dark .tz-login-header,
+html.dark .tz-login-title,
+html.dark .tz-login-subtitle,
+html.dark .tz-form-field,
+html.dark .tz-form-label,
+html.dark .tz-form-input,
+html.dark .tz-form-textarea,
+html.dark .tz-form-select,
+html.dark .tz-form-checkbox,
+html.dark .tz-form-radio,
+html.dark .tz-form-message {
+  background-color: #121212 !important;
+  color: #EDEDED !important;
+}
+
+.dark .tz-form-input,
+.dark .tz-form-textarea,
+.dark .tz-form-select,
+html.dark .tz-form-input,
+html.dark .tz-form-textarea,
+html.dark .tz-form-select {
+  background-color: #1e1e1e !important;
+  border-color: #333333 !important;
+  color: #EDEDED !important;
+}
+
+.dark .tz-form-input:focus,
+.dark .tz-form-textarea:focus,
+.dark .tz-form-select:focus,
+html.dark .tz-form-input:focus,
+html.dark .tz-form-textarea:focus,
+html.dark .tz-form-select:focus {
+  border-color: #555555 !important;
+}
+
+.dark .tz-login-btn,
+.dark .tz-form-btn,
+html.dark .tz-login-btn,
+html.dark .tz-form-btn {
+  background-color: #EDEDED !important;
+  color: #121212 !important;
+  border-color: #EDEDED !important;
+}
+
+.dark .tz-login-btn:hover,
+.dark .tz-form-btn:hover,
+html.dark .tz-login-btn:hover,
+html.dark .tz-form-btn:hover {
+  background-color: #CCCCCC !important;
+}
+
+.dark .tz-form-link,
+html.dark .tz-form-link {
+  color: #CCCCCC !important;
+}
+
+.dark .tz-form-link:hover,
+html.dark .tz-form-link:hover {
+  color: #EDEDED !important;
+}
+
+/* Light Mode Support */
+.light .tz-login-section,
+.light .tz-login-container,
+.light .tz-login-header,
+.light .tz-login-title,
+.light .tz-login-subtitle,
+.light .tz-form-field,
+.light .tz-form-label,
+.light .tz-form-input,
+.light .tz-form-textarea,
+.light .tz-form-select,
+.light .tz-form-checkbox,
+.light .tz-form-radio,
+.light .tz-form-message,
+html.light .tz-login-section,
+html.light .tz-login-container,
+html.light .tz-login-header,
+html.light .tz-login-title,
+html.light .tz-login-subtitle,
+html.light .tz-form-field,
+html.light .tz-form-label,
+html.light .tz-form-input,
+html.light .tz-form-textarea,
+html.light .tz-form-select,
+html.light .tz-form-checkbox,
+html.light .tz-form-radio,
+html.light .tz-form-message {
+  background-color: #ffffff !important;
+  color: #111111 !important;
+}
+
+.light .tz-form-input,
+.light .tz-form-textarea,
+.light .tz-form-select,
+html.light .tz-form-input,
+html.light .tz-form-textarea,
+html.light .tz-form-select {
+  background-color: #ffffff !important;
+  border-color: #cccccc !important;
+  color: #111111 !important;
+}
+
+.light .tz-form-input:focus,
+.light .tz-form-textarea:focus,
+.light .tz-form-select:focus,
+html.light .tz-form-input:focus,
+html.light .tz-form-textarea:focus,
+html.light .tz-form-select:focus {
+  border-color: #999999 !important;
+}
+
+.light .tz-login-btn,
+.light .tz-form-btn,
+html.light .tz-login-btn,
+html.light .tz-form-btn {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border-color: #000000 !important;
+}
+
+.light .tz-login-btn:hover,
+.light .tz-form-btn:hover,
+html.light .tz-login-btn:hover,
+html.light .tz-form-btn:hover {
+  background-color: #333333 !important;
+}
+
+.light .tz-form-link,
+html.light .tz-form-link {
+  color: #333333 !important;
+}
+
+.light .tz-form-link:hover,
+html.light .tz-form-link:hover {
+  color: #000000 !important;
+}

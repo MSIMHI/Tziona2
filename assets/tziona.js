@@ -41,6 +41,322 @@ document.addEventListener('DOMContentLoaded', () => {
 
   initMobileMenu();
 
+  // Dark Mode Dropdown
+  const initDarkMode = () => {
+    const dropdownTrigger = document.querySelector('.dark-mode-dropdown-trigger');
+    const dropdownMenu = document.querySelector('.dark-mode-dropdown-menu');
+    const themeOptions = document.querySelectorAll('.dark-mode-option');
+    const htmlElement = document.documentElement;
+
+    if (dropdownTrigger && dropdownMenu) {
+      // Toggle dropdown menu
+      dropdownTrigger.addEventListener('click', (e) => {
+        e.preventDefault();
+        const isExpanded = dropdownTrigger.getAttribute('aria-expanded') === 'true';
+        dropdownTrigger.setAttribute('aria-expanded', !isExpanded);
+        dropdownMenu.hidden = isExpanded;
+
+        // Update arrow rotation
+        const arrow = dropdownTrigger.querySelector('.dropdown-arrow');
+        if (arrow) {
+          arrow.style.transform = isExpanded ? 'rotate(0deg)' : 'rotate(180deg)';
+        }
+      });
+
+      // Close dropdown when clicking outside
+      document.addEventListener('click', (e) => {
+        if (!dropdownTrigger.contains(e.target) && !dropdownMenu.contains(e.target)) {
+          dropdownTrigger.setAttribute('aria-expanded', 'false');
+          dropdownMenu.hidden = true;
+          const arrow = dropdownTrigger.querySelector('.dropdown-arrow');
+          if (arrow) {
+            arrow.style.transform = 'rotate(0deg)';
+          }
+        }
+      });
+
+      // Handle theme option clicks
+      themeOptions.forEach(option => {
+        option.addEventListener('click', (e) => {
+          e.preventDefault();
+          const theme = option.dataset.theme;
+
+          // Remove active class from all options
+          themeOptions.forEach(opt => opt.classList.remove('active'));
+          // Add active class to clicked option
+          option.classList.add('active');
+
+          // Apply theme
+          applyTheme(theme);
+
+          // Close dropdown
+          dropdownTrigger.setAttribute('aria-expanded', 'false');
+          dropdownMenu.hidden = true;
+          const arrow = dropdownTrigger.querySelector('.dropdown-arrow');
+          if (arrow) {
+            arrow.style.transform = 'rotate(0deg)';
+          }
+        });
+      });
+    }
+
+    // Apply theme function
+    const applyTheme = (theme) => {
+      // Remove existing theme classes
+      document.body.classList.remove('dark', 'light');
+      htmlElement.classList.remove('dark', 'light');
+
+      // Remove any existing inline styles
+      const existingStyle = document.getElementById('theme-inline-styles');
+      if (existingStyle) {
+        existingStyle.remove();
+      }
+
+      if (theme === 'dark') {
+        document.body.classList.add('dark');
+        htmlElement.classList.add('dark');
+        localStorage.setItem('darkMode', 'dark');
+
+        // Add inline styles to ensure dark mode takes effect
+        const style = document.createElement('style');
+        style.id = 'theme-inline-styles';
+        style.textContent = `
+          body, html { background-color: #121212 !important; color: #EDEDED !important; }
+          h1, h2, h3, h4, h5, h6, p, span, div, li, td, th, a, label {
+            color: #EDEDED !important;
+          }
+          /* Don't override button colors, badges, dropdown elements, and white text elements */
+          button, .tz-btn, .tz-btn * {
+            color: inherit !important;
+          }
+          .tz-submit-btn {
+            color: #ffffff !important;
+          }
+          .tz-address-default-badge {
+            color: #ffffff !important;
+          }
+          .cart-promo {
+            color: var(--color-white, #ffffff) !important;
+          }
+          .sale-badge {
+            color: white !important;
+          }
+          .tz-cart-toast--success,
+          .tz-cart-toast--error,
+          .tz-cart-toast--info {
+            color: white !important;
+          }
+          .dark-mode-dropdown-trigger, .dark-mode-dropdown-menu, .dark-mode-option {
+            color: inherit !important;
+          }
+          a { color: #CCCCCC !important; }
+          a:hover { color: #EDEDED !important; }
+          /* Form inputs need dark backgrounds in dark mode */
+          input, textarea, select,
+          .tz-form-input, .tz-form-textarea, .tz-form-select {
+            background-color: #1e1e1e !important;
+            border-color: #333333 !important;
+            color: #EDEDED !important;
+          }
+          input:focus, textarea:focus, select:focus,
+          .tz-form-input:focus, .tz-form-textarea:focus, .tz-form-select:focus {
+            border-color: #555555 !important;
+          }
+          /* Labels and form text */
+          label, .tz-form-label {
+            color: #EDEDED !important;
+          }
+        `;
+        document.head.appendChild(style);
+      } else if (theme === 'light') {
+        document.body.classList.add('light');
+        htmlElement.classList.add('light');
+        localStorage.setItem('darkMode', 'light');
+
+        // Add inline styles to ensure light mode takes effect
+        const style = document.createElement('style');
+        style.id = 'theme-inline-styles';
+        style.textContent = `
+          body, html { background-color: #ffffff !important; color: #111111 !important; }
+          h1, h2, h3, h4, h5, h6, p, span, div, li, td, th, a, label {
+            color: #111111 !important;
+          }
+          /* Don't override button colors, badges, and dropdown elements */
+          button, .tz-btn, .tz-btn * {
+            color: inherit !important;
+          }
+          .tz-submit-btn {
+            color: #ffffff !important;
+          }
+          .tz-address-default-badge {
+            color: #ffffff !important;
+          }
+          .dark-mode-dropdown-trigger, .dark-mode-dropdown-menu, .dark-mode-option {
+            color: inherit !important;
+          }
+          a { color: #333333 !important; }
+          a:hover { color: #000000 !important; }
+          /* Form inputs need light backgrounds in light mode */
+          input, textarea, select,
+          .tz-form-input, .tz-form-textarea, .tz-form-select {
+            background-color: #ffffff !important;
+            border-color: #cccccc !important;
+            color: #111111 !important;
+          }
+          input:focus, textarea:focus, select:focus,
+          .tz-form-input:focus, .tz-form-textarea:focus, .tz-form-select:focus {
+            border-color: #999999 !important;
+          }
+          /* Labels and form text */
+          label, .tz-form-label {
+            color: #111111 !important;
+          }
+        `;
+        document.head.appendChild(style);
+      } else if (theme === 'auto') {
+        // Auto mode - use system preference
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.body.classList.add(prefersDark ? 'dark' : 'light');
+        htmlElement.classList.add(prefersDark ? 'dark' : 'light');
+        localStorage.setItem('darkMode', 'auto');
+
+        // Apply the appropriate inline styles
+        if (prefersDark) {
+          const style = document.createElement('style');
+          style.id = 'theme-inline-styles';
+          style.textContent = `
+            body, html { background-color: #121212 !important; color: #EDEDED !important; }
+            h1, h2, h3, h4, h5, h6, p, span, div, li, td, th, a, label {
+              color: #EDEDED !important;
+            }
+          /* Don't override button colors, badges, dropdown elements, and white text elements */
+          button, .tz-btn, .tz-btn * {
+            color: inherit !important;
+          }
+          .tz-submit-btn {
+            color: #ffffff !important;
+          }
+          .tz-address-default-badge {
+            color: #ffffff !important;
+          }
+          .cart-promo {
+            color: var(--color-white, #ffffff) !important;
+          }
+          .sale-badge {
+            color: white !important;
+          }
+          .tz-cart-toast--success,
+          .tz-cart-toast--error,
+          .tz-cart-toast--info {
+            color: white !important;
+          }
+          .dark-mode-dropdown-trigger, .dark-mode-dropdown-menu, .dark-mode-option {
+            color: inherit !important;
+          }
+            a { color: #CCCCCC !important; }
+            a:hover { color: #EDEDED !important; }
+            /* Form inputs need dark backgrounds in dark mode */
+            input, textarea, select,
+            .tz-form-input, .tz-form-textarea, .tz-form-select {
+              background-color: #1e1e1e !important;
+              border-color: #333333 !important;
+              color: #EDEDED !important;
+            }
+            input:focus, textarea:focus, select:focus,
+            .tz-form-input:focus, .tz-form-textarea:focus, .tz-form-select:focus {
+              border-color: #555555 !important;
+            }
+            /* Labels and form text */
+            label, .tz-form-label {
+              color: #EDEDED !important;
+            }
+          `;
+          document.head.appendChild(style);
+        } else {
+          const style = document.createElement('style');
+          style.id = 'theme-inline-styles';
+          style.textContent = `
+            body, html { background-color: #ffffff !important; color: #111111 !important; }
+            h1, h2, h3, h4, h5, h6, p, span, div, li, td, th, a, label {
+              color: #111111 !important;
+            }
+          /* Don't override button colors, badges, dropdown elements, and white text elements */
+          button, .tz-btn, .tz-btn * {
+            color: inherit !important;
+          }
+          .tz-submit-btn {
+            color: #ffffff !important;
+          }
+          .tz-address-default-badge {
+            color: #ffffff !important;
+          }
+          .cart-promo {
+            color: var(--color-white, #ffffff) !important;
+          }
+          .sale-badge {
+            color: white !important;
+          }
+          .tz-cart-toast--success,
+          .tz-cart-toast--error,
+          .tz-cart-toast--info {
+            color: white !important;
+          }
+          .dark-mode-dropdown-trigger, .dark-mode-dropdown-menu, .dark-mode-option {
+            color: inherit !important;
+          }
+            a { color: #333333 !important; }
+            a:hover { color: #000000 !important; }
+            /* Form inputs need light backgrounds in light mode */
+            input, textarea, select,
+            .tz-form-input, .tz-form-textarea, .tz-form-select {
+              background-color: #ffffff !important;
+              border-color: #cccccc !important;
+              color: #111111 !important;
+            }
+            input:focus, textarea:focus, select:focus,
+            .tz-form-input:focus, .tz-form-textarea:focus, .tz-form-select:focus {
+              border-color: #999999 !important;
+            }
+            /* Labels and form text */
+            label, .tz-form-label {
+              color: #111111 !important;
+            }
+          `;
+          document.head.appendChild(style);
+        }
+      }
+    };
+
+    // Initialize theme on page load
+    const initializeTheme = () => {
+      const savedMode = localStorage.getItem('darkMode') || 'dark'; // Default to dark
+      let currentTheme = savedMode;
+
+      if (savedMode === 'auto') {
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        currentTheme = prefersDark ? 'dark' : 'light';
+      }
+
+      applyTheme(savedMode);
+
+      // Update active state in dropdown
+      themeOptions.forEach(option => {
+        option.classList.toggle('active', option.dataset.theme === savedMode);
+      });
+
+      // Listen for system theme changes when in auto mode
+      if (savedMode === 'auto') {
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+          applyTheme('auto');
+        });
+      }
+    };
+
+    initializeTheme();
+  };
+
+  initDarkMode();
+
   // Select cart button (looking for the specific SVG pattern or a data-attribute if added)
   const cartBtns = document.querySelectorAll('.icon-btn');
   const cartDrawer = document.getElementById('cartDrawer');
