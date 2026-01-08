@@ -16,7 +16,7 @@
   --tz-collection-hero-border-dark: #333333;
 
   /* Spacing (RTL-aware) */
-  --tz-collection-hero-container-max: 1600px;
+  --tz-collection-hero-container-max: 1280px; /* Match home page container size */
   --tz-collection-hero-padding-x: 1rem;
   --tz-collection-hero-padding-y: 2rem;
   --tz-collection-hero-gap: 2rem;
@@ -39,42 +39,80 @@
   --tz-collection-hero-bg-light: var(--tz-collection-hero-bg-dark);
 }
 
-/* --- MAIN CONTAINER (RTL-First) --- */
+/* --- MAIN CONTAINER (RTL/LTR Support) --- */
 .tz-collection-hero {
   width: 100%;
+  direction: ltr; /* Default to LTR */
+  text-align: left;
+  background-color: rgb(var(--color-background));
+  padding: 0; /* Remove padding from parent - padding is now on inner container */
+  box-sizing: border-box;
+}
+
+[dir="rtl"] .tz-collection-hero {
   direction: rtl;
   text-align: right;
-  background-color: rgb(var(--color-background));
-  padding: var(--tz-collection-hero-padding-y) var(--tz-collection-hero-padding-x);
 }
 
 .tz-collection-hero__inner {
   max-width: var(--tz-collection-hero-container-max);
+  width: 100%; /* Ensure it takes full width up to max-width */
   margin-left: auto;
   margin-right: auto;
+  padding-left: 1.5rem; /* Match tz-collection-container padding */
+  padding-right: 1.5rem;
+  padding-top: var(--tz-collection-hero-padding-y);
+  padding-bottom: var(--tz-collection-hero-padding-y);
   display: flex;
   flex-direction: column;
   gap: var(--tz-collection-hero-gap);
+  direction: ltr; /* Default to LTR */
+  box-sizing: border-box; /* Include padding in width calculation */
+}
+
+@media screen and (min-width: 750px) {
+  .tz-collection-hero__inner {
+    padding-left: 5rem; /* Match tz-collection-container padding */
+    padding-right: 5rem;
+  }
+}
+
+[dir="rtl"] .tz-collection-hero__inner {
   direction: rtl;
 }
 
-/* --- TEXT WRAPPER (RTL-First) --- */
+/* --- TEXT WRAPPER (RTL/LTR Support) --- */
 .tz-collection-hero__text-wrapper {
   flex: 1;
+  direction: ltr; /* Default to LTR */
+  text-align: left;
+  min-width: 0; /* Allow flex item to shrink below content size */
+  max-width: 100%; /* Respect container width */
+}
+
+[dir="rtl"] .tz-collection-hero__text-wrapper {
   direction: rtl;
   text-align: right;
 }
 
-/* --- TITLE (RTL-First) --- */
+/* --- TITLE (RTL/LTR Support) --- */
 .tz-collection-hero__title {
   font-family: var(--tz-collection-hero-font-family);
   font-size: var(--tz-collection-hero-title-mobile);
   font-weight: 700;
   color: rgb(var(--color-foreground));
   margin: 0 0 1rem 0;
+  direction: ltr; /* Default to LTR */
+  text-align: left;
+  line-height: 1.2;
+  max-width: 100%; /* Respect container width */
+  word-wrap: break-word; /* Allow long words to wrap */
+  overflow-wrap: break-word; /* Additional word wrapping support */
+}
+
+[dir="rtl"] .tz-collection-hero__title {
   direction: rtl;
   text-align: right;
-  line-height: 1.2;
 }
 
 @media screen and (min-width: 750px) {
@@ -96,7 +134,7 @@
   border: 0 !important;
 }
 
-/* --- DESCRIPTION (RTL-First) --- */
+/* --- DESCRIPTION (RTL/LTR Support) --- */
 .tz-collection-hero__description {
   font-family: var(--tz-collection-hero-font-family);
   font-size: var(--tz-collection-hero-description-size);
@@ -104,9 +142,14 @@
   color: rgba(var(--color-foreground), 0.8);
   line-height: 1.6;
   margin: 0;
+  direction: ltr; /* Default to LTR */
+  text-align: left;
+  max-width: 66.67%;
+}
+
+[dir="rtl"] .tz-collection-hero__description {
   direction: rtl;
   text-align: right;
-  max-width: 66.67%;
 }
 
 @media screen and (max-width: 749px) {
@@ -123,9 +166,13 @@
 
 @media screen and (min-width: 750px) {
   .tz-collection-hero--with-image .tz-collection-hero__inner {
-    flex-direction: row-reverse;
+    flex-direction: row; /* Default LTR: image left, text right */
     align-items: center;
     gap: 3rem;
+  }
+  
+  [dir="rtl"] .tz-collection-hero--with-image .tz-collection-hero__inner {
+    flex-direction: row-reverse; /* RTL: text left, image right */
   }
 }
 
@@ -155,7 +202,12 @@
 @media screen and (min-width: 750px) {
   .tz-collection-hero--with-image .tz-collection-hero__text-wrapper {
     flex: 0 0 50%;
-    padding-left: 2rem;
+    padding-right: 2rem; /* Default LTR: padding on right */
+    padding-left: 0;
+  }
+  
+  [dir="rtl"] .tz-collection-hero--with-image .tz-collection-hero__text-wrapper {
+    padding-left: 2rem; /* RTL: padding on left */
     padding-right: 0;
   }
 

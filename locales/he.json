@@ -227,18 +227,18 @@
       "reset": "איפוס",
       "sort_button": "מיין",
       "sort_by_label": "מיין לפי:",
-      "to": "עד",
-      "clear_filter": "הסר מסנן",
       "sort_options": {
         "manual": "מומלץ",
         "best-selling": "הכי נמכר",
-        "title-ascending": "אלפביתי, א-ת",
-        "title-descending": "אלפביתי, ת-א",
+        "title-ascending": "שם, א-ת",
+        "title-descending": "שם, ת-א",
         "price-ascending": "מחיר, נמוך לגבוה",
         "price-descending": "מחיר, גבוה לנמוך",
-        "created-ascending": "תאריך, ישן לחדש",
-        "created-descending": "תאריך, חדש לישן"
-      }
+        "created-ascending": "תאריך, חדש לישן",
+        "created-descending": "תאריך, ישן לחדש"
+      },
+      "to": "עד",
+      "clear_filter": "הסר מסנן"
     }
   },
   "collections": {

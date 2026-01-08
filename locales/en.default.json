@@ -155,6 +155,8 @@
         "price_at_each_html": "at {{ price }}/ea",
         "price_range": "{{ minimum }} - {{ maximum }}"
       },
+      "color": "Color",
+      "type": "Product Type",
       "pickup_availability": {
         "view_store_info": "View store information",
         "check_other_stores": "Check availability at other stores",
@@ -219,6 +221,16 @@
       "reset": "Reset",
       "sort_button": "Sort",
       "sort_by_label": "Sort by:",
+      "sort_options": {
+        "manual": "Featured",
+        "best-selling": "Best selling",
+        "title-ascending": "Title, A-Z",
+        "title-descending": "Title, Z-A",
+        "price-ascending": "Price, low to high",
+        "price-descending": "Price, high to low",
+        "created-ascending": "Date, new to old",
+        "created-descending": "Date, old to new"
+      },
       "to": "To",
       "clear_filter": "Remove filter"
     }
@@ -254,7 +266,8 @@
       "pages": "Pages"
     },
     "cart": {
-      "cart": "Cart"
+      "cart": "Cart",
+      "price": "Price"
     },
     "contact": {
       "form": {
@@ -275,8 +288,8 @@
   },
   "collections": {
     "general": {
-      "view_all": "Voir tout",
-      "all_of_collection": "Voir tout"
+      "view_all": "View all",
+      "all_of_collection": "View all"
     }
   },
   "sections": {
@@ -361,6 +374,9 @@
       "empty": "No products found",
       "title": "Collection",
       "use_fewer_filters_html": "Use fewer filters or <a class=\"{{ class }}\" href=\"{{ link }}\">remove all</a>"
+    },
+    "main-collection-banner": {
+      "name": "Collection banner"
     },
     "video": {
       "load_video": "Load video: {{ description }}"

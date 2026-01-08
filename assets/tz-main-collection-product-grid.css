@@ -18,7 +18,7 @@
   --tz-collection-border-dark: #333333;
 
   /* Spacing (RTL-aware) */
-  --tz-collection-container-max: 1600px;
+  --tz-collection-container-max: 1280px; /* Match home page container size */
   --tz-collection-gap: 2rem;
   --tz-collection-padding-x: 1rem;
   --tz-collection-padding-y: 2rem;
@@ -49,35 +49,32 @@
   --tz-collection-bg-subtle: var(--tz-collection-bg-dark-subtle);
 }
 
-/* --- MAIN CONTAINER (RTL-First) --- */
+/* --- MAIN CONTAINER (RTL/LTR Support) --- */
 .tz-collection-section {
   display: block;
   width: 100%;
+  direction: ltr; /* Default to LTR */
+}
+
+[dir="rtl"] .tz-collection-section {
   direction: rtl;
 }
 
-/* Page Width Container */
+/* Page Width Container - Match home page .page-width padding */
 .tz-collection-container {
   max-width: var(--tz-collection-container-max);
   margin-left: auto;
   margin-right: auto;
-  padding-left: var(--tz-collection-padding-x);
-  padding-right: var(--tz-collection-padding-x);
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
   padding-top: var(--tz-collection-padding-y);
   padding-bottom: var(--tz-collection-padding-y);
 }
 
-@media screen and (min-width: 640px) {
+@media screen and (min-width: 750px) {
   .tz-collection-container {
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-  }
-}
-
-@media screen and (min-width: 1024px) {
-  .tz-collection-container {
-    padding-left: 2rem;
-    padding-right: 2rem;
+    padding-left: 5rem;
+    padding-right: 5rem;
   }
 }
 
@@ -169,6 +166,10 @@
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  direction: ltr; /* Default to LTR */
+}
+
+[dir="rtl"] .tz-collection-sidebar {
   direction: rtl;
 }
 
@@ -207,6 +208,11 @@
   text-transform: uppercase;
   letter-spacing: 0.1em;
   color: var(--tz-collection-text-light);
+  direction: ltr; /* Default to LTR */
+  text-align: left;
+}
+
+[dir="rtl"] .tz-collection-filter-title {
   direction: rtl;
   text-align: right;
 }
@@ -358,12 +364,17 @@
 
 .tz-collection-price-inputs .absolute {
   position: absolute;
-  right: 0.75rem;
+  right: 0.75rem; /* Default LTR: currency symbol on right */
   top: 50%;
   transform: translateY(-50%);
   color: rgb(107 114 128);
   font-size: var(--tz-collection-text-sm);
   pointer-events: none;
+}
+
+[dir="rtl"] .tz-collection-price-inputs .absolute {
+  right: auto;
+  left: 0.75rem; /* RTL: currency symbol on left */
 }
 
 .tz-collection-price-input {
@@ -456,6 +467,10 @@
 /* --- MAIN CONTENT --- */
 .tz-collection-main {
   flex: 1;
+  direction: ltr; /* Default to LTR */
+}
+
+[dir="rtl"] .tz-collection-main {
   direction: rtl;
 }
 
@@ -466,6 +481,10 @@
   align-items: center;
   margin-bottom: 1.5rem;
   font-size: var(--tz-collection-text-sm);
+  direction: ltr; /* Default to LTR */
+}
+
+[dir="rtl"] .tz-collection-sort-row {
   direction: rtl;
 }
 
@@ -500,7 +519,7 @@
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
-  padding: 0.5rem 1.75rem 0.5rem 0.5rem;
+  padding: 0.5rem 2rem 0.5rem 0.5rem; /* Extra right padding for caret icon in LTR */
   border: 1px solid rgb(209 213 219);
   background-color: #FFFFFF;
   color: var(--tz-collection-text-light);
@@ -510,8 +529,14 @@
   cursor: pointer;
   font-family: var(--tz-collection-font-family);
   min-width: 150px;
+  direction: ltr; /* Default to LTR */
+  text-align: left;
+}
+
+[dir="rtl"] .tz-collection-sort-select {
   direction: rtl;
   text-align: right;
+  padding: 0.5rem 0.5rem 0.5rem 2rem; /* Extra left padding for caret icon in RTL */
 }
 
 .tz-collection-sort-select:focus {
@@ -521,7 +546,7 @@
 
 .tz-collection-sort-icon {
   position: absolute;
-  left: 0.5rem;
+  right: 0.5rem; /* Default LTR: caret on right */
   top: 50%;
   transform: translateY(-50%);
   font-size: 1.125rem;
@@ -534,10 +559,15 @@
   display: inline-block;
   white-space: nowrap;
   word-wrap: normal;
-  direction: ltr;
+  direction: ltr; /* Icons always LTR */
   -webkit-font-feature-settings: 'liga';
   -webkit-font-smoothing: antialiased;
   pointer-events: none;
+}
+
+[dir="rtl"] .tz-collection-sort-icon {
+  right: auto;
+  left: 0.5rem; /* RTL: caret on left */
 }
 
 /* Dark mode sort controls */
@@ -633,7 +663,7 @@
 .tz-collection-product-badge {
   position: absolute;
   top: 1rem;
-  right: 1rem;
+  right: 1rem; /* Default LTR: badge on right */
   background-color: #FFFFFF;
   color: var(--tz-collection-text-light);
   font-size: 10px;
@@ -642,6 +672,11 @@
   text-transform: uppercase;
   letter-spacing: 0.1em;
   z-index: 10;
+}
+
+[dir="rtl"] .tz-collection-product-badge {
+  right: auto;
+  left: 1rem; /* RTL: badge on left */
 }
 
 .tz-collection-product-badge--out-of-stock {

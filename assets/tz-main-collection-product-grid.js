@@ -138,28 +138,62 @@ class TzCollectionGrid {
     }
   }
 
-  // Translate sort option labels
+  // Translate sort option labels based on locale
   translateSortOptions() {
     const sortSelect = this.section.querySelector('.tz-collection-sort-select');
     if (!sortSelect) return;
 
-    const translations = {
-      'manual': 'מומלץ',
-      'best-selling': 'הכי נמכר',
-      'title-ascending': 'אלפביתי, א-ת',
-      'title-descending': 'אלפביתי, ת-א',
-      'price-ascending': 'מחיר, נמוך לגבוה',
-      'price-descending': 'מחיר, גבוה לנמוך',
-      'created-ascending': 'תאריך, ישן לחדש',
-      'created-descending': 'תאריך, חדש לישן'
-    };
+    // Check current locale from HTML lang attribute or URL
+    const htmlLang = document.documentElement.lang || '';
+    const locale = htmlLang.toLowerCase();
+    const isHebrew = locale === 'he' || locale === 'iw' || locale.includes('he');
+    
+    // Also check if option text contains Hebrew characters (indicating Shopify returned Hebrew)
+    const firstOption = sortSelect.options[0];
+    const hasHebrewChars = firstOption && /[\u0590-\u05FF]/.test(firstOption.textContent);
+    
+    // Only translate to Hebrew if locale is Hebrew AND options are not already in English
+    // If locale is English but options are in Hebrew (from Shopify), translate to English
+    if (isHebrew && !hasHebrewChars) {
+      // Locale is Hebrew but options are in English - translate to Hebrew
+      const translations = {
+        'manual': 'מומלץ',
+        'best-selling': 'הכי נמכר',
+        'title-ascending': 'שם, א-ת',
+        'title-descending': 'שם, ת-א',
+        'price-ascending': 'מחיר, נמוך לגבוה',
+        'price-descending': 'מחיר, גבוה לנמוך',
+        'created-ascending': 'תאריך, חדש לישן',
+        'created-descending': 'תאריך, ישן לחדש'
+      };
 
-    Array.from(sortSelect.options).forEach(option => {
-      const value = option.value;
-      if (translations[value]) {
-        option.textContent = translations[value];
-      }
-    });
+      Array.from(sortSelect.options).forEach(option => {
+        const value = option.value;
+        if (translations[value]) {
+          option.textContent = translations[value];
+        }
+      });
+    } else if (!isHebrew && hasHebrewChars) {
+      // Locale is English but options are in Hebrew - translate to English
+      const translations = {
+        'manual': 'Featured',
+        'best-selling': 'Best selling',
+        'title-ascending': 'Title, A-Z',
+        'title-descending': 'Title, Z-A',
+        'price-ascending': 'Price, low to high',
+        'price-descending': 'Price, high to low',
+        'created-ascending': 'Date, new to old',
+        'created-descending': 'Date, old to new'
+      };
+
+      Array.from(sortSelect.options).forEach(option => {
+        const value = option.value;
+        if (translations[value]) {
+          option.textContent = translations[value];
+        }
+      });
+    }
+    // If locale matches the option language, keep as-is (already correct)
   }
 
   // Load more functionality
@@ -307,8 +341,18 @@ class TzCollectionGrid {
       const maxValue = parseFloat(maxInput.value) || 0;
 
       if (maxValue > 0 && minValue > maxValue) {
-        minInput.setCustomValidity('מחיר מינימום לא יכול להיות גבוה ממחיר מקסימום');
-        maxInput.setCustomValidity('מחיר מקסימום לא יכול להיות נמוך ממחיר מינימום');
+        // Check locale for error messages
+        const htmlLang = document.documentElement.lang || '';
+        const locale = htmlLang.toLowerCase();
+        const isHebrew = locale === 'he' || locale === 'iw' || locale.includes('he');
+        
+        if (isHebrew) {
+          minInput.setCustomValidity('מחיר מינימום לא יכול להיות גבוה ממחיר מקסימום');
+          maxInput.setCustomValidity('מחיר מקסימום לא יכול להיות נמוך ממחיר מינימום');
+        } else {
+          minInput.setCustomValidity('Minimum price cannot be higher than maximum price');
+          maxInput.setCustomValidity('Maximum price cannot be lower than minimum price');
+        }
       } else {
         minInput.setCustomValidity('');
         maxInput.setCustomValidity('');
@@ -451,7 +495,14 @@ class TzCollectionGrid {
     if (!loadingIndicator) {
       loadingIndicator = document.createElement('div');
       loadingIndicator.className = 'tz-collection-loading';
-      loadingIndicator.innerHTML = '<div style="text-align: center; padding: 2rem;">טוען...</div>';
+      
+      // Check locale for loading text
+      const htmlLang = document.documentElement.lang || '';
+      const locale = htmlLang.toLowerCase();
+      const isHebrew = locale === 'he' || locale === 'iw' || locale.includes('he');
+      const loadingText = isHebrew ? 'טוען...' : 'Loading...';
+      
+      loadingIndicator.innerHTML = `<div style="text-align: center; padding: 2rem;">${loadingText}</div>`;
       const mainContent = this.section.querySelector('.tz-collection-main');
       if (mainContent) {
         mainContent.appendChild(loadingIndicator);
@@ -490,7 +541,12 @@ class TzCollectionGrid {
     // Show loading state
     const originalText = this.loadMoreButton.textContent;
     this.loadMoreButton.disabled = true;
-    this.loadMoreButton.textContent = 'טוען...';
+    
+    // Check locale for loading text
+    const htmlLang = document.documentElement.lang || '';
+    const locale = htmlLang.toLowerCase();
+    const isHebrew = locale === 'he' || locale === 'iw' || locale.includes('he');
+    this.loadMoreButton.textContent = isHebrew ? 'טוען...' : 'Loading...';
 
     // Get current URL and add page parameter
     const currentUrl = new URL(window.location.href);

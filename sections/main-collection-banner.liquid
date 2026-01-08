@@ -8,17 +8,27 @@
       <h1 class="tz-collection-hero__title">
         {%- liquid
           assign collection_title = collection.title | escape
-          assign collection_title_down = collection_title | downcase
+          assign locale_code = request.locale.iso_code | downcase
+          assign shop_locale = shop.locale | downcase
+          assign is_hebrew = false
           
-          # Translate common collection names to Hebrew (case-insensitive)
-          if collection_title_down == 'products' or collection_title_down == 'all products'
-            assign collection_title = 'מוצרים'
-          elsif collection_title_down == 'collection'
-            assign collection_title = 'קטגוריה'
-          elsif collection_title_down == 'collections'
-            assign collection_title = 'קטגוריות'
-          elsif collection.handle == 'all'
-            assign collection_title = 'מוצרים'
+          # Check if current locale is Hebrew
+          if locale_code == 'he' or locale_code == 'iw' or shop_locale == 'he' or shop_locale == 'iw' or locale_code contains 'he' or shop_locale contains 'he'
+            assign is_hebrew = true
+          endif
+          
+          # Only translate to Hebrew if locale is Hebrew
+          if is_hebrew
+            assign collection_title_down = collection_title | downcase
+            if collection_title_down == 'products' or collection_title_down == 'all products'
+              assign collection_title = 'מוצרים'
+            elsif collection_title_down == 'collection'
+              assign collection_title = 'קטגוריה'
+            elsif collection_title_down == 'collections'
+              assign collection_title = 'קטגוריות'
+            elsif collection.handle == 'all'
+              assign collection_title = 'מוצרים'
+            endif
           endif
         -%}
         {{- collection_title -}}

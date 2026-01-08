@@ -400,13 +400,29 @@
                     aria-describedby="a11y-refresh-page-message"
                   >
                     {%- for option in results.sort_options -%}
+                      {%- liquid
+                        # Check current locale
+                        assign current_locale = request.locale.iso_code | downcase
+                        assign sort_label = option.name
+                        
+                        # If locale is English, use our English translations
+                        if current_locale == 'en' or current_locale == 'en-us' or current_locale == 'en-gb'
+                          assign sort_key = 'products.facets.sort_options.' | append: option.value
+                          assign translated_label = sort_key | t
+                          # Use translation if it exists and is different from the key
+                          if translated_label != sort_key and translated_label != blank
+                            assign sort_label = translated_label
+                          endif
+                        endif
+                        # For Hebrew and other locales, Shopify's option.name should already be localized
+                      -%}
                       <option
                         value="{{ option.value | escape }}"
                         {% if option.value == sort_by %}
                           selected="selected"
                         {% endif %}
                       >
-                        {{ option.name | escape }}
+                        {{ sort_label | escape }}
                       </option>
                     {%- endfor -%}
                   </select>
@@ -733,13 +749,29 @@
                           aria-describedby="a11y-refresh-page-message"
                         >
                           {%- for option in results.sort_options -%}
+                            {%- liquid
+                              # Check current locale
+                              assign current_locale = request.locale.iso_code | downcase
+                              assign sort_label = option.name
+                              
+                              # If locale is English, use our English translations
+                              if current_locale == 'en' or current_locale == 'en-us' or current_locale == 'en-gb'
+                                assign sort_key = 'products.facets.sort_options.' | append: option.value
+                                assign translated_label = sort_key | t
+                                # Use translation if it exists and is different from the key
+                                if translated_label != sort_key and translated_label != blank
+                                  assign sort_label = translated_label
+                                endif
+                              endif
+                              # For Hebrew and other locales, Shopify's option.name should already be localized
+                            -%}
                             <option
                               value="{{ option.value | escape }}"
                               {% if option.value == sort_by %}
                                 selected="selected"
                               {% endif %}
                             >
-                              {{ option.name | escape }}
+                              {{ sort_label | escape }}
                             </option>
                           {%- endfor -%}
                         </select>
@@ -840,13 +872,29 @@
                 aria-describedby="a11y-refresh-page-message"
               >
                 {%- for option in results.sort_options -%}
+                  {%- liquid
+                    # Check current locale
+                    assign current_locale = request.locale.iso_code | downcase
+                    assign sort_label = option.name
+                    
+                    # If locale is English, use our English translations
+                    if current_locale == 'en' or current_locale == 'en-us' or current_locale == 'en-gb'
+                      assign sort_key = 'products.facets.sort_options.' | append: option.value
+                      assign translated_label = sort_key | t
+                      # Use translation if it exists and is different from the key
+                      if translated_label != sort_key and translated_label != blank
+                        assign sort_label = translated_label
+                      endif
+                    endif
+                    # For Hebrew and other locales, Shopify's option.name should already be localized
+                  -%}
                   <option
                     value="{{ option.value | escape }}"
                     {% if option.value == sort_by %}
                       selected="selected"
                     {% endif %}
                   >
-                    {{ option.name | escape }}
+                    {{ sort_label | escape }}
                   </option>
                 {%- endfor -%}
               </select>
