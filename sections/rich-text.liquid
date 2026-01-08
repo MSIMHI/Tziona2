@@ -1,66 +1,50 @@
-{{ 'section-rich-text.css' | asset_url | stylesheet_tag }}
+{{ 'tz-section-rich-text.css' | asset_url | stylesheet_tag }}
 
 {%- style -%}
-  .section-{{ section.id }}-padding {
+  .section-{{ section.id }}-padding .tz-rich-text__container {
     padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
     padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
   }
 
   @media screen and (min-width: 750px) {
-    .section-{{ section.id }}-padding {
+    .section-{{ section.id }}-padding .tz-rich-text__container {
       padding-top: {{ section.settings.padding_top }}px;
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
 {%- endstyle -%}
 
-<div class="isolate{% unless section.settings.full_width %} page-width{% endunless %}">
-  <div class="rich-text content-container color-{{ section.settings.color_scheme }} gradient{% if section.settings.full_width %} rich-text--full-width content-container--full-width{% endif %} section-{{ section.id }}-padding">
-    <div class="rich-text__wrapper rich-text__wrapper--{{ section.settings.desktop_content_position }}{% if section.settings.full_width %} page-width{% endif %}">
-      <div class="rich-text__blocks {{ section.settings.content_alignment }}">
+<div class="tz-rich-text{% if section.settings.full_width %} tz-rich-text--full-width{% endif %} tz-rich-text--color-{{ section.settings.color_scheme }} section-{{ section.id }}-padding">
+  <div class="tz-rich-text__container">
+    <div class="tz-rich-text__wrapper tz-rich-text__wrapper--{{ section.settings.desktop_content_position }}">
+      <div class="tz-rich-text__blocks tz-rich-text__blocks--{{ section.settings.content_alignment }}">
         {%- for block in section.blocks -%}
           {%- case block.type -%}
             {%- when 'heading' -%}
               <h2
-                class="rich-text__heading rte inline-richtext {{ block.settings.heading_size }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+                class="tz-rich-text__heading tz-rich-text__heading--{{ block.settings.heading_size }}"
                 {{ block.shopify_attributes }}
-                {% if settings.animations_reveal_on_scroll %}
-                  data-cascade
-                  style="--animation-order: {{ forloop.index }};"
-                {% endif %}
               >
                 {{ block.settings.heading }}
               </h2>
             {%- when 'caption' -%}
               <p
-                class="rich-text__caption {{ block.settings.text_style }} {{ block.settings.text_style }}--{{ block.settings.text_size }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+                class="tz-rich-text__caption tz-rich-text__caption--{{ block.settings.text_style }} tz-rich-text__caption--{{ block.settings.text_size }}"
                 {{ block.shopify_attributes }}
-                {% if settings.animations_reveal_on_scroll %}
-                  data-cascade
-                  style="--animation-order: {{ forloop.index }};"
-                {% endif %}
               >
                 {{ block.settings.caption | escape }}
               </p>
             {%- when 'text' -%}
               <div
-                class="rich-text__text rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+                class="tz-rich-text__text"
                 {{ block.shopify_attributes }}
-                {% if settings.animations_reveal_on_scroll %}
-                  data-cascade
-                  style="--animation-order: {{ forloop.index }};"
-                {% endif %}
               >
                 {{ block.settings.text }}
               </div>
             {%- when 'button' -%}
               <div
-                class="rich-text__buttons{% if block.settings.button_label != blank and block.settings.button_label_2 != blank %} rich-text__buttons--multiple{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+                class="tz-rich-text__buttons{% if block.settings.button_label != blank and block.settings.button_label_2 != blank %} tz-rich-text__buttons--multiple{% endif %}"
                 {{ block.shopify_attributes }}
-                {% if settings.animations_reveal_on_scroll %}
-                  data-cascade
-                  style="--animation-order: {{ forloop.index }};"
-                {% endif %}
               >
                 {%- if block.settings.button_label != blank -%}
                   <a
@@ -69,7 +53,7 @@
                     {% else %}
                       href="{{ block.settings.button_link }}"
                     {% endif %}
-                    class="button{% if block.settings.button_style_secondary %} button--secondary{% else %} button--primary{% endif %}"
+                    class="tz-btn{% if block.settings.button_style_secondary %} tz-btn--outline{% else %} tz-btn--solid{% endif %}"
                   >
                     {{- block.settings.button_label | escape -}}
                   </a>
@@ -81,7 +65,7 @@
                     {% else %}
                       href="{{ block.settings.button_link_2 }}"
                     {% endif %}
-                    class="button{% if block.settings.button_style_secondary_2 %} button--secondary{% else %} button--primary{% endif %}"
+                    class="tz-btn{% if block.settings.button_style_secondary_2 %} tz-btn--outline{% else %} tz-btn--solid{% endif %}"
                   >
                     {{- block.settings.button_label_2 | escape -}}
                   </a>
@@ -120,7 +104,7 @@
           "label": "t:sections.rich-text.settings.desktop_content_position.options__3.label"
         }
       ],
-      "default": "center",
+      "default": "left",
       "label": "t:sections.rich-text.settings.desktop_content_position.label"
     },
     {
@@ -140,7 +124,7 @@
           "label": "t:sections.rich-text.settings.content_alignment.options__3.label"
         }
       ],
-      "default": "center",
+      "default": "left",
       "label": "t:sections.rich-text.settings.content_alignment.label"
     },
     {

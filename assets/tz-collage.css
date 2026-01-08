@@ -12,7 +12,11 @@
 
 .tz-collage-title {
     margin-bottom: 2rem;
-    text-align: center;
+    text-align: left;
+}
+
+[dir="rtl"] .tz-collage-title {
+    text-align: right;
 }
 
 .tz-collage-grid {
