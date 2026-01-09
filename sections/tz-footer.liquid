@@ -35,8 +35,9 @@
       --col-align:
         {% case block.settings.align %}
           {% when 'center' %} center
+          {% when 'left' %} left
           {% when 'right' %} right
-          {% else %} left
+          {% else %} inherit
         {% endcase %};
 
       --col-h-color: {{ block.settings.heading_color | default: section.settings.heading_color }};

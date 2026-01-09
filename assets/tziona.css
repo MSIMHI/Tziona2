@@ -49,7 +49,9 @@ html.dark a {
 
 .dark a:hover,
 html.dark a:hover {
- 
+    color: #EDEDED !important;
+}
+
 /* Ensure white text elements maintain white color in dark mode */
 .dark .cart-promo,
 html.dark .cart-promo,
@@ -64,10 +66,12 @@ html.dark .tz-cart-toast--info,
 .dark .tz-submit-btn,
 html.dark .tz-submit-btn,
 .dark .tz-address-default-badge,
-html.dark .tz-address-default-badge {
+html.dark .tz-address-default-badge,
+.dark .tz-product-dream-card,
+html.dark .tz-product-dream-card,
+.dark .tz-product-dream-card *,
+html.dark .tz-product-dream-card * {
     color: #ffffff !important;
-}
-    color: #EDEDED !important;
 }
 
 /* Light mode for all text elements */
@@ -85,7 +89,9 @@ html.light a {
 
 .light a:hover,
 html.light a:hover {
- 
+    color: #000000 !important;
+}
+
 /* Override light mode text color for elements that should remain white */
 .light .cart-promo,
 html.light .cart-promo,
@@ -100,10 +106,12 @@ html.light .tz-cart-toast--info,
 .light .tz-submit-btn,
 html.light .tz-submit-btn,
 .light .tz-address-default-badge,
-html.light .tz-address-default-badge {
+html.light .tz-address-default-badge,
+.light .tz-product-dream-card,
+html.light .tz-product-dream-card,
+.light .tz-product-dream-card *,
+html.light .tz-product-dream-card * {
     color: #ffffff !important;
-}
-    color: #000000 !important;
 }
 
 /* Dark Mode Dropdown */
@@ -559,12 +567,12 @@ html.dark main {
     font-size: 14px;
     font-weight: 800;
     letter-spacing: 0.5px;
- 
+}
+
 /* Ensure cart promo text stays white in light mode */
 .light .cart-promo,
 html.light .cart-promo {
     color: var(--color-white) !important;
-}
 }
 
 .benefit-desc {
@@ -573,6 +581,37 @@ html.light .cart-promo {
     line-height: 1.4;
     max-width: 300px;
 }
+
+/* Mobile responsive for benefits */
+@media screen and (max-width: 767px) {
+    .footer-benefits {
+        grid-template-columns: 1fr;
+        padding: 40px 20px;
+        gap: 30px;
+    }
+
+    .benefit-item {
+        border-left: none;
+        border-bottom: 1px solid #ddd;
+        padding: 0 0 30px 0;
+    }
+
+    .benefit-item:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+    }
+
+    .dark .benefit-item,
+    html.dark .benefit-item {
+        border-bottom-color: #333333;
+    }
+
+    .light .benefit-item,
+    html.light .benefit-item {
+        border-bottom-color: #ddd;
+    }
+}
+
 
 /* Dark Mode for Benefits */
 .dark .footer-benefits,
@@ -686,6 +725,17 @@ html.light .footer-guarantee {
   margin-bottom: 40px; /* preset */
 }
 
+/* Mobile responsive for footer grid */
+@media screen and (max-width: 767px) {
+    .tz-footer .footer-top-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    .tz-footer .footer-col-dynamic {
+        text-align: inherit; /* Respect RTL/LTR of the container/html */
+    }
+}
+
 /* Column defaults */
 .tz-footer .footer-col-dynamic{
   /* Preset defaults (overridable via vars) */
@@ -696,7 +746,7 @@ html.light .footer-guarantee {
   --col-h-size: 14px;
   --col-t-size: 14px;
 
-  --col-align: left;
+  --col-align: right;
 
   --col-heading-font: var(--tz-heading-font, inherit);
   --col-text-font: var(--tz-text-font, inherit);
@@ -718,6 +768,7 @@ html.light .footer-guarantee {
   --icon-gap: 10px;
 
   text-align: var(--col-align);
+  direction: inherit;
 }
 
 .tz-footer .footer-col-dynamic h4{
@@ -725,12 +776,6 @@ html.light .footer-guarantee {
   font-weight: 800;
   margin-bottom: 25px;     /* preset similar to your old footer */
   letter-spacing: 0.5px;   /* preset */
- 
-/* Ensure cart promo text stays white in light mode */
-.light .cart-promo,
-html.light .cart-promo {
-    color: var(--color-white) !important;
-}
   color: var(--col-h-color);
   font-family: var(--col-heading-font);
   text-transform: uppercase;

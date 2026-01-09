@@ -1225,9 +1225,9 @@ product-info,
 /* Dark mode: normal blend mode */
 @media (prefers-color-scheme: dark) {
   .tz-product-main-image {
-    background-color: var(--tz-product-bg-dark-subtle);
+    /*background-color: var(--tz-product-bg-dark-subtle);
     background-color: #1E1E1E;
-    /* Explicit dark background */
+    Explicit dark background */
   }
 
   .tz-product-main-image img {
