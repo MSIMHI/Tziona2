@@ -330,13 +330,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize theme on page load
     const initializeTheme = () => {
       const savedMode = localStorage.getItem('darkMode') || 'light'; // Default to light
-      let currentTheme = savedMode;
-
-      if (savedMode === 'auto') {
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        currentTheme = prefersDark ? 'dark' : 'light';
-      }
-
+      
       applyTheme(savedMode);
 
       // Update active state in dropdown

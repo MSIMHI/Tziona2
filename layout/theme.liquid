@@ -10,10 +10,24 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
     {{ content_for_header }}
     {{ 'tziona.css' | asset_url | stylesheet_tag }}
+    <script>
+      (function() {
+        const savedMode = localStorage.getItem('darkMode') || 'light';
+        let currentTheme = savedMode;
+        if (savedMode === 'auto') {
+          currentTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        document.documentElement.classList.add(currentTheme);
+        // Also add to body when it's available to ensure full compatibility
+        document.addEventListener('DOMContentLoaded', () => {
+          document.body.classList.add(currentTheme);
+        });
+      })();
+    </script>
     <script src="{{ 'tziona.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'global.js' | asset_url }}" defer="defer"></script>
 </head>
-<body class="template-{{ template.name }} dark">
+<body class="template-{{ template.name }}">
 
     {% sections 'tz-header-group' %}
 
