@@ -1,118 +1,118 @@
 {% style %}
-.tz-announcement {
-background-color: {{ section.settings.bg_color }};
-color: {{ section.settings.text_color }};
-border-bottom: 1px solid rgba(0,0,0,0.05);
-position: relative;
-z-index: 1002;
-overflow: hidden;
-line-height: 1.5;
-font-size: {{ section.settings.font_size }}px;
-font-weight: 700;
-}
+  .tz-announcement {
+  background-color: {{ section.settings.bg_color }};
+  color: {{ section.settings.text_color }};
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+  position: relative;
+  z-index: 1002;
+  overflow: hidden;
+  line-height: 1.5;
+  font-size: {{ section.settings.font_size }}px;
+  font-weight: 700;
+  }
 
-.tz-announcement a {
-text-decoration: underline;
-text-underline-offset: 3px;
-color: inherit;
-}
-.tz-announcement a:hover { opacity: 0.8; }
-
-/* Override global light mode styles - must be more specific */
-body.light .tz-announcement,
-body.light .tz-announcement *,
-body.light .tz-announcement p,
-body.light .tz-announcement span,
-body.light .tz-announcement div,
-body.light .tz-announcement a,
-html.light body .tz-announcement,
-html.light body .tz-announcement *,
-html.light body .tz-announcement p,
-html.light body .tz-announcement span,
-html.light body .tz-announcement div,
-html.light body .tz-announcement a,
-.light .tz-announcement,
-.light .tz-announcement *,
-.light .tz-announcement p,
-.light .tz-announcement span,
-.light .tz-announcement div,
-.light .tz-announcement a,
-html.light .tz-announcement,
-html.light .tz-announcement *,
-html.light .tz-announcement p,
-html.light .tz-announcement span,
-html.light .tz-announcement div,
-html.light .tz-announcement a {
-  color: {{ section.settings.text_color }} !important;
-}
-
-/* Dark Mode Support */
-.dark .tz-announcement,
-html.dark .tz-announcement {
-  border-bottom-color: #333333 !important;
-}
-
-.dark .tz-announcement *,
-html.dark .tz-announcement * {
+  .tz-announcement a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
   color: inherit;
-}
+  }
+  .tz-announcement a:hover { opacity: 0.8; }
 
-/* Light Mode Support */
-.light .tz-announcement,
-html.light .tz-announcement {
-  border-bottom-color: rgba(0,0,0,0.05) !important;
-}
+  /* Override global light mode styles - must be more specific */
+  body.light .tz-announcement,
+  body.light .tz-announcement *,
+  body.light .tz-announcement p,
+  body.light .tz-announcement span,
+  body.light .tz-announcement div,
+  body.light .tz-announcement a,
+  html.light body .tz-announcement,
+  html.light body .tz-announcement *,
+  html.light body .tz-announcement p,
+  html.light body .tz-announcement span,
+  html.light body .tz-announcement div,
+  html.light body .tz-announcement a,
+  .light .tz-announcement,
+  .light .tz-announcement *,
+  .light .tz-announcement p,
+  .light .tz-announcement span,
+  .light .tz-announcement div,
+  .light .tz-announcement a,
+  html.light .tz-announcement,
+  html.light .tz-announcement *,
+  html.light .tz-announcement p,
+  html.light .tz-announcement span,
+  html.light .tz-announcement div,
+  html.light .tz-announcement a {
+    color: {{ section.settings.text_color }} !important;
+  }
 
-/* --- STATIC MODE --- */
-.tz-announcement-inner {
-padding: 10px 40px;
-display: flex;
-justify-content: center;
-align-items: center;
-min-height: 40px;
-flex-wrap: wrap;
-gap: 30px;
-}
+  /* Dark Mode Support */
+  .dark .tz-announcement,
+  html.dark .tz-announcement {
+    border-bottom-color: #333333 !important;
+  }
 
-/* --- MARQUEE MODE --- */
-.marquee-window {
-display: block;
-overflow: hidden;
-user-select: none;
-padding: 10px 0;
-direction: ltr; /* Force LTR for animation physics */
-}
+  .dark .tz-announcement *,
+  html.dark .tz-announcement * {
+    color: inherit;
+  }
 
-.marquee-mover {
-display: flex;
-width: fit-content;
-flex-shrink: 0;
-/* Move from 0 to -50% (halfway) to create infinite loop effect */
-animation: marquee-scroll {{ section.settings.speed }}s linear infinite;
-}
+  /* Light Mode Support */
+  .light .tz-announcement,
+  html.light .tz-announcement {
+    border-bottom-color: rgba(0,0,0,0.05) !important;
+  }
 
-.marquee-content-set {
-display: flex;
-align-items: center;
-flex-shrink: 0;
-}
+  /* --- STATIC MODE --- */
+  .tz-announcement-inner {
+  padding: 10px 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 40px;
+  flex-wrap: wrap;
+  gap: 30px;
+  }
 
-.marquee-item {
-display: inline-flex;
-align-items: center;
-padding: 0 40px;
-white-space: nowrap;
-direction: rtl; /* Restore RTL for Hebrew text */
-}
+  /* --- MARQUEE MODE --- */
+  .marquee-window {
+  display: block;
+  overflow: hidden;
+  user-select: none;
+  padding: 10px 0;
+  direction: ltr; /* Force LTR for animation physics */
+  }
 
-.tz-announcement:hover .marquee-mover {
-animation-play-state: paused;
-}
+  .marquee-mover {
+  display: flex;
+  width: fit-content;
+  flex-shrink: 0;
+  /* Move from 0 to -50% (halfway) to create infinite loop effect */
+  animation: marquee-scroll {{ section.settings.speed }}s linear infinite;
+  }
 
-@keyframes marquee-scroll {
-0% { transform: translateX(0); }
-100% { transform: translateX(-50%); }
-}
+  .marquee-content-set {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  }
+
+  .marquee-item {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 40px;
+  white-space: nowrap;
+  direction: rtl; /* Restore RTL for Hebrew text */
+  }
+
+  .tz-announcement:hover .marquee-mover {
+  animation-play-state: paused;
+  }
+
+  @keyframes marquee-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+  }
 {% endstyle %}
 
 <!-- CAPTURE CONTENT -->
@@ -131,110 +131,152 @@ animation-play-state: paused;
 {% endcapture %}
 
 <div class="tz-announcement" role="region" aria-label="Announcement">
-
-    {% if section.settings.enable_marquee %}
+  {% if section.settings.enable_marquee %}
     <!-- MARQUEE -->
     <div class="marquee-window">
-        <div class="marquee-mover">
-            <div class="marquee-content-set">
-                {{ announcement_text }}
-            </div>
-            <div class="marquee-content-set" aria-hidden="true">
-                {{ announcement_text }}
-            </div>
+      <div class="marquee-mover">
+        <div class="marquee-content-set">
+          {{ announcement_text }}
         </div>
+        <div class="marquee-content-set" aria-hidden="true">
+          {{ announcement_text }}
+        </div>
+      </div>
     </div>
-    {% else %}
+  {% else %}
     <!-- STATIC -->
     <div class="tz-announcement-inner">
-        {%- for block in section.blocks -%}
+      {%- for block in section.blocks -%}
         <div class="uppercase" {{ block.shopify_attributes }}>
-            {%- if block.settings.link != blank -%}
+          {%- if block.settings.link != blank -%}
             <a href="{{ block.settings.link }}">{{ block.settings.text }}</a>
-            {%- else -%}
+          {%- else -%}
             <span>{{ block.settings.text }}</span>
-            {%- endif -%}
+          {%- endif -%}
         </div>
-        {%- endfor -%}
+      {%- endfor -%}
     </div>
-    {% endif %}
-
+  {% endif %}
 </div>
 
 {% schema %}
 {
-"name": "Marquee Announcement",
-"class": "section-marquee-announcement",
-"enabled_on": {
-"groups": ["header"]
-},
-"settings": [
-{
-"type": "checkbox",
-"id": "enable_marquee",
-"label": "Enable Marquee",
-"default": true
-},
-{
-"type": "range",
-"id": "speed",
-"min": 5,
-"max": 60,
-"step": 1,
-"unit": "s",
-"label": "Animation Speed",
-"default": 25
-},
-{
-"type": "color",
-"id": "bg_color",
-"label": "Background Color",
-"default": "#d32f2f"
-},
-{
-"type": "color",
-"id": "text_color",
-"label": "Text Color",
-"default": "#ffffff"
-},
-{
-"type": "range",
-"id": "font_size",
-"min": 10,
-"max": 20,
-"step": 1,
-"unit": "px",
-"label": "Font Size",
-"default": 13
-}
-],
-"blocks": [
-{
-"type": "announcement",
-"name": "Message",
-"settings": [
-{
-"type": "text",
-"id": "text",
-"label": "Text",
-"default": "Welcome to our store"
-},
-{
-"type": "url",
-"id": "link",
-"label": "Link"
-}
-]
-}
-],
-"presets": [
-{
-"name": "Marquee Announcement",
-"blocks": [
-{ "type": "announcement" },
-{ "type": "announcement" }
-]
-}
-]
+  "name": "Marquee Announcement",
+  "class": "section-marquee-announcement",
+  "enabled_on": {
+    "groups": ["header"]
+  },
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_marquee",
+      "label": "Enable Marquee",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "speed",
+      "label": "Animation Speed",
+      "default": "30",
+      "info": "Higher values = slower animation",
+      "options": [
+        {
+          "value": "30",
+          "label": "Slow (30s) - Default"
+        },
+        {
+          "value": "5",
+          "label": "Very Fast (5s)"
+        },
+        {
+          "value": "10",
+          "label": "Fast (10s)"
+        },
+        {
+          "value": "15",
+          "label": "Medium Fast (15s)"
+        },
+        {
+          "value": "20",
+          "label": "Medium (20s)"
+        },
+        {
+          "value": "25",
+          "label": "Medium Slow (25s)"
+        },
+        {
+          "value": "40",
+          "label": "Very Slow (40s)"
+        },
+        {
+          "value": "50",
+          "label": "Extra Slow (50s)"
+        },
+        {
+          "value": "60",
+          "label": "Ultra Slow (60s)"
+        },
+        {
+          "value": "80",
+          "label": "Very Ultra Slow (80s)"
+        },
+        {
+          "value": "100",
+          "label": "Extremely Slow (100s)"
+        },
+        {
+          "value": "120",
+          "label": "Maximum Slow (120s)"
+        }
+      ]
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#d32f2f"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "font_size",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Font Size",
+      "default": 13
+    }
+  ],
+  "blocks": [
+    {
+      "type": "announcement",
+      "name": "Message",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Welcome to our store"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Marquee Announcement",
+      "blocks": [{ "type": "announcement" }, { "type": "announcement" }]
+    }
+  ]
 }
 {% endschema %}
