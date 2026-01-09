@@ -290,7 +290,7 @@
                           assign is_color_option = false
                           for value in option.values
                             assign value_down = value | downcase
-                            if value_down contains 'red' or value_down contains 'blue' or value_down contains 'green' or value_down contains 'yellow' or value_down contains 'black' or value_down contains 'white' or value_down contains 'gray' or value_down contains 'purple' or value_down contains 'pink' or value_down contains 'orange' or value_down contains 'brown' or value_down contains 'navy' or value_down contains 'teal' or value_down contains 'maroon' or value_down contains 'אדום' or value_down contains 'כחול' or value_down contains 'ירוק' or value_down contains 'צהוב' or value_down contains 'שחור' or value_down contains 'לבן' or value_down contains 'אפור' or value_down contains 'סגול' or value_down contains 'ורוד' or value_down contains 'כתום' or value_down contains 'חום' or value_down contains 'ים' or value_down contains 'טורקיז' or value_down contains 'בורדו'
+                            if value_down contains 'red' or value_down contains 'blue' or value_down contains 'green' or value_down contains 'yellow' or value_down contains 'black' or value_down contains 'white' or value_down contains 'gray' or value_down contains 'grey' or value_down contains 'purple' or value_down contains 'pink' or value_down contains 'orange' or value_down contains 'brown' or value_down contains 'navy' or value_down contains 'teal' or value_down contains 'maroon' or value_down contains 'אדום' or value_down contains 'כחול' or value_down contains 'ירוק' or value_down contains 'צהוב' or value_down contains 'שחור' or value_down contains 'לבן' or value_down contains 'אפור' or value_down contains 'סגול' or value_down contains 'ורוד' or value_down contains 'כתום' or value_down contains 'חום' or value_down contains 'ים' or value_down contains 'טורקיז' or value_down contains 'בורדו'
                               assign is_color_option = true
                             endif
                           endfor
@@ -308,34 +308,35 @@
                         {%- for value in color_option.values limit: 4 -%}
                           {%- liquid
                             assign variant_bg = '#6b7280'
+                            assign val_lowercase = value | downcase
                             
-                            if value == 'שָׁחוֹר'
+                            if val_lowercase contains 'שָׁחוֹר' or val_lowercase contains 'שחור' or val_lowercase contains 'black'
                               assign variant_bg = '#000000'
-                            elsif value == 'כְּחוֹל'
+                            elsif val_lowercase contains 'כְּחוֹל' or val_lowercase contains 'כחול' or val_lowercase contains 'blue'
                               assign variant_bg = '#3b82f6'
-                            elsif value contains 'אדום' or value == 'red'
+                            elsif val_lowercase contains 'אדום' or val_lowercase contains 'red'
                               assign variant_bg = '#ef4444'
-                            elsif value contains 'ירוק' or value == 'green'
+                            elsif val_lowercase contains 'ירוק' or val_lowercase contains 'green'
                               assign variant_bg = '#10b981'
-                            elsif value contains 'צהוב' or value == 'yellow'
+                            elsif val_lowercase contains 'צהוב' or val_lowercase contains 'yellow'
                               assign variant_bg = '#f59e0b'
-                            elsif value contains 'לבן' or value == 'white'
+                            elsif val_lowercase contains 'לבן' or val_lowercase contains 'white'
                               assign variant_bg = '#ffffff'
-                            elsif value contains 'אפור' or value == 'gray'
+                            elsif val_lowercase contains 'אפור' or val_lowercase contains 'gray' or val_lowercase contains 'grey'
                               assign variant_bg = '#6b7280'
-                            elsif value contains 'סגול' or value == 'purple'
+                            elsif val_lowercase contains 'סגול' or val_lowercase contains 'purple'
                               assign variant_bg = '#8b5cf6'
-                            elsif value contains 'ורוד' or value == 'pink'
+                            elsif val_lowercase contains 'ורוד' or val_lowercase contains 'pink'
                               assign variant_bg = '#ec4899'
-                            elsif value contains 'כתום' or value == 'orange'
+                            elsif val_lowercase contains 'כתום' or val_lowercase contains 'orange'
                               assign variant_bg = '#f97316'
-                            elsif value contains 'חום' or value == 'brown'
+                            elsif val_lowercase contains 'חום' or val_lowercase contains 'brown'
                               assign variant_bg = '#92400e'
-                            elsif value contains 'ים' or value == 'navy'
+                            elsif val_lowercase contains 'ים' or val_lowercase contains 'navy'
                               assign variant_bg = '#1e3a8a'
-                            elsif value contains 'טורקיז' or value == 'teal'
+                            elsif val_lowercase contains 'טורקיז' or val_lowercase contains 'teal'
                               assign variant_bg = '#14b8a6'
-                            elsif value contains 'בורדו' or value == 'maroon'
+                            elsif val_lowercase contains 'בורדו' or val_lowercase contains 'maroon'
                               assign variant_bg = '#7f1d1d'
                             endif
                           -%}

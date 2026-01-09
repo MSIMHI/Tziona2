@@ -1013,11 +1013,13 @@ document.addEventListener('DOMContentLoaded', () => {
             const doc = parser.parseFromString(html, 'text/html');
             
             // Update price
-            const newPriceContainer = doc.querySelector('.tz-product-price');
+            const newPriceContainer = doc.querySelector('.tz-product-price .price');
             if (newPriceContainer) {
-              const currentPriceContainer = productInfo.querySelector('.tz-product-price');
+              const currentPriceContainer = productInfo.querySelector('.tz-product-price .price');
               if (currentPriceContainer) {
                 currentPriceContainer.innerHTML = newPriceContainer.innerHTML;
+                // Update classes (important for sold-out badge)
+                currentPriceContainer.className = newPriceContainer.className;
               }
             }
             
@@ -1080,25 +1082,36 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       
       function updatePriceManually(variant) {
-        const priceContainer = productInfo.querySelector('.tz-product-price');
-        if (priceContainer && variant.price !== undefined) {
-          // Try to find existing price elements
-          const regularPrice = priceContainer.querySelector('.price-item--regular:not(s)');
-          const salePrice = priceContainer.querySelector('.price-item--sale, .price-item--last');
-          
-          if (variant.compare_at_price && variant.compare_at_price > variant.price) {
-            // Sale price
-            if (salePrice) {
-              salePrice.textContent = formatMoney(variant.price);
-            }
-            const comparePrice = priceContainer.querySelector('s.price-item--regular');
-            if (comparePrice) {
-              comparePrice.textContent = formatMoney(variant.compare_at_price);
-            }
+        const priceContainer = productInfo.querySelector('.tz-product-price .price');
+        if (priceContainer) {
+          // Update sold-out class
+          if (!variant.available) {
+            priceContainer.classList.add('price--sold-out');
           } else {
-            // Regular price
-            if (regularPrice) {
-              regularPrice.textContent = formatMoney(variant.price);
+            priceContainer.classList.remove('price--sold-out');
+          }
+
+          if (variant.price !== undefined) {
+            // Try to find existing price elements
+            const regularPrice = priceContainer.querySelector('.price-item--regular:not(s)');
+            const salePrice = priceContainer.querySelector('.price-item--sale, .price-item--last');
+            
+            if (variant.compare_at_price && variant.compare_at_price > variant.price) {
+              // Sale price
+              priceContainer.classList.add('price--on-sale');
+              if (salePrice) {
+                salePrice.textContent = formatMoney(variant.price);
+              }
+              const comparePrice = priceContainer.querySelector('s.price-item--regular');
+              if (comparePrice) {
+                comparePrice.textContent = formatMoney(variant.compare_at_price);
+              }
+            } else {
+              // Regular price
+              priceContainer.classList.remove('price--on-sale');
+              if (regularPrice) {
+                regularPrice.textContent = formatMoney(variant.price);
+              }
             }
           }
         }

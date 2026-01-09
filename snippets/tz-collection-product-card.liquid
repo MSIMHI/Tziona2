@@ -41,7 +41,7 @@
     {%- liquid
       assign color_option = null
       assign color_option_index = null
-      
+
       for option in product.options_with_values
         assign option_name_down = option.name | downcase
         if option_name_down contains 'color' or option_name_down contains 'צבע' or option_name_down contains 'צֶבַע'
@@ -64,16 +64,17 @@
         endif
       endfor
     -%}
-    
+
     {%- if color_option -%}
       <div class="tz-collection-product-variants">
-        {%- for value in color_option.values limit: 4 -%}
+        {%- for value_down in color_option.values limit: 4 -%}
           {%- liquid
             assign variant_bg = '#6b7280'
-            
-            if value == 'שָׁחוֹר'
+            assign value = value_down | downcase | strip
+
+            if value == 'שָׁחוֹר' or value == 'black'
               assign variant_bg = '#000000'
-            elsif value == 'כְּחוֹל'
+            elsif value == 'כְּחוֹל' or value == 'blue'
               assign variant_bg = '#3b82f6'
             elsif value contains 'אדום' or value == 'red'
               assign variant_bg = '#ef4444'

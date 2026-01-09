@@ -512,7 +512,12 @@ product-info,
   margin-left: 0.5rem;
 }
 
-.tz-product-price .price__badge-sale {
+.tz-product-price .price__badge-sale,
+.tz-product-price .price__badge-sold-out {
+  display: none !important;
+}
+
+.tz-product-price .price--on-sale .price__badge-sale {
   display: inline-block !important;
   background-color: #000 !important;
   color: #fff !important;
@@ -523,6 +528,21 @@ product-info,
   letter-spacing: 0.05em !important;
   margin-right: 0.5rem !important;
   vertical-align: middle !important;
+}
+
+.tz-product-price .price--sold-out .price__badge-sold-out {
+  display: inline-block !important;
+  background-color: #ff0000 !important; /* Red for sold out */
+  color: #fff !important;
+  font-size: 0.625rem !important;
+  font-weight: 700 !important;
+  padding: 0.25rem 0.5rem !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  margin-right: 0.5rem !important;
+  vertical-align: middle !important;
+  position: relative !important;
+  z-index: 1 !important;
 }
 
 .tz-product-price .price-item--sale {

@@ -36,6 +36,7 @@
             {{- 'general.search.search' | t -}}
           {%- endif -%}
         </h1>
+      </div>
       <div class="tz-main-search__search">
         {%- if settings.predictive_search_enabled -%}
           <predictive-search data-loading-text="{{ 'accessibility.loading' | t }}">
@@ -179,7 +180,7 @@
                                   assign is_color_option = false
                                   for value in option.values
                                     assign value_down = value | downcase
-                                    if value_down contains 'red' or value_down contains 'blue' or value_down contains 'green' or value_down contains 'yellow' or value_down contains 'black' or value_down contains 'white' or value_down contains 'gray' or value_down contains 'purple' or value_down contains 'pink' or value_down contains 'orange' or value_down contains 'brown' or value_down contains 'navy' or value_down contains 'teal' or value_down contains 'maroon' or value_down contains 'אדום' or value_down contains 'כחול' or value_down contains 'ירוק' or value_down contains 'צהוב' or value_down contains 'שחור' or value_down contains 'לבן' or value_down contains 'אפור' or value_down contains 'סגול' or value_down contains 'ורוד' or value_down contains 'כתום' or value_down contains 'חום' or value_down contains 'ים' or value_down contains 'טורקיז' or value_down contains 'בורדו'
+                                    if value_down contains 'red' or value_down contains 'blue' or value_down contains 'green' or value_down contains 'yellow' or value_down contains 'black' or value_down contains 'white' or value_down contains 'gray' or value_down contains 'grey' or value_down contains 'purple' or value_down contains 'pink' or value_down contains 'orange' or value_down contains 'brown' or value_down contains 'navy' or value_down contains 'teal' or value_down contains 'maroon' or value_down contains 'אדום' or value_down contains 'כחול' or value_down contains 'ירוק' or value_down contains 'צהוב' or value_down contains 'שחור' or value_down contains 'לבן' or value_down contains 'אפור' or value_down contains 'סגול' or value_down contains 'ורוד' or value_down contains 'כתום' or value_down contains 'חום' or value_down contains 'ים' or value_down contains 'טורקיז' or value_down contains 'בורדו'
                                       assign is_color_option = true
                                     endif
                                   endfor
@@ -196,36 +197,36 @@
                               <div class="tz-collection-product-colors">
                                 {%- for value in color_option.values limit: 5 -%}
                                   {%- liquid
-                                    assign color_class = 'tz-color-gray'
                                     assign color_hex = '#808080'
+                                    assign val_lowercase = value | downcase
 
-                                    if value == 'שָׁחוֹר' or value == 'black'
+                                    if val_lowercase contains 'שָׁחוֹר' or val_lowercase contains 'שחור' or val_lowercase contains 'black'
                                       assign color_hex = '#000000'
-                                    elsif value == 'כְּחוֹל' or value == 'blue'
+                                    elsif val_lowercase contains 'כְּחוֹל' or val_lowercase contains 'כחול' or val_lowercase contains 'blue'
                                       assign color_hex = '#0000FF'
-                                    elsif value contains 'אדום' or value == 'red'
+                                    elsif val_lowercase contains 'אדום' or val_lowercase contains 'red'
                                       assign color_hex = '#FF0000'
-                                    elsif value contains 'ירוק' or value == 'green'
+                                    elsif val_lowercase contains 'ירוק' or val_lowercase contains 'green'
                                       assign color_hex = '#008000'
-                                    elsif value contains 'צהוב' or value == 'yellow'
+                                    elsif val_lowercase contains 'צהוב' or val_lowercase contains 'yellow'
                                       assign color_hex = '#FFFF00'
-                                    elsif value contains 'לבן' or value == 'white'
+                                    elsif val_lowercase contains 'לבן' or val_lowercase contains 'white'
                                       assign color_hex = '#FFFFFF'
-                                    elsif value contains 'אפור' or value == 'gray'
+                                    elsif val_lowercase contains 'אפור' or val_lowercase contains 'gray' or val_lowercase contains 'grey'
                                       assign color_hex = '#808080'
-                                    elsif value contains 'סגול' or value == 'purple'
+                                    elsif val_lowercase contains 'סגול' or val_lowercase contains 'purple'
                                       assign color_hex = '#800080'
-                                    elsif value contains 'ורוד' or value == 'pink'
+                                    elsif val_lowercase contains 'ורוד' or val_lowercase contains 'pink'
                                       assign color_hex = '#FFC0CB'
-                                    elsif value contains 'כתום' or value == 'orange'
+                                    elsif val_lowercase contains 'כתום' or val_lowercase contains 'orange'
                                       assign color_hex = '#FFA500'
-                                    elsif value contains 'חום' or value == 'brown'
+                                    elsif val_lowercase contains 'חום' or val_lowercase contains 'brown'
                                       assign color_hex = '#8B4513'
-                                    elsif value contains 'ים' or value == 'navy'
+                                    elsif val_lowercase contains 'ים' or val_lowercase contains 'navy'
                                       assign color_hex = '#000080'
-                                    elsif value contains 'טורקיז' or value == 'teal'
+                                    elsif val_lowercase contains 'טורקיז' or val_lowercase contains 'teal'
                                       assign color_hex = '#008080'
-                                    elsif value contains 'בורדו' or value == 'maroon'
+                                    elsif val_lowercase contains 'בורדו' or val_lowercase contains 'maroon'
                                       assign color_hex = '#800000'
                                     endif
                                   -%}
