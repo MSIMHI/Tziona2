@@ -178,9 +178,55 @@
     
     <!-- Main Menu -->
     <nav class="mobile-menu-nav">
-      {% for link in linklists[section.settings.mobile_menu].links %}
-        <a href="{{ link.url }}" class="mobile-menu-link">{{ link.title }}</a>
-      {% endfor %}
+      {% assign main_menu_handle = section.settings.mobile_menu %}
+      {% if main_menu_handle != blank %}
+        {% assign main_menu = linklists[main_menu_handle] %}
+        {% for link in main_menu.links %}
+          {% if link.links.size > 0 %}
+            <div class="mobile-menu-accordion">
+              <button class="mobile-menu-accordion-toggle" aria-expanded="false" type="button">
+                <span>{{ link.title }}</span>
+                <span class="mobile-menu-accordion-icon">+</span>
+              </button>
+              <div class="mobile-menu-accordion-content">
+                {% for childlink in link.links %}
+                  {% if childlink.links.size > 0 %}
+                    <div class="mobile-menu-accordion mobile-menu-accordion-nested">
+                      <button class="mobile-menu-accordion-toggle" aria-expanded="false" type="button">
+                        <span>{{ childlink.title }}</span>
+                        <span class="mobile-menu-accordion-icon">+</span>
+                      </button>
+                      <div class="mobile-menu-accordion-content">
+                        {% for grandchildlink in childlink.links %}
+                          {% if grandchildlink.links.size > 0 %}
+                            <div class="mobile-menu-accordion mobile-menu-accordion-nested">
+                              <button class="mobile-menu-accordion-toggle" aria-expanded="false" type="button">
+                                <span>{{ grandchildlink.title }}</span>
+                                <span class="mobile-menu-accordion-icon">+</span>
+                              </button>
+                              <div class="mobile-menu-accordion-content">
+                                {% for greatgrandchildlink in grandchildlink.links %}
+                                  <a href="{{ greatgrandchildlink.url }}" class="mobile-menu-link">{{ greatgrandchildlink.title }}</a>
+                                {% endfor %}
+                              </div>
+                            </div>
+                          {% else %}
+                            <a href="{{ grandchildlink.url }}" class="mobile-menu-link">{{ grandchildlink.title }}</a>
+                          {% endif %}
+                        {% endfor %}
+                      </div>
+                    </div>
+                  {% else %}
+                    <a href="{{ childlink.url }}" class="mobile-menu-link">{{ childlink.title }}</a>
+                  {% endif %}
+                {% endfor %}
+              </div>
+            </div>
+          {% else %}
+            <a href="{{ link.url }}" class="mobile-menu-link">{{ link.title }}</a>
+          {% endif %}
+        {% endfor %}
+      {% endif %}
       {% if section.settings.show_sale %}
         <a href="{{ section.settings.sale_link }}" class="mobile-menu-link mobile-menu-sale">
           {{ 'general.header.sale_text' | t | default: section.settings.sale_text }}

@@ -83,14 +83,53 @@
         <!-- MAIN NAV -->
         <nav class="nav-links uppercase">
           {% for link in linklists[section.settings.menu].links %}
-            <!-- We use forloop.index (1, 2, 3) because Hebrew handles often break IDs -->
-            <a
-              href="{{ link.url }}"
-              class="nav-link"
-              data-tz-index="{{ forloop.index }}"
-            >
-              {{ link.title }}
-            </a>
+            {% if link.links.size > 0 %}
+              <div class="main-menu-item">
+                <div class="tz-main-hover-trigger">
+                  <a
+                    href="{{ link.url }}"
+                    class="nav-link"
+                    data-tz-index="{{ forloop.index }}"
+                  >
+                    {{ link.title }}
+                  </a>
+                  <ul class="main-dropdown">
+                    {% for childlink in link.links %}
+                      <li class="{% if childlink.links.size > 0 %}main-menu-item-has-children{% endif %}">
+                        <a href="{{ childlink.url }}">{{ childlink.title }}</a>
+                        {% if childlink.links.size > 0 %}
+                          <ul class="main-dropdown main-dropdown-nested">
+                            {% for grandchildlink in childlink.links %}
+                              <li class="{% if grandchildlink.links.size > 0 %}main-menu-item-has-children{% endif %}">
+                                <a href="{{ grandchildlink.url }}">{{ grandchildlink.title }}</a>
+                                {% if grandchildlink.links.size > 0 %}
+                                  <ul class="main-dropdown main-dropdown-nested">
+                                    {% for greatgrandchildlink in grandchildlink.links %}
+                                      <li>
+                                        <a href="{{ greatgrandchildlink.url }}">{{ greatgrandchildlink.title }}</a>
+                                      </li>
+                                    {% endfor %}
+                                  </ul>
+                                {% endif %}
+                              </li>
+                            {% endfor %}
+                          </ul>
+                        {% endif %}
+                      </li>
+                    {% endfor %}
+                  </ul>
+                </div>
+              </div>
+            {% else %}
+              <!-- We use forloop.index (1, 2, 3) because Hebrew handles often break IDs -->
+              <a
+                href="{{ link.url }}"
+                class="nav-link"
+                data-tz-index="{{ forloop.index }}"
+              >
+                {{ link.title }}
+              </a>
+            {% endif %}
           {% endfor %}
 
           {% if section.settings.show_sale %}

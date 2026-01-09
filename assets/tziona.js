@@ -183,18 +183,37 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   };
 
+  // Initialize main menu accordion functionality
+  const initMainMenuAccordion = () => {
+    const accordionToggles = document.querySelectorAll('.mobile-menu-accordion-toggle');
+    
+    accordionToggles.forEach(toggle => {
+      // Remove existing listeners to avoid duplicates
+      const newToggle = toggle.cloneNode(true);
+      toggle.parentNode.replaceChild(newToggle, toggle);
+      
+      newToggle.addEventListener('click', (e) => {
+        e.preventDefault();
+        const isExpanded = newToggle.getAttribute('aria-expanded') === 'true';
+        newToggle.setAttribute('aria-expanded', !isExpanded);
+      });
+    });
+  };
+
   // Sync utility menu when drawer opens
   const mobileMenuDrawer = document.getElementById('mobile-menu-drawer');
   if (mobileMenuDrawer) {
     const observer = new MutationObserver(() => {
       if (mobileMenuDrawer.classList.contains('is-open')) {
         setTimeout(syncUtilityMenuToDrawer, 50);
+        setTimeout(initMainMenuAccordion, 50);
       }
     });
     observer.observe(mobileMenuDrawer, { attributes: true, attributeFilter: ['class'] });
     
     // Also sync on page load
     setTimeout(syncUtilityMenuToDrawer, 100);
+    setTimeout(initMainMenuAccordion, 100);
   }
 
   // Dark Mode Dropdown

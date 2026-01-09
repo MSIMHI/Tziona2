@@ -92,6 +92,57 @@ html.light a:hover {
     color: #000000 !important;
 }
 
+/* Override global light mode link colors for header - use CSS variables */
+body.light .tz-section.tz-header .nav-links a,
+body.light .tz-section.tz-header .nav-utilities a,
+body.light .tz-section.tz-header .nav-link,
+body.light .tz-section.tz-header .logo a,
+html.light body .tz-section.tz-header .nav-links a,
+html.light body .tz-section.tz-header .nav-utilities a,
+html.light body .tz-section.tz-header .nav-link,
+html.light body .tz-section.tz-header .logo a,
+.light .tz-section.tz-header .nav-links a,
+.light .tz-section.tz-header .nav-utilities a,
+.light .tz-section.tz-header .nav-link,
+.light .tz-section.tz-header .logo a,
+html.light .tz-section.tz-header .nav-links a,
+html.light .tz-section.tz-header .nav-utilities a,
+html.light .tz-section.tz-header .nav-link,
+html.light .tz-section.tz-header .logo a {
+    color: var(--tz-link, #111111) !important;
+}
+
+body.light .tz-section.tz-header .nav-links a:hover,
+body.light .tz-section.tz-header .nav-utilities a:hover,
+body.light .tz-section.tz-header .nav-link:hover,
+html.light body .tz-section.tz-header .nav-links a:hover,
+html.light body .tz-section.tz-header .nav-utilities a:hover,
+html.light body .tz-section.tz-header .nav-link:hover,
+.light .tz-section.tz-header .nav-links a:hover,
+.light .tz-section.tz-header .nav-utilities a:hover,
+.light .tz-section.tz-header .nav-link:hover,
+html.light .tz-section.tz-header .nav-links a:hover,
+html.light .tz-section.tz-header .nav-utilities a:hover,
+html.light .tz-section.tz-header .nav-link:hover {
+    color: var(--tz-link-hover, #555555) !important;
+}
+
+/* Override text colors in light mode */
+body.light .tz-section.tz-header .nav-links,
+body.light .tz-section.tz-header .nav-utilities,
+body.light .tz-section.tz-header .sale-text,
+html.light body .tz-section.tz-header .nav-links,
+html.light body .tz-section.tz-header .nav-utilities,
+html.light body .tz-section.tz-header .sale-text,
+.light .tz-section.tz-header .nav-links,
+.light .tz-section.tz-header .nav-utilities,
+.light .tz-section.tz-header .sale-text,
+html.light .tz-section.tz-header .nav-links,
+html.light .tz-section.tz-header .nav-utilities,
+html.light .tz-section.tz-header .sale-text {
+    color: var(--tz-text, #111111) !important;
+}
+
 /* Override light mode text color for elements that should remain white */
 .light .cart-promo,
 html.light .cart-promo,
@@ -512,6 +563,19 @@ html.dark [data-tz-component="header"] .header-inner {
     background-color: transparent !important;
 }
 
+/* Override global dark mode styles - ensure visibility on dark backgrounds */
+/* In dark mode, header background is always dark, so text must be light */
+/* Note: Links are handled separately below to ensure they're always visible */
+body.dark .tz-section.tz-header .nav-links,
+body.dark .tz-section.tz-header .nav-utilities,
+body.dark .tz-section.tz-header .logo a,
+body.dark .tz-section.tz-header .nav-link,
+body.dark .tz-section.tz-header .sale-text,
+html.dark body .tz-section.tz-header .nav-links,
+html.dark body .tz-section.tz-header .nav-utilities,
+html.dark body .tz-section.tz-header .logo a,
+html.dark body .tz-section.tz-header .nav-link,
+html.dark body .tz-section.tz-header .sale-text,
 .dark .tz-section.tz-header .nav-links,
 .dark .tz-section.tz-header .nav-utilities,
 .dark .tz-section.tz-header .logo a,
@@ -525,6 +589,29 @@ html.dark .tz-section.tz-header .sale-text {
     color: #EDEDED !important;
 }
 
+/* Override link colors in dark mode - ensure visibility on dark backgrounds */
+/* In dark mode, header background is always dark (#121212), so links must be light */
+body.dark .tz-section.tz-header .nav-links a,
+body.dark .tz-section.tz-header .nav-utilities a,
+body.dark .tz-section.tz-header .nav-link,
+html.dark body .tz-section.tz-header .nav-links a,
+html.dark body .tz-section.tz-header .nav-utilities a,
+html.dark body .tz-section.tz-header .nav-link,
+.dark .tz-section.tz-header .nav-links a,
+.dark .tz-section.tz-header .nav-utilities a,
+.dark .tz-section.tz-header .nav-link,
+html.dark .tz-section.tz-header .nav-links a,
+html.dark .tz-section.tz-header .nav-utilities a,
+html.dark .tz-section.tz-header .nav-link {
+    color: #EDEDED !important;
+}
+
+body.dark .tz-section.tz-header .nav-links a:hover,
+body.dark .tz-section.tz-header .nav-utilities a:hover,
+body.dark .tz-section.tz-header .nav-link:hover,
+html.dark body .tz-section.tz-header .nav-links a:hover,
+html.dark body .tz-section.tz-header .nav-utilities a:hover,
+html.dark body .tz-section.tz-header .nav-link:hover,
 .dark .tz-section.tz-header .nav-links a:hover,
 .dark .tz-section.tz-header .nav-utilities a:hover,
 .dark .tz-section.tz-header .nav-link:hover,
@@ -1216,6 +1303,174 @@ html.dark [data-tz-component="header"] .utility-dropdown a:hover {
 }
 
 [dir="rtl"] [data-tz-component="header"] .utility-dropdown li.utility-menu-item-has-children > a::after {
+  right: auto;
+  left: 12px;
+  content: '‹';
+}
+
+/* =========================================================
+   MAIN MENU DROPDOWN STYLES (3 Levels)
+   ========================================================= */
+
+[data-tz-component="header"] .main-menu-item {
+  position: relative;
+}
+
+[data-tz-component="header"] .main-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 8px;
+  background: var(--tz-bg, #ffffff);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  min-width: 180px;
+  list-style: none;
+  padding: 8px 0;
+  margin: 0;
+  display: block;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(-8px);
+  transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease;
+  z-index: 10000;
+}
+
+/* Only show direct child dropdown, not nested ones */
+/* Only show direct child dropdown (level 1), not nested ones */
+[data-tz-component="header"] .main-menu-item:hover > .tz-main-hover-trigger > .main-dropdown:not(.main-dropdown-nested),
+[data-tz-component="header"] .main-menu-item .nav-link:hover + .main-dropdown:not(.main-dropdown-nested),
+[data-tz-component="header"] .main-menu-item:hover .nav-link + .main-dropdown:not(.main-dropdown-nested),
+[data-tz-component="header"] .tz-main-hover-trigger:hover > .main-dropdown:not(.main-dropdown-nested),
+[data-tz-component="header"] .main-menu-item > .tz-main-hover-trigger > .main-dropdown:not(.main-dropdown-nested):hover {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+[data-tz-component="header"] .main-dropdown > li {
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+[data-tz-component="header"] .main-dropdown a {
+  display: block;
+  padding: 10px 16px;
+  color: var(--tz-link, #111111);
+  text-decoration: none;
+  font-size: var(--tz-nav-size, 13px);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+[data-tz-component="header"] .main-dropdown a:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  color: var(--tz-link-hover, #555555);
+}
+
+/* Dark mode for main dropdown */
+.dark [data-tz-component="header"] .main-dropdown,
+html.dark [data-tz-component="header"] .main-dropdown {
+  background: #1e1e1e;
+  border-color: #333333;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.dark [data-tz-component="header"] .main-dropdown-nested,
+html.dark [data-tz-component="header"] .main-dropdown-nested {
+  background: #1e1e1e !important;
+  border-color: #333333 !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+}
+
+.dark [data-tz-component="header"] .main-dropdown a,
+html.dark [data-tz-component="header"] .main-dropdown a {
+  color: #EDEDED;
+}
+
+.dark [data-tz-component="header"] .main-dropdown a:hover,
+html.dark [data-tz-component="header"] .main-dropdown a:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: rgba(237, 237, 237, 0.7);
+}
+
+/* RTL support for main dropdown */
+[dir="rtl"] [data-tz-component="header"] .main-dropdown {
+  right: auto;
+  left: 0;
+}
+
+/* Nested dropdown support - items with children */
+[data-tz-component="header"] .main-dropdown-nested {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  margin-left: 8px;
+  margin-top: 0;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateX(-8px);
+  transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease;
+}
+
+[data-tz-component="header"] .main-dropdown li.main-menu-item-has-children > a {
+  position: relative;
+  padding-right: 24px;
+}
+
+[data-tz-component="header"] .main-dropdown li.main-menu-item-has-children > a::after {
+  content: '›';
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+  line-height: 1;
+}
+
+/* Only show nested dropdown when hovering the specific li item (level 2) */
+[data-tz-component="header"] .main-dropdown > li.main-menu-item-has-children:hover > .main-dropdown-nested {
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+  transform: translateX(0);
+}
+
+/* For third level nested dropdowns (level 3) */
+[data-tz-component="header"] .main-dropdown-nested > li.main-menu-item-has-children:hover > .main-dropdown-nested {
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+  transform: translateX(0);
+}
+
+/* RTL support for nested main dropdown */
+[dir="rtl"] [data-tz-component="header"] .main-dropdown-nested {
+  left: auto;
+  right: 100%;
+  margin-left: 0;
+  margin-right: 8px;
+  transform: translateX(8px);
+}
+
+[dir="rtl"] [data-tz-component="header"] .main-dropdown > li.main-menu-item-has-children:hover > .main-dropdown-nested {
+  transform: translateX(0);
+}
+
+[dir="rtl"] [data-tz-component="header"] .main-dropdown-nested > li.main-menu-item-has-children:hover > .main-dropdown-nested {
+  transform: translateX(0);
+}
+
+[dir="rtl"] [data-tz-component="header"] .main-dropdown li.main-menu-item-has-children > a {
+  padding-right: 16px;
+  padding-left: 24px;
+}
+
+[dir="rtl"] [data-tz-component="header"] .main-dropdown li.main-menu-item-has-children > a::after {
   right: auto;
   left: 12px;
   content: '‹';
@@ -2065,6 +2320,138 @@ html.dark .tz-section.tz-header {
     [dir="rtl"] .mobile-utility-accordion-nested .mobile-utility-accordion-toggle {
         padding-left: 1.5rem;
         padding-right: 2.5rem;
+    }
+    
+    /* Main Menu Accordion Styles (Mobile) */
+    .mobile-menu-accordion {
+        display: block;
+        width: 100%;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+    
+    .mobile-menu-accordion-toggle {
+        width: 100%;
+        padding: 1rem 1.5rem;
+        font-size: 0.9375rem;
+        font-weight: 500;
+        color: var(--tz-link, #111111);
+        background: none;
+        border: none;
+        text-align: left;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: background-color 0.2s ease, color 0.2s ease;
+    }
+    
+    [dir="rtl"] .mobile-menu-accordion-toggle {
+        text-align: right;
+    }
+    
+    .mobile-menu-accordion-toggle:hover {
+        background-color: rgba(0, 0, 0, 0.02);
+        color: var(--tz-link-hover, #555555);
+    }
+    
+    .mobile-menu-accordion-toggle:active {
+        transform: scale(0.98);
+    }
+    
+    .mobile-menu-accordion-icon {
+        font-size: 1.25rem;
+        font-weight: 300;
+        line-height: 1;
+        transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .mobile-menu-accordion-toggle[aria-expanded="true"] .mobile-menu-accordion-icon {
+        transform: rotate(45deg);
+    }
+    
+    .mobile-menu-accordion-content {
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+                    opacity 0.3s ease,
+                    padding 0.3s ease;
+        padding-left: 0;
+        padding-right: 0;
+    }
+    
+    .mobile-menu-accordion-toggle[aria-expanded="true"] + .mobile-menu-accordion-content {
+        max-height: 2000px;
+        opacity: 1;
+        padding-top: 0.25rem;
+        padding-bottom: 0.5rem;
+    }
+    
+    /* Animate child items */
+    .mobile-menu-accordion-content > * {
+        opacity: 0;
+        transform: translateY(-8px);
+        transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+    
+    .mobile-menu-accordion-toggle[aria-expanded="true"] + .mobile-menu-accordion-content > * {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
+    /* Stagger delays for child items */
+    .mobile-menu-accordion-toggle[aria-expanded="true"] + .mobile-menu-accordion-content > *:nth-child(1) { transition-delay: 0.05s; }
+    .mobile-menu-accordion-toggle[aria-expanded="true"] + .mobile-menu-accordion-content > *:nth-child(2) { transition-delay: 0.1s; }
+    .mobile-menu-accordion-toggle[aria-expanded="true"] + .mobile-menu-accordion-content > *:nth-child(3) { transition-delay: 0.15s; }
+    .mobile-menu-accordion-toggle[aria-expanded="true"] + .mobile-menu-accordion-content > *:nth-child(4) { transition-delay: 0.2s; }
+    .mobile-menu-accordion-toggle[aria-expanded="true"] + .mobile-menu-accordion-content > *:nth-child(5) { transition-delay: 0.25s; }
+    .mobile-menu-accordion-toggle[aria-expanded="true"] + .mobile-menu-accordion-content > *:nth-child(6) { transition-delay: 0.3s; }
+    .mobile-menu-accordion-toggle[aria-expanded="true"] + .mobile-menu-accordion-content > *:nth-child(n+7) { transition-delay: 0.35s; }
+    
+    .mobile-menu-accordion-nested {
+        background-color: rgba(0, 0, 0, 0.02);
+        border-radius: 4px;
+        margin: 0.25rem 0;
+    }
+    
+    .mobile-menu-accordion-nested .mobile-menu-link {
+        padding-left: 2.5rem;
+    }
+    
+    [dir="rtl"] .mobile-menu-accordion-nested .mobile-menu-link {
+        padding-left: 1.5rem;
+        padding-right: 2.5rem;
+    }
+    
+    .mobile-menu-accordion-nested .mobile-menu-accordion-toggle {
+        padding-left: 2.5rem;
+    }
+    
+    [dir="rtl"] .mobile-menu-accordion-nested .mobile-menu-accordion-toggle {
+        padding-left: 1.5rem;
+        padding-right: 2.5rem;
+    }
+    
+    /* Dark mode for mobile main menu */
+    .dark .mobile-menu-accordion,
+    html.dark .mobile-menu-accordion {
+        border-bottom-color: rgba(255, 255, 255, 0.1);
+    }
+    
+    .dark .mobile-menu-accordion-toggle,
+    html.dark .mobile-menu-accordion-toggle {
+        color: #EDEDED;
+    }
+    
+    .dark .mobile-menu-accordion-toggle:hover,
+    html.dark .mobile-menu-accordion-toggle:hover {
+        background-color: rgba(255, 255, 255, 0.05);
+        color: rgba(237, 237, 237, 0.7);
+    }
+    
+    .dark .mobile-menu-accordion-nested,
+    html.dark .mobile-menu-accordion-nested {
+        background-color: rgba(255, 255, 255, 0.03);
     }
     
     /* Dark mode for mobile utility menu */
