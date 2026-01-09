@@ -1,0 +1,757 @@
+/* ============================================
+   TZ BLOG STYLES
+   ============================================ */
+
+/* --- BLOG LISTING PAGE --- */
+.tz-blog-section {
+    padding: 4rem 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.tz-blog-title {
+    text-align: center;
+    font-size: 3rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 3rem;
+    color: #000;
+}
+
+.tz-blog-filters {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.tz-blog-filters-title {
+    font-size: 0.875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 1.5rem;
+    color: #000;
+}
+
+.tz-blog-tags {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
+}
+
+.tz-blog-tag {
+    padding: 0.5rem 1.25rem;
+    background-color: transparent;
+    border: 1px solid #000;
+    color: #000;
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.tz-blog-tag:hover {
+    background-color: #000;
+    color: #fff !important;
+}
+
+html .light .tz-blog-tag.tz-blog-tag--active {
+    background-color: #000;
+    color: #fff !important;
+}
+
+html .dark .tz-blog-tag.tz-blog-tag--active {
+    color: #000 !important;
+}
+
+/* Override global light mode styles for active tag white text */
+body.light .tz-blog-tag.tz-blog-tag--active,
+body.light .tz-blog-tag:hover,
+html.light body .tz-blog-tag.tz-blog-tag--active,
+html.light body .tz-blog-tag:hover,
+.light .tz-blog-tag.tz-blog-tag--active,
+.light .tz-blog-tag:hover,
+html.light .tz-blog-tag.tz-blog-tag--active,
+html.light .tz-blog-tag:hover {
+    color: #fff !important;
+}
+
+.tz-blog-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+}
+
+.tz-blog-card {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    text-decoration: none;
+    display: block;
+}
+
+.tz-blog-card-figure {
+    position: relative;
+    width: 100%;
+    padding-bottom: 75%;
+    /* 4:3 aspect ratio */
+    overflow: hidden;
+    background-color: #f5f5f5;
+    margin: 0;
+}
+
+.tz-blog-card-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.tz-blog-card:hover .tz-blog-card-image {
+    transform: scale(1.05);
+}
+
+.tz-blog-card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 2rem;
+    background: linear-gradient(180deg, #0000, #0006);
+    color: #fff !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+/* Override global light mode styles for overlay content - must be more specific than global .light h2 */
+/* Using body/html prefix to increase specificity */
+body.light .tz-blog-card-overlay,
+body.light .tz-blog-card-overlay *,
+body.light .tz-blog-card-overlay h1,
+body.light .tz-blog-card-overlay h2,
+body.light .tz-blog-card-overlay h2.tz-blog-card-title,
+body.light .tz-blog-card-overlay h3,
+body.light .tz-blog-card-overlay h4,
+body.light .tz-blog-card-overlay h5,
+body.light .tz-blog-card-overlay h6,
+body.light .tz-blog-card-overlay p,
+body.light .tz-blog-card-overlay span,
+body.light .tz-blog-card-overlay div,
+html.light body .tz-blog-card-overlay,
+html.light body .tz-blog-card-overlay *,
+html.light body .tz-blog-card-overlay h1,
+html.light body .tz-blog-card-overlay h2,
+html.light body .tz-blog-card-overlay h2.tz-blog-card-title,
+html.light body .tz-blog-card-overlay h3,
+html.light body .tz-blog-card-overlay h4,
+html.light body .tz-blog-card-overlay h5,
+html.light body .tz-blog-card-overlay h6,
+html.light body .tz-blog-card-overlay p,
+html.light body .tz-blog-card-overlay span,
+html.light body .tz-blog-card-overlay div,
+.light .tz-blog-card-overlay,
+.light .tz-blog-card-overlay *,
+.light .tz-blog-card-overlay h1,
+.light .tz-blog-card-overlay h2,
+.light .tz-blog-card-overlay h2.tz-blog-card-title,
+.light .tz-blog-card-overlay h3,
+.light .tz-blog-card-overlay h4,
+.light .tz-blog-card-overlay h5,
+.light .tz-blog-card-overlay h6,
+.light .tz-blog-card-overlay p,
+.light .tz-blog-card-overlay span,
+.light .tz-blog-card-overlay div,
+html.light .tz-blog-card-overlay,
+html.light .tz-blog-card-overlay *,
+html.light .tz-blog-card-overlay h1,
+html.light .tz-blog-card-overlay h2,
+html.light .tz-blog-card-overlay h2.tz-blog-card-title,
+html.light .tz-blog-card-overlay h3,
+html.light .tz-blog-card-overlay h4,
+html.light .tz-blog-card-overlay h5,
+html.light .tz-blog-card-overlay h6,
+html.light .tz-blog-card-overlay p,
+html.light .tz-blog-card-overlay span,
+html.light .tz-blog-card-overlay div {
+    color: #fff !important;
+}
+
+.tz-blog-card-category {
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.5rem;
+    opacity: 0.9;
+    color: #fff !important;
+}
+
+.light .tz-blog-card-category,
+html.light .tz-blog-card-category {
+    color: #fff !important;
+}
+
+.tz-blog-card-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0.5rem;
+    line-height: 1.3;
+    color: #fff !important;
+}
+
+.light .tz-blog-card-title,
+.light .tz-blog-card-overlay h2,
+html.light .tz-blog-card-title,
+html.light .tz-blog-card-overlay h2 {
+    color: #fff !important;
+}
+
+.tz-blog-card-meta {
+    font-size: 0.875rem;
+    opacity: 0.9;
+    font-weight: 400;
+    color: #fff !important;
+}
+
+.light .tz-blog-card-meta,
+html.light .tz-blog-card-meta {
+    color: #fff !important;
+}
+
+.tz-blog-card-meta-author {
+    font-weight: 500;
+}
+
+/* --- BLOG POST PAGE --- */
+.tz-article-section {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+}
+
+.tz-article-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.tz-article-title {
+    font-size: 2rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 1rem;
+    color: #000;
+    line-height: 1.2;
+}
+
+.tz-article-meta {
+    font-size: 1rem;
+    color: #666;
+    font-weight: 400;
+}
+
+.tz-article-meta-author {
+    font-weight: 500;
+}
+
+.tz-article-meta-separator {
+    margin: 0 0.5rem;
+}
+
+.tz-article-image {
+    width: 100%;
+    margin-bottom: 3rem;
+}
+
+.tz-article-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.tz-article-content {
+    font-size: 1.125rem;
+    line-height: 1.8;
+    color: #333;
+    margin-bottom: 3rem;
+}
+
+.tz-article-content h2,
+.tz-article-content h3,
+.tz-article-content h4 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    color: #000;
+}
+
+.tz-article-content h2:first-child,
+.tz-article-content h3:first-child,
+.tz-article-content h4:first-child {
+    margin-top: 0;
+}
+
+.tz-article-content p {
+    margin-bottom: 1.5rem;
+}
+
+.tz-article-footer {
+    border-top: 1px solid #e5e5e5;
+    padding-top: 2rem;
+    margin-top: 3rem;
+}
+
+.tz-article-tags {
+    margin-bottom: 1.5rem;
+}
+
+.tz-article-tags-label {
+    font-size: 0.875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.75rem;
+    color: #000;
+}
+
+.tz-article-tags-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.tz-article-tag {
+    font-size: 0.875rem;
+    color: #666;
+    text-decoration: none;
+}
+
+.tz-article-tag:hover {
+    color: #000;
+    text-decoration: underline;
+}
+
+.tz-article-share {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+}
+
+.tz-article-share-label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #000;
+}
+
+.tz-article-share-icon {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+    display: inline-block;
+    color: currentColor;
+    text-decoration: none;
+    flex-shrink: 0;
+}
+
+.tz-article-share-icon svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.tz-article-share-icon:hover {
+    opacity: 0.7;
+}
+
+.tz-article-comments {
+    margin-top: 3rem;
+}
+
+.tz-article-comments-count {
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin-bottom: 2rem;
+    color: #000;
+}
+
+.tz-article-comments-list {
+    margin-bottom: 3rem;
+}
+
+.tz-article-comment {
+    padding: 1.5rem 0;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.tz-article-comment:last-child {
+    border-bottom: none;
+}
+
+.tz-article-comment-content {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #333;
+    margin-bottom: 0.75rem;
+}
+
+.tz-article-comment-meta {
+    font-size: 0.875rem;
+    color: #666;
+}
+
+.tz-article-comment-author {
+    font-weight: 500;
+}
+
+.tz-article-comment-separator {
+    margin: 0 0.5rem;
+}
+
+.tz-article-comment-date {
+    color: #999;
+}
+
+.tz-article-comment-form {
+    margin-top: 2rem;
+}
+
+.tz-article-comment-form-title {
+    font-size: 1.125rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 1.5rem;
+    color: #000;
+}
+
+.tz-article-comment-fields {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.tz-article-comment-field {
+    display: flex;
+    flex-direction: column;
+}
+
+.tz-article-comment-field label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    color: #000;
+}
+
+.tz-article-comment-field input,
+.tz-article-comment-field textarea {
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    font-size: 1rem;
+    font-family: inherit;
+    color: #000;
+    background-color: #fff;
+    transition: border-color 0.3s ease;
+}
+
+.tz-article-comment-field input:focus,
+.tz-article-comment-field textarea:focus {
+    outline: none;
+    border-color: #000;
+}
+
+.tz-article-comment-field--full {
+    grid-column: 1 / -1;
+}
+
+.tz-article-comment-field textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.tz-article-comment-note {
+    font-size: 0.75rem;
+    color: #666;
+    margin-bottom: 1.5rem;
+    font-style: italic;
+}
+
+.tz-article-comment-submit {
+    padding: 0.875rem 2rem;
+    background-color: var(--tz-product-primary, #F8E71C);
+    color: #fff;
+    border: none;
+    font-size: 0.875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.tz-article-comment-submit:hover {
+    background-color: var(--tz-product-primary-hover, #E6D61A);
+}
+
+.tz-article-comment-error,
+.tz-article-comment-success {
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    border-radius: 4px;
+}
+
+.tz-article-comment-error {
+    background-color: #fee;
+    border: 1px solid #fcc;
+    color: #c33;
+}
+
+.tz-article-comment-success {
+    background-color: #efe;
+    border: 1px solid #cfc;
+    color: #3c3;
+}
+
+.dark .tz-article-comment-error,
+html.dark .tz-article-comment-error {
+    background-color: #3c1e1e;
+    border-color: #5c2e2e;
+    color: #ff6666;
+}
+
+.dark .tz-article-comment-success,
+html.dark .tz-article-comment-success {
+    background-color: #1e3c1e;
+    border-color: #2e5c2e;
+    color: #66ff66;
+}
+
+/* --- RESPONSIVE --- */
+@media screen and (max-width: 768px) {
+    .tz-blog-section {
+        padding: 2rem 1rem;
+    }
+
+    .tz-blog-title {
+        font-size: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    .tz-blog-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .tz-article-section {
+        padding: 2rem 1rem;
+    }
+
+    .tz-article-title {
+        font-size: 2rem;
+    }
+
+    .tz-article-comment-fields {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* --- DARK MODE --- */
+.dark .tz-blog-section,
+html.dark .tz-blog-section {
+    background-color: #121212;
+    margin-bottom: 200px;
+}
+
+.dark .tz-blog-title,
+html.dark .tz-blog-title {
+    color: #EDEDED;
+}
+
+.dark .tz-blog-filters-title,
+html.dark .tz-blog-filters-title {
+    color: #EDEDED;
+}
+
+.dark .tz-blog-tag,
+html.dark .tz-blog-tag {
+    border-color: #EDEDED;
+    color: #EDEDED;
+}
+
+.dark .tz-blog-tag:hover,
+html.dark .tz-blog-tag:hover {
+    background-color: #EDEDED;
+    color: #121212;
+}
+
+.dark .tz-blog-tag.tz-blog-tag--active,
+html.dark .tz-blog-tag.tz-blog-tag--active {
+    background-color: #EDEDED;
+    color: #121212;
+}
+
+.dark .tz-article-section,
+html.dark .tz-article-section {
+    background-color: #121212;
+}
+
+.dark .tz-article-title,
+html.dark .tz-article-title {
+    color: #EDEDED;
+}
+
+.dark .tz-article-meta,
+html.dark .tz-article-meta {
+    color: #CCCCCC;
+}
+
+.dark .tz-article-content,
+html.dark .tz-article-content {
+    color: #EDEDED;
+}
+
+.dark .tz-article-content h2,
+.dark .tz-article-content h3,
+.dark .tz-article-content h4,
+html.dark .tz-article-content h2,
+html.dark .tz-article-content h3,
+html.dark .tz-article-content h4 {
+    color: #EDEDED;
+}
+
+.dark .tz-article-footer,
+html.dark .tz-article-footer {
+    border-top-color: #333333;
+}
+
+.dark .tz-article-tags-label,
+html.dark .tz-article-tags-label {
+    color: #EDEDED;
+}
+
+.dark .tz-article-tag,
+html.dark .tz-article-tag {
+    color: #CCCCCC;
+}
+
+.dark .tz-article-tag:hover,
+html.dark .tz-article-tag:hover {
+    color: #EDEDED;
+}
+
+.dark .tz-article-share-label,
+html.dark .tz-article-share-label {
+    color: #EDEDED;
+}
+
+.dark .tz-article-comments-count,
+html.dark .tz-article-comments-count {
+    color: #EDEDED;
+}
+
+.dark .tz-article-comment-form-title,
+html.dark .tz-article-comment-form-title {
+    color: #EDEDED;
+}
+
+.dark .tz-article-comment-field label,
+html.dark .tz-article-comment-field label {
+    color: #EDEDED;
+}
+
+.dark .tz-article-comment-field input,
+.dark .tz-article-comment-field textarea,
+html.dark .tz-article-comment-field input,
+html.dark .tz-article-comment-field textarea {
+    background-color: #1e1e1e;
+    border-color: #333333;
+    color: #EDEDED;
+}
+
+.dark .tz-article-comment-field input:focus,
+.dark .tz-article-comment-field textarea:focus,
+html.dark .tz-article-comment-field input:focus,
+html.dark .tz-article-comment-field textarea:focus {
+    border-color: #555555;
+}
+
+.dark .tz-article-comment-note,
+html.dark .tz-article-comment-note {
+    color: #CCCCCC;
+}
+
+/* Dark mode for comments list */
+.dark .tz-article-comment,
+html.dark .tz-article-comment {
+    border-bottom-color: #333333;
+}
+
+.dark .tz-article-comment-content,
+html.dark .tz-article-comment-content {
+    color: #EDEDED;
+}
+
+.dark .tz-article-comment-meta,
+.dark .tz-article-comment-author,
+html.dark .tz-article-comment-meta,
+html.dark .tz-article-comment-author {
+    color: #CCCCCC;
+}
+
+.dark .tz-article-comment-date,
+html.dark .tz-article-comment-date {
+    color: #999999;
+}
+
+/* --- LIGHT MODE --- */
+.light .tz-blog-section,
+html.light .tz-blog-section {
+    background-color: #ffffff;
+}
+
+.light .tz-blog-title,
+html.light .tz-blog-title {
+    color: #000;
+}
+
+.light .tz-article-section,
+html.light .tz-article-section {
+    background-color: #ffffff;
+}
+
+.light .tz-article-title,
+html.light .tz-article-title {
+    color: #000;
+}
+
+/* --- RTL SUPPORT --- */
+[dir="rtl"] .tz-blog-tags {
+    flex-direction: row-reverse;
+}
+
+[dir="rtl"] .tz-article-tags-list {
+    flex-direction: row-reverse;
+}
+
+[dir="rtl"] .tz-article-share {
+    flex-direction: row-reverse;
+}

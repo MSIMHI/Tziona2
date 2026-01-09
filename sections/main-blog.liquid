@@ -1,6 +1,4 @@
-{{ 'component-article-card.css' | asset_url | stylesheet_tag }}
-{{ 'component-card.css' | asset_url | stylesheet_tag }}
-{{ 'section-main-blog.css' | asset_url | stylesheet_tag }}
+{{ 'tz-blog.css' | asset_url | stylesheet_tag }}
 
 {%- style -%}
   .section-{{ section.id }}-padding {
@@ -17,30 +15,94 @@
 {%- endstyle -%}
 
 {%- paginate blog.articles by 6 -%}
-  <div class="main-blog page-width section-{{ section.id }}-padding">
-    <h1 class="title--primary{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
-      {{ blog.title | escape }}
+  <div class="tz-blog-section section-{{ section.id }}-padding">
+    <h1 class="tz-blog-title">
+      {{ 'blogs.blog.title' | t | default: blog.title | escape }}
     </h1>
 
-    <div class="blog-articles {% if section.settings.layout == 'collage' %}blog-articles--collage{% endif %}">
-      {%- for article in blog.articles -%}
-        <div
-          class="blog-articles__article article{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
-          {% if settings.animations_reveal_on_scroll %}
-            data-cascade
-            style="--animation-order: {{ forloop.index }};"
-          {% endif %}
-        >
-          {%- render 'article-card',
-            article: article,
-            media_height: section.settings.image_height,
-            media_aspect_ratio: article.image.aspect_ratio,
-            show_image: section.settings.show_image,
-            show_date: section.settings.show_date,
-            show_author: section.settings.show_author,
-            show_excerpt: true
-          -%}
+    {%- comment -%} Collect all unique tags from articles {%- endcomment -%}
+    {%- assign all_tags = '' -%}
+    {%- for article in blog.articles -%}
+      {%- for tag in article.tags -%}
+        {%- unless all_tags contains tag -%}
+          {%- if all_tags == '' -%}
+            {%- assign all_tags = tag -%}
+          {%- else -%}
+            {%- assign all_tags = all_tags | append: ',' | append: tag -%}
+          {%- endif -%}
+        {%- endunless -%}
+      {%- endfor -%}
+    {%- endfor -%}
+    {%- assign tag_array = all_tags | split: ',' -%}
+
+    {%- if tag_array.size > 0 -%}
+      <div class="tz-blog-filters">
+        <div class="tz-blog-filters-title">
+          {{ 'blogs.blog.filter_by_tags' | t | default: 'Filter by Tags' }}
         </div>
+        <div class="tz-blog-tags">
+          <a href="#" class="tz-blog-tag tz-blog-tag--active" data-tag="all">
+            {{ 'blogs.blog.all' | t | default: 'All' }}
+          </a>
+          {%- for tag in tag_array -%}
+            <a href="#" class="tz-blog-tag" data-tag="{{ tag | handleize }}">
+              {{ tag | upcase }}
+            </a>
+          {%- endfor -%}
+        </div>
+      </div>
+    {%- endif -%}
+
+    <div class="tz-blog-grid">
+      {%- for article in blog.articles -%}
+        {%- assign article_tags_handles = '' -%}
+        {%- for tag in article.tags -%}
+          {%- if article_tags_handles == '' -%}
+            {%- assign article_tags_handles = tag | handleize -%}
+          {%- else -%}
+            {%- assign article_tags_handles = article_tags_handles | append: ',' | append: tag | handleize -%}
+          {%- endif -%}
+        {%- endfor -%}
+        
+        <a href="{{ article.url }}" class="tz-blog-card" data-tags="{{ article_tags_handles }}">
+          <figure class="tz-blog-card-figure">
+            {%- if article.image -%}
+              <img
+                src="{{ article.image | image_url: width: 800 }}"
+                alt="{{ article.image.alt | escape }}"
+                class="tz-blog-card-image"
+                loading="lazy"
+                width="{{ article.image.width }}"
+                height="{{ article.image.height }}"
+              >
+            {%- else -%}
+              <div class="tz-blog-card-image" style="background-color: #f5f5f5;"></div>
+            {%- endif -%}
+            <div class="tz-blog-card-overlay">
+              {%- if article.tags.size > 0 -%}
+                <div class="tz-blog-card-category">
+                  {%- for tag in article.tags -%}
+                    {{ tag | upcase }}{% unless forloop.last %}, {% endunless %}
+                  {%- endfor -%}
+                </div>
+              {%- endif -%}
+              <h2 class="tz-blog-card-title">{{ article.title | escape }}</h2>
+              <div class="tz-blog-card-meta">
+                {%- if section.settings.show_author and article.author != blank -%}
+                  <span class="tz-blog-card-meta-author">
+                    {{ 'blogs.article.by' | t | default: 'By' }} {{ article.author }}
+                  </span>
+                {%- endif -%}
+                {%- if section.settings.show_date -%}
+                  {%- if section.settings.show_author and article.author != blank -%}
+                    <span> • </span>
+                  {%- endif -%}
+                  <span>{{ article.published_at | time_tag: format: 'date' }}</span>
+                {%- endif -%}
+              </div>
+            </div>
+          </figure>
+        </a>
       {%- endfor -%}
     </div>
 
@@ -50,58 +112,14 @@
   </div>
 {%- endpaginate -%}
 
+<script src="{{ 'tz-blog.js' | asset_url }}" defer></script>
+
 {% schema %}
 {
   "name": "t:sections.main-blog.name",
   "tag": "section",
   "class": "section",
   "settings": [
-    {
-      "type": "select",
-      "id": "layout",
-      "options": [
-        {
-          "value": "grid",
-          "label": "t:sections.main-blog.settings.layout.options__1.label"
-        },
-        {
-          "value": "collage",
-          "label": "t:sections.main-blog.settings.layout.options__2.label"
-        }
-      ],
-      "default": "collage",
-      "label": "t:sections.main-blog.settings.layout.label"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_image",
-      "default": true,
-      "label": "t:sections.main-blog.settings.show_image.label"
-    },
-    {
-      "type": "select",
-      "id": "image_height",
-      "options": [
-        {
-          "value": "adapt",
-          "label": "t:sections.main-blog.settings.image_height.options__1.label"
-        },
-        {
-          "value": "small",
-          "label": "t:sections.main-blog.settings.image_height.options__2.label"
-        },
-        {
-          "value": "medium",
-          "label": "t:sections.main-blog.settings.image_height.options__3.label"
-        },
-        {
-          "value": "large",
-          "label": "t:sections.main-blog.settings.image_height.options__4.label"
-        }
-      ],
-      "default": "medium",
-      "label": "t:sections.main-blog.settings.image_height.label"
-    },
     {
       "type": "checkbox",
       "id": "show_date",
@@ -111,7 +129,7 @@
     {
       "type": "checkbox",
       "id": "show_author",
-      "default": false,
+      "default": true,
       "label": "t:sections.main-blog.settings.show_author.label"
     },
     {

@@ -85,9 +85,16 @@
     "complementary_products": "מוצרים משלימים"
   },
   "blogs": {
+    "blog": {
+      "title": "בלוג",
+      "filter_by_tags": "סנן לפי תגיות",
+      "all": "הכל"
+    },
     "article": {
       "blog": "בלוג",
       "read_more_title": "קרא עוד: {{ title }}",
+      "by": "מאת",
+      "tags": "תגיות",
       "comments": {
         "one": "תגובה {{ count }}",
         "other": "{{ count }} תגובות"
@@ -96,10 +103,10 @@
       "comment_form_title": "השאר תגובה",
       "name": "שם",
       "email": "אימייל",
-      "message": "תגובה",
+      "message": "הודעה",
       "post": "פרסם תגובה",
       "back_to_blog": "חזרה לבלוג",
-      "share": "שתף מאמר זה",
+      "share": "שתף",
       "success": "תגובתך פורסמה בהצלחה! תודה!",
       "success_moderated": "תגובתך פורסמה בהצלחה. אנו נפרסם אותה בעוד זמן קצר, שכן הבלוג שלנו עובר ניהול."
     }

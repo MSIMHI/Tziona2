@@ -9,9 +9,8 @@ Rebuild the Blog section of the Shopify theme from scratch, following the theme'
 ## Context & References
 
 ### Design References
-- `blog.html` - Static HTML reference for blog listing layout (visual inspiration only)
+- `blog_template/` - Static HTML reference for blog listing layout (visual inspiration only)
 - `post.html` - Static HTML reference for single article page (visual inspiration only)
-- `login.html` - Reference for Tailwind-style clean design patterns
 
 **Important:** Use these files ONLY for visual structure and layout inspiration. Do NOT reuse their classes or CSS.
 
