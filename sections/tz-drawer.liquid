@@ -133,6 +133,50 @@
         <span class="material-icons-outlined">close</span>
       </button>
     </div>
+    
+    <!-- Utility Menu Section (Above Main Menu) - JS will sync from header if no Liquid menu configured -->
+    <div class="mobile-utility-menu">
+      <div class="mobile-utility-menu-title">Utilities</div>
+      <nav class="mobile-utility-nav">
+        {% assign utility_menu_handle = section.settings.utility_menu %}
+        {% if utility_menu_handle != blank %}
+          {% assign utility_menu = linklists[utility_menu_handle] %}
+          {% for link in utility_menu.links %}
+            {% if link.links.size > 0 %}
+              <div class="mobile-utility-accordion">
+                <button class="mobile-utility-accordion-toggle" aria-expanded="false" type="button">
+                  <span>{{ link.title }}</span>
+                  <span class="mobile-utility-accordion-icon">+</span>
+                </button>
+                <div class="mobile-utility-accordion-content">
+                  {% for childlink in link.links %}
+                    {% if childlink.links.size > 0 %}
+                      <div class="mobile-utility-accordion mobile-utility-accordion-nested">
+                        <button class="mobile-utility-accordion-toggle" aria-expanded="false" type="button">
+                          <span>{{ childlink.title }}</span>
+                          <span class="mobile-utility-accordion-icon">+</span>
+                        </button>
+                        <div class="mobile-utility-accordion-content">
+                          {% for grandchildlink in childlink.links %}
+                            <a href="{{ grandchildlink.url }}" class="mobile-utility-link">{{ grandchildlink.title }}</a>
+                          {% endfor %}
+                        </div>
+                      </div>
+                    {% else %}
+                      <a href="{{ childlink.url }}" class="mobile-utility-link">{{ childlink.title }}</a>
+                    {% endif %}
+                  {% endfor %}
+                </div>
+              </div>
+            {% else %}
+              <a href="{{ link.url }}" class="mobile-utility-link">{{ link.title }}</a>
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+      </nav>
+    </div>
+    
+    <!-- Main Menu -->
     <nav class="mobile-menu-nav">
       {% for link in linklists[section.settings.mobile_menu].links %}
         <a href="{{ link.url }}" class="mobile-menu-link">{{ link.title }}</a>
@@ -170,6 +214,12 @@
       "id": "mobile_menu",
       "label": "Mobile Menu",
       "default": "main-menu"
+    },
+    {
+      "type": "link_list",
+      "id": "utility_menu",
+      "label": "Utility Menu (Mobile)",
+      "info": "IMPORTANT: Select the same menu used in the header's 'Utilities Menu' setting. Items with children will show as accordions."
     },
     {
       "type": "checkbox",

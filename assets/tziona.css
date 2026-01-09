@@ -1020,6 +1020,7 @@ html.dark .tz-footer a:hover {
   background: color-mix(in srgb, var(--tz-bg) calc(var(--tz-bg-opacity) * 100%), transparent);
   padding-top: var(--tz-pt);
   padding-bottom: var(--tz-pb);
+  overflow: visible;
 }
 
 /* Sticky */
@@ -1039,6 +1040,7 @@ html.dark .tz-footer a:hover {
   gap: 16px;
   width: 100%;
   direction: rtl; /* IMPORTANT: keep RTL */
+  overflow: visible;
 }
 
 /* MAIN MENU + SALE (right side in RTL) */
@@ -1049,11 +1051,171 @@ html.dark .tz-footer a:hover {
   flex-wrap: wrap;
 }
 
-/* UTILITIES + ICONS (left side in RTL — because it’s last in Liquid) */
+/* UTILITIES + ICONS (left side in RTL — because it's last in Liquid) */
 [data-tz-component="header"] .nav-utilities{
   display: flex;
   align-items: center;
   gap: 14px;
+  position: relative;
+  overflow: visible;
+}
+
+/* Utility Menu Dropdown */
+[data-tz-component="header"] .utility-menu-item {
+  position: relative;
+}
+
+[data-tz-component="header"] .utility-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 8px;
+  background: var(--tz-bg, #ffffff);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  min-width: 180px;
+  list-style: none;
+  padding: 8px 0;
+  margin: 0;
+  display: block;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(-8px);
+  transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease;
+  z-index: 10000;
+}
+
+[data-tz-component="header"] .utility-menu-item:hover .utility-dropdown,
+[data-tz-component="header"] .utility-menu-item .utility-menu-link:hover + .utility-dropdown,
+[data-tz-component="header"] .utility-menu-item:hover .utility-menu-link + .utility-dropdown,
+[data-tz-component="header"] .utility-menu-item .utility-dropdown:hover {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+[data-tz-component="header"] .utility-dropdown > li {
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+[data-tz-component="header"] .utility-dropdown a {
+  display: block;
+  padding: 10px 16px;
+  color: var(--tz-link, #111111);
+  text-decoration: none;
+  font-size: var(--tz-nav-size, 13px);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+[data-tz-component="header"] .utility-dropdown a:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  color: var(--tz-link-hover, #555555);
+}
+
+/* Dark mode for utility dropdown */
+.dark [data-tz-component="header"] .utility-dropdown,
+html.dark [data-tz-component="header"] .utility-dropdown {
+  background: #1e1e1e;
+  border-color: #333333;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.dark [data-tz-component="header"] .utility-dropdown-nested,
+html.dark [data-tz-component="header"] .utility-dropdown-nested {
+  background: #1e1e1e !important;
+  border-color: #333333 !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+}
+
+.dark [data-tz-component="header"] .utility-dropdown a,
+html.dark [data-tz-component="header"] .utility-dropdown a {
+  color: #EDEDED;
+}
+
+.dark [data-tz-component="header"] .utility-dropdown a:hover,
+html.dark [data-tz-component="header"] .utility-dropdown a:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: rgba(237, 237, 237, 0.7);
+}
+
+/* RTL support for utility dropdown */
+[dir="rtl"] [data-tz-component="header"] .utility-dropdown {
+  right: auto;
+  left: 0;
+}
+
+/* Nested dropdown support - items with children */
+[data-tz-component="header"] .utility-dropdown-nested {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  margin-left: 8px;
+  margin-top: 0;
+  min-width: 180px;
+  z-index: 10001;
+  display: block;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  transform: translateX(-8px);
+  transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease;
+  background: var(--tz-bg, #ffffff);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  list-style: none;
+  padding: 8px 0;
+}
+
+[data-tz-component="header"] .utility-dropdown li.utility-menu-item-has-children > a {
+  position: relative;
+  padding-right: 24px;
+}
+
+[data-tz-component="header"] .utility-dropdown li.utility-menu-item-has-children > a::after {
+  content: '›';
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 16px;
+  color: inherit;
+}
+
+[data-tz-component="header"] .utility-dropdown li.utility-menu-item-has-children:hover > .utility-dropdown-nested {
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+  transform: translateX(0);
+}
+
+/* RTL support for nested dropdowns */
+[dir="rtl"] [data-tz-component="header"] .utility-dropdown-nested {
+  left: auto;
+  right: 100%;
+  margin-left: 0;
+  margin-right: 8px;
+  transform: translateX(8px);
+}
+
+[dir="rtl"] [data-tz-component="header"] .utility-dropdown li.utility-menu-item-has-children:hover > .utility-dropdown-nested {
+  transform: translateX(0);
+}
+
+[dir="rtl"] [data-tz-component="header"] .utility-dropdown li.utility-menu-item-has-children > a {
+  padding-right: 16px;
+  padding-left: 24px;
+}
+
+[dir="rtl"] [data-tz-component="header"] .utility-dropdown li.utility-menu-item-has-children > a::after {
+  right: auto;
+  left: 12px;
+  content: '‹';
 }
 
 /* LOGO — visually centered, DOES NOT affect layout */
@@ -1707,6 +1869,11 @@ html.dark .tz-section.tz-header {
         gap: 1rem;
     }
     
+    /* Hide utility menu on mobile in header */
+    [data-tz-component="header"] .nav-utilities {
+        display: none;
+    }
+    
     .mobile-menu-link {
         padding: 1rem 1.5rem;
         font-size: 1rem;
@@ -1730,6 +1897,215 @@ html.dark .tz-section.tz-header {
     
     .mobile-menu-sale {
         color: var(--tz-accent, #ff5a1f);
+    }
+    
+    /* Mobile Utility Menu - Now positioned ABOVE main menu */
+    .mobile-utility-menu {
+        margin-bottom: 1.5rem;
+        padding-bottom: 1.5rem;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+    
+    .mobile-utility-menu-title {
+        font-size: 0.875rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        color: var(--tz-text);
+        padding: 0 1.5rem;
+        margin-bottom: 1rem;
+    }
+    
+    .mobile-utility-nav {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    /* RTL: Reverse mobile utility menu order to match header's visual order */
+    [dir="rtl"] .mobile-utility-nav {
+        flex-direction: column-reverse;
+    }
+    
+    .mobile-utility-link {
+        padding: 1rem 1.5rem;
+        font-size: 0.9375rem;
+        color: var(--tz-link, #111111);
+        text-decoration: none;
+        display: block;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        transition: background-color 0.2s ease, 
+                    color 0.2s ease,
+                    padding-left 0.2s ease,
+                    padding-right 0.2s ease;
+    }
+    
+    .mobile-utility-link:hover {
+        background-color: rgba(0, 0, 0, 0.02);
+        color: var(--tz-link-hover, #555555);
+        padding-left: 1.75rem;
+    }
+    
+    [dir="rtl"] .mobile-utility-link:hover {
+        padding-left: 1.5rem;
+        padding-right: 1.75rem;
+    }
+    
+    .mobile-utility-link:active {
+        transform: scale(0.98);
+    }
+    
+    /* Utility Accordion */
+    .mobile-utility-accordion {
+        display: block;
+        width: 100%;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+    
+    .mobile-utility-accordion-toggle {
+        width: 100%;
+        padding: 1rem 1.5rem;
+        font-size: 0.9375rem;
+        font-weight: 500;
+        color: var(--tz-link, #111111);
+        background: none;
+        border: none;
+        text-align: left;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: background-color 0.25s ease, color 0.25s ease;
+    }
+    
+    [dir="rtl"] .mobile-utility-accordion-toggle {
+        text-align: right;
+    }
+    
+    .mobile-utility-accordion-toggle:hover {
+        background-color: rgba(0, 0, 0, 0.02);
+        color: var(--tz-link-hover, #555555);
+    }
+    
+    .mobile-utility-accordion-toggle:active {
+        transform: scale(0.98);
+    }
+    
+    .mobile-utility-accordion-icon {
+        font-size: 1.25rem;
+        font-weight: 300;
+        line-height: 1;
+        transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .mobile-utility-accordion-toggle[aria-expanded="true"] .mobile-utility-accordion-icon {
+        transform: rotate(45deg);
+    }
+    
+    .mobile-utility-accordion-content {
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+                    opacity 0.3s ease,
+                    padding 0.3s ease;
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+    
+    .mobile-utility-accordion-toggle[aria-expanded="true"] + .mobile-utility-accordion-content {
+        max-height: 2000px;
+        opacity: 1;
+        padding-top: 0.25rem;
+        padding-bottom: 0.5rem;
+    }
+    
+    /* Staggered animation for accordion items */
+    .mobile-utility-accordion-content > * {
+        opacity: 0;
+        transform: translateY(-8px);
+        transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+    
+    .mobile-utility-accordion-toggle[aria-expanded="true"] + .mobile-utility-accordion-content > * {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
+    /* Stagger delays for child items */
+    .mobile-utility-accordion-toggle[aria-expanded="true"] + .mobile-utility-accordion-content > *:nth-child(1) { transition-delay: 0.05s; }
+    .mobile-utility-accordion-toggle[aria-expanded="true"] + .mobile-utility-accordion-content > *:nth-child(2) { transition-delay: 0.1s; }
+    .mobile-utility-accordion-toggle[aria-expanded="true"] + .mobile-utility-accordion-content > *:nth-child(3) { transition-delay: 0.15s; }
+    .mobile-utility-accordion-toggle[aria-expanded="true"] + .mobile-utility-accordion-content > *:nth-child(4) { transition-delay: 0.2s; }
+    .mobile-utility-accordion-toggle[aria-expanded="true"] + .mobile-utility-accordion-content > *:nth-child(5) { transition-delay: 0.25s; }
+    .mobile-utility-accordion-toggle[aria-expanded="true"] + .mobile-utility-accordion-content > *:nth-child(6) { transition-delay: 0.3s; }
+    .mobile-utility-accordion-toggle[aria-expanded="true"] + .mobile-utility-accordion-content > *:nth-child(n+7) { transition-delay: 0.35s; }
+    
+    .mobile-utility-accordion-nested {
+        background-color: rgba(0, 0, 0, 0.02);
+        border-radius: 4px;
+        margin: 0.25rem 0;
+    }
+    
+    .mobile-utility-accordion-nested .mobile-utility-link {
+        padding-left: 2.5rem;
+    }
+    
+    [dir="rtl"] .mobile-utility-accordion-nested .mobile-utility-link {
+        padding-left: 1.5rem;
+        padding-right: 2.5rem;
+    }
+    
+    .mobile-utility-accordion-nested .mobile-utility-accordion-toggle {
+        padding-left: 2.5rem;
+    }
+    
+    [dir="rtl"] .mobile-utility-accordion-nested .mobile-utility-accordion-toggle {
+        padding-left: 1.5rem;
+        padding-right: 2.5rem;
+    }
+    
+    /* Dark mode for mobile utility menu */
+    .dark .mobile-utility-menu,
+    html.dark .mobile-utility-menu {
+        border-bottom-color: rgba(255, 255, 255, 0.1);
+    }
+    
+    .dark .mobile-utility-menu-title,
+    html.dark .mobile-utility-menu-title {
+        color: #EDEDED;
+    }
+    
+    .dark .mobile-utility-link,
+    html.dark .mobile-utility-link {
+        color: #EDEDED;
+        border-bottom-color: rgba(255, 255, 255, 0.1);
+    }
+    
+    .dark .mobile-utility-link:hover,
+    html.dark .mobile-utility-link:hover {
+        background-color: rgba(255, 255, 255, 0.05);
+        color: rgba(237, 237, 237, 0.7);
+    }
+    
+    .dark .mobile-utility-accordion,
+    html.dark .mobile-utility-accordion {
+        border-bottom-color: rgba(255, 255, 255, 0.1);
+    }
+    
+    .dark .mobile-utility-accordion-toggle,
+    html.dark .mobile-utility-accordion-toggle {
+        color: #EDEDED;
+    }
+    
+    .dark .mobile-utility-accordion-toggle:hover,
+    html.dark .mobile-utility-accordion-toggle:hover {
+        background-color: rgba(255, 255, 255, 0.05);
+        color: rgba(237, 237, 237, 0.7);
+    }
+    
+    .dark .mobile-utility-accordion-nested,
+    html.dark .mobile-utility-accordion-nested {
+        background-color: rgba(255, 255, 255, 0.03);
     }
     
     /* Adjust logo position on mobile */

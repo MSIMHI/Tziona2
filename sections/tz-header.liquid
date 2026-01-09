@@ -3,6 +3,11 @@
 {% endcomment %}
 {{ 'tz-mega-menu.css' | asset_url | stylesheet_tag }}
 
+{% comment %} Store utility menu handle for drawer access {% endcomment %}
+{% if section.settings.secondary_menu != blank %}
+  {% render 'utility-menu-handle', menu_handle: section.settings.secondary_menu %}
+{% endif %}
+
 {%- style -%}
   /* =========================================================
      TZ Header — Liquid (TOKENS ONLY)
@@ -108,7 +113,38 @@
         <!-- UTILITIES -->
         <div class="nav-utilities uppercase">
           {% for link in linklists[section.settings.secondary_menu].links %}
-            <a href="{{ link.url }}">{{ link.title }}</a>
+            {% if link.links.size > 0 %}
+              <div class="utility-menu-item">
+                <a href="{{ link.url }}" class="utility-menu-link">{{ link.title }}</a>
+                <ul class="utility-dropdown">
+                  {% for childlink in link.links %}
+                    <li class="{% if childlink.links.size > 0 %}utility-menu-item-has-children{% endif %}">
+                      <a href="{{ childlink.url }}">{{ childlink.title }}</a>
+                      {% if childlink.links.size > 0 %}
+                        <ul class="utility-dropdown utility-dropdown-nested">
+                          {% for grandchildlink in childlink.links %}
+                            <li class="{% if grandchildlink.links.size > 0 %}utility-menu-item-has-children{% endif %}">
+                              <a href="{{ grandchildlink.url }}">{{ grandchildlink.title }}</a>
+                              {% if grandchildlink.links.size > 0 %}
+                                <ul class="utility-dropdown utility-dropdown-nested">
+                                  {% for greatgrandchildlink in grandchildlink.links %}
+                                    <li>
+                                      <a href="{{ greatgrandchildlink.url }}">{{ greatgrandchildlink.title }}</a>
+                                    </li>
+                                  {% endfor %}
+                                </ul>
+                              {% endif %}
+                            </li>
+                          {% endfor %}
+                        </ul>
+                      {% endif %}
+                    </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            {% else %}
+              <a href="{{ link.url }}">{{ link.title }}</a>
+            {% endif %}
           {% endfor %}
 
           <button class="icon-btn" aria-label="Search">

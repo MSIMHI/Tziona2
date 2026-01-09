@@ -1,0 +1,12 @@
+{% comment %}
+  This snippet stores the utility menu handle in a global variable
+  that can be accessed by both header and drawer sections.
+  
+  Usage: {% render 'utility-menu-handle', menu_handle: section.settings.secondary_menu %}
+{% endcomment %}
+
+{% if menu_handle != blank %}
+  <script type="application/json" id="utility-menu-handle" style="display: none;">
+    {{ menu_handle | json }}
+  </script>
+{% endif %}

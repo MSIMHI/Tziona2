@@ -41,6 +41,162 @@ document.addEventListener('DOMContentLoaded', () => {
 
   initMobileMenu();
 
+  // Mobile Utility Menu Accordion
+  const initMobileUtilityAccordion = () => {
+    const accordionToggles = document.querySelectorAll('.mobile-utility-accordion-toggle');
+    
+    accordionToggles.forEach(toggle => {
+      toggle.addEventListener('click', (e) => {
+        e.preventDefault();
+        const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+        const newState = !isExpanded;
+        
+        toggle.setAttribute('aria-expanded', newState);
+      });
+    });
+  };
+
+  initMobileUtilityAccordion();
+
+  // Sync utility menu from header to drawer on mobile (if drawer nav is empty)
+  const syncUtilityMenuToDrawer = () => {
+    const drawerUtilityNav = document.querySelector('.mobile-utility-nav');
+    
+    // Only sync if drawer nav is empty (no Liquid content)
+    if (!drawerUtilityNav || drawerUtilityNav.children.length > 0) {
+      return;
+    }
+    
+    // Find utility menu items in header
+    const headerUtilityItems = document.querySelectorAll('[data-tz-component="header"] .nav-utilities .utility-menu-item, [data-tz-component="header"] .nav-utilities > a:not(.icon-btn)');
+    
+    if (headerUtilityItems.length === 0) {
+      // Hide the utility section if no items
+      const utilitySection = document.querySelector('.mobile-utility-menu');
+      if (utilitySection) {
+        utilitySection.style.display = 'none';
+      }
+      return;
+    }
+    
+    // Build accordion items from header utility menu
+    headerUtilityItems.forEach(item => {
+      const dropdown = item.querySelector('.utility-dropdown');
+      
+      if (dropdown) {
+        // Item has children - create accordion
+        const link = item.querySelector('.utility-menu-link') || item.querySelector('a');
+        if (!link) return;
+        
+        const accordion = document.createElement('div');
+        accordion.className = 'mobile-utility-accordion';
+        
+        const toggle = document.createElement('button');
+        toggle.className = 'mobile-utility-accordion-toggle';
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.setAttribute('type', 'button');
+        toggle.innerHTML = `<span>${link.textContent.trim()}</span><span class="mobile-utility-accordion-icon">+</span>`;
+        
+        const content = document.createElement('div');
+        content.className = 'mobile-utility-accordion-content';
+        
+        // Get all direct child li elements
+        const childItems = dropdown.children;
+        for (let i = 0; i < childItems.length; i++) {
+          const li = childItems[i];
+          if (li.tagName !== 'LI') continue;
+          
+          const childLink = li.querySelector('a');
+          const nestedDropdown = li.querySelector('.utility-dropdown-nested');
+          
+          if (nestedDropdown && childLink) {
+            // Nested accordion
+            const nestedAccordion = document.createElement('div');
+            nestedAccordion.className = 'mobile-utility-accordion mobile-utility-accordion-nested';
+            
+            const nestedToggle = document.createElement('button');
+            nestedToggle.className = 'mobile-utility-accordion-toggle';
+            nestedToggle.setAttribute('aria-expanded', 'false');
+            nestedToggle.setAttribute('type', 'button');
+            nestedToggle.innerHTML = `<span>${childLink.textContent.trim()}</span><span class="mobile-utility-accordion-icon">+</span>`;
+            
+            const nestedContent = document.createElement('div');
+            nestedContent.className = 'mobile-utility-accordion-content';
+            
+            // Get nested items
+            const nestedItems = nestedDropdown.children;
+            for (let j = 0; j < nestedItems.length; j++) {
+              const nestedLi = nestedItems[j];
+              if (nestedLi.tagName !== 'LI') continue;
+              
+              const nestedLink = nestedLi.querySelector('a');
+              if (nestedLink) {
+                const mobileLink = document.createElement('a');
+                mobileLink.href = nestedLink.href;
+                mobileLink.className = 'mobile-utility-link';
+                mobileLink.textContent = nestedLink.textContent.trim();
+                nestedContent.appendChild(mobileLink);
+              }
+            }
+            
+            nestedAccordion.appendChild(nestedToggle);
+            nestedAccordion.appendChild(nestedContent);
+            content.appendChild(nestedAccordion);
+            
+            nestedToggle.addEventListener('click', (e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              const isExpanded = nestedToggle.getAttribute('aria-expanded') === 'true';
+              nestedToggle.setAttribute('aria-expanded', !isExpanded);
+            });
+          } else if (childLink) {
+            // Simple link
+            const mobileLink = document.createElement('a');
+            mobileLink.href = childLink.href;
+            mobileLink.className = 'mobile-utility-link';
+            mobileLink.textContent = childLink.textContent.trim();
+            content.appendChild(mobileLink);
+          }
+        }
+        
+        accordion.appendChild(toggle);
+        accordion.appendChild(content);
+        drawerUtilityNav.appendChild(accordion);
+        
+        toggle.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+          toggle.setAttribute('aria-expanded', !isExpanded);
+        });
+      } else {
+        // Simple link (no children)
+        const link = item.tagName === 'A' ? item : item.querySelector('a');
+        if (link) {
+          const mobileLink = document.createElement('a');
+          mobileLink.href = link.href;
+          mobileLink.className = 'mobile-utility-link';
+          mobileLink.textContent = link.textContent.trim();
+          drawerUtilityNav.appendChild(mobileLink);
+        }
+      }
+    });
+  };
+
+  // Sync utility menu when drawer opens
+  const mobileMenuDrawer = document.getElementById('mobile-menu-drawer');
+  if (mobileMenuDrawer) {
+    const observer = new MutationObserver(() => {
+      if (mobileMenuDrawer.classList.contains('is-open')) {
+        setTimeout(syncUtilityMenuToDrawer, 50);
+      }
+    });
+    observer.observe(mobileMenuDrawer, { attributes: true, attributeFilter: ['class'] });
+    
+    // Also sync on page load
+    setTimeout(syncUtilityMenuToDrawer, 100);
+  }
+
   // Dark Mode Dropdown
   const initDarkMode = () => {
     const dropdownTrigger = document.querySelector('.dark-mode-dropdown-trigger');
