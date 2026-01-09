@@ -118,7 +118,6 @@ html.light .tz-product-dream-card * {
 .footer-dark-mode-dropdown {
     position: relative;
     display: inline-block;
-    margin-left: 1rem;
     z-index: 1100; /* Higher than footer z-index */
     overflow: visible; /* Override footer overflow hidden */
 }
@@ -198,6 +197,15 @@ html.light .dark-mode-dropdown-trigger:hover {
     margin-bottom: 0;
 }
 
+@media screen and (max-width: 767px) {
+    .dark-mode-dropdown-menu {
+        right: auto;
+        left: 0;
+        min-width: 140px;
+        max-width: calc(100vw - 40px);
+    }
+}
+
 .dark body .dark-mode-dropdown-menu,
 html.dark .dark-mode-dropdown-menu {
     background: #1e1e1e;
@@ -219,6 +227,8 @@ html.light .dark-mode-dropdown-menu {
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3) !important;
     z-index: 1101 !important;
     position: absolute !important;
+    right: auto !important;
+    left: 0 !important;
 }
 
 .tz-footer .dark-mode-option {
@@ -700,6 +710,8 @@ html.light .footer-guarantee {
   color: var(--tz-t-color);
   position: relative;
   overflow: hidden;
+    padding: 0 30px;
+  text-align: right; /* Default alignment for RTL */
 }
 
 /* If your .tz-section system applies padding elsewhere, remove these 2 lines */
@@ -732,8 +744,12 @@ html.light .footer-guarantee {
         gap: 30px;
     }
     .tz-footer .footer-col-dynamic {
-        text-align: inherit; /* Respect RTL/LTR of the container/html */
+        text-align: var(--col-align, inherit); /* Respect the alignment variable */
     }
+    html[dir="rtl"] .footer-col-dynamic {
+        text-align: right;
+    }
+
 }
 
 /* Column defaults */
