@@ -50,6 +50,10 @@
   /* top-4 */
 }
 
+html.light body .tz-product-service-icons .tz-product-service-icon .tz-product-service-icon-wrapper > span {
+  color: #ffffff !important;
+}
+
 /* Dark Mode Variables */
 @media (prefers-color-scheme: dark) {
   :root {
