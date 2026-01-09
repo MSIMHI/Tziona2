@@ -39,6 +39,8 @@
       {% when 'body' %} var(--font-body-family, inherit)
       {% else %} inherit
     {% endcase %};
+
+    --tz-logo-height: {{ section.settings.logo_height | default: 20 }}px;
   }
 
   #shopify-section-{{ section.id }} {
@@ -103,7 +105,8 @@
         <div class="logo">
           <a href="{{ routes.root_url }}">
             {% if section.settings.logo != blank %}
-              {{ section.settings.logo | image_url: width: 300 | image_tag: height: 20 }}
+              {%- assign logo_height = section.settings.logo_height | default: 20 -%}
+              {{ section.settings.logo | image_url: width: 300 | image_tag: height: logo_height }}
             {% else %}
               {{ shop.name }}
             {% endif %}
@@ -291,6 +294,17 @@
 
     { "type": "header", "content": "Content" },
     { "type": "image_picker", "id": "logo", "label": "Logo" },
+    {
+      "type": "range",
+      "id": "logo_height",
+      "label": "Logo Height",
+      "min": 15,
+      "max": 80,
+      "step": 1,
+      "unit": "px",
+      "default": 20,
+      "info": "Adjust the logo size. The width will scale proportionally."
+    },
     {
       "type": "link_list",
       "id": "menu",

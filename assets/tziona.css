@@ -397,7 +397,7 @@ html.dark .nav-links a:hover {
 }
 
 .logo img {
-    height: 20px;
+    height: var(--tz-logo-height, 20px);
     display: block;
 }
 
@@ -1241,7 +1241,7 @@ html.dark [data-tz-component="header"] .utility-dropdown a:hover {
 }
 
 [data-tz-component="header"] .logo img{
-  height: 20px;
+  height: var(--tz-logo-height, 20px);
   max-width: 180px;
   display: block;
 }
@@ -2137,7 +2137,7 @@ html.dark .tz-section.tz-header {
     }
 
     [data-tz-component="header"] .logo img {
-        height: 18px;
+        height: calc(var(--tz-logo-height, 20px) * 0.9);
         max-width: 120px;
     }
     
@@ -2189,7 +2189,7 @@ html.dark .tz-section.tz-header {
     }
 
     [data-tz-component="header"] .logo img {
-        height: 20px;
+        height: var(--tz-logo-height, 20px);
         max-width: 180px;
     }
 }

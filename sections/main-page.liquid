@@ -1,18 +1,57 @@
 {{ 'tz-main-page.css' | asset_url | stylesheet_tag }}
-<script src="{{ 'tz-main-page.js' | asset_url }}" defer="defer"></script>
 
-{%- style -%}
-  #shopify-section-{{ section.id }} {
-    --tz-pt: {{ section.settings.padding_top }}px;
-    --tz-pb: {{ section.settings.padding_bottom }}px;
+  {%- style -%}
+  #Page-{{ section.id }} {
+    --overlay-opacity: {{ section.settings.image_overlay_opacity | divided_by: 100.0 }};
   }
+
+  {%- if section.settings.banner_image != blank -%}
+    {%- if section.settings.image_height == 'adapt' -%}
+      @media screen and (min-width: 750px) {
+        #Page-{{ section.id }} .tz-page-banner::before {
+          padding-bottom: {{ 1 | divided_by: section.settings.banner_image.aspect_ratio | times: 100 }}%;
+          content: '';
+          display: block;
+        }
+      }
+    {%- endif -%}
+  {%- endif -%}
 {%- endstyle -%}
 
-<div class="tz-page-section">
+<div class="tz-page-section" id="Page-{{ section.id }}">
+  {%- if section.settings.banner_image != blank -%}
+    <div class="tz-page-banner tz-page-banner--{{ section.settings.image_height }}">
+      <div class="tz-page-banner__media">
+        {{
+          section.settings.banner_image
+          | image_url: width: 2000
+          | image_tag:
+            width: section.settings.banner_image.width,
+            height: section.settings.banner_image.height,
+            class: 'tz-page-banner__image',
+            sizes: '100vw',
+            widths: '375, 550, 750, 1100, 1500, 2000',
+            loading: 'lazy'
+        }}
+        <div class="tz-page-banner__overlay"></div>
+      </div>
+      <div class="tz-page-banner__content">
+        <h1 class="tz-page-banner__title">
+          {{ page.title | escape }}
+        </h1>
+      </div>
+    </div>
+  {%- else -%}
+    <div class="tz-page-banner tz-page-banner--no-image">
+      <div class="tz-page-banner__content">
+        <h1 class="tz-page-banner__title">
+          {{ page.title | escape }}
+        </h1>
+      </div>
+    </div>
+  {%- endif -%}
+  
   <div class="tz-page-container">
-    <h1 class="tz-page-title">
-      {{ page.title | escape }}
-    </h1>
     <div class="tz-page-content">
       {{ page.content }}
     </div>
@@ -25,6 +64,50 @@
   "tag": "section",
   "class": "section",
   "settings": [
+    {
+      "type": "header",
+      "content": "Banner Settings"
+    },
+    {
+      "type": "image_picker",
+      "id": "banner_image",
+      "label": "Banner Background Image",
+      "info": "Upload an image to use as the banner background. The page title will be displayed centered over the image."
+    },
+    {
+      "type": "range",
+      "id": "image_overlay_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "unit": "%",
+      "label": "Image Overlay Opacity",
+      "default": 0
+    },
+    {
+      "type": "select",
+      "id": "image_height",
+      "options": [
+        {
+          "value": "small",
+          "label": "Small"
+        },
+        {
+          "value": "medium",
+          "label": "Medium"
+        },
+        {
+          "value": "large",
+          "label": "Large"
+        },
+        {
+          "value": "adapt",
+          "label": "Adapt to image"
+        }
+      ],
+      "default": "medium",
+      "label": "Banner Height"
+    },
     {
       "type": "header",
       "content": "Padding"

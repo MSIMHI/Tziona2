@@ -1,36 +1,224 @@
+/* ============================================
+   TZ MAIN PAGE STYLES
+   ============================================ */
+
 .tz-page-section {
-  padding-top: var(--tz-pt, 36px);
   padding-bottom: var(--tz-pb, 36px);
 }
 
-.tz-page-container {
-  max-width: 800px; /* Equivalent to page-width--narrow */
-  margin: 0 auto;
-  padding: 0 1.5rem;
+/* Page Banner */
+.tz-page-banner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  overflow: hidden;
+  margin-bottom: 3rem;
 }
 
-.tz-page-title {
-  font-size: 2.5rem;
-  font-weight: 300;
-  margin-bottom: 2rem;
+/* Banner Height Variants */
+.tz-page-banner--small {
+  min-height: 300px;
+}
+
+.tz-page-banner--medium {
+  min-height: 400px;
+}
+
+.tz-page-banner--large {
+  min-height: 500px;
+}
+
+@media screen and (min-width: 750px) {
+  .tz-page-banner--small {
+    min-height: 400px;
+  }
+
+  .tz-page-banner--medium {
+    min-height: 500px;
+  }
+
+  .tz-page-banner--large {
+    min-height: 600px;
+  }
+}
+
+/* Adapt Height */
+.tz-page-banner--adapt {
+  min-height: auto;
+}
+
+.tz-page-banner--adapt::before {
+  content: '';
+  display: block;
+}
+
+/* No Image Banner */
+.tz-page-banner--no-image {
+  min-height: 400px;
+  background-color: #f5f5f5;
+}
+
+/* Banner Media */
+.tz-page-banner__media {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.tz-page-banner__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Banner Overlay */
+.tz-page-banner__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, var(--overlay-opacity, 0));
+  z-index: 2;
+}
+
+/* Banner Content */
+.tz-page-banner__content {
+  position: relative;
+  z-index: 3;
   text-align: center;
+  padding: 2rem 1.5rem;
+  width: 100%;
 }
 
+/* Banner Title */
+.tz-page-banner__title {
+  font-size: 2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #fff;
+  margin: 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Page Container */
+.tz-page-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+@media screen and (max-width: 749px) {
+  .tz-page-container {
+    padding: 0 1.5rem;
+  }
+}
+
+/* Page Content */
 .tz-page-content {
-  line-height: 1.6;
-  color: #1a1a1a;
+  line-height: 1.8;
+  font-size: 1.125rem;
+  color: #333;
+}
+
+.tz-page-content h1,
+.tz-page-content h2,
+.tz-page-content h3,
+.tz-page-content h4,
+.tz-page-content h5,
+.tz-page-content h6 {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.tz-page-content h1:first-child,
+.tz-page-content h2:first-child,
+.tz-page-content h3:first-child {
+  margin-top: 0;
+}
+
+.tz-page-content p {
+  margin-bottom: 1.5rem;
 }
 
 .tz-page-content img {
   max-width: 100%;
   height: auto;
+  margin: 2rem 0;
 }
 
 .tz-page-content a {
-  color: inherit;
+  color: #000;
   text-decoration: underline;
 }
 
-[dir="rtl"] .tz-page-title {
-  text-align: center;
+.tz-page-content a:hover {
+  color: #666;
+}
+
+.tz-page-content ul,
+.tz-page-content ol {
+  margin-bottom: 1.5rem;
+  padding-left: 2rem;
+}
+
+.tz-page-content li {
+  margin-bottom: 0.5rem;
+}
+
+/* Dark Mode */
+.dark .tz-page-banner--no-image,
+html.dark .tz-page-banner--no-image {
+  background-color: #1e1e1e;
+}
+
+.dark .tz-page-banner__title,
+html.dark .tz-page-banner__title {
+  color: #EDEDED;
+}
+
+.dark .tz-page-content,
+html.dark .tz-page-content {
+  color: #EDEDED;
+}
+
+.dark .tz-page-content h1,
+.dark .tz-page-content h2,
+.dark .tz-page-content h3,
+.dark .tz-page-content h4,
+.dark .tz-page-content h5,
+.dark .tz-page-content h6,
+html.dark .tz-page-content h1,
+html.dark .tz-page-content h2,
+html.dark .tz-page-content h3,
+html.dark .tz-page-content h4,
+html.dark .tz-page-content h5,
+html.dark .tz-page-content h6 {
+  color: #EDEDED;
+}
+
+.dark .tz-page-content a,
+html.dark .tz-page-content a {
+  color: #CCCCCC;
+}
+
+.dark .tz-page-content a:hover,
+html.dark .tz-page-content a:hover {
+  color: #EDEDED;
+}
+
+/* RTL Support */
+[dir="rtl"] .tz-page-content ul,
+[dir="rtl"] .tz-page-content ol {
+  padding-left: 0;
+  padding-right: 2rem;
 }

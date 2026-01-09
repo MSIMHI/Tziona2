@@ -18,28 +18,49 @@ color: inherit;
 }
 .tz-announcement a:hover { opacity: 0.8; }
 
+/* Override global light mode styles - must be more specific */
+body.light .tz-announcement,
+body.light .tz-announcement *,
+body.light .tz-announcement p,
+body.light .tz-announcement span,
+body.light .tz-announcement div,
+body.light .tz-announcement a,
+html.light body .tz-announcement,
+html.light body .tz-announcement *,
+html.light body .tz-announcement p,
+html.light body .tz-announcement span,
+html.light body .tz-announcement div,
+html.light body .tz-announcement a,
+.light .tz-announcement,
+.light .tz-announcement *,
+.light .tz-announcement p,
+.light .tz-announcement span,
+.light .tz-announcement div,
+.light .tz-announcement a,
+html.light .tz-announcement,
+html.light .tz-announcement *,
+html.light .tz-announcement p,
+html.light .tz-announcement span,
+html.light .tz-announcement div,
+html.light .tz-announcement a {
+  color: {{ section.settings.text_color }} !important;
+}
+
 /* Dark Mode Support */
 .dark .tz-announcement,
 html.dark .tz-announcement {
   border-bottom-color: #333333 !important;
-  color: #ffffff !important;
 }
 
 .dark .tz-announcement *,
 html.dark .tz-announcement * {
-  color: #ffffff !important;
+  color: inherit;
 }
 
-/* Light Mode Support - White text on dark background */
+/* Light Mode Support */
 .light .tz-announcement,
 html.light .tz-announcement {
   border-bottom-color: rgba(0,0,0,0.05) !important;
-  color: #ffffff !important;
-}
-
-.light .tz-announcement *,
-html.light .tz-announcement * {
-  color: #ffffff !important;
 }
 
 /* --- STATIC MODE --- */
