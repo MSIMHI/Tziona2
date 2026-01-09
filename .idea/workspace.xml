@@ -6,8 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="261e89e2-f91d-4885-a699-11b8f855e509" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/tz-blog.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/tz-blog.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/tziona.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/tziona.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sections/tz-header.liquid" beforeDir="false" afterPath="$PROJECT_DIR$/sections/tz-header.liquid" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,7 +95,7 @@
       <workItem from="1767777475363" duration="21572000" />
       <workItem from="1767859601959" duration="1384000" />
       <workItem from="1767945283511" duration="13631000" />
-      <workItem from="1767960970182" duration="7653000" />
+      <workItem from="1767960970182" duration="11004000" />
     </task>
     <servers />
   </component>

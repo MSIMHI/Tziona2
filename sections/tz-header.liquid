@@ -115,32 +115,34 @@
           {% for link in linklists[section.settings.secondary_menu].links %}
             {% if link.links.size > 0 %}
               <div class="utility-menu-item">
-                <a href="{{ link.url }}" class="utility-menu-link">{{ link.title }}</a>
-                <ul class="utility-dropdown">
-                  {% for childlink in link.links %}
-                    <li class="{% if childlink.links.size > 0 %}utility-menu-item-has-children{% endif %}">
-                      <a href="{{ childlink.url }}">{{ childlink.title }}</a>
-                      {% if childlink.links.size > 0 %}
-                        <ul class="utility-dropdown utility-dropdown-nested">
-                          {% for grandchildlink in childlink.links %}
-                            <li class="{% if grandchildlink.links.size > 0 %}utility-menu-item-has-children{% endif %}">
-                              <a href="{{ grandchildlink.url }}">{{ grandchildlink.title }}</a>
-                              {% if grandchildlink.links.size > 0 %}
-                                <ul class="utility-dropdown utility-dropdown-nested">
-                                  {% for greatgrandchildlink in grandchildlink.links %}
-                                    <li>
-                                      <a href="{{ greatgrandchildlink.url }}">{{ greatgrandchildlink.title }}</a>
-                                    </li>
-                                  {% endfor %}
-                                </ul>
-                              {% endif %}
-                            </li>
-                          {% endfor %}
-                        </ul>
-                      {% endif %}
-                    </li>
-                  {% endfor %}
-                </ul>
+                <div class="tz-utility-hover-trigger">
+                  <a href="{{ link.url }}" class="utility-menu-link">{{ link.title }}</a>
+                  <ul class="utility-dropdown">
+                    {% for childlink in link.links %}
+                      <li class="{% if childlink.links.size > 0 %}utility-menu-item-has-children{% endif %}">
+                        <a href="{{ childlink.url }}">{{ childlink.title }}</a>
+                        {% if childlink.links.size > 0 %}
+                          <ul class="utility-dropdown utility-dropdown-nested">
+                            {% for grandchildlink in childlink.links %}
+                              <li class="{% if grandchildlink.links.size > 0 %}utility-menu-item-has-children{% endif %}">
+                                <a href="{{ grandchildlink.url }}">{{ grandchildlink.title }}</a>
+                                {% if grandchildlink.links.size > 0 %}
+                                  <ul class="utility-dropdown utility-dropdown-nested">
+                                    {% for greatgrandchildlink in grandchildlink.links %}
+                                      <li>
+                                        <a href="{{ greatgrandchildlink.url }}">{{ greatgrandchildlink.title }}</a>
+                                      </li>
+                                    {% endfor %}
+                                  </ul>
+                                {% endif %}
+                              </li>
+                            {% endfor %}
+                          </ul>
+                        {% endif %}
+                      </li>
+                    {% endfor %}
+                  </ul>
+                </div>
               </div>
             {% else %}
               <a href="{{ link.url }}">{{ link.title }}</a>

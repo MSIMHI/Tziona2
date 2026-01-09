@@ -1065,6 +1065,8 @@ html.dark .tz-footer a:hover {
   position: relative;
 }
 
+
+
 [data-tz-component="header"] .utility-dropdown {
   position: absolute;
   top: 100%;
@@ -1090,6 +1092,7 @@ html.dark .tz-footer a:hover {
 [data-tz-component="header"] .utility-menu-item:hover .utility-dropdown,
 [data-tz-component="header"] .utility-menu-item .utility-menu-link:hover + .utility-dropdown,
 [data-tz-component="header"] .utility-menu-item:hover .utility-menu-link + .utility-dropdown,
+[data-tz-component="header"] .tz-utility-hover-trigger:hover .utility-menu-link + .utility-dropdown,
 [data-tz-component="header"] .utility-menu-item .utility-dropdown:hover {
   opacity: 1;
   visibility: visible;
