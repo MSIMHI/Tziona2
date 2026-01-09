@@ -578,12 +578,15 @@ html.dark .tz-article-comment-success {
 .dark .tz-blog-section,
 html.dark .tz-blog-section {
     background-color: #121212;
-    margin-bottom: 200px;
 }
 
 .dark .tz-blog-title,
 html.dark .tz-blog-title {
     color: #EDEDED;
+}
+
+.tz-blog-section {
+    margin-bottom: 200px;
 }
 
 .dark .tz-blog-filters-title,

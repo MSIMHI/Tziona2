@@ -6,7 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="261e89e2-f91d-4885-a699-11b8f855e509" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sections/tz-drawer.liquid" beforeDir="false" afterPath="$PROJECT_DIR$/sections/tz-drawer.liquid" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/tz-blog.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/tz-blog.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/tziona.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/tziona.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,7 +56,7 @@
     "git-widget-placeholder": "main",
     "javascript.preferred.runtime.type.id": "node",
     "junie.onboarding.icon.badge.shown": "true",
-    "last_opened_file_path": "/var/www/lab/Tziona2",
+    "last_opened_file_path": "/var/www/lab/Tziona2/blog_template",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
@@ -69,6 +70,9 @@
     <option name="suspendCountdown" value="0" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/blog_template" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
     </key>
@@ -91,7 +95,7 @@
       <workItem from="1767777475363" duration="21572000" />
       <workItem from="1767859601959" duration="1384000" />
       <workItem from="1767945283511" duration="13631000" />
-      <workItem from="1767960970182" duration="5200000" />
+      <workItem from="1767960970182" duration="7653000" />
     </task>
     <servers />
   </component>
