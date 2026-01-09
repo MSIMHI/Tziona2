@@ -317,9 +317,8 @@
 
 .tz-collection-product-color {
   width: 1rem;
-  height: 1rem;
-  border-radius: 50%;
-  border: 1px solid #E5E5E5;
+  height: 0.5rem;
+  border: 1px solid rgb(209 213 219);
   cursor: pointer;
   transition: transform 0.2s ease;
 }

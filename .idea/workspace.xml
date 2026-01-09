@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="261e89e2-f91d-4885-a699-11b8f855e509" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locales/he.json" beforeDir="false" afterPath="$PROJECT_DIR$/locales/he.json" afterDir="false" />
-    </list>
+    <list default="true" id="261e89e2-f91d-4885-a699-11b8f855e509" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -66,7 +63,7 @@
   }
 }]]></component>
   <component name="RecapUselessUpdatesCounter">
-    <option name="suspendCountdown" value="7" />
+    <option name="suspendCountdown" value="6" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -90,7 +87,7 @@
       <workItem from="1767638902769" duration="3693000" />
       <workItem from="1767777475363" duration="21572000" />
       <workItem from="1767859601959" duration="1384000" />
-      <workItem from="1767945283511" duration="7814000" />
+      <workItem from="1767945283511" duration="8561000" />
     </task>
     <servers />
   </component>
