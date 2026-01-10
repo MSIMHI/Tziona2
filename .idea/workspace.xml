@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="261e89e2-f91d-4885-a699-11b8f855e509" name="Changes" comment="" />
+    <list default="true" id="261e89e2-f91d-4885-a699-11b8f855e509" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/assets/tziona.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/tziona.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sections/tz-drawer.liquid" beforeDir="false" afterPath="$PROJECT_DIR$/sections/tz-drawer.liquid" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/snippets/tz-mobile-menu-drawer.liquid" beforeDir="false" afterPath="$PROJECT_DIR$/snippets/tz-mobile-menu-drawer.liquid" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -92,7 +96,7 @@
       <workItem from="1767859601959" duration="1384000" />
       <workItem from="1767945283511" duration="13631000" />
       <workItem from="1767960970182" duration="15819000" />
-      <workItem from="1768036365793" duration="10809000" />
+      <workItem from="1768036365793" duration="11156000" />
     </task>
     <servers />
   </component>
