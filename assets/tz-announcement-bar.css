@@ -1,0 +1,293 @@
+/* =========================================================
+   TZ Announcement Bar - Redesign
+   ========================================================= */
+
+.tz-utility-bar {
+  --tz-ub-height: auto;
+  --tz-ub-min-height: 36px;
+  --tz-ub-font-size: 13px;
+  --tz-ub-icon-size: 18px;
+
+  background: var(--tz-bg, #ffffff);
+  color: var(--tz-text, #111111);
+  min-height: var(--tz-ub-min-height);
+  display: flex;
+  align-items: center;
+  position: relative;
+  z-index: 10001;
+  border-bottom: 0.1rem solid rgba(var(--color-foreground), 0.08);
+}
+
+.tz-utility-bar--bottom-border {
+  border-bottom: 0.1rem solid rgba(var(--color-foreground), 0.08);
+}
+
+/* Container matching theme */
+.tz-utility-bar .page-width {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.tz-utility-bar__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-areas: 'announcements';
+  align-items: center;
+  width: 100%;
+}
+
+@media screen and (min-width: 990px) {
+  .tz-utility-bar__grid--3-col {
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-areas: 'social announcements localization';
+  }
+
+  .tz-utility-bar__grid--2-col.has-social.has-announcements {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: 'social announcements';
+  }
+
+  .tz-utility-bar__grid--2-col.has-announcements.has-localization {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: 'announcements localization';
+  }
+
+  .tz-utility-bar__grid--2-col.has-social.has-localization {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: 'social localization';
+  }
+}
+
+/* Social Icons */
+.tz-utility-bar__social {
+  grid-area: social;
+  display: flex;
+  align-items: center;
+}
+
+.tz-utility-bar .list-social {
+  justify-content: flex-start;
+  gap: 1.5rem;
+}
+
+[dir="rtl"] .tz-utility-bar .list-social {
+  justify-content: flex-end;
+}
+
+.tz-utility-bar .list-social__link {
+  padding: 0.8rem;
+  color: currentColor;
+}
+
+.tz-utility-bar .list-social__link .icon {
+  width: var(--tz-ub-icon-size);
+  height: var(--tz-ub-icon-size);
+}
+
+/* Announcement Bar */
+.tz-announcement-bar {
+  grid-area: announcements;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+}
+
+.tz-announcement-bar__message {
+  font-size: var(--tz-ub-font-size);
+  font-weight: 500;
+  margin: 0;
+  padding: 0.8rem 0;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.tz-announcement-bar__link {
+  color: inherit;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.tz-announcement-bar__link:hover .tz-announcement-bar__message {
+  text-decoration: underline;
+  text-underline-offset: 0.3rem;
+}
+
+/* Slider buttons */
+.tz-announcement-bar-slider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  position: relative;
+}
+
+.tz-announcement-bar .slider-button {
+  color: currentColor;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.tz-announcement-bar .slider-button .svg-wrapper {
+  width: 12px;
+  height: 12px;
+}
+
+/* Localization Wrapper */
+.tz-localization-wrapper {
+  grid-area: localization;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+[dir="rtl"] .tz-localization-wrapper {
+  justify-content: flex-end;
+}
+
+.tz-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.tz-dropdown__toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: transparent;
+  border: none;
+  padding: 0.8rem 0;
+  cursor: pointer;
+  color: inherit;
+  font-size: var(--tz-ub-font-size);
+  font-weight: 500;
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+.tz-dropdown__toggle .icon-caret {
+  width: 10px;
+  height: 6px;
+  transition: transform 0.2s ease;
+}
+
+.tz-dropdown[open] .tz-dropdown__toggle .icon-caret,
+.tz-dropdown.is-active .tz-dropdown__toggle .icon-caret {
+  transform: rotate(180deg);
+}
+
+.tz-dropdown__menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: var(--tz-bg, #ffffff);
+  min-width: 180px;
+  max-height: 300px;
+  overflow-y: auto;
+  border: 1px solid rgba(0,0,0,0.1);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  z-index: 10002;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: all 0.2s ease;
+}
+
+.tz-dropdown.is-active .tz-dropdown__menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.tz-dropdown__list {
+  list-style: none;
+  padding: 0.5rem 0;
+  margin: 0;
+}
+
+.tz-dropdown__item a {
+  display: block;
+  padding: 0.8rem 1.5rem;
+  color: var(--tz-text, #111111);
+  text-decoration: none;
+  font-size: 13px;
+  white-space: nowrap;
+  transition: background 0.2s ease;
+}
+
+.tz-dropdown__item a:hover {
+  background: rgba(0,0,0,0.05);
+}
+
+.tz-dropdown__item a[aria-current="true"] {
+  font-weight: 700;
+  background: rgba(0,0,0,0.02);
+}
+
+/* Dark Mode Support Dropdown */
+.dark .tz-dropdown__menu,
+html.dark .tz-dropdown__menu {
+  background: #1a1a1a;
+  border-color: rgba(255,255,255,0.1);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+}
+
+.dark .tz-dropdown__item a,
+html.dark .tz-dropdown__item a {
+  color: #ffffff;
+}
+
+.dark .tz-dropdown__item a:hover,
+html.dark .tz-dropdown__item a:hover {
+  background: rgba(255,255,255,0.1);
+}
+
+.dark .tz-dropdown__item a[aria-current="true"],
+html.dark .tz-dropdown__item a[aria-current="true"] {
+  background: rgba(255,255,255,0.05);
+}
+
+/* Hide theme defaults that might leak in */
+.tz-utility-bar .localization-form {
+  display: none !important;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* Responsive */
+@media screen and (max-width: 989px) {
+  .tz-utility-bar__social,
+  .tz-localization-wrapper {
+    display: none;
+  }
+  
+  .tz-utility-bar__grid {
+    grid-template-areas: 'announcements';
+  }
+}
+
+/* Dark Mode Support */
+.dark .tz-utility-bar,
+html.dark .tz-utility-bar {
+  background-color: #121212;
+  color: #ffffff;
+  border-bottom-color: rgba(255, 255, 255, 0.1);
+}
