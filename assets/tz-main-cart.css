@@ -87,18 +87,18 @@ cart-items.tz-cart-items,
 @media screen and (min-width: 1024px) {
   /* Grid wrapper for cart sections - created by JS */
   .tz-cart-sections-wrapper {
-    display: grid !important;
+    display: grid ;
     /* Use flexible grid proportions to match original 384px footer width */
     /* Ratio: ~1.917:1 (65.71% : 34.29%) - using 1.92fr for precision */
     /* This ensures footer width matches original design (~384px) proportionally */
-    grid-template-columns: 1.92fr 1fr !important;
-    gap: var(--tz-cart-gap-lg) !important;
-    max-width: var(--tz-cart-container-max) !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-    padding-left: var(--tz-cart-padding-x-lg) !important;
-    padding-right: var(--tz-cart-padding-x-lg) !important;
-    width: 100% !important;
+    grid-template-columns: 1.92fr 1fr ;
+    gap: var(--tz-cart-gap-lg) ;
+    max-width: var(--tz-cart-container-max) ;
+    margin-left: auto ;
+    margin-right: auto ;
+    padding-left: var(--tz-cart-padding-x-lg) ;
+    padding-right: var(--tz-cart-padding-x-lg) ;
+    width: 100% ;
   }
 
   /* Cart items: takes the larger fraction (left side in RTL) */
@@ -1071,7 +1071,7 @@ cart-remove-button {
 }
 
 .tz-cart-hidden {
-  display: none !important;
+  display: none ;
 }
 
 /* Error Messages */
@@ -1082,7 +1082,7 @@ cart-remove-button {
 }
 
 .tz-cart-item-error {
-  display: none !important; /* Hidden by default */
+  display: none ; /* Hidden by default */
   align-items: center;
   gap: 0.5rem;
   color: #ef4444;
@@ -1092,7 +1092,7 @@ cart-remove-button {
 
 /* Show only when error text has content */
 .tz-cart-item-error:has(.tz-cart-item-error-text:not(:empty)) {
-  display: flex !important;
+  display: flex ;
 }
 
 .tz-cart-item-error-text {
@@ -1106,15 +1106,15 @@ cart-remove-button {
 
 /* Visually Hidden (for accessibility) */
 .tz-cart-visually-hidden {
-  position: absolute !important;
-  width: 1px !important;
-  height: 1px !important;
-  padding: 0 !important;
-  margin: -1px !important;
-  overflow: hidden !important;
-  clip: rect(0, 0, 0, 0) !important;
-  white-space: nowrap !important;
-  border: 0 !important;
+  position: absolute ;
+  width: 1px ;
+  height: 1px ;
+  padding: 0 ;
+  margin: -1px ;
+  overflow: hidden ;
+  clip: rect(0, 0, 0, 0) ;
+  white-space: nowrap ;
+  border: 0 ;
 }
 
 /* Empty State */

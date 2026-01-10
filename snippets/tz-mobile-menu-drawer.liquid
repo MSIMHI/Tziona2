@@ -83,7 +83,11 @@
                                 {{
                                   block.settings.image
                                   | image_url: width: 600
-                                  | image_tag: loading: 'lazy', widths: '200, 400, 600', style: 'width: 100%; height: auto;'
+                                  | image_tag:
+                                    loading: 'lazy',
+                                    widths: '200, 400, 600',
+                                    style: 'width: 100%; height: auto;',
+                                    alt: block.settings.alt_text
                                 }}
                                 {% if block.settings.caption != blank -%}
                                   <span class="mobile-mm-caption">{{ block.settings.caption }}</span>
@@ -177,7 +181,11 @@
                               {{
                                 block.settings.image
                                 | image_url: width: 600
-                                | image_tag: loading: 'lazy', widths: '200, 400, 600', style: 'width: 100%; height: auto;'
+                                | image_tag:
+                                  loading: 'lazy',
+                                  widths: '200, 400, 600',
+                                  style: 'width: 100%; height: auto;',
+                                  alt: block.settings.alt_text
                               }}
                               {% if block.settings.caption != blank -%}
                                 <span class="mobile-mm-caption">{{ block.settings.caption }}</span>

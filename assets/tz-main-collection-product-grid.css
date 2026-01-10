@@ -161,14 +161,14 @@ html.light .tz-collection-filter-button:hover {
 
 .light .tz-collection-filter-button.is-active,
 html.light .tz-collection-filter-button.is-active {
-  background-color: #000000 !important;
-  color: #ffffff !important;
-  border-color: #000000 !important;
+  background-color: #000000 ;
+  color: #ffffff ;
+  border-color: #000000 ;
 }
 
 .light .tz-collection-filter-button.is-active *,
 html.light .tz-collection-filter-button.is-active * {
-  color: #ffffff !important;
+  color: #ffffff ;
 }
 
 /* --- MAIN LAYOUT GRID --- */
@@ -331,7 +331,7 @@ html.light .tz-collection-filter-button.is-active * {
 
 .tz-collection-price-range input[type="range"],
 .tz-collection-price-input[type="range"] {
-  width: 100% !important;
+  width: 100% ;
   margin-bottom: 1rem;
   margin-left: 0;
   margin-right: 0;
@@ -362,7 +362,7 @@ html.light .tz-collection-filter-button.is-active * {
 }
 
 .tz-collection-price-range input[type="range"]::-webkit-slider-runnable-track {
-  width: 100% !important;
+  width: 100% ;
   height: 4px;
   cursor: pointer;
   background: rgb(229 231 235);

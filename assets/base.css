@@ -192,11 +192,11 @@ body:has(.section-header .drawer-menu) .announcement-bar-section .page-width {
 }
 
 .hidden {
-  display: none !important;
+  display: none ;
 }
 
 .visually-hidden {
-  position: absolute !important;
+  position: absolute ;
   overflow: hidden;
   width: 1px;
   height: 1px;
@@ -204,7 +204,7 @@ body:has(.section-header .drawer-menu) .announcement-bar-section .page-width {
   padding: 0;
   border: 0;
   clip: rect(0 0 0 0);
-  word-wrap: normal !important;
+  word-wrap: normal ;
 }
 
 .visually-hidden--inline {
@@ -429,19 +429,19 @@ table:not([class]) th {
 
 @media screen and (max-width: 749px) {
   .small-hide {
-    display: none !important;
+    display: none ;
   }
 }
 
 @media screen and (min-width: 750px) and (max-width: 989px) {
   .medium-hide {
-    display: none !important;
+    display: none ;
   }
 }
 
 @media screen and (min-width: 990px) {
   .large-up-hide {
-    display: none !important;
+    display: none ;
   }
 }
 
@@ -571,8 +571,8 @@ details > * {
 
 @media (prefers-reduced-motion) {
   .motion-reduce {
-    transition: none !important;
-    animation: none !important;
+    transition: none ;
+    animation: none ;
   }
 }
 
@@ -750,8 +750,8 @@ summary::-webkit-details-marker {
 
 /* Dangerous for a11y - Use with care */
 .focus-none {
-  box-shadow: none !important;
-  outline: 0 !important;
+  box-shadow: none ;
+  outline: 0 ;
 }
 
 .focus-offset:focus-visible {
@@ -1979,8 +1979,8 @@ input[type='checkbox'] {
 .quantity__input:-webkit-autofill,
 .quantity__input:-webkit-autofill:hover,
 .quantity__input:-webkit-autofill:active {
-  box-shadow: 0 0 0 10rem rgb(var(--color-background)) inset !important;
-  -webkit-box-shadow: 0 0 0 10rem rgb(var(--color-background)) inset !important;
+  box-shadow: 0 0 0 10rem rgb(var(--color-background)) inset ;
+  -webkit-box-shadow: 0 0 0 10rem rgb(var(--color-background)) inset ;
 }
 
 .quantity__input::-webkit-outer-spin-button,
@@ -2940,7 +2940,7 @@ details-disclosure > details {
 @media screen and (forced-colors: active) {
   .icon {
     color: CanvasText;
-    fill: CanvasText !important;
+    fill: CanvasText ;
   }
 
   .icon-close-small path {
@@ -3001,7 +3001,7 @@ details-disclosure > details {
   position: relative;
   border: var(--media-border-width) solid rgba(var(--color-foreground), var(--media-border-opacity));
   border-radius: var(--media-radius);
-  overflow: visible !important;
+  overflow: visible ;
   background-color: rgb(var(--color-background));
 }
 
@@ -3020,7 +3020,7 @@ details-disclosure > details {
 }
 
 .global-media-settings--no-shadow {
-  overflow: hidden !important;
+  overflow: hidden ;
 }
 
 .global-media-settings--no-shadow:after {

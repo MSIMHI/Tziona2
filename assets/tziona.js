@@ -156,53 +156,53 @@ document.addEventListener('DOMContentLoaded', () => {
         const style = document.createElement('style');
         style.id = 'theme-inline-styles';
         style.textContent = `
-          body, html { background-color: #121212 !important; color: #EDEDED !important; }
+          body, html { background-color: #121212 ; color: #EDEDED ; }
           h1, h2, h3, h4, h5, h6, p, span, div, li, td, th, a, label {
-            color: #EDEDED !important;
+            color: #EDEDED ;
           }
-          /* Don't override button colors, badges, dropdown elements, and white text elements */
-          button, .tz-btn, .tz-btn * {
-            color: inherit !important;
+          /* Don't override button colors, badges, dropdown elements, mega menu, and white text elements */
+          button, .tz-btn, .tz-btn *, .tz-mega-menu, .tz-mega-menu * {
+            color: inherit ;
           }
           .tz-submit-btn {
-            color: #ffffff !important;
+            color: #ffffff ;
           }
           .tz-address-default-badge {
-            color: #ffffff !important;
+            color: #ffffff ;
           }
           .tz-product-dream-card, .tz-product-dream-card * {
-            color: #ffffff !important;
+            color: #ffffff ;
           }
           .cart-promo {
-            color: var(--color-white, #ffffff) !important;
+            color: var(--color-white, #ffffff) ;
           }
           .sale-badge {
-            color: white !important;
+            color: white ;
           }
           .tz-cart-toast--success,
           .tz-cart-toast--error,
           .tz-cart-toast--info {
-            color: white !important;
+            color: white ;
           }
           .dark-mode-dropdown-trigger, .dark-mode-dropdown-menu, .dark-mode-option {
-            color: inherit !important;
+            color: inherit ;
           }
-          a { color: #CCCCCC !important; }
-          a:hover { color: #EDEDED !important; }
+          a { color: #CCCCCC ; }
+          a:hover { color: #EDEDED ; }
           /* Form inputs need dark backgrounds in dark mode */
           input, textarea, select,
           .tz-form-input, .tz-form-textarea, .tz-form-select {
-            background-color: #1e1e1e !important;
-            border-color: #333333 !important;
-            color: #EDEDED !important;
+            background-color: #1e1e1e ;
+            border-color: #333333 ;
+            color: #EDEDED ;
           }
           input:focus, textarea:focus, select:focus,
           .tz-form-input:focus, .tz-form-textarea:focus, .tz-form-select:focus {
-            border-color: #555555 !important;
+            border-color: #555555 ;
           }
           /* Labels and form text */
           label, .tz-form-label {
-            color: #EDEDED !important;
+            color: #EDEDED ;
           }
         `;
         document.head.appendChild(style);
@@ -215,42 +215,42 @@ document.addEventListener('DOMContentLoaded', () => {
         const style = document.createElement('style');
         style.id = 'theme-inline-styles';
         style.textContent = `
-          body, html { background-color: #ffffff !important; color: #111111 !important; }
+          body, html { background-color: #ffffff ; color: #111111 ; }
           h1, h2, h3, h4, h5, h6, p, span, div, li, td, th, a, label {
-            color: #111111 !important;
+            color: #111111 ;
           }
-          /* Don't override button colors, badges, and dropdown elements */
-          button, .tz-btn, .tz-btn * {
-            color: inherit !important;
+          /* Don't override button colors, badges, mega menu, and dropdown elements */
+          button, .tz-btn, .tz-btn *, .tz-mega-menu, .tz-mega-menu * {
+            color: inherit ;
           }
           .tz-submit-btn {
-            color: #ffffff !important;
+            color: #ffffff ;
           }
           .tz-address-default-badge {
-            color: #ffffff !important;
+            color: #ffffff ;
           }
           .tz-product-dream-card, .tz-product-dream-card * {
-            color: #ffffff !important;
+            color: #ffffff ;
           }
           .dark-mode-dropdown-trigger, .dark-mode-dropdown-menu, .dark-mode-option {
-            color: inherit !important;
+            color: inherit ;
           }
-          a { color: #333333 !important; }
-          a:hover { color: #000000 !important; }
+          a { color: #333333 ; }
+          a:hover { color: #000000 ; }
           /* Form inputs need light backgrounds in light mode */
           input, textarea, select,
           .tz-form-input, .tz-form-textarea, .tz-form-select {
-            background-color: #ffffff !important;
-            border-color: #cccccc !important;
-            color: #111111 !important;
+            background-color: #ffffff ;
+            border-color: #cccccc ;
+            color: #111111 ;
           }
           input:focus, textarea:focus, select:focus,
           .tz-form-input:focus, .tz-form-textarea:focus, .tz-form-select:focus {
-            border-color: #999999 !important;
+            border-color: #999999 ;
           }
           /* Labels and form text */
           label, .tz-form-label {
-            color: #111111 !important;
+            color: #111111 ;
           }
         `;
         document.head.appendChild(style);
@@ -266,53 +266,53 @@ document.addEventListener('DOMContentLoaded', () => {
           const style = document.createElement('style');
           style.id = 'theme-inline-styles';
           style.textContent = `
-            body, html { background-color: #121212 !important; color: #EDEDED !important; }
+            body, html { background-color: #121212 ; color: #EDEDED ; }
             h1, h2, h3, h4, h5, h6, p, span, div, li, td, th, a, label {
-              color: #EDEDED !important;
+              color: #EDEDED ;
             }
-          /* Don't override button colors, badges, dropdown elements, and white text elements */
-          button, .tz-btn, .tz-btn * {
-            color: inherit !important;
+          /* Don't override button colors, badges, dropdown elements, mega menu, and white text elements */
+          button, .tz-btn, .tz-btn *, .tz-mega-menu, .tz-mega-menu * {
+            color: inherit ;
           }
           .tz-submit-btn {
-            color: #ffffff !important;
+            color: #ffffff ;
           }
           .tz-address-default-badge {
-            color: #ffffff !important;
+            color: #ffffff ;
           }
           .tz-product-dream-card, .tz-product-dream-card * {
-            color: #ffffff !important;
+            color: #ffffff ;
           }
           .cart-promo {
-            color: var(--color-white, #ffffff) !important;
+            color: var(--color-white, #ffffff) ;
           }
           .sale-badge {
-            color: white !important;
+            color: white ;
           }
           .tz-cart-toast--success,
           .tz-cart-toast--error,
           .tz-cart-toast--info {
-            color: white !important;
+            color: white ;
           }
           .dark-mode-dropdown-trigger, .dark-mode-dropdown-menu, .dark-mode-option {
-            color: inherit !important;
+            color: inherit ;
           }
-            a { color: #CCCCCC !important; }
-            a:hover { color: #EDEDED !important; }
+            a { color: #CCCCCC ; }
+            a:hover { color: #EDEDED ; }
             /* Form inputs need dark backgrounds in dark mode */
             input, textarea, select,
             .tz-form-input, .tz-form-textarea, .tz-form-select {
-              background-color: #1e1e1e !important;
-              border-color: #333333 !important;
-              color: #EDEDED !important;
+              background-color: #1e1e1e ;
+              border-color: #333333 ;
+              color: #EDEDED ;
             }
             input:focus, textarea:focus, select:focus,
             .tz-form-input:focus, .tz-form-textarea:focus, .tz-form-select:focus {
-              border-color: #555555 !important;
+              border-color: #555555 ;
             }
             /* Labels and form text */
             label, .tz-form-label {
-              color: #EDEDED !important;
+              color: #EDEDED ;
             }
           `;
           document.head.appendChild(style);
@@ -320,53 +320,53 @@ document.addEventListener('DOMContentLoaded', () => {
           const style = document.createElement('style');
           style.id = 'theme-inline-styles';
           style.textContent = `
-            body, html { background-color: #ffffff !important; color: #111111 !important; }
+            body, html { background-color: #ffffff ; color: #111111 ; }
             h1, h2, h3, h4, h5, h6, p, span, div, li, td, th, a, label {
-              color: #111111 !important;
+              color: #111111 ;
             }
-          /* Don't override button colors, badges, dropdown elements, and white text elements */
-          button, .tz-btn, .tz-btn * {
-            color: inherit !important;
+          /* Don't override button colors, badges, dropdown elements, mega menu, and white text elements */
+          button, .tz-btn, .tz-btn *, .tz-mega-menu, .tz-mega-menu * {
+            color: inherit ;
           }
           .tz-submit-btn {
-            color: #ffffff !important;
+            color: #ffffff ;
           }
           .tz-address-default-badge {
-            color: #ffffff !important;
+            color: #ffffff ;
           }
           .tz-product-dream-card, .tz-product-dream-card * {
-            color: #ffffff !important;
+            color: #ffffff ;
           }
           .cart-promo {
-            color: var(--color-white, #ffffff) !important;
+            color: var(--color-white, #ffffff) ;
           }
           .sale-badge {
-            color: white !important;
+            color: white ;
           }
           .tz-cart-toast--success,
           .tz-cart-toast--error,
           .tz-cart-toast--info {
-            color: white !important;
+            color: white ;
           }
           .dark-mode-dropdown-trigger, .dark-mode-dropdown-menu, .dark-mode-option {
-            color: inherit !important;
+            color: inherit ;
           }
-            a { color: #333333 !important; }
-            a:hover { color: #000000 !important; }
+            a { color: #333333 ; }
+            a:hover { color: #000000 ; }
             /* Form inputs need light backgrounds in light mode */
             input, textarea, select,
             .tz-form-input, .tz-form-textarea, .tz-form-select {
-              background-color: #ffffff !important;
-              border-color: #cccccc !important;
-              color: #111111 !important;
+              background-color: #ffffff ;
+              border-color: #cccccc ;
+              color: #111111 ;
             }
             input:focus, textarea:focus, select:focus,
             .tz-form-input:focus, .tz-form-textarea:focus, .tz-form-select:focus {
-              border-color: #999999 !important;
+              border-color: #999999 ;
             }
             /* Labels and form text */
             label, .tz-form-label {
-              color: #111111 !important;
+              color: #111111 ;
             }
           `;
           document.head.appendChild(style);

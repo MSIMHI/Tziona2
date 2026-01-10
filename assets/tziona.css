@@ -24,14 +24,14 @@ body {
 /* Theme Modes */
 .dark body,
 html.dark body {
-    background-color: #121212 !important;
-    color: #EDEDED !important;
+    background-color: #121212 ;
+    color: #EDEDED ;
 }
 
 .light body,
 html.light body {
-    background-color: #ffffff !important;
-    color: #111111 !important;
+    background-color: #ffffff ;
+    color: #111111 ;
 }
 
 /* Dark mode for all text elements */
@@ -39,17 +39,17 @@ html.light body {
 .dark p, .dark span, .dark div, .dark li, .dark td, .dark th,
 html.dark h1, html.dark h2, html.dark h3, html.dark h4, html.dark h5, html.dark h6,
 html.dark p, html.dark span, html.dark div, html.dark li, html.dark td, html.dark th {
-    color: #EDEDED !important;
+    color: #EDEDED;
 }
 
 .dark a,
 html.dark a {
-    color: #CCCCCC !important;
+    color: #CCCCCC;
 }
 
 .dark a:hover,
 html.dark a:hover {
-    color: #EDEDED !important;
+    color: #EDEDED;
 }
 
 /* Ensure white text elements maintain white color in dark mode */
@@ -71,25 +71,15 @@ html.dark .tz-address-default-badge,
 html.dark .tz-product-dream-card,
 .dark .tz-product-dream-card *,
 html.dark .tz-product-dream-card * {
-    color: #ffffff !important;
+    color: #ffffff;
 }
 
-/* Light mode for all text elements */
-.light h1, .light h2, .light h3, .light h4, .light h5, .light h6,
-.light p, .light span, .light div, .light li, .light td, .light th,
-html.light h1, html.light h2, html.light h3, html.light h4, html.light h5, html.light h6,
-html.light p, html.light span, html.light div, html.light li, html.light td, html.light th {
-    color: #111111 !important;
-}
 
-.light a,
-html.light a {
-    color: #333333 !important;
-}
+
 
 .light a:hover,
 html.light a:hover {
-    color: #000000 !important;
+    color: #000000;
 }
 
 /* Override global light mode link colors for header - use CSS variables */
@@ -109,7 +99,7 @@ html.light .tz-section.tz-header .nav-links a,
 html.light .tz-section.tz-header .nav-utilities a,
 html.light .tz-section.tz-header .nav-link,
 html.light .tz-section.tz-header .logo a {
-    color: var(--tz-link, #111111) !important;
+    color: var(--tz-link, #111111);
 }
 
 body.light .tz-section.tz-header .nav-links a:hover,
@@ -124,7 +114,7 @@ html.light body .tz-section.tz-header .nav-link:hover,
 html.light .tz-section.tz-header .nav-links a:hover,
 html.light .tz-section.tz-header .nav-utilities a:hover,
 html.light .tz-section.tz-header .nav-link:hover {
-    color: var(--tz-link-hover, #555555) !important;
+    color: var(--tz-link-hover, #555555);
 }
 
 /* Override text colors in light mode */
@@ -140,7 +130,7 @@ html.light body .tz-section.tz-header .sale-text,
 html.light .tz-section.tz-header .nav-links,
 html.light .tz-section.tz-header .nav-utilities,
 html.light .tz-section.tz-header .sale-text {
-    color: var(--tz-text, #111111) !important;
+    color: var(--tz-text, #111111);
 }
 
 /* Override light mode text color for elements that should remain white */
@@ -162,7 +152,7 @@ html.light .tz-address-default-badge,
 html.light .tz-product-dream-card,
 .light .tz-product-dream-card *,
 html.light .tz-product-dream-card * {
-    color: #ffffff !important;
+    color: #ffffff;
 }
 
 /* Dark Mode Dropdown */
@@ -195,8 +185,8 @@ html.dark .dark-mode-dropdown-trigger {
 
 /* Footer-specific dropdown trigger styles (footer is always dark) */
 .tz-footer .dark-mode-dropdown-trigger {
-    border-color: var(--color-white, #ededed) !important;
-    color: var(--color-white, #ededed) !important;
+    border-color: var(--color-white, #ededed) ;
+    color: var(--color-white, #ededed) ;
 }
 
 /* Light mode styles (don't apply to footer) */
@@ -207,7 +197,7 @@ html.light .dark-mode-dropdown-trigger {
 }
 
 .tz-footer .dark-mode-dropdown-trigger:hover {
-    background: rgba(255, 255, 255, 0.05) !important;
+    background: rgba(255, 255, 255, 0.05) ;
 }
 
 .dark-mode-dropdown-trigger:hover {
@@ -264,34 +254,28 @@ html.dark .dark-mode-dropdown-menu {
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
 }
 
-.light body .dark-mode-dropdown-menu,
-html.light .dark-mode-dropdown-menu {
-    background: var(--color-white, #ffffff);
-    border-color: #e5e7eb;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-}
 
 /* Footer-specific dropdown menu styles (maintain dark theme) */
 .tz-footer .dark-mode-dropdown-menu {
-    background: #1e1e1e !important;
-    border-color: #333333 !important;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3) !important;
-    z-index: 1101 !important;
-    position: absolute !important;
-    right: auto !important;
-    left: 0 !important;
+    background: #1e1e1e ;
+    border-color: #333333 ;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3) ;
+    z-index: 1101 ;
+    position: absolute ;
+    right: auto ;
+    left: 0 ;
 }
 
 .tz-footer .dark-mode-option {
-    color: #ededed !important;
+    color: #ededed ;
 }
 
 .tz-footer .dark-mode-option:hover {
-    background: #2a2a2a !important;
+    background: #2a2a2a ;
 }
 
 .tz-footer .dark-mode-option.active {
-    background: #333333 !important;
+    background: #333333 ;
 }
 
 .dark-mode-option {
@@ -330,7 +314,7 @@ html.dark .dark-mode-option:hover {
 
 .light body .dark-mode-option:hover,
 html.light .dark-mode-option:hover {
-    background: #f9f9f9;
+    background: #333333;
 }
 
 .dark-mode-option.active {
@@ -343,10 +327,6 @@ html.dark .dark-mode-option.active {
     background: #333333;
 }
 
-.light body .dark-mode-option.active,
-html.light .dark-mode-option.active {
-    background: #f0f0f0;
-}
 
 .dark-mode-option:first-child {
     border-radius: 6px 6px 0 0;
@@ -509,9 +489,9 @@ html.dark .icon-btn:hover {
 html.dark .header-wrapper,
 html.dark .section-header,
 html.dark .header {
-    background-color: #121212 !important;
-    color: #EDEDED !important;
-    border-bottom-color: #333333 !important;
+    background-color: #121212;
+    color: #EDEDED;
+    border-bottom-color: #333333;
 }
 
 .dark .header__heading,
@@ -522,14 +502,14 @@ html.dark .header__heading,
 html.dark .header__heading-link,
 html.dark .header__menu-item,
 html.dark .header__icon {
-    color: #EDEDED !important;
+    color: #EDEDED;
 }
 
 .dark .header__menu-item:hover,
 .dark .header__icon:hover,
 html.dark .header__menu-item:hover,
 html.dark .header__icon:hover {
-    color: rgba(237, 237, 237, 0.7) !important;
+    color: rgba(237, 237, 237, 0.7);
 }
 
 /* Dark Mode for TZ Header Section */
@@ -541,26 +521,26 @@ html.dark .tz-section.tz-header,
 html.dark [data-tz-component="header"],
 html.dark section[class*="tz-header"],
 html.dark #shopify-section-tz-header {
-    background-color: #121212 !important;
-    background: #121212 !important;
-    --tz-bg: #121212 !important;
-    color: #EDEDED !important;
-    border-bottom-color: #333333 !important;
+    background-color: #121212;
+    background: #121212;
+    --tz-bg: #121212;
+    color: #EDEDED;
+    border-bottom-color: #333333;
 }
 
 /* Override inline styles from Liquid */
 .dark section[id^="shopify-section-"].tz-section.tz-header,
 html.dark section[id^="shopify-section-"].tz-section.tz-header {
-    background-color: #121212 !important;
-    background: #121212 !important;
-    --tz-bg: #121212 !important;
+    background-color: #121212;
+    background: #121212;
+    --tz-bg: #121212;
 }
 
 .dark .tz-section.tz-header .header-inner,
 .dark [data-tz-component="header"] .header-inner,
 html.dark .tz-section.tz-header .header-inner,
 html.dark [data-tz-component="header"] .header-inner {
-    background-color: transparent !important;
+    background-color: transparent;
 }
 
 /* Override global dark mode styles - ensure visibility on dark backgrounds */
@@ -586,7 +566,7 @@ html.dark .tz-section.tz-header .nav-utilities,
 html.dark .tz-section.tz-header .logo a,
 html.dark .tz-section.tz-header .nav-link,
 html.dark .tz-section.tz-header .sale-text {
-    color: #EDEDED !important;
+    color: #EDEDED;
 }
 
 /* Override link colors in dark mode - ensure visibility on dark backgrounds */
@@ -603,7 +583,7 @@ html.dark body .tz-section.tz-header .nav-link,
 html.dark .tz-section.tz-header .nav-links a,
 html.dark .tz-section.tz-header .nav-utilities a,
 html.dark .tz-section.tz-header .nav-link {
-    color: #EDEDED !important;
+    color: #EDEDED;
 }
 
 body.dark .tz-section.tz-header .nav-links a:hover,
@@ -618,7 +598,7 @@ html.dark body .tz-section.tz-header .nav-link:hover,
 html.dark .tz-section.tz-header .nav-links a:hover,
 html.dark .tz-section.tz-header .nav-utilities a:hover,
 html.dark .tz-section.tz-header .nav-link:hover {
-    color: rgba(237, 237, 237, 0.7) !important;
+    color: rgba(237, 237, 237, 0.7);
 }
 
 
@@ -669,7 +649,7 @@ html.dark main {
 /* Ensure cart promo text stays white in light mode */
 .light .cart-promo,
 html.light .cart-promo {
-    color: var(--color-white) !important;
+    color: var(--color-white);
 }
 
 .benefit-desc {
@@ -1044,44 +1024,44 @@ html.light .footer-guarantee {
 /* Light Mode Footer Support - White text on dark footer background */
 .light .tz-footer .copyright-text,
 html.light .tz-footer .copyright-text {
-  color: #ededed !important;
+  color: #ededed ;
 }
 
 .light .tz-footer .social-icon-link svg,
 html.light .tz-footer .social-icon-link svg {
-  fill: #ededed !important;
+  fill: #ededed ;
 }
 
 /* Footer links and all text elements should be white in light mode */
 .light .tz-footer *,
 html.light .tz-footer * {
-  color: #ededed !important;
+  color: #ededed;
 }
 
 .light .tz-footer a,
 html.light .tz-footer a {
-  color: #cccccc !important;
+  color: #cccccc;
 }
 
 .light .tz-footer a:hover,
 html.light .tz-footer a:hover {
-  color: #ededed !important;
+  color: #ededed;
 }
 
 /* Dark Mode Footer Support - Ensure proper contrast */
 .dark .tz-footer *,
 html.dark .tz-footer * {
-  color: #ededed !important;
+  color: #ededed;
 }
 
 .dark .tz-footer a,
 html.dark .tz-footer a {
-  color: #cccccc !important;
+  color: #cccccc;
 }
 
 .dark .tz-footer a:hover,
 html.dark .tz-footer a:hover {
-  color: #ededed !important;
+  color: #ededed;
 }
 
 /* Mobile tweaks */
@@ -1280,7 +1260,7 @@ html.dark .tz-footer a:hover {
 /* Ensure cart promo text stays white in light mode */
 .light .cart-promo,
 html.light .cart-promo {
-    color: var(--color-white) !important;
+    color: var(--color-white);
 }
 }
 
@@ -1550,8 +1530,8 @@ button.item-remove:disabled {
 /* Dark Mode for TZ Sections */
 .dark .tz-section.tz-header,
 html.dark .tz-section.tz-header {
-    background-color: #121212 !important;
-    --tz-bg: #121212 !important;
+    background-color: #121212 ;
+    --tz-bg: #121212 ;
 }
 
 .tz-section__inner {
@@ -1635,7 +1615,7 @@ html.dark .tz-section.tz-header {
 
 /* 4. Visibility Helpers */
 @media (max-width: 768px) {
-    .mobile-hide { display: none !important; }
+    .mobile-hide { display: none ; }
     
     /* Mobile Header Styles */
     [data-tz-component="header"] .header-inner {
@@ -2188,6 +2168,22 @@ html.dark .tz-section.tz-header {
         margin-bottom: 0.5rem;
     }
 
+    .mobile-mm-heading,
+    .mobile-mega-menu-content h1,
+    .mobile-mega-menu-content h2,
+    .mobile-mega-menu-content h3,
+    .mobile-mega-menu-content h4,
+    .mobile-mega-menu-content h5,
+    .mobile-mega-menu-content h6,
+    .mobile-mega-menu-content p,
+    .mobile-mega-menu-content span,
+    .mobile-mega-menu-content div,
+    .mobile-mega-menu-content li,
+    .mobile-mega-menu-content a,
+    .mobile-mega-menu-content label {
+        color: var(--tz-mm-text, inherit) ;
+    }
+
     .mobile-mm-heading {
         font-size: 13px;
         font-weight: 700;
@@ -2195,13 +2191,11 @@ html.dark .tz-section.tz-header {
         margin-bottom: 10px;
         padding-bottom: 5px;
         border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-        color: var(--tz-text, #111);
     }
 
     .dark .mobile-mm-heading,
     html.dark .mobile-mm-heading {
         border-bottom-color: rgba(255, 255, 255, 0.1);
-        color: #EDEDED;
     }
 
     .mobile-mm-linklist {
@@ -2216,7 +2210,7 @@ html.dark .tz-section.tz-header {
 
     .mobile-mm-linklist a {
         font-size: 14px;
-        color: var(--tz-link, #111);
+        color: var(--tz-mm-text, inherit) ;
         text-decoration: none;
         display: block;
         padding: 4px 0;
@@ -2224,18 +2218,15 @@ html.dark .tz-section.tz-header {
 
     .dark .mobile-mm-linklist a,
     html.dark .mobile-mm-linklist a {
-        color: #EDEDED;
     }
 
     .mobile-mm-richtext {
         font-size: 14px;
         line-height: 1.5;
-        color: var(--tz-text, #111);
     }
 
     .dark .mobile-mm-richtext,
     html.dark .mobile-mm-richtext {
-        color: #EDEDED;
     }
 
     .mobile-mm-image img {
@@ -2292,7 +2283,7 @@ html.dark .tz-section.tz-header {
     .mobile-mm-product-title {
         font-size: 14px;
         font-weight: 600;
-        color: var(--tz-text, #111);
+        color: var(--tz-mm-text, inherit) ;
     }
 
     .mobile-mm-product-price {
@@ -2300,17 +2291,13 @@ html.dark .tz-section.tz-header {
         color: var(--tz-accent, #ff5a1f);
     }
 
-    .dark .mobile-mm-product-title,
-    html.dark .mobile-mm-product-title {
-        color: #EDEDED;
-    }
 
     /* Adjust logo position on mobile */
     [data-tz-component="header"] .logo {
-        position: relative !important;
-        left: auto !important;
-        top: auto !important;
-        transform: none !important;
+        position: relative ;
+        left: auto ;
+        top: auto ;
+        transform: none ;
         z-index: 1;
         order: 1;
         flex: 1;
@@ -2338,7 +2325,7 @@ html.dark .tz-section.tz-header {
     /* Hide header logo on mobile (small screens only) since it's now in the drawer */
     @media (max-width: 411px) {
         [data-tz-component="header"] .logo {
-            display: none !important;
+            display: none ;
         }
     }
     
@@ -2354,7 +2341,7 @@ html.dark .tz-section.tz-header {
 }
 
 @media (min-width: 769px) {
-    .desktop-hide { display: none !important; }
+    .desktop-hide { display: none ; }
     
     /* Hide mobile menu button on desktop */
     [data-tz-component="header"] .mobile-menu-toggle {
@@ -2373,12 +2360,12 @@ html.dark .tz-section.tz-header {
 
     /* Desktop logo adjustments */
     [data-tz-component="header"] .logo {
-        position: absolute !important;
-        left: 50% !important;
-        top: 50% !important;
-        transform: translate(-50%, -50%) !important;
+        position: absolute ;
+        left: 50% ;
+        top: 50% ;
+        transform: translate(-50%, -50%) ;
         z-index: 2;
-        flex: none !important;
+        flex: none ;
         order: unset;
     }
 
@@ -2464,23 +2451,23 @@ html.dark .tz-section.tz-header {
 /* Dark Mode Search Input */
 .dark .tz-search-input,
 html.dark .tz-search-input {
-  color: #ededed !important;
+  color: #ededed ;
 }
 
 .dark .tz-search-input::placeholder,
 html.dark .tz-search-input::placeholder {
-  color: rgba(255, 255, 255, 0.5) !important;
+  color: rgba(255, 255, 255, 0.5) ;
 }
 
 /* Light Mode Search Input */
 .light .tz-search-input,
 html.light .tz-search-input {
-  color: #111111 !important;
+  color: #111111 ;
 }
 
 .light .tz-search-input::placeholder,
 html.light .tz-search-input::placeholder {
-  color: rgba(0, 0, 0, 0.5) !important;
+  color: rgba(0, 0, 0, 0.5) ;
 }
 
 [dir="rtl"] .tz-search-input {
@@ -2553,23 +2540,23 @@ html.light .tz-search-input::placeholder {
 /* Dark Mode Search Submit Button */
 .dark .tz-search-submit,
 html.dark .tz-search-submit {
-  background: #2a2a2a !important;
+  background: #2a2a2a ;
 }
 
 .dark .tz-search-submit:hover,
 html.dark .tz-search-submit:hover {
-  background: #333333 !important;
+  background: #333333 ;
 }
 
 /* Light Mode Search Submit Button */
 .light .tz-search-submit,
 html.light .tz-search-submit {
-  background: var(--tz-search-bg-color) !important;
+  background: var(--tz-search-bg-color) ;
 }
 
 .light .tz-search-submit:hover,
 html.light .tz-search-submit:hover {
-  background: rgba(0, 0, 0, 0.05) !important;
+  background: rgba(0, 0, 0, 0.05) ;
 }
 
 .tz-search-submit .tz-search-icon {
@@ -2585,25 +2572,25 @@ html.light .tz-search-submit:hover {
 /* Dark Mode Search Icon */
 .dark .tz-search-submit .tz-search-icon,
 html.dark .tz-search-submit .tz-search-icon {
-  stroke: #ededed !important;
+  stroke: #ededed ;
 }
 
 /* Light Mode Search Icon */
 .light .tz-search-submit .tz-search-icon,
 html.light .tz-search-submit .tz-search-icon {
-  stroke: var(--tz-search-text-color) !important;
+  stroke: var(--tz-search-text-color) ;
 }
 
 /* Dark Mode Search Reset Icon */
 .dark .tz-search-reset .tz-search-icon,
 html.dark .tz-search-reset .tz-search-icon {
-  stroke: #ededed !important;
+  stroke: #ededed ;
 }
 
 /* Light Mode Search Reset Icon */
 .light .tz-search-reset .tz-search-icon,
 html.light .tz-search-reset .tz-search-icon {
-  stroke: var(--tz-search-text-color) !important;
+  stroke: var(--tz-search-text-color) ;
 }
 
 /* RTL Adjustments */
@@ -2728,23 +2715,23 @@ html.light .tz-search-dialog-close {
 /* Search Dialog Input Dark Mode */
 .dark .tz-search-dialog .tz-search-input,
 html.dark .tz-search-dialog .tz-search-input {
-  color: #ededed !important;
+  color: #ededed ;
 }
 
 .dark .tz-search-dialog .tz-search-input::placeholder,
 html.dark .tz-search-dialog .tz-search-input::placeholder {
-  color: rgba(255, 255, 255, 0.5) !important;
+  color: rgba(255, 255, 255, 0.5) ;
 }
 
 /* Search Dialog Input Light Mode */
 .light .tz-search-dialog .tz-search-input,
 html.light .tz-search-dialog .tz-search-input {
-  color: #111111 !important;
+  color: #111111 ;
 }
 
 .light .tz-search-dialog .tz-search-input::placeholder,
 html.light .tz-search-dialog .tz-search-input::placeholder {
-  color: rgba(0, 0, 0, 0.5) !important;
+  color: rgba(0, 0, 0, 0.5) ;
 }
 
 .tz-search-dialog-close svg {
@@ -3061,7 +3048,7 @@ html.dark .tz-cart-toast--error,
 html.dark .tz-cart-toast--info,
 html.dark .tz-submit-btn,
 html.dark .tz-address-default-badge {
-  color: #ffffff !important;
+  color: #ffffff ;
 }
 
 /* Additional checkout button override */
@@ -3069,7 +3056,7 @@ html.dark .tz-address-default-badge {
 html.light .checkout-btn,
 .dark .checkout-btn,
 html.dark .checkout-btn {
-  color: #ffffff !important;
+  color: #ffffff ;
 }
 
 /* Additional white text elements */
@@ -3081,7 +3068,7 @@ html.dark .tz-pagination-current,
 html.light .tz-zoom-dialog-close,
 .dark .tz-zoom-dialog-close,
 html.dark .tz-zoom-dialog-close {
-  color: #ffffff !important;
+  color: #ffffff ;
 }
 
 /* Checkout button span elements - maintain white text */
@@ -3089,47 +3076,47 @@ html.dark .tz-zoom-dialog-close {
 html.light .checkout-btn span,
 .dark .checkout-btn span,
 html.dark .checkout-btn span {
-  color: #ffffff !important;
+  color: #ffffff ;
 }
 
 /* Hamburger icon spans - ensure visibility in dark mode */
 .dark .hamburger-icon span,
 html.dark .hamburger-icon span {
-  background-color: #ffffff !important;
+  background-color: #ffffff ;
 }
 
 /* Mobile menu drawer - dark mode overrides */
 .dark .mobile-menu-drawer,
 html.dark .mobile-menu-drawer {
-  background: #1a1a1a !important;
+  background: #1a1a1a ;
 }
 
 .dark .mobile-menu-close,
 html.dark .mobile-menu-close,
 .dark .mobile-menu-link,
 html.dark .mobile-menu-link {
-  color: #ffffff !important;
+  color: #ffffff ;
 }
 
 .dark .mobile-menu-link:hover,
 html.dark .mobile-menu-link:hover {
-  color: var(--tz-accent, #ff5a1f) !important;
+  color: var(--tz-accent, #ff5a1f) ;
 }
 
 .dark .mobile-menu-header,
 html.dark .mobile-menu-header {
-  border-bottom-color: rgba(255, 255, 255, 0.1) !important;
+  border-bottom-color: rgba(255, 255, 255, 0.1) ;
 }
 
 .dark .mobile-menu-link,
 html.dark .mobile-menu-link {
-  border-bottom-color: rgba(255, 255, 255, 0.1) !important;
+  border-bottom-color: rgba(255, 255, 255, 0.1) ;
 }
 
 /* Cart drawer - dark mode overrides */
 .dark .cart-drawer,
 html.dark .cart-drawer {
-  background: #1a1a1a !important;
+  background: #1a1a1a ;
 }
 
 .dark .cart-drawer .cart-title-main,
@@ -3144,23 +3131,23 @@ html.dark .cart-drawer .cart-item__details,
 html.dark .cart-drawer .cart-item__price,
 html.dark .cart-drawer .price,
 html.dark .cart-drawer .cart__login-title {
-  color: #ffffff !important;
+  color: #ffffff ;
 }
 
 .dark .cart-drawer .cart-header,
 html.dark .cart-drawer .cart-header {
-  border-bottom-color: rgba(255, 255, 255, 0.1) !important;
+  border-bottom-color: rgba(255, 255, 255, 0.1) ;
 }
 
 .dark .cart-drawer .cart-item,
 html.dark .cart-drawer .cart-item {
-  border-bottom-color: rgba(255, 255, 255, 0.1) !important;
+  border-bottom-color: rgba(255, 255, 255, 0.1) ;
 }
 
 /* Cart drawer - dark mode overrides */
 .dark .cart-drawer,
 html.dark .cart-drawer {
-  background: #1a1a1a !important;
+  background: #1a1a1a ;
 }
 
 .dark .cart-drawer .cart-title-main,
@@ -3175,38 +3162,38 @@ html.dark .cart-drawer .cart-item__details,
 html.dark .cart-drawer .cart-item__price,
 html.dark .cart-drawer .price,
 html.dark .cart-drawer .cart__login-title {
-  color: #ffffff !important;
+  color: #ffffff ;
 }
 
 .dark .cart-drawer .cart-header,
 html.dark .cart-drawer .cart-header {
-  border-bottom-color: rgba(255, 255, 255, 0.1) !important;
+  border-bottom-color: rgba(255, 255, 255, 0.1) ;
 }
 
 .dark .cart-drawer .cart-item,
 html.dark .cart-drawer .cart-item {
-  border-bottom-color: rgba(255, 255, 255, 0.1) !important;
+  border-bottom-color: rgba(255, 255, 255, 0.1) ;
 }
 
 /* Cart item images - ensure normal display in dark mode */
 .dark .cart-item img,
 html.dark .cart-item img {
-  mix-blend-mode: normal !important;
-  filter: brightness(1.1) !important;
+  mix-blend-mode: normal ;
+  filter: brightness(1.1) ;
 }
 
 /* Cart item images - ensure normal display in dark mode */
 .dark .cart-item img,
 html.dark .cart-item img {
-  mix-blend-mode: normal !important;
-  filter: brightness(1.1) !important;
+  mix-blend-mode: normal ;
+  filter: brightness(1.1) ;
 }
 
 /* Cart footer - dark mode overrides */
 .dark .cart-footer,
 html.dark .cart-footer {
-  background: #1a1a1a !important;
-  border-top-color: rgba(255, 255, 255, 0.1) !important;
+  background: #1a1a1a ;
+  border-top-color: rgba(255, 255, 255, 0.1) ;
 }
 
 .dark .cart-footer .cart__login-title,
@@ -3217,14 +3204,14 @@ html.dark .cart-footer .cart__login-title,
 html.dark .cart-footer .price,
 html.dark .cart-footer .cart-subtotal,
 html.dark .cart-footer .cart-total {
-  color: #ffffff !important;
+  color: #ffffff ;
 }
 
 /* Cart footer - dark mode overrides */
 .dark .cart-footer,
 html.dark .cart-footer {
-  background: #1a1a1a !important;
-  border-top-color: rgba(255, 255, 255, 0.1) !important;
+  background: #1a1a1a ;
+  border-top-color: rgba(255, 255, 255, 0.1) ;
 }
 
 .dark .cart-footer .cart__login-title,
@@ -3235,7 +3222,7 @@ html.dark .cart-footer .cart__login-title,
 html.dark .cart-footer .price,
 html.dark .cart-footer .cart-subtotal,
 html.dark .cart-footer .cart-total {
-  color: #ffffff !important;
+  color: #ffffff ;
 }
 
 /* Additional cart elements - maintain white text in light mode */
@@ -3248,16 +3235,20 @@ html.light .tz-cart-coupon-text,
 html.light .tz-cart-ctas,
 html.light .tz-cart-trust-icon,
 html.light .tz-cart-trust-icon.material-icons-outlined {
-  color: #ffffff !important;
+  color: #ffffff ;
 }
 /* Cart checkout button text - ensure visibility on white background in dark mode */
 .dark .tz-cart-checkout-button,
 html.dark .tz-cart-checkout-button {
-  color: #000000 !important;
+  color: #000000 ;
 }
 
 /* Collection product sale badge - maintain white text in light mode */
 .light .tz-collection-product-badge--sale,
 html.light .tz-collection-product-badge--sale {
-  color: #ffffff !important;
+  color: #ffffff ;
+}
+
+.tz-mega-menu .tz-mm-product-info {
+    text-align: center;
 }

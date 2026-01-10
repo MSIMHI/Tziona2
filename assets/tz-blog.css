@@ -57,16 +57,16 @@
 
 .tz-blog-tag:hover {
     background-color: #000;
-    color: #fff !important;
+    color: #fff ;
 }
 
 html .light .tz-blog-tag.tz-blog-tag--active {
     background-color: #000;
-    color: #fff !important;
+    color: #fff ;
 }
 
 html .dark .tz-blog-tag.tz-blog-tag--active {
-    color: #000 !important;
+    color: #000 ;
 }
 
 /* Override global light mode styles for active tag white text */
@@ -78,7 +78,7 @@ html.light body .tz-blog-tag:hover,
 .light .tz-blog-tag:hover,
 html.light .tz-blog-tag.tz-blog-tag--active,
 html.light .tz-blog-tag:hover {
-    color: #fff !important;
+    color: #fff ;
 }
 
 .tz-blog-grid {
@@ -127,7 +127,7 @@ html.light .tz-blog-tag:hover {
     bottom: 0;
     padding: 2rem;
     background: linear-gradient(180deg, #0000, #0006);
-    color: #fff !important;
+    color: #fff ;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -183,7 +183,7 @@ html.light .tz-blog-card-overlay h6,
 html.light .tz-blog-card-overlay p,
 html.light .tz-blog-card-overlay span,
 html.light .tz-blog-card-overlay div {
-    color: #fff !important;
+    color: #fff ;
 }
 
 .tz-blog-card-category {
@@ -193,12 +193,12 @@ html.light .tz-blog-card-overlay div {
     letter-spacing: 0.5px;
     margin-bottom: 0.5rem;
     opacity: 0.9;
-    color: #fff !important;
+    color: #fff ;
 }
 
 .light .tz-blog-card-category,
 html.light .tz-blog-card-category {
-    color: #fff !important;
+    color: #fff ;
 }
 
 .tz-blog-card-title {
@@ -208,26 +208,26 @@ html.light .tz-blog-card-category {
     letter-spacing: 1px;
     margin-bottom: 0.5rem;
     line-height: 1.3;
-    color: #fff !important;
+    color: #fff ;
 }
 
 .light .tz-blog-card-title,
 .light .tz-blog-card-overlay h2,
 html.light .tz-blog-card-title,
 html.light .tz-blog-card-overlay h2 {
-    color: #fff !important;
+    color: #fff ;
 }
 
 .tz-blog-card-meta {
     font-size: 0.875rem;
     opacity: 0.9;
     font-weight: 400;
-    color: #fff !important;
+    color: #fff ;
 }
 
 .light .tz-blog-card-meta,
 html.light .tz-blog-card-meta {
-    color: #fff !important;
+    color: #fff ;
 }
 
 .tz-blog-card-meta-author {

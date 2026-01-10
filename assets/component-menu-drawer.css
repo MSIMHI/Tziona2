@@ -236,8 +236,8 @@ details[open].menu-opening > .menu-drawer__submenu {
 
 @media screen and (max-width: 749px) {
   .menu-drawer.country-selector-open {
-    transform: none !important;
-    filter: none !important;
-    transition: none !important;
+    transform: none ;
+    filter: none ;
+    transition: none ;
   }
 }
