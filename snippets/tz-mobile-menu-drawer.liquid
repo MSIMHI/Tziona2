@@ -108,6 +108,19 @@
                                   </div>
                                 </a>
                               </div>
+
+                            {% when 'collection_block' %}
+                              {% assign collection = collections[block.settings.collection] %}
+                              <div class="mobile-mm-collection">
+                                <a href="{{ collection.url }}" class="mobile-mm-collection-card">
+                                  <div class="mobile-mm-collection-img">
+                                    {{ collection.featured_image | image_url: width: 400 | image_tag: loading: 'lazy' }}
+                                  </div>
+                                  <div class="mobile-mm-collection-info">
+                                    <span class="mobile-mm-collection-title">{{ collection.title }}</span>
+                                  </div>
+                                </a>
+                              </div>
                           {% endcase %}
                         </div>
                       {% endif %}
@@ -203,6 +216,19 @@
                                 <div class="mobile-mm-product-info">
                                   <span class="mobile-mm-product-title">{{ product.title }}</span>
                                   <span class="mobile-mm-product-price">{{ product.price | money }}</span>
+                                </div>
+                              </a>
+                            </div>
+
+                          {% when 'collection_block' %}
+                            {% assign collection = collections[block.settings.collection] %}
+                            <div class="mobile-mm-collection">
+                              <a href="{{ collection.url }}" class="mobile-mm-collection-card">
+                                <div class="mobile-mm-collection-img">
+                                  {{ collection.featured_image | image_url: width: 400 | image_tag: loading: 'lazy' }}
+                                </div>
+                                <div class="mobile-mm-collection-info">
+                                  <span class="mobile-mm-collection-title">{{ collection.title }}</span>
                                 </div>
                               </a>
                             </div>

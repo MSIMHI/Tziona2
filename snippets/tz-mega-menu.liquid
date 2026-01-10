@@ -61,6 +61,10 @@
               {% if block.settings.product != blank %}
                 {% assign show_block = true %}
               {% endif %}
+            {% when 'collection_block' %}
+              {% if block.settings.collection != blank %}
+                {% assign show_block = true %}
+              {% endif %}
           {% endcase %}
 
           {% if show_block %}
@@ -120,6 +124,19 @@
                       <div class="tz-mm-product-info">
                         <span class="tz-mm-product-title">{{ product.title }}</span>
                         <span class="tz-mm-product-price">{{ product.price | money }}</span>
+                      </div>
+                    </a>
+                  </div>
+
+                {% when 'collection_block' %}
+                  {% assign collection = collections[block.settings.collection] %}
+                  <div class="tz-mm-collection">
+                    <a href="{{ collection.url }}" class="tz-mm-collection-card">
+                      <div class="tz-mm-collection-img">
+                        {{ collection.featured_image | image_url: width: 400 | image_tag: loading: 'lazy' }}
+                      </div>
+                      <div class="tz-mm-collection-info">
+                        <span class="tz-mm-collection-title">{{ collection.title }}</span>
                       </div>
                     </a>
                   </div>

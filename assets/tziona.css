@@ -2246,7 +2246,8 @@ html.dark .tz-section.tz-header {
         color: #AAA;
     }
 
-    .mobile-mm-product-card {
+    .mobile-mm-product-card,
+    .mobile-mm-collection-card {
         display: flex;
         gap: 12px;
         text-decoration: none;
@@ -2257,30 +2258,36 @@ html.dark .tz-section.tz-header {
     }
 
     .dark .mobile-mm-product-card,
-    html.dark .mobile-mm-product-card {
+    .dark .mobile-mm-collection-card,
+    html.dark .mobile-mm-product-card,
+    html.dark .mobile-mm-collection-card {
         background: rgba(255,255,255,0.03);
     }
 
-    .mobile-mm-product-img {
+    .mobile-mm-product-img,
+    .mobile-mm-collection-img {
         width: 60px;
         height: 60px;
         flex-shrink: 0;
     }
 
-    .mobile-mm-product-img img {
+    .mobile-mm-product-img img,
+    .mobile-mm-collection-img img {
         width: 100%;
         height: 100%;
         object-fit: cover;
         border-radius: 4px;
     }
 
-    .mobile-mm-product-info {
+    .mobile-mm-product-info,
+    .mobile-mm-collection-info {
         display: flex;
         flex-direction: column;
         gap: 2px;
     }
 
-    .mobile-mm-product-title {
+    .mobile-mm-product-title,
+    .mobile-mm-collection-title {
         font-size: 14px;
         font-weight: 600;
         color: var(--tz-mm-text, inherit) ;

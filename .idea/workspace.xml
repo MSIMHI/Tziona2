@@ -6,34 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="261e89e2-f91d-4885-a699-11b8f855e509" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/base.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/base.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/component-cart-drawer.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/component-cart-drawer.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/component-image-with-text.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/component-image-with-text.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/component-menu-drawer.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/component-menu-drawer.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/component-price.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/component-price.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/customer.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/customer.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/quick-add.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/quick-add.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/section-contact-form.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/section-contact-form.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/section-footer.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/section-footer.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/section-image-banner.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/section-image-banner.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/section-main-product.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/section-main-product.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/section-password.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/section-password.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/tz-blog.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/tz-blog.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/tz-collection-hero.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/tz-collection-hero.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/tz-main-account-addresses.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/tz-main-account-addresses.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/tz-main-account.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/tz-main-account.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/tz-main-cart.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/tz-main-cart.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/tz-main-collection-product-grid.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/tz-main-collection-product-grid.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/tz-main-login.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/tz-main-login.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/tz-main-register.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/tz-main-register.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/tz-mega-menu.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/tz-mega-menu.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/tz-product.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/tz-product.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/tz-section-image-banner.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/tz-section-image-banner.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/tz-section-multicolumn.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/tz-section-multicolumn.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/tz-section-rich-text.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/tz-section-rich-text.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/tziona.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/tziona.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/tziona.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/tziona.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sections/tz-announcement.liquid" beforeDir="false" afterPath="$PROJECT_DIR$/sections/tz-announcement.liquid" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sections/tz-header.liquid" beforeDir="false" afterPath="$PROJECT_DIR$/sections/tz-header.liquid" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/snippets/tz-mega-menu.liquid" beforeDir="false" afterPath="$PROJECT_DIR$/snippets/tz-mega-menu.liquid" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/snippets/tz-mobile-menu-drawer.liquid" beforeDir="false" afterPath="$PROJECT_DIR$/snippets/tz-mobile-menu-drawer.liquid" afterDir="false" />
@@ -125,7 +99,7 @@
       <workItem from="1767859601959" duration="1384000" />
       <workItem from="1767945283511" duration="13631000" />
       <workItem from="1767960970182" duration="15819000" />
-      <workItem from="1768036365793" duration="16478000" />
+      <workItem from="1768036365793" duration="17630000" />
     </task>
     <servers />
   </component>
