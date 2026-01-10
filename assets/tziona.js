@@ -185,19 +185,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Initialize main menu accordion functionality
   const initMainMenuAccordion = () => {
-    const accordionToggles = document.querySelectorAll('.mobile-menu-accordion-toggle');
-    
-    accordionToggles.forEach(toggle => {
-      // Remove existing listeners to avoid duplicates
-      const newToggle = toggle.cloneNode(true);
-      toggle.parentNode.replaceChild(newToggle, toggle);
+    // We use delegation on the drawer itself to avoid issues with cloning or re-initialization
+    const drawer = document.getElementById('mobile-menu-drawer');
+    if (!drawer || drawer.dataset.accordionInit === 'true') return;
+
+    drawer.addEventListener('click', (e) => {
+      const toggle = e.target.closest('.mobile-menu-accordion-toggle');
+      if (!toggle) return;
+
+      e.preventDefault();
+      e.stopPropagation();
+      const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+      toggle.setAttribute('aria-expanded', !isExpanded);
       
-      newToggle.addEventListener('click', (e) => {
-        e.preventDefault();
-        const isExpanded = newToggle.getAttribute('aria-expanded') === 'true';
-        newToggle.setAttribute('aria-expanded', !isExpanded);
-      });
+      console.log('Mobile accordion toggle clicked:', toggle.textContent.trim(), 'New state:', !isExpanded);
     });
+
+    drawer.dataset.accordionInit = 'true';
   };
 
   // Sync utility menu when drawer opens

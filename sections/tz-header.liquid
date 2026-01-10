@@ -154,6 +154,10 @@
       {% render 'tz-mega-menu', link: link, blocks: section.blocks, index: forloop.index %}
     {% endfor %}
   </div>
+
+  <!-- MOBILE MENU DRAWER -->
+  <div class="mobile-menu-overlay"></div>
+  {% render 'tz-mobile-menu-drawer' %}
 </section>
 
 
@@ -279,6 +283,13 @@
       "type": "link_list",
       "id": "menu",
       "label": "Main Menu",
+      "default": "main-menu"
+    },
+    {
+      "type": "link_list",
+      "id": "mobile_menu",
+      "label": "Mobile Menu (Optional)",
+      "info": "If left blank, the Main Menu will be used on mobile.",
       "default": "main-menu"
     },
 

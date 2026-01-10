@@ -1,0 +1,197 @@
+{% comment %}
+  Snippet: tz-mobile-menu-drawer.liquid
+  Renders the mobile navigation drawer. 
+  When included in tz-header.liquid, it has access to the header's mega menu blocks.
+{% endcomment %}
+
+<div id="mobile-menu-drawer" class="mobile-menu-drawer">
+  <div class="mobile-menu-header">
+    <div class="mobile-menu-logo">
+      <a href="{{ routes.root_url }}">
+        {% if section.settings.logo != blank %}
+          {%- assign logo_height = section.settings.logo_height | default: 20 -%}
+          {{ section.settings.logo | image_url: width: 300 | image_tag: height: logo_height }}
+        {% else %}
+          {{ shop.name }}
+        {% endif %}
+      </a>
+    </div>
+    <button class="mobile-menu-close" aria-label="Close menu">
+      <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none">
+        <path d="M18 6L6 18M6 6l12 12" />
+      </svg>
+    </button>
+  </div>
+
+  <div class="mobile-menu-body">
+    <!-- Utility Menu (Sync from Header or Manual) -->
+    <div class="mobile-utility-menu">
+      <h3 class="mobile-utility-menu-title">{{ 'general.header.utility_menu' | t | default: 'Quick Links' }}</h3>
+      <nav class="mobile-utility-nav">
+        {% assign utility_menu_handle = section.settings.secondary_menu %}
+        {% if utility_menu_handle != blank %}
+          {% for link in linklists[utility_menu_handle].links %}
+            {% if link.links.size > 0 %}
+              <div class="mobile-utility-accordion">
+                <button class="mobile-utility-accordion-toggle" aria-expanded="false" type="button">
+                  <span>{{ link.title }}</span>
+                  <span class="mobile-utility-accordion-icon">+</span>
+                </button>
+                <div class="mobile-utility-accordion-content">
+                  {% for childlink in link.links %}
+                    <a href="{{ childlink.url }}" class="mobile-utility-link">{{ childlink.title }}</a>
+                  {% endfor %}
+                </div>
+              </div>
+            {% else %}
+              <a href="{{ link.url }}" class="mobile-utility-link">{{ link.title }}</a>
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+      </nav>
+    </div>
+    
+    <!-- Main Menu -->
+    <nav class="mobile-menu-nav">
+      {% assign main_menu_handle = section.settings.mobile_menu | default: section.settings.menu %}
+      {% if main_menu_handle != blank %}
+        {% assign main_menu = linklists[main_menu_handle] %}
+        {% for link in main_menu.links %}
+          {% assign link_title_clean = link.title | strip | downcase %}
+          {% assign has_mega_content = false %}
+          {% for block in section.blocks %}
+            {% if block.type == 'mega_menu_settings' %}{% continue %}{% endif %}
+            {% assign block_trigger_clean = block.settings.menu_trigger | strip | downcase %}
+            {% if block_trigger_clean == link_title_clean %}
+              {% assign has_mega_content = true %}
+              {% break %}
+            {% endif %}
+          {% endfor %}
+
+          {% if has_mega_content %}
+            <div class="mobile-menu-accordion">
+              <button class="mobile-menu-accordion-toggle" aria-expanded="false" type="button">
+                <span>{{ link.title }}</span>
+                <span class="mobile-menu-accordion-icon">+</span>
+              </button>
+              <div class="mobile-menu-accordion-content">
+                <div class="mobile-mega-menu-content">
+                  {% for block in section.blocks %}
+                    {% assign block_trigger_clean = block.settings.menu_trigger | strip | downcase %}
+                    {% if block_trigger_clean == link_title_clean %}
+                      <div class="mobile-mm-block mobile-mm-block--{{ block.type | replace: '_', '-' }}">
+                        {% case block.type %}
+                          {% when 'menu_block' %}
+                            {% if block.settings.heading != blank %}
+                              <h4 class="mobile-mm-heading">{{ block.settings.heading }}</h4>
+                            {% endif %}
+                            {% if block.settings.menu != blank %}
+                              <ul class="mobile-mm-linklist">
+                                {% for sublink in linklists[block.settings.menu].links %}
+                                  <li>
+                                    <a href="{{ sublink.url }}">{{ sublink.title }}</a>
+                                  </li>
+                                {% endfor %}
+                              </ul>
+                            {% endif %}
+
+                          {% when 'rich_text_block' %}
+                            <div class="mobile-mm-richtext">
+                              {% if block.settings.heading != blank %}
+                                <h4 class="mobile-mm-heading">{{ block.settings.heading }}</h4>
+                              {% endif %}
+                              <div class="rte">{{ block.settings.text }}</div>
+                            </div>
+
+                          {% when 'image_block' %}
+                            <div class="mobile-mm-image">
+                              {% if block.settings.link != blank %}<a href="{{ block.settings.link }}">{% endif %}
+                              {{
+                                block.settings.image
+                                | image_url: width: 600
+                                | image_tag: loading: 'lazy', widths: '200, 400, 600', style: 'width: 100%; height: auto;'
+                              }}
+                              {% if block.settings.caption != blank -%}
+                                <span class="mobile-mm-caption">{{ block.settings.caption }}</span>
+                              {%- endif %}
+                              {% if block.settings.link != blank %}</a>{% endif %}
+                            </div>
+
+                          {% when 'product_block' %}
+                            {% assign product = all_products[block.settings.product] %}
+                            <div class="mobile-mm-product">
+                              <a href="{{ product.url }}" class="mobile-mm-product-card">
+                                <div class="mobile-mm-product-img">
+                                  {{ product.featured_image | image_url: width: 400 | image_tag: loading: 'lazy' }}
+                                </div>
+                                <div class="mobile-mm-product-info">
+                                  <span class="mobile-mm-product-title">{{ product.title }}</span>
+                                  <span class="mobile-mm-product-price">{{ product.price | money }}</span>
+                                </div>
+                              </a>
+                            </div>
+                        {% endcase %}
+                      </div>
+                    {% endif %}
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+          {% elsif link.links.size > 0 %}
+            <div class="mobile-menu-accordion">
+              <button class="mobile-menu-accordion-toggle" aria-expanded="false" type="button">
+                <span>{{ link.title }}</span>
+                <span class="mobile-menu-accordion-icon">+</span>
+              </button>
+              <div class="mobile-menu-accordion-content">
+                {% for childlink in link.links %}
+                  {% if childlink.links.size > 0 %}
+                    <div class="mobile-menu-accordion mobile-menu-accordion-nested">
+                      <button class="mobile-menu-accordion-toggle" aria-expanded="false" type="button">
+                        <span>{{ childlink.title }}</span>
+                        <span class="mobile-menu-accordion-icon">+</span>
+                      </button>
+                      <div class="mobile-menu-accordion-content">
+                        {% for grandchildlink in childlink.links %}
+                          {% if grandchildlink.links.size > 0 %}
+                            <div class="mobile-menu-accordion mobile-menu-accordion-nested">
+                              <button class="mobile-menu-accordion-toggle" aria-expanded="false" type="button">
+                                <span>{{ grandchildlink.title }}</span>
+                                <span class="mobile-menu-accordion-icon">+</span>
+                              </button>
+                              <div class="mobile-menu-accordion-content">
+                                {% for greatgrandchildlink in grandchildlink.links %}
+                                  <a href="{{ greatgrandchildlink.url }}" class="mobile-menu-link">{{ greatgrandchildlink.title }}</a>
+                                {% endfor %}
+                              </div>
+                            </div>
+                          {% else %}
+                            <a href="{{ grandchildlink.url }}" class="mobile-menu-link">{{ grandchildlink.title }}</a>
+                          {% endif %}
+                        {% endfor %}
+                      </div>
+                    </div>
+                  {% else %}
+                    <a href="{{ childlink.url }}" class="mobile-menu-link">{{ childlink.title }}</a>
+                  {% endif %}
+                {% endfor %}
+              </div>
+            </div>
+          {% else %}
+            <a href="{{ link.url }}" class="mobile-menu-link">{{ link.title }}</a>
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+
+      {% assign sale_text_fallback = 'general.header.sale_text' | t %}
+      {% assign sale_badge_fallback = 'general.header.sale_badge' | t %}
+
+      {% if section.settings.show_sale %}
+        <a href="{{ section.settings.sale_link }}" class="mobile-menu-link mobile-menu-sale">
+          {{ section.settings.sale_text | default: sale_text_fallback }}
+          <span class="sale-badge">{{ section.settings.sale_badge | default: sale_badge_fallback }}</span>
+        </a>
+      {% endif %}
+    </nav>
+  </div>
+</div>
