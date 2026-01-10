@@ -58,7 +58,8 @@
     },
     "header": {
       "sale_text": "Sale",
-      "sale_badge": "Hot"
+      "sale_badge": "Hot",
+      "utility_menu": "Quick Links"
     }
   },
   "newsletter": {

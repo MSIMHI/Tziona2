@@ -58,7 +58,8 @@
     },
     "header": {
       "sale_text": "מבצע",
-      "sale_badge": "חם"
+      "sale_badge": "חם",
+      "utility_menu": "קישורים מהירים"
     }
   },
   "newsletter": {
