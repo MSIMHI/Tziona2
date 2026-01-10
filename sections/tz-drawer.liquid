@@ -227,10 +227,13 @@
           {% endif %}
         {% endfor %}
       {% endif %}
+      {% assign sale_text_fallback = 'general.header.sale_text' | t %}
+      {% assign sale_badge_fallback = 'general.header.sale_badge' | t %}
+
       {% if section.settings.show_sale %}
         <a href="{{ section.settings.sale_link }}" class="mobile-menu-link mobile-menu-sale">
-          {{ 'general.header.sale_text' | t | default: section.settings.sale_text }}
-          <span class="sale-badge">{{ 'general.header.sale_badge' | t | default: section.settings.sale_badge }}</span>
+          {{ section.settings.sale_text | default: sale_text_fallback }}
+          <span class="sale-badge">{{ section.settings.sale_badge | default: sale_badge_fallback }}</span>
         </a>
       {% endif %}
     </nav>

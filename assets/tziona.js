@@ -965,39 +965,54 @@ function closeZoomDialog() {
 /*-----*/
 
 document.addEventListener('DOMContentLoaded', () => {
-  console.log('TZ Mega Menu Loaded'); // Debug check
+  console.log('TZ Mega Menu Initializing');
 
-  const triggers = document.querySelectorAll('[data-tz-index]');
-  const header = document.querySelector('.section-header');
+  // Use event delegation on the body to handle potential clones/dynamic headers
+  document.body.addEventListener('mouseover', (e) => {
+    const trigger = e.target.closest('[data-tz-index]');
+    if (!trigger) return;
 
-  function closeAll() {
+    const index = trigger.getAttribute('data-tz-index');
+    
+    // 1. Try finding it within the same section (best for clones)
+    const parentSection = trigger.closest('.shopify-section') || trigger.closest('section');
+    let menu = parentSection ? parentSection.querySelector(`[data-tz-menu-index="${index}"]`) : null;
+    
+    // 2. Fallback to global search if not found in section
+    if (!menu) {
+      menu = document.querySelector(`[data-tz-menu-index="${index}"]`);
+    }
+
+    // 3. Last fallback to ID
+    if (!menu) {
+      menu = document.getElementById(`mega-menu-${index}`);
+    }
+
+    if (menu) {
+      // Close all others first
+      document.querySelectorAll('.tz-mega-menu').forEach((el) => {
+        if (el !== menu) el.classList.remove('is-active');
+      });
+      menu.classList.add('is-active');
+    }
+  });
+
+  // Close when leaving the header area OR the mega menu itself
+  const closeAll = () => {
     document.querySelectorAll('.tz-mega-menu').forEach((el) => {
       el.classList.remove('is-active');
     });
-  }
+  };
 
-  triggers.forEach((trigger) => {
-    trigger.addEventListener('mouseenter', () => {
-      const index = trigger.getAttribute('data-tz-index');
-      console.log('Hovering Index:', index); // Debug check
-
-      const menu = document.getElementById(`mega-menu-${index}`);
-
-      // Close others first
+  // Improved closing logic: close only if moving to something that isn't the header or the menu
+  document.addEventListener('mousemove', (e) => {
+    const isOverHeader = e.target.closest('.section-header, .tz-header, [data-tz-component="header"]');
+    const isOverMenu = e.target.closest('.tz-mega-menu');
+    
+    if (!isOverHeader && !isOverMenu) {
       closeAll();
-
-      if (menu) {
-        console.log('Opening Menu:', index); // Debug check
-        menu.classList.add('is-active');
-      } else {
-        console.log('No menu found for Index:', index);
-      }
-    });
+    }
   });
-
-  if (header) {
-    header.addEventListener('mouseleave', closeAll);
-  }
 });
 
 /* =========================================================

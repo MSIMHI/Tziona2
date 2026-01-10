@@ -83,59 +83,23 @@
         <!-- MAIN NAV -->
         <nav class="nav-links uppercase">
           {% for link in linklists[section.settings.menu].links %}
-            {% if link.links.size > 0 %}
-              <div class="main-menu-item">
-                <div class="tz-main-hover-trigger">
-                  <a
-                    href="{{ link.url }}"
-                    class="nav-link"
-                    data-tz-index="{{ forloop.index }}"
-                  >
-                    {{ link.title }}
-                  </a>
-                  <ul class="main-dropdown">
-                    {% for childlink in link.links %}
-                      <li class="{% if childlink.links.size > 0 %}main-menu-item-has-children{% endif %}">
-                        <a href="{{ childlink.url }}">{{ childlink.title }}</a>
-                        {% if childlink.links.size > 0 %}
-                          <ul class="main-dropdown main-dropdown-nested">
-                            {% for grandchildlink in childlink.links %}
-                              <li class="{% if grandchildlink.links.size > 0 %}main-menu-item-has-children{% endif %}">
-                                <a href="{{ grandchildlink.url }}">{{ grandchildlink.title }}</a>
-                                {% if grandchildlink.links.size > 0 %}
-                                  <ul class="main-dropdown main-dropdown-nested">
-                                    {% for greatgrandchildlink in grandchildlink.links %}
-                                      <li>
-                                        <a href="{{ greatgrandchildlink.url }}">{{ greatgrandchildlink.title }}</a>
-                                      </li>
-                                    {% endfor %}
-                                  </ul>
-                                {% endif %}
-                              </li>
-                            {% endfor %}
-                          </ul>
-                        {% endif %}
-                      </li>
-                    {% endfor %}
-                  </ul>
-                </div>
-              </div>
-            {% else %}
-              <!-- We use forloop.index (1, 2, 3) because Hebrew handles often break IDs -->
-              <a
-                href="{{ link.url }}"
-                class="nav-link"
-                data-tz-index="{{ forloop.index }}"
-              >
-                {{ link.title }}
-              </a>
-            {% endif %}
+            <!-- We use forloop.index (1, 2, 3) because Hebrew handles often break IDs -->
+            <a
+              href="{{ link.url }}"
+              class="nav-link"
+              data-tz-index="{{ forloop.index }}"
+            >
+              {{ link.title }}
+            </a>
           {% endfor %}
+
+          {% assign sale_text_fallback = 'general.header.sale_text' | t %}
+          {% assign sale_badge_fallback = 'general.header.sale_badge' | t %}
 
           {% if section.settings.show_sale %}
             <a href="{{ section.settings.sale_link }}" class="sale-text">
-              {{ 'general.header.sale_text' | t | default: section.settings.sale_text }}
-              <span class="sale-badge">{{ 'general.header.sale_badge' | t | default: section.settings.sale_badge }}</span>
+              {{ section.settings.sale_text | default: sale_text_fallback }}
+              <span class="sale-badge">{{ section.settings.sale_badge | default: sale_badge_fallback }}</span>
             </a>
           {% endif %}
         </nav>
@@ -155,40 +119,7 @@
         <!-- UTILITIES -->
         <div class="nav-utilities uppercase">
           {% for link in linklists[section.settings.secondary_menu].links %}
-            {% if link.links.size > 0 %}
-              <div class="utility-menu-item">
-                <div class="tz-utility-hover-trigger">
-                  <a href="{{ link.url }}" class="utility-menu-link">{{ link.title }}</a>
-                  <ul class="utility-dropdown">
-                    {% for childlink in link.links %}
-                      <li class="{% if childlink.links.size > 0 %}utility-menu-item-has-children{% endif %}">
-                        <a href="{{ childlink.url }}">{{ childlink.title }}</a>
-                        {% if childlink.links.size > 0 %}
-                          <ul class="utility-dropdown utility-dropdown-nested">
-                            {% for grandchildlink in childlink.links %}
-                              <li class="{% if grandchildlink.links.size > 0 %}utility-menu-item-has-children{% endif %}">
-                                <a href="{{ grandchildlink.url }}">{{ grandchildlink.title }}</a>
-                                {% if grandchildlink.links.size > 0 %}
-                                  <ul class="utility-dropdown utility-dropdown-nested">
-                                    {% for greatgrandchildlink in grandchildlink.links %}
-                                      <li>
-                                        <a href="{{ greatgrandchildlink.url }}">{{ greatgrandchildlink.title }}</a>
-                                      </li>
-                                    {% endfor %}
-                                  </ul>
-                                {% endif %}
-                              </li>
-                            {% endfor %}
-                          </ul>
-                        {% endif %}
-                      </li>
-                    {% endfor %}
-                  </ul>
-                </div>
-              </div>
-            {% else %}
-              <a href="{{ link.url }}">{{ link.title }}</a>
-            {% endif %}
+            <a href="{{ link.url }}">{{ link.title }}</a>
           {% endfor %}
 
           <button class="icon-btn" aria-label="Search">
@@ -361,13 +292,13 @@
       "type": "text",
       "id": "sale_text",
       "label": "Sale Text",
-      "default": "במבצע עכשיו"
+      "default": "__auto__"
     },
     {
       "type": "text",
       "id": "sale_badge",
       "label": "Sale Badge",
-      "default": "30% OFF"
+      "default": "__auto__"
     },
     {
       "type": "url",

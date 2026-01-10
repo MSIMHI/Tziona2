@@ -1,0 +1,529 @@
+{% comment %}
+  Load TZ Mega Menu Assets
+{% endcomment %}
+{{ 'tz-mega-menu.css' | asset_url | stylesheet_tag }}
+
+{% comment %} Store utility menu handle for drawer access {% endcomment %}
+{% if section.settings.secondary_menu != blank %}
+    {% render 'utility-menu-handle', menu_handle: section.settings.secondary_menu %}
+{% endif %}
+
+{%- style -%}
+    /* =========================================================
+    TZ Header — Liquid (TOKENS ONLY)
+    ========================================================= */
+    #shopify-section-{{ section.id }} {
+    --tz-pt: {{ section.settings.padding_top | default: 12 }}px;
+    --tz-pb: {{ section.settings.padding_bottom | default: 12 }}px;
+    --tz-bg: {{ section.settings.bg_color | default: '#ffffff' }};
+    --tz-bg-opacity: {{ section.settings.bg_opacity | default: 100 | divided_by: 100.0 }};
+
+    --tz-text: {{ section.settings.text_color | default: '#111111' }};
+    --tz-link: {{ section.settings.link_color | default: '#111111' }};
+    --tz-link-hover: {{ section.settings.link_hover_color | default: '#555555' }};
+    --tz-accent: {{ section.settings.accent_color | default: '#ff5a1f' }};
+
+    --tz-nav-size: {{ section.settings.nav_text_size | default: 13 }}px;
+    --tz-nav-case: {% if section.settings.nav_uppercase %}uppercase{% else %}none{% endif %};
+
+    --tz-blur: {% if section.settings.bg_blur %}blur(10px){% else %}none{% endif %};
+
+    --tz-heading-font: {% case section.settings.heading_font_family %}
+    {% when 'heading' %} var(--font-heading-family, inherit)
+    {% when 'body' %} var(--font-body-family, inherit)
+    {% else %} inherit
+{% endcase %};
+
+    --tz-text-font: {% case section.settings.text_font_family %}
+    {% when 'heading' %} var(--font-heading-family, inherit)
+    {% when 'body' %} var(--font-body-family, inherit)
+    {% else %} inherit
+{% endcase %};
+
+    --tz-logo-height: {{ section.settings.logo_height | default: 20 }}px;
+    }
+
+    #shopify-section-{{ section.id }} {
+    position: {% if section.settings.sticky %}sticky{% else %}relative{% endif %};
+    top: 0;
+    z-index: {% if section.settings.sticky %}9999{% else %}auto{% endif %};
+    }
+
+    {% if section.settings.sticky %}
+        #shopify-section-{{ section.id }}{
+        background: color-mix(in srgb, var(--tz-bg) calc(var(--tz-bg-opacity) * 100%), transparent);
+        backdrop-filter: var(--tz-blur);
+        }
+    {% endif %}
+
+    #shopify-section-{{ section.id }} .tz-header {
+    position: relative;
+    }
+{%- endstyle -%}
+
+<section
+        {% if section.settings.custom_id != blank %}
+            id="{{ section.settings.custom_id | escape }}"
+        {% endif %}
+        class="tz-section tz-header {% if section.settings.sticky %}is-sticky{% endif %} {{ section.settings.custom_class }} {% if section.settings.hide_mobile %}mobile-hide{% endif %} {% if section.settings.hide_desktop %}desktop-hide{% endif %}"
+        data-tz-component="header"
+>
+    <div class="tz-section__inner {{ section.settings.section_width | default: 'page-width' }}">
+        <div class="tz-section__content">
+            <div class="header-inner">
+                <!-- MOBILE MENU BUTTON -->
+                <button class="mobile-menu-toggle" aria-label="Menu" aria-expanded="false">
+          <span class="hamburger-icon">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+                </button>
+
+                <!-- MAIN NAV -->
+                <nav class="nav-links uppercase">
+                    {% for link in linklists[section.settings.menu].links %}
+                        {% if link.links.size > 0 %}
+                            <div class="main-menu-item">
+                                <div class="tz-main-hover-trigger">
+                                    <a
+                                            href="{{ link.url }}"
+                                            class="nav-link"
+                                            data-tz-index="{{ forloop.index }}"
+                                    >
+                                        {{ link.title }}
+                                    </a>
+                                    <ul class="main-dropdown">
+                                        {% for childlink in link.links %}
+                                            <li class="{% if childlink.links.size > 0 %}main-menu-item-has-children{% endif %}">
+                                                <a href="{{ childlink.url }}">{{ childlink.title }}</a>
+                                                {% if childlink.links.size > 0 %}
+                                                    <ul class="main-dropdown main-dropdown-nested">
+                                                        {% for grandchildlink in childlink.links %}
+                                                            <li class="{% if grandchildlink.links.size > 0 %}main-menu-item-has-children{% endif %}">
+                                                                <a href="{{ grandchildlink.url }}">{{ grandchildlink.title }}</a>
+                                                                {% if grandchildlink.links.size > 0 %}
+                                                                    <ul class="main-dropdown main-dropdown-nested">
+                                                                        {% for greatgrandchildlink in grandchildlink.links %}
+                                                                            <li>
+                                                                                <a href="{{ greatgrandchildlink.url }}">{{ greatgrandchildlink.title }}</a>
+                                                                            </li>
+                                                                        {% endfor %}
+                                                                    </ul>
+                                                                {% endif %}
+                                                            </li>
+                                                        {% endfor %}
+                                                    </ul>
+                                                {% endif %}
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </div>
+                        {% else %}
+                            <!-- We use forloop.index (1, 2, 3) because Hebrew handles often break IDs -->
+                            <a
+                                    href="{{ link.url }}"
+                                    class="nav-link"
+                                    data-tz-index="{{ forloop.index }}"
+                            >
+                                {{ link.title }}
+                            </a>
+                        {% endif %}
+                    {% endfor %}
+
+                    {% assign sale_text_fallback = 'general.header.sale_text' | t %}
+                    {% assign sale_badge_fallback = 'general.header.sale_badge' | t %}
+
+                    {% if section.settings.show_sale %}
+                        <a href="{{ section.settings.sale_link }}" class="sale-text">
+                            {{ section.settings.sale_text | default: sale_text_fallback }}
+                            <span class="sale-badge">{{ section.settings.sale_badge | default: sale_badge_fallback }}</span>
+                        </a>
+                    {% endif %}
+                </nav>
+
+                <!-- LOGO -->
+                <div class="logo">
+                    <a href="{{ routes.root_url }}">
+                        {% if section.settings.logo != blank %}
+                            {%- assign logo_height = section.settings.logo_height | default: 20 -%}
+                            {{ section.settings.logo | image_url: width: 300 | image_tag: height: logo_height }}
+                        {% else %}
+                            {{ shop.name }}
+                        {% endif %}
+                    </a>
+                </div>
+
+                <!-- UTILITIES -->
+                <div class="nav-utilities uppercase">
+                    {% for link in linklists[section.settings.secondary_menu].links %}
+                        {% if link.links.size > 0 %}
+                            <div class="utility-menu-item">
+                                <div class="tz-utility-hover-trigger">
+                                    <a href="{{ link.url }}" class="utility-menu-link">{{ link.title }}</a>
+                                    <ul class="utility-dropdown">
+                                        {% for childlink in link.links %}
+                                            <li class="{% if childlink.links.size > 0 %}utility-menu-item-has-children{% endif %}">
+                                                <a href="{{ childlink.url }}">{{ childlink.title }}</a>
+                                                {% if childlink.links.size > 0 %}
+                                                    <ul class="utility-dropdown utility-dropdown-nested">
+                                                        {% for grandchildlink in childlink.links %}
+                                                            <li class="{% if grandchildlink.links.size > 0 %}utility-menu-item-has-children{% endif %}">
+                                                                <a href="{{ grandchildlink.url }}">{{ grandchildlink.title }}</a>
+                                                                {% if grandchildlink.links.size > 0 %}
+                                                                    <ul class="utility-dropdown utility-dropdown-nested">
+                                                                        {% for greatgrandchildlink in grandchildlink.links %}
+                                                                            <li>
+                                                                                <a href="{{ greatgrandchildlink.url }}">{{ greatgrandchildlink.title }}</a>
+                                                                            </li>
+                                                                        {% endfor %}
+                                                                    </ul>
+                                                                {% endif %}
+                                                            </li>
+                                                        {% endfor %}
+                                                    </ul>
+                                                {% endif %}
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </div>
+                        {% else %}
+                            <a href="{{ link.url }}">{{ link.title }}</a>
+                        {% endif %}
+                    {% endfor %}
+
+                    <button class="icon-btn" aria-label="Search">
+                        <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none">
+                            <circle cx="11" cy="11" r="8" />
+                            <path d="M21 21l-4.35-4.35" />
+                        </svg>
+                    </button>
+
+                    <a href="{{ routes.account_url }}" class="icon-btn" aria-label="Account">
+                        <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                            <circle cx="12" cy="7" r="4" />
+                        </svg>
+                    </a>
+
+                    <button class="icon-btn" aria-label="Cart">
+                        <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none">
+                            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+                            <path d="M16 10a4 4 0 0 1-8 0" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MEGA MENU LAYER -->
+    <div class="tz-mega-menu-layer">
+        {% for link in linklists[section.settings.menu].links %}
+            <!-- Pass the index number to the snippet so the ID matches the link -->
+            {% render 'tz-mega-menu', link: link, blocks: section.blocks, index: forloop.index %}
+        {% endfor %}
+    </div>
+</section>
+
+
+{% schema %}
+{
+  "name": "TZ Header",
+  "tag": "section",
+  "class": "section-header",
+  "settings": [
+    { "type": "header", "content": "Layout" },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "Section Width",
+      "options": [
+        { "value": "page-width", "label": "Page Width" },
+        { "value": "full-width", "label": "Full Width" }
+      ],
+      "default": "page-width"
+    },
+    {
+      "type": "checkbox",
+      "id": "sticky",
+      "label": "Sticky header",
+      "default": false
+    },
+
+    { "type": "header", "content": "Spacing" },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 12
+    },
+
+    { "type": "header", "content": "Background" },
+    { "type": "color", "id": "bg_color", "label": "Background color", "default": "#ffffff" },
+    {
+      "type": "range",
+      "id": "bg_opacity",
+      "label": "Background opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    { "type": "checkbox", "id": "bg_blur", "label": "Backdrop blur (sticky)", "default": false },
+
+    { "type": "header", "content": "Typography" },
+    {
+      "type": "select",
+      "id": "heading_font_family",
+      "label": "Heading font family",
+      "options": [
+        { "value": "inherit", "label": "Inherit" },
+        { "value": "heading", "label": "Theme heading font" },
+        { "value": "body", "label": "Theme body font" }
+      ],
+      "default": "inherit"
+    },
+    {
+      "type": "select",
+      "id": "text_font_family",
+      "label": "Text font family",
+      "options": [
+        { "value": "inherit", "label": "Inherit" },
+        { "value": "body", "label": "Theme body font" },
+        { "value": "heading", "label": "Theme heading font" }
+      ],
+      "default": "inherit"
+    },
+    {
+      "type": "range",
+      "id": "nav_text_size",
+      "label": "Nav text size",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 13
+    },
+    { "type": "checkbox", "id": "nav_uppercase", "label": "Uppercase nav text", "default": true },
+
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "text_color", "label": "Text color", "default": "#111111" },
+    { "type": "color", "id": "link_color", "label": "Link color", "default": "#111111" },
+    { "type": "color", "id": "link_hover_color", "label": "Link hover color", "default": "#555555" },
+    { "type": "color", "id": "accent_color", "label": "Accent color", "default": "#ff5a1f" },
+
+    { "type": "header", "content": "Visibility" },
+    { "type": "checkbox", "id": "hide_mobile", "label": "Hide on mobile", "default": false },
+    { "type": "checkbox", "id": "hide_desktop", "label": "Hide on desktop", "default": false },
+
+    { "type": "header", "content": "Content" },
+    { "type": "image_picker", "id": "logo", "label": "Logo" },
+    {
+      "type": "range",
+      "id": "logo_height",
+      "label": "Logo Height",
+      "min": 15,
+      "max": 80,
+      "step": 1,
+      "unit": "px",
+      "default": 20,
+      "info": "Adjust the logo size. The width will scale proportionally."
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Main Menu",
+      "default": "main-menu"
+    },
+
+    {
+      "type": "checkbox",
+      "id": "show_sale",
+      "label": "Show Sale Link",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "sale_text",
+      "label": "Sale Text",
+      "default": "__auto__"
+    },
+    {
+      "type": "text",
+      "id": "sale_badge",
+      "label": "Sale Badge",
+      "default": "__auto__"
+    },
+    {
+      "type": "url",
+      "id": "sale_link",
+      "label": "Sale Link"
+    },
+    {
+      "type": "link_list",
+      "id": "secondary_menu",
+      "label": "Utilities Menu"
+    },
+
+    { "type": "header", "content": "Advanced" },
+    { "type": "text", "id": "custom_id", "label": "Custom ID" },
+    { "type": "text", "id": "custom_class", "label": "Custom class" }
+  ],
+  "blocks": [
+    {
+      "type": "mega_menu_settings",
+      "name": "Mega Menu Settings",
+      "limit": 10,
+      "settings": [
+        {
+          "type": "text",
+          "id": "menu_trigger",
+          "label": "Menu Trigger Item",
+          "info": "Enter the exact name of the menu item (e.g. 'Women') to apply these settings to.",
+          "default": "Women"
+        },
+        {
+          "type": "color",
+          "id": "bg_color",
+          "label": "Background Color",
+          "default": "#ffffff"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text Color",
+          "default": "#000000"
+        },
+        {
+          "type": "range",
+          "id": "min_height",
+          "label": "Minimum Height",
+          "min": 200,
+          "max": 800,
+          "step": 10,
+          "unit": "px",
+          "default": 300
+        }
+      ]
+    },
+    {
+      "type": "menu_block",
+      "name": "Menu Column",
+      "settings": [
+        {
+          "type": "text",
+          "id": "menu_trigger",
+          "label": "Menu Trigger Item",
+          "info": "Enter the exact name of the parent menu item.",
+          "default": "Women"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Column Heading",
+          "default": "Categories"
+        },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "label": "Select Menu"
+        }
+      ]
+    },
+    {
+      "type": "rich_text_block",
+      "name": "Rich Text Column",
+      "settings": [
+        {
+          "type": "text",
+          "id": "menu_trigger",
+          "label": "Menu Trigger Item",
+          "info": "Enter the exact name of the parent menu item.",
+          "default": "Women"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Featured Info"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text Content",
+          "default": "<p>Share information about your brand or latest collection here.</p>"
+        }
+      ]
+    },
+    {
+      "type": "image_block",
+      "name": "Image Column",
+      "settings": [
+        {
+          "type": "text",
+          "id": "menu_trigger",
+          "label": "Menu Trigger Item",
+          "info": "Enter the exact name of the parent menu item.",
+          "default": "Women"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "caption",
+          "label": "Caption / Alt Text"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Image Link"
+        }
+      ]
+    },
+    {
+      "type": "product_block",
+      "name": "Product Column",
+      "settings": [
+        {
+          "type": "text",
+          "id": "menu_trigger",
+          "label": "Menu Trigger Item",
+          "info": "Enter the exact name of the parent menu item.",
+          "default": "Women"
+        },
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Select Product"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "TZ Header"
+    }
+  ]
+}
+{% endschema %}

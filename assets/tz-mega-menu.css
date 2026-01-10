@@ -40,6 +40,15 @@
   color: var(--tz-mm-text, #000000);
   box-shadow: 0 10px 30px rgba(0,0,0,0.1);
   border-top: 1px solid #f0f0f0;
+
+  /* Initial State: Hidden */
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  z-index: 100000 !important;
+  
+  /* Smooth Fade */
+  transition: opacity 0.2s ease, visibility 0.2s;
 }
 
 /* Dark Mode Mega Menu */
@@ -65,15 +74,6 @@ html.dark .tz-mm-linklist a {
 .dark .tz-mm-linklist a:hover,
 html.dark .tz-mm-linklist a:hover {
   color: rgba(237, 237, 237, 0.7) !important;
-  
-  /* Initial State: Hidden */
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-  z-index: 100000 !important;
-  
-  /* Smooth Fade */
-  transition: opacity 0.2s ease, visibility 0.2s;
 }
 
 /* Active State: Visible */
